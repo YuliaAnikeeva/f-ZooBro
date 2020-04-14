@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -8,14 +7,38 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
-    meta: {layout: 'main'},
+    component: () => import( '../views/Home.vue'),
+    meta: { layout: 'main' },
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import( '../views/About.vue'),
-    meta: {layout: 'main'},
+    path: '/login',
+    name: 'Login',
+    component: () => import( '../views/Login.vue'),
+    meta: { layout: 'main' },
+  },
+  {
+    path: '/recovery-password',
+    name: 'RecoveryPassword',
+    component: () => import( '../views/RecoveryPassword.vue'),
+    meta: { layout: 'main' },
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: () => import( '../views/Profile.vue'),
+    meta: { layout: 'main' },
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import( '../views/Admin.vue'),
+    meta: { layout: 'main' },
+  },
+  {
+    path: '/order',
+    name: 'Order',
+    component: () => import( '../views/Order.vue'),
+    meta: { layout: 'main' },
   },
   {
     path: '*',
