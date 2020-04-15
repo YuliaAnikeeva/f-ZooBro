@@ -10,9 +10,9 @@
 <script>
 export default {
   props: {
-    orderId: Number,
+    orderId: Number
   },
-  data() {
+  data () {
     return {
       orders: {
         3: {
@@ -52,7 +52,7 @@ export default {
     }
   },
   computed: {
-    currentOrder() {
+    currentOrder () {
       return this.orders[this.orderId]
     }
   }

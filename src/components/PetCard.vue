@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <label>
-      <h3>Pet's name</h3> 
+      <h3>Pet's name</h3>
       <input type="text" :disabled="disabled" v-model="currentPet.name">
     </label>
     <label>
@@ -26,7 +26,7 @@
     <label>
       <h3>Age</h3>
       <input v-if="currentPet.age.date" type="text" :disabled="disabled" v-model="currentPet.age.date">
-      <select 
+      <select
         :disabled="disabled"
         v-model="currentPet.age.years"
         v-if="!currentPet.age.date"
@@ -58,7 +58,7 @@
 
     <div>
       <h3>Subscription</h3>
-      <p>Status: 
+      <p>Status:
         <span v-if="currentPet.subscription.status" class="green">Active</span>
         <span v-else class="red">Disabled</span>
       </p>
@@ -69,9 +69,9 @@
 <script>
 export default {
   props: {
-    petId: Number,
+    petId: Number
   },
-  data() {
+  data () {
     return {
       disabled: true,
       select: 'test',
@@ -101,12 +101,12 @@ export default {
           weight: 'big',
           age: {
             date: '14.06.2010',
-            years: false,
+            years: false
           },
           features: false,
           subscription: {
             status: false,
-            duration: false,
+            duration: false
           }
         }
       }

@@ -1,9 +1,9 @@
 <template>
   <div id="profile">
     <h2>User info</h2>
-    <div id="profile-user"> 
+    <div id="profile-user">
       <label>
-        <p>E-mail</p> 
+        <p>E-mail</p>
         <input type="text" :disabled="disabled" v-model="email">
       </label>
       <label>
@@ -18,7 +18,7 @@
     </div>
     <h2>Pets cards</h2>
     <div id="profile-pets">
-      <PetCard 
+      <PetCard
         v-for="(id, index) in pets"
         :key="index"
         :petId="id"
@@ -36,26 +36,26 @@
 </template>
 
 <script>
-  import PetCard from '@/components/PetCard';
-  import OrderCard from '@/components/OrderCard';
+import PetCard from '@/components/PetCard'
+import OrderCard from '@/components/OrderCard'
 
-  export default {
-    name: 'Profile',
-    metaInfo: {
-      title: 'Profile',
-    },
-    components: {PetCard, OrderCard},
-    data() {
-      return {
-        email: 'test@test.test',
-        phone: '2-123-141-32-31',
-        address: 'Moscow Pushkin st 8 rqwead fdsfasf',
-        pets: [34, 44],
-        orders: [3, 5, 7, 12, 44],
-        disabled: true,
-      }
+export default {
+  name: 'Profile',
+  metaInfo: {
+    title: 'Profile'
+  },
+  components: { PetCard, OrderCard },
+  data () {
+    return {
+      email: 'test@test.test',
+      phone: '2-123-141-32-31',
+      address: 'Moscow Pushkin st 8 rqwead fdsfasf',
+      pets: [34, 44],
+      orders: [3, 5, 7, 12, 44],
+      disabled: true
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
