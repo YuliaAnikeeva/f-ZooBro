@@ -75,6 +75,13 @@
         width: 20vw
       }
     }
+    &-pets {
+      display: flex;
+      flex-flow: row nowrap;
+      overflow-y: scroll;
+      align-items: flex-start;
+      justify-content: space-evenly;
+    }
   }
 
   input {
