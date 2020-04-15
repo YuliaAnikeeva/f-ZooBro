@@ -51,7 +51,7 @@
         phone: '2-123-141-32-31',
         address: 'Moscow Pushkin st 8 rqwead fdsfasf',
         pets: [34, 44],
-        orders: [3, 5, 7],
+        orders: [3, 5, 7, 12, 44],
         disabled: true,
       }
     }
@@ -81,6 +81,10 @@
       overflow-y: scroll;
       align-items: flex-start;
       justify-content: space-evenly;
+    }
+    &-orders {
+      height: 15vh;
+      overflow-y: scroll;
     }
   }
 

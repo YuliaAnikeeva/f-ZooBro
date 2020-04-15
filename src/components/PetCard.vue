@@ -112,11 +112,10 @@ export default {
       }
     }
   },
-  created() {
-    this.currentPet = this.pets[this.petId]
-  },
   computed: {
-    
+    currentPet () {
+      return this.pets[this.petId]
+    }
   }
 }
 </script>
