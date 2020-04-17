@@ -1,9 +1,21 @@
 <template>
   <div :class="currentOrder.status">
-    <span>Order # {{ orderId }}</span>
-    <span>Data: {{ currentOrder.data }}</span>
-    <span>For: {{ pets[currentOrder.petId].name }}</span>
-    <span>Status: {{ currentOrder.status }} </span>
+    <p>Order # 
+      <span>{{ orderId }}</span>
+    </p>
+    <ul>
+      <li>Data: 
+        <span>{{ currentOrder.data }}</span>
+      </li>
+      <li>For: 
+        <span>{{ pets[currentOrder.petId].name }}</span>
+      </li>
+    </ul>
+    <p>Status: 
+      <span class="status">
+        {{ currentOrder.status }}
+      </span>
+    </p>
   </div>
 </template>
 
@@ -60,30 +72,59 @@ export default {
 </script>
 <style lang="scss" scoped>
   .new {
-    background-color: rgba(0, 128, 0, 0.35) !important;
+    border-left: 5px solid rgb(0, 128, 0);
+    .status {
+      color: rgb(0, 128, 0);
+    }
   }
 
   .dealing {
-    background-color: rgba(205, 92, 92, 0.35) !important;
+    border-left: 5px solid rgb(205, 92, 92);
+    .status {
+      color: rgb(205, 92, 92);
+    }
   }
 
   .on-the-way {
-    background-color: rgba(135, 206, 250, 0.35) !important;
+    border-left: 5px solid rgb(135, 206, 250);
+    .status {
+      color: rgb(135, 206, 250);
+    }
   }
 
   .done {
-    background-color: rgba(0, 255, 0, 0.35) !important;
+    border-left: 5px solid rgb(0, 255, 0);
+    .status {
+      color: rgb(0, 255, 0);
+    }
   }
 
   .canceled {
-    background-color: rgba(255, 0, 0, 0.35) !important;
+    border-left: 5px solid rgb(255, 0, 0);
+    .status {
+      color: rgb(255, 0, 0);
+    }
   }
 
   div {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-evenly;
+    justify-content: stretch;
     align-items: center;
-    border-radius: 5px;
+    text-align: left;
+    font-size: 16px;
+    height: 75px;
+    border-top: 1px solid #f3f3f3;
+    span {
+      color: black;
+    }
+    p:first-child {
+      width: 40%;
+      margin-left: 15px;
+    }
+    ul {
+      width: 30%;
+      list-style-type: none;
+    }
   }
 </style>

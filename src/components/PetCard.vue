@@ -5,8 +5,8 @@
       <input type="text" :disabled="disabled" v-model="currentPet.name">
     </label>
     <label>
-      <h3>Sex</h3>
-      <select :disabled="disabled" v-model="currentPet.sex">
+      <h3>Gender:</h3>
+      <select :disabled="disabled" v-model="currentPet.gender">
         <option value="m">Male</option>
         <option value="f">Female</option>
       </select>
@@ -78,7 +78,7 @@ export default {
       pets: {
         34: {
           name: 'Johny',
-          sex: 'm',
+          gender: 'm',
           species: 'Bulldog',
           weight: 'middle',
           age: {
@@ -96,7 +96,7 @@ export default {
         },
         44: {
           name: 'Lola',
-          sex: 'f',
+          gender: 'f',
           species: 'Labrador',
           weight: 'big',
           age: {
@@ -122,8 +122,8 @@ export default {
 
 <style lang="scss" scoped>
   .card {
-    border: 1px solid black;
-    border-radius: 5px;
+    background-color: #f2f3f7;
+    border: 1px solid #d3d4d7;
   }
   .green {
     color: green;
