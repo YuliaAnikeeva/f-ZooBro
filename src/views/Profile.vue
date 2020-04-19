@@ -3,9 +3,9 @@
     <div id="profile-nav">
       <div id="profile-nav-info">
         <h2>User info</h2>
-        <p>{{ email }}</p>
-        <p>{{ phone }}</p>
-        <p>{{ address }}</p>
+        <p>{{ userInfo.email }}</p>
+        <p>{{ userInfo.phone }}</p>
+        <p>{{ userInfo.address }}</p>
       </div>
       <ul id="profile-nav-tabs">
         <li v-on:click="changeTab('pets')" class="active-tab" id="pets">
@@ -127,7 +127,7 @@
       </ul>
     </div>
     <div v-if="activeTab == 'pets'" id="profile-pets">
-      <label id="profile-pets-choose">
+      <label v-if="pets.length > 1" id="profile-pets-choose">
         <h2>Choose pet</h2>
         <select v-model="selectedPet">
           <option
@@ -149,24 +149,28 @@
         :orderId="orderId"
       />
     </div>
+    <SettingsCard :profile="userInfo" v-if="activeTab == 'settings'" id="profile-settings" />
   </div>
 </template>
 
 <script>
 import PetCard from "@/components/PetCard";
 import OrderCard from "@/components/OrderCard";
+import SettingsCard from '@/components/SettingsCard'
 
 export default {
   name: "Profile",
   metaInfo: {
     title: "Profile"
   },
-  components: { PetCard, OrderCard },
+  components: { PetCard, OrderCard, SettingsCard },
   data() {
     return {
-      email: "test@test.test",
-      phone: "2-123-141-32-31",
-      address: "Moscow Pushkin st 8 rqwead fdsfasf",
+      userInfo: {
+        email: "test@test.test",
+        phone: "2-123-141-32-31",
+        address: "Moscow Pushkin st 8 rqwead fdsfasf",
+      },
       pets: [
         {
           id: 34,
@@ -191,6 +195,9 @@ export default {
         this.activeTab = tabName;
       }
     }
+  },
+  mounted() {
+    this.selectedPet = this.pets[0].id
   }
 };
 </script>
@@ -200,8 +207,9 @@ export default {
   display: flex;
   flex-flow: row-nowrap;
   align-items: flex-start;
+  width: 100%;
   &-nav {
-    width: 15vw;
+    width: 15%;
     height: 100%;
     // border-right: 1px solid black;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -232,32 +240,26 @@ export default {
       }
     }
   }
-  &-user {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-between;
-    label {
-      width: 20vw;
-    }
-  }
   &-pets {
+    width: 85%;
     display: flex;
     flex-flow: row nowrap;
     overflow-y: scroll;
-    justify-content: space-between;
+    justify-content: space-evenly;
     &-choose {
       margin-right: 20px;
       margin-left: 20px;
     }
   }
   &-orders {
-    // height: 15vh;
-    width: 100%;
+    width: 85%;
     overflow-y: scroll;
     div:nth-child(even) {
       background: #f2f3f7;
     }
+  }
+  &-settings {
+    width: 85%;
   }
 }
 
