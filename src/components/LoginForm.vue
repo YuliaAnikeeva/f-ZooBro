@@ -23,6 +23,9 @@
 
 <script>
   import { required, email, minLength, maxLength, and, helpers } from 'vuelidate/lib/validators'
+  import { createNamespacedHelpers } from 'vuex'
+  const { mapGetters } = createNamespacedHelpers('auth')
+  import { AUTH_REQUEST } from '../store/auth'
 
   const betweenLength = (min, max) => helpers.withParams(
     { min, max },
@@ -37,10 +40,10 @@
         email: '',
         password: '',
         msg: '',
-        status: '',
       }
     },
     computed: {
+      ...mapGetters({ status: 'getStatus' }),
       disabled: function () {
         return this.status == 'pending'
       }
@@ -57,23 +60,17 @@
     },
     methods: {
       onSubmit: function () {
-        new Promise((resolve, reject) => {
-          this.status = 'pending'
-          setTimeout( () => {
-            if (this.email === 'user@example.com') {
-              resolve({token: "some-token"})
-            }
-            reject("Не верный email или пароль")
-          },2000)
-        }).then( (resp) => {
-          localStorage.setItem('user-token', resp.token)
-          this.status = 'success'
-          this.onSuccess && this.onSuccess(resp)
-        }).catch( msg => {
-          localStorage.removeItem('user-token')
-          this.status = 'error'
-          this.msg = msg
-        })
+        this.$v.$touch()
+        if (!this.$v.$invalid) {
+          const { email, password } = this
+          this.$store.dispatch('auth/'+AUTH_REQUEST, { email, password })
+            .then( (resp) => {
+              this.onSuccess && this.onSuccess(resp)
+            })
+            .catch( (msg) => {
+              this.msg = msg
+            })
+        }
       }
     }
   }
