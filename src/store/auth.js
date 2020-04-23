@@ -43,6 +43,13 @@ const actions = {
         commit(AUTH_ERROR)
         return Promise.reject(msg)
       })
+  },
+  [AUTH_LOGOUT]: ({ commit }) => {
+    return new Promise( (resolve, reject) => {
+      commit(AUTH_LOGOUT)
+      localStorage.removeItem("user-token")
+      resolve()
+    })
   }
 }
 
