@@ -5,7 +5,7 @@ export const AUTH_LOGOUT = "AUTH_LOGOUT"
 
 const state = {
   status: '',
-  token: '',
+  token: localStorage.getItem('user-token') || '',
 }
 
 const getters = {
