@@ -3,13 +3,19 @@ export const AUTH_SUCCESS = "AUTH_SUCCESS"
 export const AUTH_ERROR = "AUTH_ERROR"
 export const AUTH_LOGOUT = "AUTH_LOGOUT"
 
+export const RECOVERY_REQUEST = "RECOVERY_REQUEST"
+export const RECOVERY_SUCCESS = "RECOVERY_SUCCESS"
+export const RECOVERY_ERROR = "RECOVERY_ERROR"
+
 const state = {
   status: '',
+  recoveryStatus: '',
   token: localStorage.getItem('user-token') || '',
 }
 
 const getters = {
   getStatus: state => state.status,
+  getRecoveryStatus: state => state.recoveryStatus,
   getToken: state => state.token,
   isAuthenticated: state => !!state.token,
 }
@@ -27,6 +33,15 @@ const mutations = {
   },
   [AUTH_LOGOUT]: (state) => {
     state.token = ''
+  },
+  [RECOVERY_REQUEST]: (state) => {
+    state.recoveryStatus = 'pending'
+  },
+  [RECOVERY_SUCCESS]: (state) => {
+    state.recoveryStatus = 'success'
+  },
+  [RECOVERY_ERROR]: (state) => {
+    state.recoveryStatus = 'error'
   },
 }
 
@@ -50,16 +65,36 @@ const actions = {
       localStorage.removeItem("user-token")
       resolve()
     })
+  },
+  [RECOVERY_REQUEST]: ({ commit }, email) => {
+    commit(RECOVERY_REQUEST)
+    return mockFetch("/recovery-password", {email})
+      .then( (resp) => {
+        commit(RECOVERY_SUCCESS)
+        return resp
+      })
+      .catch( (resp) => {
+        commit(RECOVERY_ERROR, resp)
+        return Promise.reject(resp)
+      })
   }
 }
 
 const mockFetch = (url, {email}) => {
   return new Promise((resolve, reject) => {
+    let success, fail
+    if (url == "/login") {
+      success = { token: 'some-token' }
+      fail = "Не верный email или пароль"
+    }else if (url == "/recovery-password") {
+      success = "Пароль отправлен на почту " + email
+      fail = "Пользователь с такой почтой не найден"
+    }
     setTimeout(() => {
       if (email==='user@example.com') {
-        resolve({ token: 'some-token' })
+        resolve(success)
       }
-      reject("Error")
+      reject(fail)
     },2000)
   })
 }
