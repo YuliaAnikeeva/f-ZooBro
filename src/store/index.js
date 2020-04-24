@@ -17,13 +17,15 @@ export default new Vuex.Store({
         email: 'some@email.com',
         mobile: '-',
         type: 'admin',
+        address: '-'
       },
       {
         id: 2,
         password: 'qwerty',
         email: 'user@user.com',
         mobile: '1-234-567-89-01',
-        type: 'user'
+        type: 'user',
+        address: 'Moscow Pushkin st 8 220'
       }
     ],
     pets: [
