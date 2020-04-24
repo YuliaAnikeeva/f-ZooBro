@@ -31,12 +31,11 @@
           Отменен
         </label>
       </div>
-      <div 
+      <AdminOrder
         v-for="(order, index) in this.$store.getters['admin/getOrdersByStatus'](selectedCategory)"
-        :key="index"
-      >
-        <AdminOrder :order="order" />
-      </div>
+        :key="index" 
+        :order="order" 
+      />
     </div>
   </div>
 </template>

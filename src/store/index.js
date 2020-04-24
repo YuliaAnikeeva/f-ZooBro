@@ -38,7 +38,7 @@ export default new Vuex.Store({
         breed: 'Bulldog',
         birthday_date: '2018-06-01',
         birthday_years: null,
-        food_exceptios: null,
+        food_exceptions: null,
       },
       {
         id: 44,
@@ -49,7 +49,7 @@ export default new Vuex.Store({
         breed: 'Labrador',
         birthday_date: null,
         birthday_years: '1-5',
-        food_exceptios: ['vegetables'],  
+        food_exceptions: ['vegetables'],  
       }
     ],
     orders: [

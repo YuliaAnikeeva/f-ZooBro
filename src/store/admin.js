@@ -18,6 +18,12 @@ const admin = {
       const pet = rootState.pets.filter(pet => pet.id == id)
       const user = rootState.users.filter(user => user.id == pet[0].user_id)
       return user[0].address
+    },
+    getPetInfo: (state, getters, rootState) => id => {
+      return rootState.pets.filter(pet => pet.id == id)[0]
+    },
+    getUserInfo: (state, getters, rootState) => id => {
+      return rootState.users.filter(user => user.id == id)[0]
     }
   }
 }
