@@ -32,7 +32,7 @@
         </label>
       </div>
       <div 
-        v-for="(order, index) in this.$store.state.orders"
+        v-for="(order, index) in this.$store.getters['admin/getOrdersByStatus'](selectedCategory)"
         :key="index"
       >
         {{order}}
