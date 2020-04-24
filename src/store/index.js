@@ -59,22 +59,22 @@ export default new Vuex.Store({
       {
         id: 1,
         pet_id: 33,
-        status: 2,
+        status: 1,
       },
       {
         id: 4,
         pet_id: 44,
-        status: 3,
+        status: 2,
       },
       {
         id: 10,
         pet_id: 44,
-        status: 4,
+        status: 3,
       },
       {
         id: 12,
         pet_id: 33,
-        status: 5,
+        status: 4,
       }
     ]
   },
