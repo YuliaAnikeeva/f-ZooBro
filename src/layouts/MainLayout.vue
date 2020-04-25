@@ -13,6 +13,8 @@
             <router-link to="/admin">admin</router-link>
             |
             <router-link to="/order">order</router-link>
+            |
+            <router-link to="/registration">registration</router-link>
         </div>
         <hr>
 
