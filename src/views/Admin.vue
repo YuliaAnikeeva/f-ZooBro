@@ -31,21 +31,25 @@
           Отменен
         </label>
       </div>
-      <div 
+      <AdminOrder
         v-for="(order, index) in this.$store.getters['admin/getOrdersByStatus'](selectedCategory)"
-        :key="index"
-      >
-        {{order}}
-      </div>
+        :key="index" 
+        :order="order" 
+      />
     </div>
   </div>
 </template>
 
 <script>
+  import AdminOrder from '@/components/AdminOrder'
+
   export default {
     name: 'Admin',
     metaInfo: {
       title: 'Admin',
+    },
+    components: {
+      AdminOrder
     },
     data() {
       return {
@@ -53,9 +57,8 @@
       }
     },
     created() {
-      this.$store.getters['admin/getOrderAddress'](2)
       console.log(this.$store)
-    }
+    },
   }
 </script>
 
