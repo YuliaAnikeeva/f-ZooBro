@@ -19,7 +19,7 @@
             <div class="error" v-if="!$v.form.repeatPassword.sameAsPassword">Passwords must be identical.</div>
 
          </div>
-        <input class="button" type="submit" value="Register" >
+        <input class="button" type="submit" value="Register" :disabled="$v.$invalid">
     </form>
   </div>
 </template>
@@ -50,7 +50,7 @@
       email: {
         required,
         email,
-      },
+          },
       password: {
         required,
         betweenLength: betweenLength(4, 18),
@@ -66,7 +66,17 @@
       // this.$store.dispatch('createUser', this.form)
       // .then(() => this.$router.push('/'))
       // .catch(err => console.log(err))
+     },
+     onSubmit() {
+       if(!this.$v.$invalid){
+         const user= {
+           email: form.email,
+           password: form.password,
+           repeatPassword: form.repeatPassword
+         }
+       }
      }
+
     },
 
     created() {
