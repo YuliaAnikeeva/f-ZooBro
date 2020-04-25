@@ -50,13 +50,15 @@ const actions = {
     commit(AUTH_REQUEST)
     return mockFetch("/login", {email, password})
       .then( (resp) => {
-        localStorage.setItem("user-token", resp.token)
-        commit(AUTH_SUCCESS, resp.token)
-        return resp
-      }).catch( (msg) => {
-        localStorage.removeItem("user-token")
-        commit(AUTH_ERROR)
-        return Promise.reject(msg)
+        if (resp.status == 1) {
+          localStorage.setItem("user-token", resp.data.token)
+          commit(AUTH_SUCCESS, resp.data.token)
+          return resp.data
+        } else if (resp.status == -1) {
+          localStorage.removeItem("user-token")
+          commit(AUTH_ERROR, resp.message)
+          return Promise.reject(resp.message)
+        }
       })
   },
   [AUTH_LOGOUT]: ({ commit }) => {
@@ -69,32 +71,34 @@ const actions = {
   [RECOVERY_REQUEST]: ({ commit }, email) => {
     commit(RECOVERY_REQUEST)
     return mockFetch("/recovery-password", {email})
-      .then( (resp) => {
-        commit(RECOVERY_SUCCESS)
-        return resp
-      })
-      .catch( (resp) => {
-        commit(RECOVERY_ERROR, resp)
-        return Promise.reject(resp)
+      .then( resp => {
+        if (resp.status == 1) {
+          commit(RECOVERY_SUCCESS)
+          return resp.data
+        } else if (resp.status == -1) {
+          commit(RECOVERY_ERROR, resp.message)
+          return Promise.reject(resp.message)
+        }
       })
   }
 }
 
 const mockFetch = (url, {email}) => {
   return new Promise((resolve, reject) => {
-    let success, fail
+    let success = { status: 1 },
+        fail = { status: -1}
     if (url == "/login") {
-      success = { token: 'some-token' }
-      fail = "Не верный email или пароль"
+      success.data = { token: 'some-token' }
+      fail.message = ["Не верный email или пароль"]
     }else if (url == "/recovery-password") {
-      success = "Пароль отправлен на почту " + email
-      fail = "Пользователь с такой почтой не найден"
+      success.data = {}
+      fail.message = ["Пользователь с такой почтой не найден"]
     }
     setTimeout(() => {
       if (email==='user@example.com') {
         resolve(success)
       }
-      reject(fail)
+      resolve(fail)
     },2000)
   })
 }

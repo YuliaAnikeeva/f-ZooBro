@@ -1,7 +1,7 @@
 <template>
   <div class="form-recovery">
-    <p class="message" :class="`message--${status}`">{{ msg }}</p>
-    <form v-if="status != 'success' || !msg" class="form" @submit.prevent="onSubmit" ref="form">
+    <p v-for="msg in messages" class="message" :class="`message--${status}`" :key="msg">{{ msg }}</p>
+    <form v-if="status != 'success' || !messages.length" class="form" @submit.prevent="onSubmit" ref="form">
         <div class="field" :class="{ 'field--error': $v.email.$error }">
             <label class="label" for="email-field">Email</label>
             <input class="input" :disabled="disabled" id="email-field" type="email" v-model="$v.email.$model" placeholder="user@example.com">
@@ -24,7 +24,7 @@ export default {
   data () {
     return {
       email: '',
-      msg: '',
+      messages: [],
     }
   },
   computed: {
@@ -41,14 +41,16 @@ export default {
   },
   methods: {
     onSubmit: function () {
-      this.msg = ''
       this.$v.$touch()
-      this.$store.dispatch('auth/'+RECOVERY_REQUEST, this.email)
-        .then( msg => {
-          this.msg = msg
-        }).catch( msg => {
-          this.msg = msg
-        })
+      if (!this.$v.$invalid) {
+        this.messages = []
+        this.$store.dispatch('auth/'+RECOVERY_REQUEST, this.email)
+          .then( () => {
+            this.messages = ["Письмо с паролем отправленно на почту"]
+          }).catch( (messages) => {
+            this.messages = messages
+          })
+      }
     }
   }
 }

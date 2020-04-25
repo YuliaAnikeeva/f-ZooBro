@@ -1,7 +1,7 @@
 <template>
   <div class="form-login">
     <div v-if="status == 'pending'">Pending...</div>
-    <div class="message message--error" v-else-if="status == 'error'">{{ msg }}</div>
+    <div v-for="msg in messages" class="message" :class="`message--${status}`" :key="msg">{{ msg }}</div>
     <form class="form" @submit.prevent="onSubmit">
         <div class="field" :class="{ 'field--error': $v.email.$error }">
             <label class="label" for="email_field">Почта</label>
@@ -39,7 +39,7 @@
       return {
         email: '',
         password: '',
-        msg: '',
+        messages: [],
       }
     },
     computed: {
@@ -62,13 +62,14 @@
       onSubmit: function () {
         this.$v.$touch()
         if (!this.$v.$invalid) {
+          this.messages = []
           const { email, password } = this
           this.$store.dispatch('auth/'+AUTH_REQUEST, { email, password })
             .then( (resp) => {
               this.onSuccess && this.onSuccess(resp)
             })
-            .catch( (msg) => {
-              this.msg = msg
+            .catch( (messages) => {
+              this.messages = messages
             })
         }
       }
