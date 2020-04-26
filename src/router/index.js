@@ -41,6 +41,12 @@ const routes = [
     meta: { layout: 'main' },
   },
   {
+    path: '/registration',
+    name: 'Registration',
+    component: () => import( '../views/Registration.vue'),
+    meta: { layout: 'main' },
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('../views/404.vue'),
