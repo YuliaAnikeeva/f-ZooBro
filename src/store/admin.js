@@ -1,16 +1,34 @@
 const admin = {
   namespaced: true, 
-  state: {},
-  mutations: {},
-  actions: {},
+  state: {
+    pets: [],
+    orders: [],
+    users: []
+  },
+  mutations: {
+    setStateFromRoot(state, {pets, orders, users}) {
+      state.pets = [...pets]
+      state.orders = [...orders]
+      state.users = [...users]
+    }
+  },
+  actions: {
+    fillState({commit, getters}) {
+      const payload = {}
+      payload.pets = [...getters.getPets]
+      payload.orders = [...getters.getOrders]
+      payload.users = [...getters.getUsers]
+      commit('setStateFromRoot', payload)
+    }
+  },
   getters: {
-    getOrdersByStatus: (state, getters, rootState) => status => {
+    getOrdersByStatus: (state) => status => {
       if (status === 'all') {
-        return rootState.orders
+        return state.orders
       }
 
       if (status >= 0 && status <= 4) {
-        return rootState.orders.filter(order => order.status == status)
+        return state.orders.filter(order => order.status == status)
       }
 
     },
@@ -24,6 +42,15 @@ const admin = {
     },
     getUserInfo: (state, getters, rootState) => id => {
       return rootState.users.filter(user => user.id == id)[0]
+    },
+    getPets(state, getters, rootState) {
+      return rootState.pets
+    },
+    getOrders(state, getters, rootState) {
+      return rootState.orders
+    },
+    getUsers(state, getters, rootState) {
+      return rootState.users
     }
   }
 }
