@@ -1,16 +1,46 @@
 const admin = {
   namespaced: true, 
-  state: {},
-  mutations: {},
-  actions: {},
+  state: {
+    pets: [],
+    orders: [],
+    users: []
+  },
+  mutations: {
+    setNewStatus(test, test1, test2) {
+      console.log(test)
+      console.log(test1)
+      console.log(test2)
+    },
+    setPets(state, payload) {
+      state.pets = [...state.pets, payload]
+    },
+    setOrders(state, payload) {
+
+    },
+    setStateFromRoot(state, {pets, orders, users}) {
+      state.pets = [...pets]
+      state.orders = [...orders]
+      state.users = [...users]
+      console.log(state)
+    }
+  },
+  actions: {
+    fillState({commit, getters}) {
+      const payload = {}
+      payload.pets = [...getters.getPets]
+      payload.orders = [...getters.getOrders]
+      payload.users = [...getters.getUsers]
+      commit('setStateFromRoot', payload)
+    }
+  },
   getters: {
-    getOrdersByStatus: (state, getters, rootState) => status => {
+    getOrdersByStatus: (state) => status => {
       if (status === 'all') {
-        return rootState.orders
+        return state.orders
       }
 
       if (status >= 0 && status <= 4) {
-        return rootState.orders.filter(order => order.status == status)
+        return state.orders.filter(order => order.status == status)
       }
 
     },
@@ -24,6 +54,15 @@ const admin = {
     },
     getUserInfo: (state, getters, rootState) => id => {
       return rootState.users.filter(user => user.id == id)[0]
+    },
+    getPets(state, getters, rootState) {
+      return rootState.pets
+    },
+    getOrders(state, getters, rootState) {
+      return rootState.orders
+    },
+    getUsers(state, getters, rootState) {
+      return rootState.users
     }
   }
 }
