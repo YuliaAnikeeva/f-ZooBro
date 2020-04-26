@@ -6,22 +6,10 @@ const admin = {
     users: []
   },
   mutations: {
-    setNewStatus(test, test1, test2) {
-      console.log(test)
-      console.log(test1)
-      console.log(test2)
-    },
-    setPets(state, payload) {
-      state.pets = [...state.pets, payload]
-    },
-    setOrders(state, payload) {
-
-    },
     setStateFromRoot(state, {pets, orders, users}) {
       state.pets = [...pets]
       state.orders = [...orders]
       state.users = [...users]
-      console.log(state)
     }
   },
   actions: {
