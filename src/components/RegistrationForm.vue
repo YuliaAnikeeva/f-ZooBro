@@ -7,7 +7,7 @@
             <div class="error" v-if="!$v.form.email.required">Введите e-mail</div>
             <div class="error" v-if="!$v.form.email.email">Введите корректный e-mail</div>
         </div>
-        <div class="field" :class="{ 'field--error': $v.form.password.$error }">
+        <!-- <div class="field" :class="{ 'field--error': $v.form.password.$error }">
             <label class="label" for="password_field">Пароль</label>
             <input class="input" id="password_field" type="password" v-model="$v.form.password.$model">
             <div class="error" v-if="!$v.form.password.required">Введите пароль</div>
@@ -18,8 +18,8 @@
             <input class="input" id="passwordRepeat_field" type="password" v-model.trim="$v.form.repeatPassword.$model"/>
             <div class="error" v-if="!$v.form.repeatPassword.sameAsPassword">Passwords must be identical.</div>
 
-         </div>
-        <input class="button" type="submit" value="Register" :disabled="$v.$invalid">
+         </div> -->
+        <input class="button" type="submit" value="Next" :disabled="$v.$invalid" v-on:click="next">
     </form>
   </div>
 </template>
@@ -38,9 +38,7 @@
     data () {
       return {
         form:{
-        email: '',
-        password: '',
-        repeatPassword: ''
+        email: ''
       }
       }
     },
@@ -50,17 +48,13 @@
       email: {
         required,
         email,
-          },
-      password: {
-        required,
-        betweenLength: betweenLength(4, 18),
-      },
-      repeatPassword: {
-      sameAsPassword: sameAs('password')
-    }
+          }
       }
     },
     methods: {
+      next (event){
+this.$router.push('/login')
+      },
      register() {
        console.log(this.form)
       // this.$store.dispatch('createUser', this.form)
@@ -71,8 +65,7 @@
        if(!this.$v.$invalid){
          const user= {
            email: form.email,
-           password: form.password,
-           repeatPassword: form.repeatPassword
+          
          }
        }
      }
