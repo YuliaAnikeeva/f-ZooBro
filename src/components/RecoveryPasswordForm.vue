@@ -1,36 +1,34 @@
 <template>
   <div class="form-recovery">
-    <div v-if="status=='success'">
-      <p class="message message--success">{{ msg }}</p>
-    </div>
-    <div v-else>
-      <p v-if="status=='error'" class="message message--error">{{ msg }}</p>
-      <form  class="form" @submit.prevent="onSubmit" ref="form">
-          <div class="field" :class="{ 'field--error': $v.email.$error }">
-              <label class="label" for="email-field">Email</label>
-              <input class="input" :disabled="disabled" id="email-field" type="email" v-model="$v.email.$model" placeholder="user@example.com">
-              <div class="error" v-if="!$v.email.required">Введите e-mail</div>
-              <div class="error" v-if="!$v.email.email">Введите корректный e-mail</div>
-          </div>
-          <input class="button" type="submit" value="Восстановить пароль" :disabled="disabled">
-      </form>
-    </div>
+    <p v-for="msg in messages" class="message" :class="`message--${status}`" :key="msg">{{ msg }}</p>
+    <form v-if="status != 'success' || !messages.length" class="form" @submit.prevent="onSubmit" ref="form">
+        <div class="field" :class="{ 'field--error': $v.email.$error }">
+            <label class="label" for="email-field">Email</label>
+            <input class="input" :disabled="disabled" id="email-field" type="email" v-model="$v.email.$model" placeholder="user@example.com">
+            <div class="error" v-if="!$v.email.required">Введите e-mail</div>
+            <div class="error" v-if="!$v.email.email">Введите корректный e-mail</div>
+        </div>
+        <input class="button" type="submit" value="Восстановить пароль" :disabled="disabled">
+    </form>
   </div>
 </template>
 
 <script>
 import { required, email } from 'vuelidate/lib/validators'
+import { createNamespacedHelpers } from 'vuex'
+const { mapGetters } = createNamespacedHelpers('auth')
+import { RECOVERY_REQUEST } from '../store/auth'
 
 export default {
   name: 'RecoveryPasswordForm',
   data () {
     return {
       email: '',
-      status: '',
-      msg: '',
+      messages: [],
     }
   },
   computed: {
+    ...mapGetters({status: 'getRecoveryStatus'}),
     disabled: function () {
       return this.status === 'pending'
     }
@@ -43,21 +41,16 @@ export default {
   },
   methods: {
     onSubmit: function () {
-      new Promise((resolve, reject) => {
-        this.status = 'pending'
-        setTimeout( () => {
-          if (this.email === 'user@example.com') {
-            resolve("Письмо c паролем отправленно на почту")
-          }
-          reject("Пользователь с таким email не зарегистрирован")
-        },2000)
-      }).then( msg => {
-        this.status = 'success'
-        this.msg = msg
-      }).catch( msg => {
-        this.status = 'error'
-        this.msg = msg
-      })
+      this.$v.$touch()
+      if (!this.$v.$invalid) {
+        this.messages = []
+        this.$store.dispatch('auth/'+RECOVERY_REQUEST, this.email)
+          .then( () => {
+            this.messages = ["Письмо с паролем отправленно на почту"]
+          }).catch( (messages) => {
+            this.messages = messages
+          })
+      }
     }
   }
 }

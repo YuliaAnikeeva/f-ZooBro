@@ -17,13 +17,15 @@ export default new Vuex.Store({
         email: 'some@email.com',
         mobile: '-',
         type: 'admin',
+        address: '-'
       },
       {
         id: 2,
         password: 'qwerty',
         email: 'user@user.com',
         mobile: '1-234-567-89-01',
-        type: 'user'
+        type: 'user',
+        address: 'Moscow Pushkin st 8 220'
       }
     ],
     pets: [
@@ -36,7 +38,7 @@ export default new Vuex.Store({
         breed: 'Bulldog',
         birthday_date: '2018-06-01',
         birthday_years: null,
-        food_exceptios: null,
+        food_exceptions: null,
       },
       {
         id: 44,
@@ -47,7 +49,7 @@ export default new Vuex.Store({
         breed: 'Labrador',
         birthday_date: null,
         birthday_years: '1-5',
-        food_exceptios: ['vegetables'],  
+        food_exceptions: ['vegetables'],  
       }
     ],
     orders: [

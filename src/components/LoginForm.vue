@@ -1,7 +1,7 @@
 <template>
   <div class="form-login">
     <div v-if="status == 'pending'">Pending...</div>
-    <div class="message message--error" v-else-if="status == 'error'">{{ msg }}</div>
+    <div v-for="msg in messages" class="message" :class="`message--${status}`" :key="msg">{{ msg }}</div>
     <form class="form" @submit.prevent="onSubmit">
         <div class="field" :class="{ 'field--error': $v.email.$error }">
             <label class="label" for="email_field">Почта</label>
@@ -23,6 +23,9 @@
 
 <script>
   import { required, email, minLength, maxLength, and, helpers } from 'vuelidate/lib/validators'
+  import { createNamespacedHelpers } from 'vuex'
+  const { mapGetters } = createNamespacedHelpers('auth')
+  import { AUTH_REQUEST } from '../store/auth'
 
   const betweenLength = (min, max) => helpers.withParams(
     { min, max },
@@ -36,11 +39,11 @@
       return {
         email: '',
         password: '',
-        msg: '',
-        status: '',
+        messages: [],
       }
     },
     computed: {
+      ...mapGetters({ status: 'getStatus' }),
       disabled: function () {
         return this.status == 'pending'
       }
@@ -57,23 +60,18 @@
     },
     methods: {
       onSubmit: function () {
-        new Promise((resolve, reject) => {
-          this.status = 'pending'
-          setTimeout( () => {
-            if (this.email === 'user@example.com') {
-              resolve({token: "some-token"})
-            }
-            reject("Не верный email или пароль")
-          },2000)
-        }).then( (resp) => {
-          localStorage.setItem('user-token', resp.token)
-          this.status = 'success'
-          this.onSuccess && this.onSuccess(resp)
-        }).catch( msg => {
-          localStorage.removeItem('user-token')
-          this.status = 'error'
-          this.msg = msg
-        })
+        this.$v.$touch()
+        if (!this.$v.$invalid) {
+          this.messages = []
+          const { email, password } = this
+          this.$store.dispatch('auth/'+AUTH_REQUEST, { email, password })
+            .then( (resp) => {
+              this.onSuccess && this.onSuccess(resp)
+            })
+            .catch( (messages) => {
+              this.messages = messages
+            })
+        }
       }
     }
   }

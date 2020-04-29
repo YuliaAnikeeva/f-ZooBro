@@ -7,7 +7,7 @@
       <div class="main__first-block"></div>
       <div class="main__second-block"></div>
       <div class="main__third-block"></div>
-      <div class="main__"></div>
+      <div class="main__map"></div>
       <div class="main__image-gallery"></div>
     </main>
     <footer class="landing">FOOTER</footer>
