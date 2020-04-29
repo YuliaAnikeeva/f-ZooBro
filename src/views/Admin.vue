@@ -57,8 +57,10 @@
       }
     },
     created() {
-      console.log(this.$store)
-    },
+      if (this.$store.state.admin.orders.length == 0) {
+        this.$store.dispatch('admin/fillState')
+      } 
+    }
   }
 </script>
 
