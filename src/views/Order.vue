@@ -32,229 +32,262 @@
             <transition name="translate">
                 <div class="abs" v-if="step === 'step-1'">
                     <div class="container">
-                        <form @submit.prevent="submitHandler">
-                            <div class="form-group" :class="{ 'form-group--error wobble-error': $v.dogName.$error }">
-                                <label for="dogName" class="form__label">*Кличка питомца</label>
-                                <input
-                                        id="dogName"
-                                        type="text"
-                                        v-model.trim="dogName"
-                                        class="form__input"
-                                >
-                                <br>
-                                <small
-                                        v-if="($v.dogName.$dirty && !$v.dogName.required)"
-                                        class="helper-text invalid"
-                                > обязательное поле
-                                </small>
-                                <small
-                                        v-else-if="($v.dogName.$dirty && !$v.dogName.minLength)"
-                                        class="helper-text invalid"
-                                > минимум {{$v.dogName.$params.minLength.min}} символов |
-                                    ({{dogName.length}}/{{$v.dogName.$params.minLength.min}})
-                                </small>
-                            </div>
 
-                            <div class="form-group" :class="{ 'form-group--error wobble-error': $v.dogGender.$error }">
-                                <label class="form__label">*Пол питомца</label>
-                                <input type="radio" id="genderM" value="кабель" v-model="dogGender">
-                                <label for="genderM">кабель</label>
-                                <input type="radio" id="genderW" value="сука" v-model="dogGender">
-                                <label for="genderW">сука</label>
-                                <br>
-                                <small
-                                        v-if="($v.dogGender.$dirty && !$v.dogGender.required)"
-                                        class="helper-text invalid"
-                                > обязательное поле
-                                </small>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="breed" class="form__label">Порода питомца</label>
-                                <input
-                                        id="breed"
-                                        type="text"
-                                        v-model.trim="breed"
-                                        class="form__input"
-                                >
-
-                                <ul>
-                                    <li v-for="(el, idx)  in brandsDog"
-                                        :key="idx"
-                                        @click="()=>{breed = el}"
-                                    >
-                                        {{el}}
-                                    </li>
-                                </ul>
-
-                            </div>
-
-                            <div class="form-group" :class="{ 'form-group--error wobble-error': $v.weigh.$error }">
-                                <label class="form__label">*вес</label>
-                                <input type="radio" id="weighV1" value="1" v-model="weigh">
-                                <label for="weighV1">1</label>
-                                <input type="radio" id="weighV2" value="2" v-model="weigh">
-                                <label for="weighV2">2</label>
-                                <input type="radio" id="weighV3" value="3" v-model="weigh">
-                                <label for="weighV3">3</label>
-                                <br>
-                                <small
-                                        v-if="($v.weigh.$dirty && !$v.weigh.required)"
-                                        class="helper-text invalid"
-                                > обязательное поле
-                                </small>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="dateOfBirth" class="form__label">дата рождения</label>
-                                <input
-                                        id="dateOfBirth"
-                                        type="date"
-                                        v-model="dateOfBirth"
-                                        class="form__input"
-                                >
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form__label">возраст (варианты)</label>
-                                <input type="radio" id="ageV1" value="1" v-model="age">
-                                <label for="ageV1">1</label>
-                                <input type="radio" id="ageV2" value="2" v-model="age">
-                                <label for="ageV2">2</label>
-                                <input type="radio" id="ageV3" value="3" v-model="age">
-                                <label for="ageV3">3</label>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="allergies" class="form__label">Пищевые особенности</label>
-                                <input
-                                        id="allergies"
-                                        type="text"
-                                        v-model.trim="allergies"
-                                        class="form__input"
-                                >
-                            </div>
-
-                            <div class="card-action">
-                                <div>
-                                    <button type="submit">
-                                        далее
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </transition>
 
             <transition name="translate">
-                <div class="abs" v-if="step === 'step-2'">
-                    <div class="container">
-                        <form @submit.prevent="submitHandler">
-                            <div class="form-group" :class="{ 'form-group--error wobble-error': $v.email.$error }">
-                                <label for="email" class="form__label">*email</label>
-                                <input
-                                        id="email"
-                                        type="email"
-                                        v-model.trim="email"
-                                        class="form__input"
-                                >
-                                <small
-                                        v-if="($v.email.$dirty && !$v.email.required)"
-                                        class="helper-text invalid"
-                                > обязательное поле
-                                </small>
-                                <small
-                                        v-if="($v.email.$dirty && !$v.email.email)"
-                                        class="helper-text invalid"
-                                > некорректный email
-                                </small>
-                            </div>
-
-                            <div class="form-group" :class="{ 'form-group--error wobble-error': $v.phone.$error }">
-                                <label for="phone" class="form__label">*телефон</label>
-                                <the-mask
-                                        id="phone"
-                                        type="tel"
-                                        placeholder="+7 (000) 000-00-00"
-                                        v-model.trim="phone"
-                                        mask="+7 (###) ###-##-##"
-                                        class="form__input"
-                                />
-                                <small
-                                        v-if="($v.phone.$dirty && !$v.phone.required)"
-                                        class="helper-text invalid"
-                                > обязательное поле
-                                </small>
-                                <small
-                                        v-if="($v.phone.$dirty && !$v.phone.numeric)"
-                                        class="helper-text invalid"
-                                > numeric
-                                </small>
-                                <small
-                                        v-if="($v.phone.$dirty && !$v.phone.minLength)"
-                                        class="helper-text invalid"
-                                > некорретный номер
-                                </small>
-                            </div>
-
-                            <div class="form-group" :class="{ 'form-group--error wobble-error': $v.plan.$error }">
-                                <label class="form__label">*вариант покупки</label>
-                                <input type="radio" id="planV1" value="1" v-model="plan">
-                                <label for="planV1">1</label>
-                                <input type="radio" id="planV2" value="2" v-model="plan">
-                                <label for="planV2">2</label>
-                                <br>
-                                <small
-                                        v-if="($v.plan.$dirty && !$v.plan.required)"
-                                        class="helper-text invalid"
-                                > обязательное поле
-                                </small>
-                            </div>
-
-                            <div class="form-group" :class="{ 'form-group--error wobble-error': $v.email.$error }">
-                                <label for="address" class="form__label">*Адрес доставки</label>
-                                <input
-                                        id="address"
-                                        type="text"
-                                        v-model.trim="address"
-                                        class="form__input"
-                                >
-                                <small
-                                        v-if="($v.address.$dirty && !$v.address.required)"
-                                        class="helper-text invalid"
-                                > обязательное поле
-                                </small>
-                            </div>
-
-                            <div class="card-action">
-                                <div>
-                                    <button type="submit">
-                                        далее
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div>
-                        <p>зона доставки</p>
-                        <div style="position:relative;overflow:hidden;"><a
-                                href="https://yandex.ru/maps/213/moscow/?utm_medium=mapframe&utm_source=maps"
-                                style="color:#eee;font-size:12px;position:absolute;top:0px;">Москва</a><a
-                                href="https://yandex.ru/maps/213/moscow/?ll=37.604136%2C55.760765&mode=usermaps&source=constructorLink&um=constructor%3A6909fae852e9144b06470b26df6895bb7a9ef26ccbd40dfa7a516aec82082422&utm_medium=mapframe&utm_source=maps&z=10"
-                                style="color:#eee;font-size:12px;position:absolute;top:14px;">Яндекс.Карты — поиск мест
-                            и адресов, городской транспорт</a>
-                            <iframe src="https://yandex.ru/map-widget/v1/-/CSAn4XnI" width="100%" height="400"
-                                    frameborder="1" allowfullscreen="true" style="position:relative;"></iframe>
+              <div class="abs" v-if="step === 'step-2'">
+                <div class="container">
+                  <form @submit.prevent="submitHandler" class="form_small">
+                    <div class="form-section">
+                      <div class="form-group">
+                        <label class="form-group__label">Имя питомца</label>
+                        <div class="form-group__content">
+                          <div class="input">
+                            <input type="text" class="input__control" v-model="$v.dogName.$model" />
+                          </div>
                         </div>
+                        <div class="form-group__helper">
+                          <div class="form-group__errors">
+                            <div class="error" v-if="$v.dogName.$dirty && !$v.dogName.required">обязательное поле</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-group__label">Порода</label>
+                        <div class="form-group__content">
+                          <div class="input">
+                            <input type="text" class="input__control" v-model="breed" />
+                            <div class="input__dropdown" v-if="brandsDog.length">
+                              <div v-for="(el, idx) in brandsDog" class="input__dropdown-option"
+                                :key="idx"
+                                @click="()=>{breed = el}"
+                              >
+                                {{el}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group__helper">
+                          <div class="form-group__errors"></div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-group__label">Дата рождения</label>
+                        <div class="form-group__content">
+                          <div class="input input_type_date">
+                            <input type="date" class="input__control input__control_type_datetime" v-model="dateOfBirth">
+                          </div>
+                        </div>
+                        <div class="form-group__helper">
+                          <div class="form-group__errors"></div>
+                        </div>
+                      </div>
                     </div>
-
+                    <div class="form-section">
+                      <div class="form-group">
+                        <label class="form-group__label">Пол питомца</label>
+                        <div class="form-group__content">
+                          <div class="radio-group">
+                            <div class="radio-group__list">
+                              <label class="radio">
+                                <input type="radio" class="radio__control" value="m" v-model="dogGender" />
+                                <span class="radio__button">M</span>
+                              </label>
+                              <label class="radio">
+                                <input type="radio" class="radio__control" value="w" v-model="dogGender" />
+                                <span class="radio__button">Ж</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group__helper">
+                          <div class="form-group__errors"></div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-group__label">Размер питомца</label>
+                        <div class="form-group__content">
+                          <div class="radio-group">
+                            <div class="radio-group__list radio-group__list_with-images">
+                              <label class="radio">
+                                <input type="radio" class="radio__control" value="1" v-model="weight" />
+                                <img class="radio__image" src="../assets/small-dog.png" alt="">
+                                <span class="radio__button">маленький</span>
+                              </label>
+                              <label class="radio">
+                                <input type="radio" class="radio__control" value="2" v-model="weight" />
+                                <img class="radio__image" src="../assets/medium-dog.png" alt="">
+                                <span class="radio__button">средний</span>
+                              </label>
+                              <label class="radio">
+                                <input type="radio" class="radio__control" value="3" v-model="weight" />
+                                <img class="radio__image" src="../assets/large-dog.png" alt="">
+                                <span class="radio__button">большой</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group__helper">
+                          <div class="form-group__errors"></div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-group__label">Аллергия</label>
+                        <div class="form-group__content">
+                          <div class="radio-group">
+                            <div class="radio-group__list radio-group__list_with-images">
+                              <label class="radio">
+                                <input type="radio" class="radio__control" :value="true" v-model="hasAllergy" />
+                                <span class="radio__button">Да</span>
+                              </label>
+                              <label class="radio">
+                                <input type="radio" class="radio__control" :value="false" v-model="hasAllergy" />
+                                <span class="radio__button">Нет</span>
+                              </label>
+                            </div>
+                          </div>
+                          <textarea
+                              v-if="hasAllergy"
+                              rows="2"
+                              class="textarea"
+                              v-model="allergies"
+                              placeholder="Рыба, курица"
+                            >
+                          </textarea>
+                        </div>
+                        <div class="form-group__helper">
+                          <div class="form-group__errors"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
                 </div>
+              </div>
             </transition>
 
             <transition name="translate">
-                <div class="abs" v-if="step === 'step-3'">
+              <div class="abs" v-if="step === 'step-3'">
+                <div class="container">
+                  <form @submit.prevent="submitHandler" class="form_small">
+                    <div class="form-section">
+                      <div class="form-group">
+                        <label class="form-group__label">Ваше имя</label>
+                        <div class="form-group__content">
+                          <div class="input">
+                            <input
+                                type="text"
+                                placeholder="Петя"
+                                v-model="$v.name.$model"
+                                class="input__control"
+                              />
+                          </div>
+                        </div>
+                        <div class="form-group__helper">
+                          <div class="form-group__errors">
+                            <div class="error" v-if="$v.name.$dirty && !$v.name.required">Введите ваше имя</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-group__label">E-mail</label>
+                        <div class="form-group__content">
+                          <div class="input">
+                            <input
+                                type="text"
+                                placeholder="user@example.com"
+                                v-model="$v.email.$model"
+                                class="input__control"
+                              />
+                          </div>
+                        </div>
+                        <div class="form-group__helper">
+                          <div class="form-group__errors">
+                            <div class="error" v-if="$v.email.$dirty && !$v.email.required">Введите email</div>
+                            <div class="error" v-if="$v.email.$dirty && !$v.email.email">Введите корректный email</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-group__label">Телефон</label>
+                        <div class="form-group__content">
+                          <div class="input">
+                            <the-mask
+                                type="tel"
+                                placeholder="+7 (000) 000-00-00"
+                                v-model.trim="$v.phone.$model"
+                                mask="+7 (###) ###-##-##"
+                                class="input__control"
+                              />
+                          </div>
+                        </div>
+                        <div class="form-group__helper">
+                          <div class="form-group__errors">
+                            <div class="error" v-if="$v.phone.$dirty && !$v.phone.required">Введите телефон</div>
+                            <div class="error" v-if="$v.phone.$dirty && !$v.phone.minLength">Введите корректный номер телефона</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-section">
+                      <div class="form-group form-group_with_link">
+                        <label class="form-group__label">Адрес доставки</label>
+                        <div class="form-group__content">
+                          <div class="input input_type_address">
+                            <input
+                                type="text"
+                                placeholder="г. Москва ул. Ленина 35 кв.10"
+                                v-model="$v.address.$model"
+                                class="input__control"
+                              />
+                          </div>
+                        </div>
+                        <div class="form-group__helper">
+                        <div class="form-group__errors">
+                          <div class="error" v-if="$v.address.$dirty && !$v.address.required">Введите адрес</div>
+                        </div>
+                        <a class="form-group__link" href="#" @click="showMap = !showMap">Зоны доставки</a>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-group__label">Желаемые дата и время доставки</label>
+                        <div class="form-group__content">
+                          <div class="input-group">
+                            <div class="input input_type_date">
+                              <input type="date" class="input__control input__control_type_datetime" v-model="$v.date.$model">
+                            </div>
+                            <div class="input input_type_time">
+                              <input type="time" class="input__control input__control_type_datetime" v-model="$v.time.$model">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group__helper">
+                          <div class="form-group__errors">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div v-if="showMap">
+                    <p>зона доставки</p>
+                    <div style="position:relative;overflow:hidden;"><a
+                            href="https://yandex.ru/maps/213/moscow/?utm_medium=mapframe&utm_source=maps"
+                            style="color:#eee;font-size:12px;position:absolute;top:0px;">Москва</a><a
+                            href="https://yandex.ru/maps/213/moscow/?ll=37.604136%2C55.760765&mode=usermaps&source=constructorLink&um=constructor%3A6909fae852e9144b06470b26df6895bb7a9ef26ccbd40dfa7a516aec82082422&utm_medium=mapframe&utm_source=maps&z=10"
+                            style="color:#eee;font-size:12px;position:absolute;top:14px;">Яндекс.Карты — поиск мест
+                        и адресов, городской транспорт</a>
+                        <iframe src="https://yandex.ru/map-widget/v1/-/CSAn4XnI" width="100%" height="400"
+                                frameborder="1" allowfullscreen="true" style="position:relative;"></iframe>
+                    </div>
+                </div>
+              </div>
+            </transition>
+
+            <transition name="translate">
+                <div class="abs" v-if="step === 'step-4'">
                     <div class="container">
                         <p>данные отправлены...</p>
                     </div>
@@ -275,7 +308,7 @@
       title: 'Order',
     },
     validations () {
-      if (this.step === 'step-1') {
+      if (this.step === 'step-2') {
         return {
           dogName: {
             required,
@@ -284,12 +317,15 @@
           dogGender: {
             required,
           },
-          weigh: {
+          weight: {
             required,
           },
         }
-      } else if (this.step === 'step-2') {
+      } else if (this.step === 'step-3') {
         return {
+          name: {
+            required,
+          },
           email: {
             required,
             email,
@@ -298,14 +334,16 @@
             required,
             minLength: minLength(10),
             maxLength: maxLength(10),
-            numeric,
-          },
-          plan: {
-            required,
           },
           address: {
             required,
           },
+          date: {
+            required,
+          },
+          time: {
+            required,
+          }
         }
       } else {
         return {}
@@ -316,17 +354,22 @@
       dogName: '',
       dogGender: '',
       breed: '',
-      weigh: '',
+      weight: '',
       dateOfBirth: '',
       age: '',
+      hasAllergy: false,
       allergies: '',
+      name: '',
       email: '',
       phone: '',
-      plan: '',
       address: '',
+      date: '',
+      time: '',
+      plan: '',
+      showMap: false,
 
       step: 'step-1',
-      steps: ['step-1', 'step-2', 'step-3'],
+      steps: ['step-1', 'step-2', 'step-3', 'step-4'],
     }),
     methods: {
       onClick (e) {
@@ -370,6 +413,7 @@
 </script>
 
 <style lang="scss" scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
 
   .progress-bar {
     display: flex;
@@ -410,7 +454,7 @@
     }
     &__step:nth-child(2) {
       &::before {
-        
+
       }
       &::after {
         width: 110%;
@@ -487,80 +531,6 @@
     }
   }
 
-    .invalid {
-        color: #f04124;
-    }
-
-    .form-group {
-        margin-bottom: 2rem;
-    }
-
-    .form-group--error .form__label {
-        color: #f04124;
-    }
-
-    .form__label {
-        font-size: 0.8125rem;
-        color: #4b6372;
-        margin-bottom: 0.3125rem;
-        margin-left: 0.875rem;
-        display: block;
-        font-family: "Lato", sans-serif;
-    }
-
-    .form-group--error input,
-    .form-group--error textarea,
-    .form-group--error input:focus,
-    .form-group--error input:hover {
-        border-color: #f79483;
-    }
-
-    .input-field input[type="text"],
-    .input-field input[type="date"],
-    .form__input {
-        font-family: "Lato", sans-serif;
-        font-size: 0.875rem;
-        font-weight: 300;
-        color: #374853;
-        line-height: 2.375rem;
-        min-height: 2.375rem;
-        position: relative;
-        border: 1px solid #E8E8E8;
-        border-radius: 5px;
-        background: #fff;
-        padding: 0 0.8125rem;
-        width: 100%;
-        transition: border .1s ease;
-        box-sizing: border-box;
-    }
-
-    .wobble-error {
-        animation: wobble-error 0.8s both;
-    }
-
-    @keyframes wobble-error {
-        0%,
-        100% {
-            transform: translateX(0%);
-            transform-origin: 50% 50%;
-        }
-        15% {
-            transform: translateX(-15px);
-        }
-        30% {
-            transform: translateX(7.7px);
-        }
-        45% {
-            transform: translateX(-7.5px);
-        }
-        60% {
-            transform: translateX(4.5px);
-        }
-        75% {
-            transform: translateX(-3px);
-        }
-    }
-
     .scale-in-hor-left {
         animation: scale-in-hor-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     }
@@ -579,7 +549,7 @@
     }
 
     .container {
-        width: 350px;
+        width: 920px;
         margin: 0 auto;
     }
 
@@ -610,5 +580,196 @@
         right: 0;
         left: 0;
     }
+
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .form_small {
+    width: 650px;
+    margin: 0 auto;
+  }
+
+  .form-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group {
+    font-family: Montserrat, sans-serif;
+    text-align: left;
+
+    &__label {
+      font-size: 12px;
+      line-height: 15px;
+      color: #828282;
+      box-sizing: border-box;
+    }
+
+    &__link {
+      display: block;
+      text-align: right;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: 0.3px;
+      text-decoration-line: underline;
+      color: #4F4F4F;
+      padding: 5px 0;
+    }
+
+    &__helper {
+      height: 50px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__errors {
+      color: red;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: 0.3px;
+
+      & .error {
+        padding: 5px 5px;
+      }
+    }
+  }
+  .input {
+    font-family: Montserrat, sans-serif;
+    display: inline-flex;
+    align-items: stretch;
+    position: relative;
+    box-sizing: border-box;
+    margin-right: 20px;
+    border-bottom: 1px solid #4f4f4f;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    padding-top: 5px;
+    min-width: 255px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &_type_date {
+      min-width: 150px;
+    }
+
+    &_type_time {
+      min-width: 100px;
+    }
+
+    &_type_address {
+      min-width: 325px;
+    }
+
+    &__control {
+      border: none;
+      outline: none;
+      font-style: normal;
+      padding: 10px 5px;
+      width: 100%;
+      box-sizing: border-box;
+      line-height: 20px;
+      font: inherit;
+
+      &_type_datetime {
+        padding: 8px 5px;
+      }
+    }
+
+    &__dropdown {
+      position: absolute;
+      top: 105%;
+      left: 0;
+      right: 0;
+      border-radius: 5px;
+      box-shadow: 0 0 5px 0 rgba(0,0,0,.3);
+      background: #fff;
+      z-index: 1;
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 500;
+
+      &-option {
+        padding: 10px;
+
+        &:hover {
+          background-color: rgba(#FFCC01, 0.3);
+        }
+      }
+    }
+  }
+  .input-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  .radio {
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    box-sizing: border-box;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &__control {
+      display: none;
+    }
+    &__button {
+      font-family: Montserrat, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 25px;
+      border: 2px solid #2289B5;
+      box-sizing: border-box;
+      border-radius: 5px;
+      padding: 0 5px;
+      min-width: 65px;
+      text-align: center;
+      margin-top: 17px;
+    }
+    &__control:checked ~ &__button {
+      background-color: #2289B5;
+      color: #FFFFFF;
+    }
+
+    &__image {
+      width: 80px;
+      display: block;
+    }
+  }
+  .radio-group {
+    &__list {
+      display: flex;
+    }
+  }
+
+  .textarea {
+    border-radius: 5px;
+    border: 1px solid #828282;
+    box-sizing: border-box;
+    color: #333333;
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    margin-top: 10px !important;
+    padding: 10px;
+    resize: none;
+    width: 100%;
+  }
 
 </style>
