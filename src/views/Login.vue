@@ -44,7 +44,7 @@ margin: 0px auto;
 h1{
 /* width: 223px;
 height: 39px; */
-margin: 45px 114px 20px 113px;
+margin: 45px 114px 0 113px;
 justify-content: center;
 font-family: Montserrat;
 font-style: normal;

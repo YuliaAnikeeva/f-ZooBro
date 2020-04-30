@@ -3,9 +3,12 @@
     <form class="form" @submit.prevent="register">
         <div class="field" :class="{ 'field--error': $v.form.email.$error }">
             <label class="label" for="email_field">Введите адрес электронной почты</label>
-            <input class="input" id="email_field" type="email" value="Адрес электронной почты" v-model="$v.form.email.$model">
+            <input class="input" id="email_field" type="email" placeholder="Адрес электронной почты" v-model="$v.form.email.$model">
+            <div class="error_block">
             <div class="error" v-if="!$v.form.email.required">Введите e-mail</div>
             <div class="error" v-if="!$v.form.email.email">Введите корректный e-mail</div>
+            <!-- <div class="password" v-if="onSubmit()">Password</div> -->
+        </div>
         </div>
         <input class="button" type="submit" value="Далее" :disabled="$v.$invalid" v-on:click="next">
     </form>
@@ -57,9 +60,10 @@ this.$router.push('/login')
          }
        }
      },
+
     next(){
-      this.tologin(event),
-      this.onSubmit()
+      // this.onSubmit(),
+      this.tologin(event)
     }
 
     },
@@ -141,34 +145,39 @@ this.$router.push('/login')
     width: 255px;
     height: 55px;
     background: #4D99BA;
+    background-image:  url(../assets/paw.svg);
+    background-position: 80% 50%;
+    background-repeat: no-repeat;
     opacity: 0.8;
     border-radius: 10px;
     /* Далее */
-
     font-family: Montserrat;
     font-style: normal;
     font-weight: 600;
     font-size: 22px;
     line-height: 27px;
     /* identical to box height */
-    
     letter-spacing: 0.2px;
-
     /* Gray 6 */
     color: #F2F2F2;
-
   }
 
   
   .error {
-    color: red;
     align-self: flex-start;
     margin: 5px 0;
-    font-size: 0.8em;
     display: none;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+
+    color: #F63535;
+
   }
   .field--error .input {
-    border-color: red;
+    border-color: #F63535;
   }
   .field--error .error {
     display: block;
@@ -178,7 +187,10 @@ this.$router.push('/login')
       color: green;
     }
     &--error {
-      color: red;
+      color:  #F63535;
     }
+    .error_block{
+    height: 20px;
+  }
   }
 </style>
