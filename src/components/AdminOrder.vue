@@ -3,16 +3,19 @@
     <span>
       Order id #{{order.id}}
     </span>
-    {{order}}
-    {{this.$store.getters['admin/getOrderAddress'](order.pet_id)}}
-    <span>{{userInfo}}</span>
+    <ul>
+      <li><h3>User's data</h3></li>
+      <li>Email: {{userInfo.email}}</li>
+      <li>Phone number: {{userInfo.mobile}}</li>
+      <li>Address: {{userInfo.address}}</li>
+    </ul>
     <ul>
       <li><h3>Pet's data</h3></li>
       <li>Name: {{petInfo.name}}</li>
       <li>Gender: {{petInfo.gender}}</li>
-      <li>Size: {{petInfo.gender}}</li>
+      <li>Size: {{petInfo.size}}</li>
       <li>Breed: {{petInfo.breed}}</li>
-      <li>Food exceptions: {{petInfo.food_exceptions}}</li>
+      <li v-if="petInfo.food_exceptions != null">Food exceptions: {{petInfo.food_exceptions}}</li>
     </ul>
     <span>
       <p>Current status: {{statusString}}</p>
@@ -38,9 +41,6 @@ export default {
       selectedStatus: '',
       changeStatus: false,
     }
-  },
-  created() {
-    // this.selectedStatus = this.order.status
   },
   computed: {
     statusChanged() {
@@ -74,7 +74,7 @@ export default {
         }
       }
     }
-  }
+  },
 }
 </script>
 
@@ -86,5 +86,9 @@ export default {
     align-items: center;
     border: 1px solid black;
     margin-top: 10px;
+  }
+
+  ul {
+    list-style-type: none;
   }
 </style>
