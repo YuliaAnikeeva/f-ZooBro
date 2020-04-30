@@ -154,8 +154,8 @@
         background-color: #4D99BA;
     }
 
-    button:focus,
-    button:active {
+    .button:focus,
+    .button:active {
         outline-color: transparent;
     }
 
