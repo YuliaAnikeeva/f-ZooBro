@@ -1,6 +1,5 @@
 <template>
   <div class="form-recovery">
-<<<<<<< HEAD
     <div class="message_block">
     <div v-if="status=='success'">
       <p class="message message--success">{{ msg }}</p>
@@ -19,18 +18,6 @@
           <input class="button" type="submit" value="Восстановить пароль" :disabled="disabled">
       </form>
     
-=======
-    <p v-for="msg in messages" class="message" :class="`message--${status}`" :key="msg">{{ msg }}</p>
-    <form v-if="status != 'success' || !messages.length" class="form" @submit.prevent="onSubmit" ref="form">
-        <div class="field" :class="{ 'field--error': $v.email.$error }">
-            <label class="label" for="email-field">Email</label>
-            <input class="input" :disabled="disabled" id="email-field" type="email" v-model="$v.email.$model" placeholder="user@example.com">
-            <div class="error" v-if="!$v.email.required">Введите e-mail</div>
-            <div class="error" v-if="!$v.email.email">Введите корректный e-mail</div>
-        </div>
-        <input class="button" type="submit" value="Восстановить пароль" :disabled="disabled">
-    </form>
->>>>>>> ec393c812929f478b1038d9118d6321861b9759a
   </div>
 </template>
 

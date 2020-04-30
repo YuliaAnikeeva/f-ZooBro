@@ -2,12 +2,8 @@
   <div class="form-login">
     <div class="message_block">
     <div v-if="status == 'pending'">Pending...</div>
-<<<<<<< HEAD
     <div class="message message--error" v-else-if="status == 'error'">{{ msg }}</div>
     </div>
-=======
-    <div v-for="msg in messages" class="message" :class="`message--${status}`" :key="msg">{{ msg }}</div>
->>>>>>> ec393c812929f478b1038d9118d6321861b9759a
     <form class="form" @submit.prevent="onSubmit">
         <div class="field" :class="{ 'field--error': $v.email.$error }">
             <input class="input" id="email_field" type="email" placeholder="Адрес электронной почты" v-model="$v.email.$model" :disabled="disabled">
@@ -27,7 +23,7 @@
             <div class="error" v-if="!$v.password.betweenLength">{{ $v.password.between }}Длина пароля должна быть от {{ $v.password.$params.betweenLength.min }} до {{ $v.password.$params.betweenLength.max }} символов</div>
         </div>
         </div>
-        <input class="button" type="submit" value="Войти" :disabled="disabled">
+        <input class="button" type="submit" value="Войти" :disabled="$v.$invalid">
         <a class="link" href="/recovery-password">Я не помню пароль</a>
         <a class="link" href="/recovery-password">Зарегистрироваться</a>
         <div>
