@@ -2,12 +2,15 @@
   <div class="form-registration">
     <form class="form" @submit.prevent="register">
         <div class="field" :class="{ 'field--error': $v.form.email.$error }">
-            <label class="label" for="email_field">Почта</label>
-            <input class="input" id="email_field" type="email" v-model="$v.form.email.$model">
+            <label class="label" for="email_field">Введите адрес электронной почты</label>
+            <input class="input" id="email_field" type="email" placeholder="Адрес электронной почты" v-model="$v.form.email.$model">
+            <div class="error_block">
             <div class="error" v-if="!$v.form.email.required">Введите e-mail</div>
             <div class="error" v-if="!$v.form.email.email">Введите корректный e-mail</div>
+            <!-- <div class="password" v-if="onSubmit()">Password</div> -->
         </div>
-        <input class="button" type="submit" value="Next" :disabled="$v.$invalid" v-on:click="next">
+        </div>
+        <input class="button" type="submit" value="Далее" :disabled="$v.$invalid" v-on:click="next">
     </form>
   </div>
 </template>
@@ -57,9 +60,10 @@ this.$router.push('/login')
          }
        }
      },
+
     next(){
-      this.tologin(event),
-      this.onSubmit()
+      // this.onSubmit(),
+      this.tologin(event)
     }
 
     },
@@ -86,32 +90,94 @@ this.$router.push('/login')
     margin: 15px 0;
   }
   .label {
-    align-self: flex-start;
-    text-transform: uppercase;
+    margin: 20px 79px;
+    align-self: center;
+    // text-transform: uppercase;
     font-size: 0.8em;
     margin-bottom: 5px;
+
+    /* Введите адрес электронной почты */
+    width: 293px;
+    height: 20px;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+
+    /* Text color test */
+    color: #1A1A22;
+
   }
   .input {
-    padding: 10px 5px;
-    border-radius: 5px;
-    border: 1px solid #333;
+    margin: 20px 0;
+    // border-radius: 5px;
+    // border: 1px solid #333;
+
+    /* Rectangle 7 */
+    width: 360px;
+    height: 22px;
+    background: #FAFAFA;
+    border-radius: 10px;
+    /* ZooBro@test.ru */
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    padding: 30px 20px 8px 20px;
+    letter-spacing: 0.2px;
+
+    color: #1A1A22;
+
+
   }
   .link {
     margin: 15px 0;
   }
   .button {
+    margin: 20px 0;
     padding: 15px;
-    align-self: flex-end;
+    align-self: center;
+    /* Rectangle 8 */
+    width: 255px;
+    height: 55px;
+    background: #4D99BA;
+    background-image:  url(../assets/paw.svg);
+    background-position: 80% 50%;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    border-radius: 10px;
+    /* Далее */
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    /* identical to box height */
+    letter-spacing: 0.2px;
+    /* Gray 6 */
+    color: #F2F2F2;
   }
+
+  
   .error {
-    color: red;
     align-self: flex-start;
     margin: 5px 0;
-    font-size: 0.8em;
     display: none;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+
+    color: #F63535;
+
   }
   .field--error .input {
-    border-color: red;
+    border-color: #F63535;
   }
   .field--error .error {
     display: block;
@@ -121,7 +187,10 @@ this.$router.push('/login')
       color: green;
     }
     &--error {
-      color: red;
+      color:  #F63535;
     }
+    .error_block{
+    height: 20px;
+  }
   }
 </style>
