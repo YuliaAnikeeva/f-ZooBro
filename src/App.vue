@@ -23,6 +23,7 @@
 </script>
 
 <style lang="scss">
+
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -51,5 +52,9 @@
     a {
       text-decoration: none;
     }
+    div {
+      display: block;
+    }
+
 
 </style>
