@@ -156,17 +156,94 @@
           </div>
         </div>
       </div>
+      <div class="doubt">
+        <div class="block__head">
+          <h4 class="block__head-text">Социальная миссия</h4>
+        </div>
+        <section class="doubt__content">
+          <div class="doubt__content-image">
+            <img src="https://via.placeholder.com/440x250" alt="">
+          </div>
+          <div class="doubt__content-text">
+            <p class="doubt__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure eveniet ab mollitia iste sint quaerat dicta eum quisquam labore ipsum, nisi repellat in nemo cupiditate natus consequuntur quis ipsam! Beatae rem totam esse. Voluptates veritatis mollitia error laudantium impedit reprehenderit, iusto soluta, sunt repellendus facere laborum neque cumque, vel delectus.</p>
+            <div class="order-button">
+              <div class="order-button__container">
+                <router-link class="order-button__text" to="/order">
+                  <span>Заказать</span>
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="faq">
+        <div class="faq__image"></div>
+        <div class="faq__container">
+          <h5 class="faq__head">FAQ</h5>
+          <div class="faq__question" @click="answerFirst = !answerFirst">
+            <span class="faq__question-text">А доставка бесплатная?</span>
+            <div class="faq__plus-minus">
+              <i :class="{rotate: !answerFirst}"></i>
+            </div>
+          </div>
+          <div class="faq__answer" :class="{faq__answer_collapse: answerFirst}">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, delectus porro amet ipsam veniam debitis!
+          </div>
+          <div class="faq__question" @click="answerSecond = !answerSecond">
+            <span class="faq__question-text">Моей собаке это точно понравится?</span>
+            <div class="faq__plus-minus">
+              <i :class="{rotate: !answerSecond}"></i>
+            </div>
+          </div>
+            <div class="faq__answer" :class="{faq__answer_collapse: answerSecond}">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero consequatur fugit quis voluptate tempora cum.
+            </div>
+          <div class="faq__question" @click="answerThird = !answerThird">
+            <span class="faq__question-text">А это подходит разным породам?</span>
+            <div class="faq__plus-minus">
+              <i :class="{rotate: !answerThird}"></i>
+            </div>
+          </div>
+          <div class="faq__answer" :class="{faq__answer_collapse: answerThird}">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus mollitia deserunt magnam ea excepturi? Sit?
+          </div>
+          <div class="faq__question" @click="answerFourth = !answerFourth">
+            <span class="faq__question-text">Когда оплачивать покупку?</span>
+            <div class="faq__plus-minus">
+              <i :class="{rotate: !answerFourth}"></i>
+            </div>
+          </div>
+          <div class="faq__answer" :class="{faq__answer_collapse: answerFourth}">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas officiis facilis nam vitae odit facere?
+          </div>
+          <div class="faq_plus-minus"></div>
+        </div>
+      </div>
     </main>
-    <footer class="footer">FOOTER</footer>
+    <footer class="footer">
+      <div class="social-icons">
+        <div class="social-icons__element"></div>
+        <div class="social-icons__element"></div>
+        <div class="social-icons__element"></div>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script>
+
+
 export default {
   name: "Home",
   metaInfo: {
     title: "Home"
   },
+  data: () => ({
+    answerFirst: false,
+    answerSecond: false,
+    answerThird: false,
+    answerFourth: false
+  }),
   components: {}
 };
 </script>
@@ -226,11 +303,12 @@ main {
     align-items: center;
 
   &__content {
+    position: relative;
     margin-bottom: 100px;
     display: block;
     width: 160px;
     height: 0px;
-    border: 1px solid #000000;
+    border-top: 1px solid #000000;
     box-sizing: border-box;
 
     &_rotate30 {
@@ -240,6 +318,27 @@ main {
       transform: rotate(-30deg);
     }
   }
+  &__content::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 1px;
+    top: -8.5px;
+    right: -3px;
+    background-color: #000;
+    transform: rotate(45deg);
+  }
+  &__content::before {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 1px;
+    top: 6.7px;
+    right: -3px;
+    background-color: #000;
+    transform: rotate(-45deg);
+  }
+
 }
 .order-button {
   display: grid;
@@ -562,7 +661,143 @@ main {
     row-gap: 60px;
   }
 }
+.doubt {
+  display: grid;
+  justify-content: center;
+  grid-template-rows: max-content max-content;
+  width: 100%;
+  background: rgba(196, 196, 196, 0.5);
+  border-bottom: 1px solid #000000;
+  box-sizing: border-box;
+  padding-bottom: 120px;
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(2, 25%);
+    justify-content: center;
+  }
+  &__content-text {
+    width: 70%;
+    justify-self: center;
+  }
+  &__text {
+    margin-bottom: 60px;
+  }
+}
+.faq {
+  background: #fff;
+  padding: 60px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 40%);
+  justify-content: center;
+
+  &__image {
+    background: url('../assets/faq_dog.png') no-repeat;
+    background-size: contain;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+  }
+  &__container {
+    background: #FBFBFB;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 80px;
+    padding: 100px 124px 100px;
+    display: grid;
+    grid-template-rows: 4em repeat(4, 4em max-content);
+    row-gap: .8em;
+    height: 820px;
+  }
+  &__head {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 39px;
+    text-align: center;
+    color: #464451;
+  }
+  &__question {
+    display: grid;
+    grid-template-columns: 4fr 1fr;;
+    justify-content: space-between;
+    align-content: center;
+    width: 100%;
+    background: #2289B5;
+    border-radius: 10px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    padding: 0 20px;
+    text-align: left;
+    margin: 0 0 10px 0;
+  }
+  &__answer {
+    overflow: hidden;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #464451;
+    height: 100%;
+    opacity: 1;
+    transition: height 300ms ease-out, opacity 300ms ease-out;
+    &_collapse {
+      opacity: 0;
+      height: 0;
+      // animation: collapse .3s .3s linear;
+      // animation-iteration-count: 1;
+    }
+  }
+  
+  &__plus-minus {
+    display: grid;
+    align-items: center;
+    justify-items: end;
+    padding-right: 10px;
+
+    & i {
+      position: relative;
+      display: block;
+    }
+    & i::before {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 22px;
+      height: 4px;
+      background-color: #fff;
+      transform: rotate(90deg);
+      transition-duration: .3s;
+      overflow: hidden;
+
+    }
+    & i::after {
+      position: absolute;
+      content: '';
+      width: 22px;
+      height: 4px;
+      background-color: #fff;
+    }
+    & .rotate::before {
+      transform: rotate(0deg);
+      transition-duration: .3s;
+    }
+  }
+}
 .footer {
   width: 100%;
+  height: 110px;
+  background: #464451;
 }
+@keyframes collapse {
+  from {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 </style>
