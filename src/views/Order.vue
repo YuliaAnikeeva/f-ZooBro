@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="container">
         <h1>Оформление заявки</h1>
 
-        <ProgresBar/>
+        <ProgresBar v-model="step"/>
 
       <div class="container">
           <div class="buttons">
