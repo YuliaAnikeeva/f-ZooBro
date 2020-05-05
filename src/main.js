@@ -15,5 +15,11 @@ Vue.use(VueTheMask)
 new Vue({
   router,
   store,
+  created () {
+    if (localStorage.getItem('userToken')) {
+      const { dispatch } = this.$store
+      dispatch('autoLoginUser', localStorage.getItem('userToken'))
+    }
+  },
   render: h => h(App)
 }).$mount('#app')
