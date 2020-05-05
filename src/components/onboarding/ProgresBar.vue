@@ -57,21 +57,9 @@
 </script>
 
 <style lang="scss" scoped>
-    .container {
-        width: 100%;
-    }
-
     .progressbar {
         display: flex;
         font-size: 14px;
-    }
-
-    .progressbar li {
-        list-style: none;
-        flex: 1;
-        position: relative;
-        text-align: center;
-        color: #2c3e50 !important;
     }
 
     .step {
