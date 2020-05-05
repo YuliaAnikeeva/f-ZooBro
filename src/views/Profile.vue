@@ -146,7 +146,6 @@
       <PetCard :petId="selectedPet" />
     </div>
     <div v-if="activeTab == 'orders'" id="profile-orders">
-      <h2>Orders</h2>
       <OrderCard
         v-for="(orderId, index) in orders"
         :key="index"
