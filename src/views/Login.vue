@@ -35,7 +35,9 @@
     .border {
         display: flex;
         flex-direction: column;
-        width: 450px;
+        width: 90%;
+        max-width: 450px;
+        min-height: 450px;
         padding: 50px 0;
         background: #FFFFFF;
         border-radius: 20px;
@@ -43,13 +45,13 @@
     }
 
     h1 {
-        justify-content: center;
-        font-family: Montserrat, serif;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 32px;
-        line-height: 39px;
-        letter-spacing: 0.1px;
-        color: #1A1A22;
+    justify-content: center;
+    font-family: Montserrat, serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 39px;
+    letter-spacing: 0.1px;
+    color: #1A1A22;
     }
 </style>
