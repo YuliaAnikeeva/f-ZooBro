@@ -31,30 +31,25 @@
   padding: 85px 0;
 }
 .border{
-/* Rectangle 98 */
-display: flex;
-flex-direction: column;
-width: 90%;
-max-width: 450px;
-height: 550px;
-background: #FFFFFF;
-border-radius: 20px;
-margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 450px;
+  height: 450px;
+  padding: 50px 0;
+  background: #FFFFFF;
+  border-radius: 20px;
+  margin: 0 auto;
 }
 
 h1{
-/* width: 223px;
-height: 39px; */
-margin: 45px 114px 20px 113px;
-justify-content: center;
-font-family: Montserrat;
-font-style: normal;
-font-weight: 600;
-font-size: 32px;
-line-height: 39px;
-/* identical to box height */
-letter-spacing: 0.1px;
-color: #1A1A22;
-
+    justify-content: center;
+    font-family: Montserrat, serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 39px;
+    letter-spacing: 0.1px;
+    color: #1A1A22;
 }
 </style>

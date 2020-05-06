@@ -102,20 +102,22 @@
         height: 30px;
     }
 
-    .form {
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
+ .form {
+    margin: 5% auto;
+    display: flex;
+    flex-direction: column;
 
-        @media (min-width: 425px) {
-            width: 400px;
-        }
+    @media (min-width: 425px) {
+      width: 400px;
     }
+    @media (min-width: 350px) {
+            width: 90%;
+        }
+  }
 
     .link {
         margin: 10px 0;
-        max-width: 155px;
-        width: 50%;
+        width: 155px;
         height: 20px;
         text-decoration: none;
         border-bottom: 0.3px solid #1A1A22;
@@ -201,6 +203,7 @@
         border-radius: 10px;
         color: #1A1A22;
         transition: 0.2s ease all;
+        
     }
 
     .group-field input:focus {
