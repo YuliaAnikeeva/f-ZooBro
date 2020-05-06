@@ -17,12 +17,6 @@ export default {
         localStorage.setItem('userToken', Authorization)
       }
     },
-    setUserLogin (state, payload) {
-      state.login = payload
-    },
-    setUserPassword (state, payload) {
-      state.password = payload
-    },
   },
   actions: {
     async loginUser ({ commit }, payload) {
