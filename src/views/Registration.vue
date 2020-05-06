@@ -35,7 +35,7 @@
   flex-direction: column;
   width: 90%;
   max-width: 450px;
-  height: 450px;
+  min-height: 450px;
   padding: 50px 0;
   background: #FFFFFF;
   border-radius: 20px;
