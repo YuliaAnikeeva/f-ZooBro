@@ -26,7 +26,6 @@ export default {
   },
   actions: {
     async loginUser ({ commit }, payload) {
-      commit('setLoading', true)
       return fetch(`${baseURL}/v1/user/auth`,
         {
           mode: 'cors',

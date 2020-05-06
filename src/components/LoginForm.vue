@@ -1,15 +1,10 @@
 <template>
     <div class="form-login">
 
-        <div class="message_block">
-            <div v-if="status == 'pending'">Pending...</div>
-            <div class="message message--error" v-else-if="status == 'error'">{{ msg }}</div>
-        </div>
-
         <form class="form" @submit.prevent="onSubmit">
 
             <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error}">
-                <input v-model="email" :disabled="disabled" required>
+                <input v-model="email" required>
                 <label>Адрес электронной почты</label>
 
                 <div class="error_block">
@@ -19,7 +14,7 @@
             </div>
 
             <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
-                <input type="password" v-model="password" :disabled="disabled" required>
+                <input type="password" v-model="password" required>
                 <label>Пароль</label>
 
                 <div class="error_block">
@@ -31,7 +26,9 @@
                 </div>
             </div>
 
-            <button class="button" type="submit">Войти</button>
+            <button :disabled="disabled" class="button" type="submit">Войти</button>
+
+            <Loader v-if="disabled"/>
 
             <router-link class="link" to="/recovery-password">Я не помню пароль</router-link>
             <router-link class="link" to="/recovery-password">Зарегистрироваться</router-link>
@@ -43,10 +40,8 @@
 
 <script>
   import { required, email, minLength, maxLength, and, helpers } from 'vuelidate/lib/validators'
-  import { createNamespacedHelpers } from 'vuex'
+  import Loader from './Loader'
 
-  const { mapGetters } = createNamespacedHelpers('auth')
-  import { AUTH_REQUEST } from '../store/auth'
   const betweenLength = (min, max) => helpers.withParams(
     {
       min,
@@ -57,18 +52,14 @@
 
   export default {
     name: 'LoginForm',
+    components: { Loader },
     props: ['onSuccess'],
     data () {
       return {
         email: '',
         password: '',
         messages: [],
-      }
-    },
-    computed: {
-      ...mapGetters({ status: 'getStatus' }),
-      disabled: function () {
-        return this.status == 'pending'
+        disabled: false,
       }
     },
     validations: {
@@ -82,24 +73,24 @@
       }
     },
     methods: {
-      onSubmit () {
+      async onSubmit () {
         this.$v.$touch()
         if (this.$v.$invalid) {
           return
         }
         if (!this.$v.$invalid) {
-          this.messages = []
           const { email, password } = this
-          this.$store.dispatch('auth/' + AUTH_REQUEST, {
+          console.log('loginUser')
+
+          this.disabled = true
+          const rez = await this.$store.dispatch('loginUser', {
             email,
             password
           })
-            .then((resp) => {
-              this.onSuccess && this.onSuccess(resp)
-            })
-            .catch((messages) => {
-              this.messages = messages
-            })
+          if (rez) {
+            this.onSuccess()
+          }
+          this.disabled = false
         }
       }
     }
