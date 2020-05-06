@@ -51,5 +51,9 @@
     a {
       text-decoration: none;
     }
+    div {
+      display: block;
+    }
+
 
 </style>

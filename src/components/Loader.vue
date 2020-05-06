@@ -2,6 +2,12 @@
 <div class="lds-dual-ring"></div>
 </template>
 
+<script>
+  export default {
+    name: 'Loader',
+  }
+</script>
+
 <style>
 .lds-dual-ring {
   display: inline-block;
@@ -11,7 +17,7 @@
 .lds-dual-ring:after {
   content: " ";
   display: block;
-  width: 64px;  
+  width: 64px;
   height: 64px;
   margin: 8px;
   border-radius: 50%;
