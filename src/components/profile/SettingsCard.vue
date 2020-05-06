@@ -1,6 +1,5 @@
 <template>
   <div id="settings">
-    <h2>Settings</h2>
     <div id="settings-form">
       <label>
         <h3>Email:</h3>

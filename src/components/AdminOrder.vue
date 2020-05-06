@@ -1,24 +1,24 @@
 <template>
-  <div>
-    <span>
+  <div class="order-data">
+    <span class="order-data__id">
       Order id #{{order.id}}
     </span>
     <ul>
       <li><h3>User's data</h3></li>
-      <li>Email: {{userInfo.email}}</li>
-      <li>Phone number: {{userInfo.mobile}}</li>
-      <li>Address: {{userInfo.address}}</li>
+      <li>Email: <span class="black">{{userInfo.email}}</span></li>
+      <li>Phone number: <span class="black">{{userInfo.mobile}}</span></li>
+      <li>Address: <span class="black">{{userInfo.address}}</span></li>
     </ul>
     <ul>
       <li><h3>Pet's data</h3></li>
-      <li>Name: {{petInfo.name}}</li>
-      <li>Gender: {{petInfo.gender}}</li>
-      <li>Size: {{petInfo.size}}</li>
-      <li>Breed: {{petInfo.breed}}</li>
-      <li v-if="petInfo.food_exceptions != null">Food exceptions: {{petInfo.food_exceptions}}</li>
+      <li>Name: <span class="black">{{petInfo.name}}</span></li>
+      <li>Gender: <span class="black">{{petInfo.gender}}</span></li>
+      <li>Size: <span class="black">{{petInfo.size}}</span></li>
+      <li>Breed: <span class="black">{{petInfo.breed}}</span></li>
+      <li>Food exceptions: <span class="black">{{petInfo.food_exceptions != null ? petInfo.food_exceptions : 'none'}}</span></li>
     </ul>
     <span>
-      <p>Current status: {{statusString}}</p>
+      <p>Current status: <span class="black">{{statusString}}</span></p>
       <button v-if="!changeStatus" @click="changeStatus = !changeStatus">Изменить статус</button>
     </span>
     <select v-if="changeStatus" v-model="selectedStatus" >
@@ -79,16 +79,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  div {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-    align-items: center;
-    border: 1px solid black;
-    margin-top: 10px;
+  .order-data {
+    // display: flex;
+    // flex-flow: row nowrap;
+    // justify-content: space-evenly;
+    // align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    border: 2px solid #2289b5;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    &__id {
+      margin: auto;
+    }
   }
 
   ul {
     list-style-type: none;
+  }
+
+  .black {
+    color: black;
+    font-weight: 600;
   }
 </style>
