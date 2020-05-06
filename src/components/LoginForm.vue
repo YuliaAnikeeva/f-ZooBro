@@ -123,7 +123,8 @@
 
     .link {
         margin: 10px 0;
-        width: 155px;
+        max-width: 155px;
+        width: 50%;
         height: 20px;
         text-decoration: none;
         border-bottom: 0.3px solid #1A1A22;

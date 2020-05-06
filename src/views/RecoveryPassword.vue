@@ -29,7 +29,8 @@
 /* Rectangle 98 */
 display: flex;
 flex-direction: column;
-width: 450px;
+width: 90%;
+max-width: 450px;
 height: 550px;
 background: #FFFFFF;
 border-radius: 20px;
