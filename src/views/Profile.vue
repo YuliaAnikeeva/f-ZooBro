@@ -126,7 +126,11 @@
         </li>
       </ul>
     </div>
+    <div id="profile-header">
+      <h2>{{headerText}}</h2>
+    </div>
     <div v-if="activeTab == 'pets'" id="profile-pets">
+      <Loader v-if="false"/>
       <label v-if="pets.length > 1" id="profile-pets-choose">
         <h2>Choose pet</h2>
         <select v-model="selectedPet">
@@ -142,7 +146,6 @@
       <PetCard :petId="selectedPet" />
     </div>
     <div v-if="activeTab == 'orders'" id="profile-orders">
-      <h2>Orders</h2>
       <OrderCard
         v-for="(orderId, index) in orders"
         :key="index"
@@ -154,16 +157,17 @@
 </template>
 
 <script>
-import PetCard from "@/components/PetCard";
-import OrderCard from "@/components/OrderCard";
-import SettingsCard from '@/components/SettingsCard'
+import PetCard from "@/components/profile/PetCard";
+import OrderCard from "@/components/profile/OrderCard";
+import SettingsCard from '@/components/profile/SettingsCard'
+import Loader from '@/components/Loader'
 
 export default {
   name: "Profile",
   metaInfo: {
     title: "Profile"
   },
-  components: { PetCard, OrderCard, SettingsCard },
+  components: { PetCard, OrderCard, SettingsCard, Loader },
   data() {
     return {
       userInfo: {
@@ -196,6 +200,19 @@ export default {
       }
     }
   },
+  computed: {
+    headerText() {
+      if (this.activeTab == 'pets') {
+        return 'Ваши животные'
+      }
+      if (this.activeTab == 'orders') {
+        return 'Ваши заказы'
+      }
+      if (this.activeTab == 'settings') {
+        return 'Настройки пользователя'
+      }
+    }
+  },
   mounted() {
     this.selectedPet = this.pets[0].id
   }
@@ -204,14 +221,16 @@ export default {
 
 <style lang="scss" scoped>
 #profile {
-  display: flex;
-  flex-flow: row-nowrap;
-  align-items: flex-start;
-  width: 100%;
+  display: grid;
+  grid-gap: 2vw;
+  grid-template-areas: 
+  "nav header"
+  "nav block";
+  grid-template-columns: 1fr 5fr;
+  grid-template-rows: 10vh 2fr;
   &-nav {
-    width: 15%;
     height: 100%;
-    // border-right: 1px solid black;
+    grid-area: nav;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     &-info {
       border-bottom: 1px solid black;
@@ -233,12 +252,19 @@ export default {
           cursor: pointer;
         }
         svg {
-          height: 100%;
-          width: auto;
+          height: 40px;
+          width: 40px;
           padding-right: 10%;
         }
       }
     }
+  }
+  &-header {
+    grid-area: header;
+    margin-top: 10px;
+  }
+  &-pets, &-orders {
+    grid-area: block;
   }
   &-pets {
     width: 85%;
