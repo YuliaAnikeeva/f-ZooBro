@@ -192,7 +192,7 @@ this.$router.push('/login')
     .group-field input:focus,
     .group-field input:hover,
     .group-field input:valid {
-        background: $forms-input-bckgr-color;
+        background: $forms-input-bckgr-hover-color;
         border-color: $forms-btn-color;
     }
     .instruction{

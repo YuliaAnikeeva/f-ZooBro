@@ -121,8 +121,8 @@
         width: 155px;
         height: 20px;
         text-decoration: none;
-        border-bottom: 0.3px solid $forms-link-color;
-        color: $forms-link-color;
+        border-bottom: 0.3px solid $forms-text-color;
+        color: $forms-text-color;
         align-self: center;
     }
 
@@ -233,7 +233,7 @@
     .group-field input:focus,
     .group-field input:hover,
     .group-field input:valid {
-        background: $forms-input-bckgr-color;
+        background: $forms-input-bckgr-hover-color;
         border-color: $forms-btn-color;
     }
 
