@@ -98,6 +98,7 @@
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/variables.scss";
     .message_block {
         height: 30px;
     }
@@ -120,8 +121,8 @@
         width: 155px;
         height: 20px;
         text-decoration: none;
-        border-bottom: 0.3px solid #1A1A22;
-        color: #1A1A22;
+        border-bottom: 0.3px solid $forms-link-color;
+        color: $forms-link-color;
         align-self: center;
     }
 
@@ -129,7 +130,7 @@
         margin: 20px 0;
         padding: 15px 90px;
         align-self: center;
-        background: #2289B5;
+        background: $forms-btn-color;
         background-image: url(../assets/paw.svg);
         background-position: calc(100% - 30px) 50%;
         background-repeat: no-repeat;
@@ -140,12 +141,12 @@
         font-weight: 600;
         font-size: 22px;
         line-height: 27px;
-        color: #F2F2F2;
+        color: $forms-btn-text-color;
         border: none;
     }
 
     .button:hover {
-        background-color: #4D99BA;
+        background-color: $forms-btn-hover-color;
     }
 
     .button:focus,
@@ -162,11 +163,11 @@
         font-weight: 500;
         font-size: 11px;
         line-height: 13px;
-        color: #F63535;
+        color: $forms-error-color;
     }
 
     .field--error input {
-        border-color: #F63535 !important;
+        border-color: $forms-error-color !important;
     }
 
     .field--error .error {
@@ -179,11 +180,11 @@
 
     .message {
         &--success {
-            color: green;
+            color: $forms-success-color;
         }
 
         &--error {
-            color: #F63535;
+            color: $forms-error-color;
         }
     }
 
@@ -198,8 +199,8 @@
         display: block;
         box-sizing: border-box;
         width: 100%;
-        border: 2px solid #FAFAFA;
-        background: #FAFAFA;
+        border: 2px solid $forms-input-bckgr-color;
+        background: $forms-input-bckgr-color;
         border-radius: 10px;
         color: #1A1A22;
         transition: 0.2s ease all;
@@ -211,7 +212,7 @@
     }
 
     .group-field label {
-        color: #B5B6B6;
+        color: $forms-input-lable-color;
         font-size: 18px;
         font-weight: normal;
         position: absolute;
@@ -232,8 +233,8 @@
     .group-field input:focus,
     .group-field input:hover,
     .group-field input:valid {
-        background: #FFFFFF;
-        border-color: #2289B5;
+        background: $forms-input-bckgr-color;
+        border-color: $forms-btn-color;
     }
 
 
