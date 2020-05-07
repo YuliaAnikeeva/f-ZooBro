@@ -130,27 +130,18 @@
       <h2>{{headerText}}</h2>
     </div>
     <div v-if="activeTab == 'pets'" id="profile-pets">
-      <Loader v-if="false"/>
+      <Loader v-if="false" />
       <label v-if="pets.length > 1" id="profile-pets-choose">
         <h2>Choose pet</h2>
         <select v-model="selectedPet">
-          <option
-           v-for="(pet, index) in pets"
-           :key="index"
-           :value="pet.id"
-           >
-            {{ pet.name }}
-          </option>
+          <option v-for="(pet, index) in pets" :key="index" :value="pet.id">{{ pet.name }}</option>
         </select>
       </label>
       <PetCard :petId="selectedPet" />
+      <button disabled="disabled" @click="createDefaultPet()">Создание дефолтного питомца</button>
     </div>
     <div v-if="activeTab == 'orders'" id="profile-orders">
-      <OrderCard
-        v-for="(orderId, index) in orders"
-        :key="index"
-        :orderId="orderId"
-      />
+      <OrderCard v-for="(orderId, index) in orders" :key="index" :orderId="orderId" />
     </div>
     <SettingsCard :profile="userInfo" v-if="activeTab == 'settings'" id="profile-settings" />
   </div>
@@ -159,8 +150,8 @@
 <script>
 import PetCard from "@/components/profile/PetCard";
 import OrderCard from "@/components/profile/OrderCard";
-import SettingsCard from '@/components/profile/SettingsCard'
-import Loader from '@/components/Loader'
+import SettingsCard from "@/components/profile/SettingsCard";
+import Loader from "@/components/Loader";
 
 export default {
   name: "Profile",
@@ -173,7 +164,7 @@ export default {
       userInfo: {
         email: "test@test.test",
         phone: "2-123-141-32-31",
-        address: "Moscow Pushkin st 8 rqwead fdsfasf",
+        address: "Moscow Pushkin st 8 rqwead fdsfasf"
       },
       pets: [
         {
@@ -188,33 +179,66 @@ export default {
       orders: [3, 5, 7, 12, 44],
       disabled: true,
       selectedPet: 34,
-      activeTab: 'pets'
+      activeTab: "pets"
     };
   },
   methods: {
-    changeTab: function (tabName) {
+    changeTab: function(tabName) {
       if (tabName != this.activeTab) {
-        document.querySelector(`#${this.activeTab}`).classList.remove('active-tab');
-        document.querySelector(`#${tabName}`).classList.add('active-tab');
+        document
+          .querySelector(`#${this.activeTab}`)
+          .classList.remove("active-tab");
+        document.querySelector(`#${tabName}`).classList.add("active-tab");
         this.activeTab = tabName;
       }
+    },
+    createDefaultPet() {
+      const payload = {
+        name: "Johnny",
+        gender: "f",
+        size: "3",
+        breed: "Default dog",
+        birthday_years: "1-3",
+        food_exceptions: ""
+      };
+      this.$store.dispatch("pet/createPet", payload).then(() => {
+        this.$store.dispatch("pet/fetchPet").then(status => {
+          if (status === true) {
+            console.log(this.$store.getters["pet/petList"]);
+          }
+        });
+      });
     }
   },
   computed: {
     headerText() {
-      if (this.activeTab == 'pets') {
-        return 'Ваши животные'
-      }
-      if (this.activeTab == 'orders') {
-        return 'Ваши заказы'
-      }
-      if (this.activeTab == 'settings') {
-        return 'Настройки пользователя'
+      switch (this.activeTab) {
+        case "pets":
+          return "Ваши животные";
+          break;
+        case "orders":
+          return "Ваши заказы";
+          break;
+        case "settings":
+          return "Настройки";
+          break;
+        default:
+          return "Что-то пошло не так";
+          break;
       }
     }
   },
   mounted() {
-    this.selectedPet = this.pets[0].id
+    this.selectedPet = this.pets[0].id;
+  },
+  created() {
+    if (this.$store.getters["pet/petList"].length == 0) {
+      this.$store.dispatch("pet/fetchPet").then(status => {
+        if (status === true) {
+          console.log(this.$store.getters["pet/petList"]);
+        }
+      });
+    }
   }
 };
 </script>
@@ -223,9 +247,9 @@ export default {
 #profile {
   display: grid;
   grid-gap: 2vw;
-  grid-template-areas: 
-  "nav header"
-  "nav block";
+  grid-template-areas:
+    "nav header"
+    "nav block";
   grid-template-columns: 1fr 5fr;
   grid-template-rows: 10vh 2fr;
   &-nav {
@@ -263,7 +287,8 @@ export default {
     grid-area: header;
     margin-top: 10px;
   }
-  &-pets, &-orders {
+  &-pets,
+  &-orders {
     grid-area: block;
   }
   &-pets {
