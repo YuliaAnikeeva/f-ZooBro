@@ -32,9 +32,7 @@
         <div class="transition-box">
             <transition name="translate">
                 <div class="abs" v-if="step === 'step-1'">
-                    <div class="container">
-                      <FirstLook/>
-                    </div>
+                    <FirstLook v-model="plan"/>
                 </div>
             </transition>
 

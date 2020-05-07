@@ -1,58 +1,159 @@
+import baseURL from './baseURL'
+
 export default {
-  namespaced: true,
   state: {
-    errorUserMessage: '',
-    usersLoading: false,
-    id: null,
+    name: null,
     email: null,
-    mobile: null
+    is_admin: null,
+    phone: null,
   },
   mutations: {
     setUserInfo (state, payload) {
-      let { id, email, mobile } = state
-
-      console.log(payload)
-      id = payload.id
-      email = payload.email
-      mobile = payload.mobile
+      let { name, email, is_admin, phone } = payload
+      state.name = name
+      state.email = email
+      state.is_admin = is_admin
+      state.phone = phone
     },
-
-    setUserLoading (state, payload) {
-      state.usersLoading = payload
+    setUserName (state, payload) {
+      state.name = payload
     },
-
-    setErrorMessage (state, payload) {
-      state.errorMessage = payload
-    }
+    setUserEmail (state, payload) {
+      state.email = payload
+    },
+    setUserPhone (state, payload) {
+      state.phone = payload
+    },
+    setUserIsAdmin (state, payload) {
+      state.is_admin = payload
+    },
   },
   actions: {
     async fetchUserInfo ({ commit, getters }, payload) {
-      commit('setUsersLoading', true)
-
-      return await fetch({
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        url: 'http://zoobro-tmweb.ru/users'
-      })
+      return fetch(`${baseURL}/v1/user`,
+        {
+          mode: 'cors',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Authorization': getters.userToken,
+          },
+          method: 'GET',
+        })
         .then(response => {
           return response.json()
         })
-        .then(json => {
-          if (json.status === 200) {
-            commit('setUserInfo', json.data)
-          } else {
-            commit('setErrorMessage', json.error)
+        .then(
+          json => {
+            if (json.status === 1) {
+              const { data } = json
+              commit('setUserHeader', data)
+              console.log('fetchUserInfo', data)
+              return true
+            } else {
+              const { message } = json
+              console.error(message)
+              return false
+            }
           }
-          commit('setUsersLoading', false)
+        )
+        .catch(
+          error => {
+            console.error('Ошибка получения пользовательских данных', error)
+            return false
+          }
+        )
+    },
+    async userUpdate ({ commit, getters }, payload) {
+      return fetch(`${baseURL}/v1/user/update`,
+        {
+          mode: 'cors',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Authorization': getters.userToken,
+          },
+          method: 'POST',
+          body: JSON.stringify(payload)
         })
-        .catch(error => {
-          console.error(error)
-          commit('setErrorMessage', 'Не удалось загрузить меню')
-          commit('setLoading', false)
+        .then(response => {
+          return response.json()
         })
-    }
+        .then(
+          json => {
+            if (json.status === 1) {
+              const { data } = json
+              // обновить локальные данные если усе успешно
+              console.log('userUpdate', data)
+              return true
+            } else {
+              const { message } = json
+              console.error(message)
+              return false
+            }
+          }
+        )
+        .catch(
+          error => {
+            console.error('Ошибка обновления пользовательских данных', error)
+            return false
+          }
+        )
+    },
+    async userRegister ({ commit, getters }, payload) {
+      return fetch(`${baseURL}/v1/user/register`,
+        {
+          mode: 'cors',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+          },
+          method: 'POST',
+          body: JSON.stringify(payload)
+        })
+        .then(response => {
+          return response.json()
+        })
+        .then(
+          json => {
+            if (json.status === 1) {
+              const { data } = json
+              // обновить локальные данные если усе успешно
+              console.log('userRegister', data)
+              return true
+            } else {
+              const { message } = json
+              console.error(message)
+              return false
+            }
+          }
+        )
+        .catch(
+          error => {
+            console.error('Ошибка регситрации пользователя', error)
+            return false
+          }
+        )
+    },
   },
-  getters: {}
+  getters: {
+    userName (state) {
+      return state.name
+    },
+    userEmail (state) {
+      return state.email
+    },
+    userPhone (state) {
+      return state.phone
+    },
+    userIsAdmin (state) {
+      return state.is_admin
+    },
+  }
 }
