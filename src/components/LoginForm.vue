@@ -5,7 +5,7 @@
 
             <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error}">
                 <div class="input-block">
-                    <input v-model="email" required>
+                    <input v-model="email">
                     <label>Адрес электронной почты</label>
                 </div>
                 <div class="error_block">
@@ -16,7 +16,7 @@
 
             <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
                 <div class="input-block">
-                    <input type="password" v-model="password" required>
+                    <input type="password" v-model="password">
                     <label>Пароль</label>
                 </div>
                 <div class="error_block">
