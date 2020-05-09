@@ -76,13 +76,16 @@ this.$router.push('/login')
 
 <style lang="scss" scoped>
  .form {
-    margin: 0 auto;
+    margin: 5% auto;
     display: flex;
     flex-direction: column;
 
     @media (min-width: 425px) {
       width: 400px;
     }
+    @media (min-width: 350px) {
+            width: 90%;
+        }
   }
   
   .button {

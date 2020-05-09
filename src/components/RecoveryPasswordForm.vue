@@ -12,10 +12,12 @@
           <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error }">
               <div class="instruction" >Введите адрес электронной почты</div>
               <input v-model="email" :disabled="disabled" required>              <label >Адрес электронной почты</label>
+              <div class="error_block">
               <div class="error" v-if="!$v.email.required">Введите e-mail</div>
               <div class="error" v-if="!$v.email.email">Введите корректный e-mail</div>
           </div>
-          <input class="button" type="submit" value="Восстановить пароль" :disabled="disabled">
+          </div>
+          <input class="button" type="submit" value="Далее" :disabled="disabled">
       </form>
     
   </div>
@@ -66,13 +68,16 @@ export default {
 
 <style lang="scss" scoped>
  .form {
-    margin: 0 auto;
+    margin: 5% auto;
     display: flex;
     flex-direction: column;
 
     @media (min-width: 425px) {
       width: 400px;
     }
+    @media (min-width: 350px) {
+            width: 90%;
+        }
   }
   
   .button {
