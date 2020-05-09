@@ -1,22 +1,47 @@
 <template>
   <div class="form-registration">
-    <form class="form" @submit.prevent="register">
-        <div class="group-field" :class="{ 'field--error wobble-error': $v.form.email.$error }">
+      <!-- <div class="message_block">
+    <div v-if="status=='success'">
+      <p class="message message--success">{{ msg }}</p>
+    </div>
+    <div v-else>
+      <p v-if="status=='error'" class="message message--error">{{ msg }}</p>
+      </div>
+      </div> -->
+    <form class="form" @submit.prevent="onSubmit">
+        <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error }">
             <div class="instruction">Введите адрес электронной почты</div>
-             <input v-model="email" :disabled="disabled" required>
+              <div class="input-block">
+                <input v-model="email">
                 <label >Адрес электронной почты</label>
+              </div>
             <div class="error_block">
-            <div class="error" v-if="!$v.form.email.required">Введите e-mail</div>
-            <div class="error" v-if="!$v.form.email.email">Введите корректный e-mail</div>
+            <div class="error" v-if="($v.email.$dirty && !$v.email.required)">Введите e-mail</div>
+            <div class="error" v-if="($v.email.$dirty && !$v.email.email)">Введите корректный e-mail</div>
         </div>
         </div>
-        <input class="button" type="submit" value="Далее" :disabled="$v.$invalid" v-on:click="next">
+          <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
+                <div class="input-block">
+                    <input type="password" v-model="password">
+                    <label>Пароль</label>
+                </div>
+                <div class="error_block">
+                    <div class="error" v-if="!$v.password.required">Введите пароль</div>
+                    <div class="error" v-if="!$v.password.betweenLength">{{ $v.password.between }}Длина пароля должна
+                        быть от {{ $v.password.$params.betweenLength.min }} до {{ $v.password.$params.betweenLength.max
+                        }} символов
+                    </div>
+                </div>
+            </div>
+        <button :disabled="disabled" class="button" type="submit">Далее</button>
+      <Loader v-if="disabled"/>
     </form>
   </div>
 </template>
 
 <script>
   import { required, email, minLength, maxLength, and, helpers, sameAs } from 'vuelidate/lib/validators'
+  import Loader from './Loader'
 
   const betweenLength = (min, max) => helpers.withParams(
     { min, max },
@@ -24,211 +49,65 @@
   )
 
    export default {
-     name: 'RegistrationForm',
+    name: 'RegistrationForm',
+    components: { Loader },
     props: ['onSuccess'],
     data () {
       return {
-        form:{
-        email: ''
-      }
+        email: '',
+        password: '',
+        disabled: false,
+        messages: [],
       }
     },
 
     validations: {
-      form: {
+      
       email: {
         required,
         email,
-          }
+          },
+
+      password: {
+        required,
+        betweenLength: betweenLength(4, 18),
       }
+      
     },
+
     methods: {
-      tologin(event){
-this.$router.push('/login')
-      },
-     register() {
-       console.log(this.form)
-      // this.$store.dispatch('createUser', this.form)
-      // .then(() => this.$router.push('/'))
-      // .catch(err => console.log(err))
-     },
-     onSubmit() {
-       if(!this.$v.$invalid){
-         const user= {
-           email: form.email,
-          
-         }
-       }
-     },
+      async onSubmit() {
+      this.$v.$touch()
+       if (this.$v.$invalid) {
+          return
+        }
+        if(!this.$v.$invalid){
+          const {email, password} = this
+          console.log('userRegister')
+          await this.$store.dispatch('userRegister', {email, password})
+          // this.disabled = true
+          this.$router.push('/login')
+        }
+      }
+      //     const rez  = await this.$store.dispatch('userRegister', {email, password})
+       
+      //  }
+      //  if (rez) {
+      //       this.onSuccess()
+      //       this.$router.push('/login')
+      //     }
+      //     this.disabled = false
+      //   },
 
-    next(){
-      // this.onSubmit(),
-      this.tologin(event)
+  
+
+        // created() {
+        //   this.$emit('ready')
+        // }
     }
-
-    },
-
-    created() {
-      this.$emit('ready')
-    }
-  }
+   }
 </script>
 
 <style lang="scss" scoped>
- .form {
-    margin: 5% auto;
-    display: flex;
-    flex-direction: column;
-
-    @media (min-width: 425px) {
-      width: 400px;
-    }
-    @media (min-width: 350px) {
-            width: 90%;
-        }
-  }
-  
-  .button {
-    margin: 20px 0;
-    padding: 15px 90px;
-    align-self: center;
-    background: #2289B5;
-    background-image: url(../assets/paw.svg);
-    background-position: calc(100% - 30px) 50%;
-    background-repeat: no-repeat;
-    opacity: 0.8;
-    border-radius: 10px;
-    font-family: Montserrat, serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 27px;
-    color: #F2F2F2;
-    border: none;    
-  }
-  .button:hover {
-    background-color: #4D99BA;
-  }
-
-  .button:focus,
-  .button:active {
-    outline-color: transparent;
-  }
-  
-  .error {
-        margin-top: 5px;
-        align-self: flex-start;
-        display: none;
-        font-family: Montserrat, serif;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 11px;
-        line-height: 13px;
-        color: #F63535;
-    }
-
-  .field--error input {
-      border-color: #F63535 !important;
-  }
-
-  .field--error .error {
-     display: block;
-  }
-
-  .error_block {
-      height: 20px;
-  }
-
-  .message {
-      &--success {
-          color: green;
-      }
-
-      &--error {
-          color: #F63535;
-      }
-  }
-  .group-field {
-        position: relative;
-    }
-
-    .group-field input {
-        font-size: 18px;
-        padding: 30px 20px 10px 20px;
-        display: block;
-        box-sizing: border-box;
-        width: 100%;
-        border: 2px solid #FAFAFA;
-        background: #FAFAFA;
-        border-radius: 10px;
-        color: #1A1A22;
-        transition: 0.2s ease all;
-    }
-
-    .group-field input:focus {
-        outline: none;
-    }
-
-    .group-field label {
-        color: #B5B6B6;
-        font-size: 18px;
-        font-weight: normal;
-        position: absolute;
-        pointer-events: none;
-        left: 20px;
-        top: 60px;
-        transition: 0.2s ease all;
-        -moz-transition: 0.2s ease all;
-        -webkit-transition: 0.2s ease all;
-    }
-
-    .group-field input:focus ~ label,
-    .group-field input:valid ~ label {
-        top: 47px;
-        font-size: 14px;
-    }
-
-    .group-field input:focus,
-    .group-field input:hover,
-    .group-field input:valid {
-        background: #FFFFFF;
-        border-color: #2289B5;
-    }
-    .instruction{
-    align-self: center;
-    font-size: 0.8em;
-    margin-bottom: 20px;
-    height: 20px;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 20px;
-    color: #1A1A22;
-    }
-    .wobble-error {
-        animation: wobble-error 0.8s both;
-    }
-@keyframes wobble-error {
-        0%,
-        100% {
-            transform: translateX(0%);
-            transform-origin: 50% 50%;
-        }
-        15% {
-            transform: translateX(-15px);
-        }
-        30% {
-            transform: translateX(7.7px);
-        }
-        45% {
-            transform: translateX(-7.5px);
-        }
-        60% {
-            transform: translateX(4.5px);
-        }
-        75% {
-            transform: translateX(-3px);
-        }
-    }
+@import "../assets/styles/_forms.scss"
 </style>
