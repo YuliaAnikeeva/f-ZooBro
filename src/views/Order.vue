@@ -188,6 +188,7 @@
         }
 
         &-button {
+            font-family: Montserrat, sans-serif;
             position: relative;
             min-width: 230px;
             padding: 15px 55px;
@@ -204,7 +205,19 @@
             color: #464451;
 
             &_secondary {
-                background-color: rgba(249, 242, 246, 0.8);
+                color: #2289B5;
+                background-color: #fff;
+                border: 1px solid #2289B5;
+                box-sizing: border-box;
+                border-radius: 10px;
+
+                &:hover {
+                    background-color: lighten(#2289B5, 50);
+                }
+
+                &:active {
+                    background-color: lighten(#2289B5, 40);
+                }
             }
 
             &__inner {
