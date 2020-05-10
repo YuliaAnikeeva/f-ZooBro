@@ -1,99 +1,113 @@
 <template>
   <div class="landing-container">
+    <img class="bg-content bg-content__ball" src="../assets/ball_bg.svg" alt="">
+      <img class="bg-content bg-content__paw" src="../assets/paw_bg.svg" alt="">
+      <img class="bg-content bg-content__box" src="../assets/box_bg.svg" alt="">
+      <img class="bg-content bg-content__big-bone" src="../assets/big_bone_bg.svg" alt="">
+      <img class="bg-content bg-content__small-bone" src="../assets/small_bone_bg.svg" alt="">
+      <img class="bg-content bg-content__paws" src="../assets/paws_bg.svg" alt="">
+      <img class="bg-content bg-content__big-box" src="../assets/big-box_bg.svg" alt="">
     <main class="landing-container__main">
+      
       <div class="order">
         <section class="order__container">
-          <h1 class="order__head">Персональная коробка счастья для вашей собаки</h1>
+          <h1 class="order__head">Любовь и забота хозяина в одной коробочке специально для тебя</h1>
           <p class="order__text">
-            Станьте еще ближе друг другу.
-            Яркие эмоции гарантированы для всех
+            Лучше и полезнее, чем обувь хозяина
           </p>
-          <div class="order__button">
-            <span class="order__button-text">Заказать</span>
-          </div>
+          <router-link class="order-button__text" to="/order">
+            <div class="order__button">
+              <span class="order__button-text">Заказать</span>
+              <img class="paw paw_25" src="../assets/paw.svg" alt="">
+            </div>
+          </router-link>
         </section>
+        <div class="order__images-content">
+          <img class="order__images-content_yelow-bone" src="../assets/yelow-bone.svg" alt="">
+          <img  class="order__images-content_dog" src="../assets/dog_PNG50331.png" alt="">
+        </div>
       </div>
       <div class="how-work">
         <div class="block__head">
-          <h4 class="block__head-text">Как это работает</h4>
+          <h4 class="block__head-text">Как работает сервис</h4>
         </div>
         <div class="how-work__container">
           <section class="how-work__section">
             <div class="how-work__image-container">
-              <img src="https://via.placeholder.com/190" alt />
+              <img src="../assets/how-work-dog-1.png" alt />
             </div>
-            <p class="how-work__text">1 шаг : заказать (заполните анкету для индивидуального подбора состава коробки)</p>
+            <h5 class="how-work__section-head">Закажи на сайте</h5>
+            <p class="how-work__text">Расскажи нам о себе, чтобы мы подобрали то, что тебе точно понравится</p>
           </section>
           <div class="how-work__arrow-container">
-            <div class="arrow">
-              <span class="arrow__content"></span>
-            </div>
+            <img src="../assets/arrow_1.svg" alt="">
           </div>
           <section class="how-work__section">
             <div class="how-work__image-container">
-              <img src="https://via.placeholder.com/190" alt />
+              <img src="../assets/how-work-dog-2.png" alt />
             </div>
-            <p class="how-work__text">2 шаг: Договориться с курьером о дате доставки(чаще всего доставка происходит на следующий день)</p>
+            <h5 class="how-work__section-head how-work__section-head
+            _margin-b-20">Договорись о доставке</h5>
+            <p class="how-work__text">Расскажи как и когда тебе удобнее получить коробочку</p>
           </section>
           <div class="how-work__arrow-container">
-            <div class="arrow">
-              <span class="arrow__content"></span>
-            </div>
+              <img src="../assets/arrow_2.svg" alt="">
           </div>
           <section class="how-work__section">
             <div class="how-work__image-container">
-              <img src="https://via.placeholder.com/190" alt />
+              <img src="../assets/how-work-dog-3.png" alt />
             </div>
-            <p class="how-work__text">3 Шаг: Получить и оплатить (Ура, теперь вы можете побаловать своего питомца новыми игрушками и лакомствами)</p>
+            <h5 class="how-work__section-head">Получи и оплати</h5>
+            <p class="how-work__text">Коробка уже у тебя. Оплати и развлекайся с новыми игрушками!</p>
           </section>
         </div>
         <div class="order-button">
           <div class="order-button__container">
             <router-link class="order-button__text" to="/order">
-              <span>Заказать</span>
+              <div class="how-work__button">
+                <span class="how-work__button-text">Заказать</span>
+                <img class="paw paw_25" src="../assets/paw.svg" alt="">
+              </div>
             </router-link>
           </div>
         </div>
       </div>
       <div class="what-in-box">
         <div class="block__head">
-          <h4 class="block__head-text">Что в коробке?</h4>
+          <h4 class="block__head-text">Внутри коробки ты найдешь</h4>
         </div>
         <div class="what-in-box__container">
           <div class="what-in-box__content">
             <div class="what-in-box__content-text">
-              <h5 class="what-in-box__content-head">2 мягкие игрушки</h5>
-              <p class="what-in-box__content-text-text">Безопасные для игр и долговечные</p>
+              <h5 class="what-in-box__content-head">Премиальные вкусняшки-лакомства</h5>
+              <p class="what-in-box__content-text-text">Эту вкуснятину можно получить за выполнение команд или просто так, если хозяин тебя очень сильно любит</p>
             </div>
             <div class="what-in-box__content-text">
-              <h5 class="what-in-box__content-head">2 жевательных лакомства</h5>
-              <p
-                class="what-in-box__content-text-text"
-              >Помогает гигиене полости рта, убирает налет и неприятный запах</p>
+              <h5 class="what-in-box__content-head">Жевательные лакомства</h5>
+              <p class="what-in-box__content-text-text">Это очень полезно пожевать после еды, вместо чистки зубов. С ними у тебя будет сильная челюсть и свежее дыхание - можно чаще целовать хозяина</p>
             </div>
           </div>
           <div class="what-in-box__content-image">
-            <img src="https://via.placeholder.com/690x380" alt="what-in-box image" />
+            <img src="../assets/what-in-box_content.png" alt="what-in-box image" />
           </div>
           <div class="what-in-box__content">
             <div class="what-in-box__content-text">
-              <h5 class="what-in-box__content-head">2 упаковки лакомства из мраморной говядины</h5>
-              <p
-                class="what-in-box__content-text-text"
-              >2 упаковки лакомства из мраморной говядины (можно использовать в дрессуре, к тому же они очень вкусные)</p>
+              <h5 class="what-in-box__content-head">Мягкие игрушки</h5>
+              <p class="what-in-box__content-text-text">Круто пищат или хрустят, когда их жуешь. Они безопасные и долговечные. Их можно порвать и за это ничего не будет</p>
             </div>
             <div class="what-in-box__content-text">
               <h5 class="what-in-box__content-head">Мячик из ворса и резины</h5>
-              <p
-                class="what-in-box__content-text-text"
-              >Мячик из ворса и резины (прослужит долго и поможет увеличить активность собаки на прогулке)</p>
+              <p class="what-in-box__content-text-text">Это вообще кайф. Его можно ощипать или побегать за ним. Принеси хозяину и тебе обязательно перепадет кусочек лакомства</p>
             </div>
           </div>
         </div>
         <div class="order-button">
           <div class="order-button__container">
             <router-link class="order-button__text" to="/order">
-              <span>Заказать</span>
+              <div class="how-work__button">
+                <span class="how-work__button-text">Заказать</span>
+                <img class="paw paw_25" src="../assets/paw.svg" alt="">
+              </div>
             </router-link>
           </div>
         </div>
@@ -104,30 +118,26 @@
         </div>
         <div class="how-use__container">
           <div class="how-use__content">
-            <div class="how-use__content-number">1</div>
-            <div class="how-use__content-text">Берешь вкусняху</div>
+            <img class="how-use__content-image" src="../assets/how-use-1.png" alt="">
+            <div class="how-use__content-text">Твой любимый хозяин берет новый мячик из коробки, кидает его тебе</div>
           </div>
           <div class="how-use__content">
-            <div class="how-use__content-arrow">
-              <div class="arrow">
-                <span class="arrow__content arrow__content_rotate30"></span>
-              </div>
+            <div class="how-use__content-arrow how-use__content-arrow_rotate-left">
+              <img src="../assets/arrow_1.svg" alt="">
             </div>
           </div>
           <div class="how-use__content">
-            <div class="how-use__content-number">2</div>
-            <div class="how-use__content-text">Кидаешь палку</div>
+            <img class="how-use__content-image" src="../assets/how-use-2.png" alt="">
+            <div class="how-use__content-text">Ты приносишь его обратно</div>
           </div>
           <div class="how-use__content">
-            <div class="how-use__content-arrow">
-              <div class="arrow">
-                <span class="arrow__content arrow__content_rotate-30"></span>
-              </div>
+            <div class="how-use__content-arrow how-use__content-arrow_rotate-right">
+              <img src="../assets/arrow_2.svg" alt="">
             </div>
           </div>
           <div class="how-use__content">
-            <div class="how-use__content-number">3</div>
-            <div class="how-use__content-text">Кормишь</div>
+            <img class="how-use__content-image" src="../assets/how-use-3.png" alt="">
+            <div class="how-use__content-text">Получаешь за это лакомство</div>
           </div>
         </div>
       </div>
@@ -136,48 +146,56 @@
           <h4 class="block__head-text">Социальная миссия</h4>
         </div>
         <div class="social-mission__container">
-          <div class="social-mission__content-image">
-            <div class="social-mission__image">
-              <img src="https://via.placeholder.com/190x300" alt="">
-              <img src="https://via.placeholder.com/190x300" alt="">
-            </div>
-            <div class="social-mission__image">
-              <img src="https://via.placeholder.com/440x250" alt="">
-              <img src="https://via.placeholder.com/440x250" alt="">
-            </div>
-          </div>
           <div class="social-mission__content">
             <p class="social-mission__text-content">
-              Не всем пёселям везет жить с хозяевами, получать ласку и заботу. Поэтому с каждой продажи мы перечисляем 5% в пользу приюта ЮЗАО, а так же являемся волонтерами.
+              5% от стоимости твоей коробки мы передадим в виде помощи приютским и бездомным собакам.
+              Это позволит им скрасить ожидание таких же любящих хозяев, как у тебя, а может даже и спасти жизнь.
             </p>
             <p class="social-mission__text-content">
-              Благодаря вашим покупкам, песики получают шанс дожить до счастливой встречи со своим человеком. Все наши отчеты мы публикуем на инстаграм странице проекта, подписывайтесь(ссылка)
+              В нашем инстаграме сможешь увидеть, как именно ты помог, если подпишешься на нас.
             </p>
+          </div>
+          <div class="social-mission__content-image">
+            <div class="social-mission__image social-mission__image_one">
+              <img src="../assets/social-dogs-1.png" alt="">
+            </div>
+            <div class="social-mission__image social-mission__image_two">
+              <img src="../assets/social-dogs-2.png" alt="">
+              <img src="../assets/social-dogs-3.png" alt="">
+            </div>
           </div>
         </div>
       </div>
       <div class="doubt">
         <div class="block__head">
-          <h4 class="block__head-text">Социальная миссия</h4>
+          <h4 class="block__head-text">Еще сомневаешься?</h4>
         </div>
-        <section class="doubt__content">
-          <div class="doubt__content-image">
-            <img src="https://via.placeholder.com/440x250" alt="">
+        <div class="doubt__container">
+          <div class="doubt__image-container">
+            <img class="doubt__image" src="../assets/doubt_image_1.png" alt="">
+            <img class="doubt__image" src="../assets/doubt_image_2.png" alt="">
+            <img class="doubt__image" src="../assets/doubt_image_3.png" alt="">
+            <img class="doubt__image" src="../assets/doubt_image_4.png" alt="">
+            <img class="doubt__image" src="../assets/doubt_image_5.png" alt="">
           </div>
-          <div class="doubt__content-text">
-            <p class="doubt__text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure eveniet ab mollitia iste sint quaerat dicta eum quisquam labore ipsum, nisi repellat in nemo cupiditate natus consequuntur quis ipsam! Beatae rem totam esse. Voluptates veritatis mollitia error laudantium impedit reprehenderit, iusto soluta, sunt repellendus facere laborum neque cumque, vel delectus.</p>
-            <div class="order-button">
-              <div class="order-button__container">
-                <router-link class="order-button__text" to="/order">
-                  <span>Заказать</span>
-                </router-link>
-              </div>
+          <p class="doubt__text">
+            Еще сомневаешься, подходит тебе это или нет? <br>
+            Попробуй стартовый набор за 3 клика. <br>
+            Уверяем, твой хвост будет вилять как пропеллер, а хвост никогда не обманывает <br>
+          </p>
+          <div class="order-button">
+            <div class="order-button__container">
+              <router-link class="order-button__text" to="/order">
+                <div class="how-work__button">
+                  <span class="how-work__button-text">Заказать</span>
+                  <img class="paw paw_25" src="../assets/paw.svg" alt="">
+                </div>
+              </router-link>
             </div>
           </div>
-        </section>
+        </div>
       </div>
       <div class="faq">
-        <div class="faq__image"></div>
         <div class="faq__container">
           <h5 class="faq__head">FAQ</h5>
           <div class="faq__question" @click="answerFirst = !answerFirst">
@@ -218,13 +236,33 @@
           </div>
           <div class="faq_plus-minus"></div>
         </div>
+        <div class="faq__image"></div>
       </div>
     </main>
     <footer class="footer">
-      <div class="social-icons">
-        <div class="social-icons__element"></div>
-        <div class="social-icons__element"></div>
-        <div class="social-icons__element"></div>
+      <div class="footer__container">
+        <div class="social-icons">
+          <a class="social-icons__element" href="">
+            <img src="../assets/instagram.svg" alt="">
+          </a>
+          <a class="social-icons__element" href="">
+            <img src="../assets/vk.svg" alt="">
+          </a>
+          <a class="social-icons__element" href="">
+            <img src="../assets/tiktok.svg" alt="">
+          </a>
+        </div>
+        <div class="footer__contacts">
+          <div class="footer__contacts-row">
+            Phone: +7 (925)-112-08-12
+          </div>
+          <div class="footer__contacts-row">
+            E-mail: hello_bro@zoobro.ru
+          </div>
+        </div>
+      </div>
+      <div class="footer__image">
+        <img src="../assets/footer_pows.svg" alt="">
       </div>
     </footer>
   </div>
@@ -297,6 +335,15 @@ main {
     }
   }
 }
+.paw {
+  display: block;
+  fill: #FAFAFA;
+
+  &_25{
+    width: 25px;
+    height: 20px;
+  }
+}
 .arrow {
     display: grid;
     height: 100%;
@@ -340,6 +387,40 @@ main {
   }
 
 }
+
+.bg-content {
+  position: fixed;
+  z-index: 5;
+  &__paw {
+    left: 93vw;
+    top:10vw;
+  }
+  &__box {
+    left: 30vw;
+    top: 75vh;
+  }
+
+  &__ball {
+    left: 0;
+    top: 20vh;
+  }
+  &__big-bone {
+    top: 40vh;
+    left: 85vw;
+  }
+  &__small-bone {
+    left: 35vw;
+    top: 65vh;
+  }
+  &__paws {
+    left: 30vw;
+  }
+  &__big-box {
+    left: 0;
+    top: 70vh
+  }
+}
+
 .order-button {
   display: grid;
   justify-content: center;
@@ -347,17 +428,14 @@ main {
   &__container {
     display: grid;
     align-items: center;
-    width: 190px;
-    height: 60px;
     background: $buy-btn-color;
     border-radius: 15px;
     border: none;
+    z-index: 6;
   }
   &__text {
     display: grid;
     align-items: center;
-    width: 190px;
-    height: 60px;
     text-decoration: none;
     font-family: Montserrat;
     font-style: normal;
@@ -365,13 +443,13 @@ main {
     font-size: 18px;
     line-height: 22px;
     color: $default-text-color;
+    width: max-content;
   }
 }
 .block {
   &__head {
     display: grid;
     justify-content: center;
-    margin-top: 125px;
     margin-bottom: 70px;
   }
   &__head-text {
@@ -390,6 +468,8 @@ main {
 
   &__main {
     width: 100%;
+    overflow: hidden;
+    position: relative;
   }
 
   &__footer {
@@ -401,73 +481,99 @@ main {
 
 .order {
   width: 100%;
-  height: 989px;
+  height: 787px;
   display: grid;
-  border-bottom: 1px #000 solid;
-  background: rgba(196, 196, 196, 0.5);
+  grid-template-columns: 1fr 1fr;
+  background: linear-gradient(163.79deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
 
   &__container {
     display: grid;
     grid-template-rows: repeat(3, max-content);
     width: 50%;
-    padding-top: 199px;
+    padding-top: 161px;
     padding-left: 240px;
   }
 
   &__head {
-    margin-bottom: 88px;
-    width: 756px;
-    height: 118px;
-    font-family: Montserrat Alternates;
+    margin-bottom: 70px;
+    width: 700px;
+    height: 177px;
+    font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
     font-size: 48px;
     line-height: 59px;
-    color: $default-text-color;
+    color: #FFFFFF;
     text-align: left;
   }
 
   &__text {
-    width: 556px;
-    height: 72px;
-    font-family: Montserrat Alternates;
+    width: 620px;
+    height: 34px;
+    font-family: Montserrat;
     font-style: normal;
     font-weight: 500;
-    font-size: 24px;
-    line-height: 29px;
+    font-size: 28px;
+    line-height: 34px;
     letter-spacing: 1px;
-    color: $default-text-color;
+    color: #FFFFFF;
     text-align: left;
-    margin-bottom: 186px;
+    margin-bottom: 100px;
   }
 
   &__button {
     display: grid;
-    width: 315px;
-    height: 85px;
+    grid-template-columns: 5fr 1fr;
     background: $buy-btn-color;
     border-radius: 15px;
     justify-content: center;
     align-items: center;
-    margin-left: 125px;
+    margin: 0 506px 0 0;
+    padding: 16px 18px 17px 62px;
+    cursor: pointer;
+  }
+  &__button:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
   &__button-text {
     font-family: Montserrat;
     font-style: normal;
-    font-weight: bold;
-    font-size: 28px;
-    line-height: 34px;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 26px;
+    text-align: left;
+    letter-spacing: 0.2px;
+    color: #464451;
+  }
+  &__images-content {
+    overflow:initial;
+    width: 100%;
+    position: relative;
+    &_yelow-bone {
+      width: max-content;
+      position: absolute;
+      left: -16vh;
+      top: 5vh;
+      z-index: 100;
+    }
+    &_dog {
+      position: absolute;
+      width: max-content;
+      left: -9vh;
+      top: 35vh;
+      z-index: 101;
+    }
   }
 }
 
 .how-work {
   width: 100%;
-  height: 929px;
+  padding: 301px 365px 150px;
   display: grid;
   grid-template-rows: max-content max-content max-content;
   align-items: center;
-  border-bottom: 1px #000 solid;
-  background: rgba(196, 196, 196, 0.5);
+  background: #fff;
+  row-gap: 80px;
   &__arrow-container {
     display: grid;
     height: 100%;
@@ -475,22 +581,66 @@ main {
   }
   &__container {
     display: grid;
-    grid-template-columns: 255px 160px 255px 160px 255px;
+    grid-template-columns: repeat(5, 190px);
     justify-content: center;
-    column-gap: 71px;
-    margin-bottom: 125px;
+    column-gap: 60px;
+    z-index: 6;
   }
   &__text {
-    margin-top: 30px;
-    width: 282px;
-    height: 80px;
-    font-family: Montserrat Alternates;
+    width: 190px;
+    font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 20px;
-    color: $default-text-color;
-    text-align: left;
+    text-align: center;
+    color: #464451;
+  }
+  &__section {
+    display: grid;
+    grid-template-rows: max-content max-content max-content;
+    row-gap: 20px;
+  }
+  &__section-head {
+    width: 190px;
+    height: 24px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #464451;
+    &_margin-b-20 {
+      margin-bottom: 20px;
+    }
+  }
+  &__image-container {
+    width: max-content;
+  }
+  &__button {
+    padding: 14px 25px 15px 64px;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    align-items: center;
+    background: #FFCC01;
+    border-radius: 15px;
+    border: none;
+  }
+  &__button:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+  &__button-text {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 26px;
+    text-align: center;
+    letter-spacing: 0.2px;
+    color: #464451;
+    margin-right: 15px;
   }
 }
 
@@ -498,10 +648,9 @@ main {
   display: grid;
   grid-template-rows: max-content max-content;
   width: 100%;
-  height: 810px;
-  background: rgba(196, 196, 196, 0.5);
-  border-bottom: 1px solid #000000;
+  background: url('../assets/what-in-box_bg.svg');
   box-sizing: border-box;
+  padding: 120px 240px 93px;
 
   &__head {
     display: grid;
@@ -521,9 +670,11 @@ main {
   }
   &__container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 25% 50% 25%;
     column-gap: 2em;
     margin-bottom: 70px;
+    z-index: 6;
+    justify-content: center;
   }
   &__content {
     display: grid;
@@ -538,127 +689,112 @@ main {
     align-content: flex-end;
   }
   &__content-head {
-    font-family: Montserrat Alternates;
+    width: 100%;
+    font-family: Montserrat;
     font-style: normal;
-    font-weight: 600;
-    font-size: 1.143em;
-    line-height: 20px;
-    color: $default-text-color;
-    margin-bottom: 15px;
-    width: 15em;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #464451;
+    margin-bottom: 20px;
   }
   &__content-text-text {
-    font-family: Montserrat Alternates;
+    width: 100%;
+    height: 80px;
+    font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: $font-16px;
+    font-size: 16px;
     line-height: 20px;
-    color: $default-text-color;
     text-align: center;
-    width: 21.429em;
+    color: #464451;
   }
 }
 .how-use {
+  padding: 150px 365px;
   display: grid;
   grid-template-columns: max-content;
   justify-content: center;
-  grid-template-rows: max-content max-content;
   width: 100%;
-  height: 800px;
-  background: rgba(196, 196, 196, 0.5);
-  border-bottom: 1px solid #000000;
-  box-sizing: border-box;
+  background: #fff;
+  z-index: 6;
 
   &__container {
     display: grid;
-    grid-template-columns: repeat(5, 215px);
-    grid-template-rows: repeat(8, 50px);
+    grid-template-columns: repeat(5, max-content);
+    column-gap: 60px;
   }
   &__content {
     display: grid;
-    width: 215px;
-    &:nth-child(odd) {
-      align-self: flex-start;
-      grid-row: 1 / 5;
-    }
-    &:nth-child(even) {
-      align-self: flex-end;
-      grid-row: 1 / 7;
-    }
-     &:nth-child(3) {
-      align-self: flex-end;
-      grid-row: 3 / last;
-    }
   }
 
-  &__content-number {
-    font-family: Montserrat Alternates;
-    font-style: normal;
-    font-weight: 800;
-    font-size: 160px;
-    line-height: 195px;
+  &__content-image {
+    width: max-content;
   }
   &__content-text {
-    font-family: Montserrat Alternates;
+    width: 190px;
+    font-family: Montserrat;
     font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 29px;
-    color: #000000;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    color: #464451;
   }
   &__content-arrow {
     display: grid;
     justify-content: center;
+    align-items: center;
+    z-index: 6;
+    &_rotate-right {
+      transform: rotate(20deg);
+    }
+    &_rotate-left {
+      transform: rotate(-20deg);
+    }
   }
 }
 .social-mission {
   display: grid;
   grid-template-columns: auto;
   justify-content: center;
+  padding: 120px 240px 120px 365px;
   width: 100%;
-  height: 944px;
-  background: rgba(196, 196, 196, 0.5);
-  border-bottom: 1px solid #000000;
-  box-sizing: border-box;
+  background: linear-gradient(176.37deg, #157DA9 12.91%, rgba(50, 157, 202, 0.82) 58.13%, #1489BB 92.45%);
+  box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
   &__container {
     display: grid;
-    grid-template-columns: 1fr 540px;
-    justify-content: center;
-    column-gap: 60px;
+    grid-template-columns: 40% 45%;
+    justify-content: space-around;
+    z-index: 6;
   }
   &__content {
     display: grid;
     height: 100%;
-    font-family: Montserrat Alternates;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 20px;
-    line-height: 24px;
-    color: #464451;
     align-content: center;
-    row-gap: 10px;
     text-align: left;
 
-    &:first-child {
-      align-self: flex-end;
-    }
-    &:last-child {
-      align-self: flex-start;
-    }
   }
   &__text-content {
-    height:50%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 30px;
+    color: #FFFFFF;
   }
 
   &__content-image {
     display: grid;
     grid-template-columns: max-content max-content;
-    column-gap: 60px;
   }
   &__image {
     display: grid;
-    grid-template-rows: max-content max-content;
-    row-gap: 60px;
+
+    &_one {
+
+    }
   }
 }
 .doubt {
@@ -666,34 +802,45 @@ main {
   justify-content: center;
   grid-template-rows: max-content max-content;
   width: 100%;
-  background: rgba(196, 196, 196, 0.5);
-  border-bottom: 1px solid #000000;
+  background: #fff;
   box-sizing: border-box;
-  padding-bottom: 120px;
-  &__content {
+  padding-top: 150px;
+  &__container {
     display: grid;
-    grid-template-columns: repeat(2, 25%);
-    justify-content: center;
+    grid-template-rows: max-content max-content max-content ;
+    z-index: 6;
   }
-  &__content-text {
-    width: 70%;
-    justify-self: center;
+  &__image-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr 2fr 1fr;
+    column-gap: 10px;
+    align-items: center;
+    justify-items: center;
   }
   &__text {
-    margin-bottom: 60px;
+    margin: 80px auto 60px auto;
+    width: 40%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    color: #464451;
   }
 }
 .faq {
   background: #fff;
-  padding: 60px 0;
+  padding: 170px 240px 35px 560px;
   display: grid;
-  grid-template-columns: repeat(2, 40%);
+  grid-template-rows: 2fr 1fr;
   justify-content: center;
+  z-index: 6;
 
   &__image {
     background: url('../assets/faq_dog.png') no-repeat;
     background-size: contain;
-    transform: matrix(-1, 0, 0, 1, 0, 0);
+    margin-left: 400px;
   }
   &__container {
     background: #FBFBFB;
@@ -703,7 +850,8 @@ main {
     display: grid;
     grid-template-rows: 4em repeat(4, 4em max-content);
     row-gap: .8em;
-    height: 820px;
+    z-index: 6;
+    margin-right: 320px;
   }
   &__head {
     font-family: Montserrat;
@@ -787,9 +935,42 @@ main {
   }
 }
 .footer {
+  position: relative;
+  padding: 32px 0 33px 253px;
+  z-index: 1000;
   width: 100%;
-  height: 110px;
   background: #464451;
+  display: grid;
+  grid-template-columns: 90%  10%;
+  justify-content: space-between;
+  &__container {
+    display: grid;
+    grid-template-columns: 30% 20%;
+    justify-content: space-between;
+  }
+  &__contacts {
+    display: grid;
+    grid-template-rows: repeat(2, max-content);
+  }
+  &__contacts-row {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+
+  }
+  &__image {
+    position: absolute;
+    left: 93vw;
+    bottom: 1px;
+  }
+}
+
+.social-icons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 @keyframes collapse {
   from {

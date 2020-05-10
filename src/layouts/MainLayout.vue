@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <div id="nav">
+        <!-- <div id="nav">
             <router-link to="/">Home</router-link>
             |
             <router-link to="/login">login</router-link>
@@ -15,7 +15,7 @@
             <router-link to="/order">order</router-link>
             |
             <router-link to="/registration">registration</router-link>
-        </div>
+        </div> -->
         <nav class="nav-menu">
           <div class="logo"><router-link class="router-link" to="/"><h4>logo</h4></router-link></div>
           <div class="rout-buttons">
@@ -88,7 +88,7 @@
       font-size: 14px;
       line-height: 25px;
       text-align: center;
-      
+
       &__auth-button {
         width: 100px;
         height: 35px;

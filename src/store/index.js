@@ -5,6 +5,7 @@ import auth from './auth'
 import order from './order'
 import toastify from './toastify'
 import user from './user'
+import pet from './pet'
 
 Vue.use(Vuex)
 
@@ -85,6 +86,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    admin, auth, order, toastify, user
+    admin, auth, order, toastify, user, pet
   }
 })
