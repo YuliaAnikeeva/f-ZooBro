@@ -60,6 +60,7 @@ export default {
         this.$store.dispatch('auth/'+RECOVERY_REQUEST, this.email)
           .then( () => {
             this.messages = ["Письмо с паролем отправленно на почту"]
+            this.$router.push('/login')
           }).catch( (messages) => {
             this.messages = messages
           })

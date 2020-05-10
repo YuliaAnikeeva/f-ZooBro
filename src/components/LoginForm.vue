@@ -5,7 +5,7 @@
 
             <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error}">
                 <div class="input-block">
-                    <input v-model="email">
+                    <input v-model="email" :disabled="disabled" required>
                     <label>Адрес электронной почты</label>
                 </div>
                 <div class="error_block">
@@ -16,7 +16,7 @@
 
             <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
                 <div class="input-block">
-                    <input type="password" v-model="password">
+                    <input v-model="password" :disabled="disabled" required>
                     <label>Пароль</label>
                 </div>
                 <div class="error_block">
@@ -33,7 +33,7 @@
             <Loader v-if="disabled"/>
 
             <router-link class="link" to="/recovery-password">Я не помню пароль</router-link>
-            <router-link class="link" to="/recovery-password">Зарегистрироваться</router-link>
+            <router-link class="link" to="/registration">Зарегистрироваться</router-link>
 
         </form>
 
