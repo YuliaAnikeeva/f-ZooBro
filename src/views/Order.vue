@@ -41,252 +41,21 @@
             </transition>
 
             <transition name="translate">
-              <div class="abs" v-if="step === 'step-2'">
-                <div class="container">
-                  <form @submit.prevent="submitHandler" class="form_small">
-                    <div class="form-section">
-                      <div class="form-group">
-                        <label class="form-group__label">Имя питомца</label>
-                        <div class="form-group__content">
-                          <div class="input">
-                            <input type="text" class="input__control" v-model="$v.dogName.$model" />
-                          </div>
-                        </div>
-                        <div class="form-group__helper">
-                          <div class="form-group__errors">
-                            <div class="error" v-if="$v.dogName.$dirty && !$v.dogName.required">обязательное поле</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="form-group__label">Порода</label>
-                        <div class="form-group__content">
-                          <div class="input">
-                            <input type="text" class="input__control" v-model="breed" />
-                            <div class="input__dropdown" v-if="brandsDog.length">
-                              <div v-for="(el, idx) in brandsDog" class="input__dropdown-option"
-                                :key="idx"
-                                @click="()=>{breed = el}"
-                              >
-                                {{el}}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="form-group__helper">
-                          <div class="form-group__errors"></div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="form-group__label">Дата рождения</label>
-                        <div class="form-group__content">
-                          <div class="input input_type_date">
-                            <input type="date" class="input__control input__control_type_datetime" v-model="dateOfBirth">
-                          </div>
-                        </div>
-                        <div class="form-group__helper">
-                          <div class="form-group__errors"></div>
-                        </div>
-                      </div>
+                <div class="abs" v-if="step === 'step-2'">
+                    <div class="container">
+
+                        <Step2/>
+
                     </div>
-                    <div class="form-section">
-                      <div class="form-group">
-                        <label class="form-group__label">Пол питомца</label>
-                        <div class="form-group__content">
-                          <div class="radio-group">
-                            <div class="radio-group__list">
-                              <label class="radio">
-                                <input type="radio" class="radio__control" value="m" v-model="dogGender" />
-                                <span class="radio__button">M</span>
-                              </label>
-                              <label class="radio">
-                                <input type="radio" class="radio__control" value="w" v-model="dogGender" />
-                                <span class="radio__button">Ж</span>
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="form-group__helper">
-                          <div class="form-group__errors"></div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="form-group__label">Размер питомца</label>
-                        <div class="form-group__content">
-                          <div class="radio-group">
-                            <div class="radio-group__list radio-group__list_with-images">
-                              <label class="radio">
-                                <input type="radio" class="radio__control" value="1" v-model="weight" />
-                                <img class="radio__image" src="../assets/small-dog.png" alt="">
-                                <span class="radio__button">маленький</span>
-                              </label>
-                              <label class="radio">
-                                <input type="radio" class="radio__control" value="2" v-model="weight" />
-                                <img class="radio__image" src="../assets/medium-dog.png" alt="">
-                                <span class="radio__button">средний</span>
-                              </label>
-                              <label class="radio">
-                                <input type="radio" class="radio__control" value="3" v-model="weight" />
-                                <img class="radio__image" src="../assets/large-dog.png" alt="">
-                                <span class="radio__button">большой</span>
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="form-group__helper">
-                          <div class="form-group__errors"></div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="form-group__label">Аллергия</label>
-                        <div class="form-group__content">
-                          <div class="radio-group">
-                            <div class="radio-group__list radio-group__list_with-images">
-                              <label class="radio">
-                                <input type="radio" class="radio__control" :value="true" v-model="hasAllergy" />
-                                <span class="radio__button">Да</span>
-                              </label>
-                              <label class="radio">
-                                <input type="radio" class="radio__control" :value="false" v-model="hasAllergy" />
-                                <span class="radio__button">Нет</span>
-                              </label>
-                            </div>
-                          </div>
-                          <textarea
-                              v-if="hasAllergy"
-                              rows="2"
-                              class="textarea"
-                              v-model="allergies"
-                              placeholder="Рыба, курица"
-                            >
-                          </textarea>
-                        </div>
-                        <div class="form-group__helper">
-                          <div class="form-group__errors"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
                 </div>
-              </div>
             </transition>
 
             <transition name="translate">
-              <div class="abs" v-if="step === 'step-3'">
-                <div class="container">
-                  <form @submit.prevent="submitHandler" class="form_small">
-                    <div class="form-section">
-                      <div class="form-group">
-                        <label class="form-group__label">Ваше имя</label>
-                        <div class="form-group__content">
-                          <div class="input">
-                            <input
-                                type="text"
-                                placeholder="Петя"
-                                v-model="$v.name.$model"
-                                class="input__control"
-                              />
-                          </div>
-                        </div>
-                        <div class="form-group__helper">
-                          <div class="form-group__errors">
-                            <div class="error" v-if="$v.name.$dirty && !$v.name.required">Введите ваше имя</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="form-group__label">E-mail</label>
-                        <div class="form-group__content">
-                          <div class="input">
-                            <input
-                                type="text"
-                                placeholder="user@example.com"
-                                v-model="$v.email.$model"
-                                class="input__control"
-                              />
-                          </div>
-                        </div>
-                        <div class="form-group__helper">
-                          <div class="form-group__errors">
-                            <div class="error" v-if="$v.email.$dirty && !$v.email.required">Введите email</div>
-                            <div class="error" v-if="$v.email.$dirty && !$v.email.email">Введите корректный email</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="form-group__label">Телефон</label>
-                        <div class="form-group__content">
-                          <div class="input">
-                            <the-mask
-                                type="tel"
-                                placeholder="+7 (000) 000-00-00"
-                                v-model.trim="$v.phone.$model"
-                                mask="+7 (###) ###-##-##"
-                                class="input__control"
-                              />
-                          </div>
-                        </div>
-                        <div class="form-group__helper">
-                          <div class="form-group__errors">
-                            <div class="error" v-if="$v.phone.$dirty && !$v.phone.required">Введите телефон</div>
-                            <div class="error" v-if="$v.phone.$dirty && !$v.phone.minLength">Введите корректный номер телефона</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-section">
-                      <div class="form-group form-group_with_link">
-                        <label class="form-group__label">Адрес доставки</label>
-                        <div class="form-group__content">
-                          <div class="input input_type_address">
-                            <input
-                                type="text"
-                                placeholder="г. Москва ул. Ленина 35 кв.10"
-                                v-model="$v.address.$model"
-                                class="input__control"
-                              />
-                          </div>
-                        </div>
-                        <div class="form-group__helper">
-                        <div class="form-group__errors">
-                          <div class="error" v-if="$v.address.$dirty && !$v.address.required">Введите адрес</div>
-                        </div>
-                        <a class="form-group__link" href="#" @click="showMap = !showMap">Зоны доставки</a>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="form-group__label">Желаемые дата и время доставки</label>
-                        <div class="form-group__content">
-                          <div class="input-group">
-                            <div class="input input_type_date">
-                              <input type="date" class="input__control input__control_type_datetime" v-model="$v.date.$model">
-                            </div>
-                            <div class="input input_type_time">
-                              <input type="time" class="input__control input__control_type_datetime" v-model="$v.time.$model">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="form-group__helper">
-                          <div class="form-group__errors">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
+                <div class="abs" v-if="step === 'step-3'">
+
+                    <Step3/>
+
                 </div>
-                <div v-if="showMap">
-                    <p>зона доставки</p>
-                    <div style="position:relative;overflow:hidden;"><a
-                            href="https://yandex.ru/maps/213/moscow/?utm_medium=mapframe&utm_source=maps"
-                            style="color:#eee;font-size:12px;position:absolute;top:0px;">Москва</a><a
-                            href="https://yandex.ru/maps/213/moscow/?ll=37.604136%2C55.760765&mode=usermaps&source=constructorLink&um=constructor%3A6909fae852e9144b06470b26df6895bb7a9ef26ccbd40dfa7a516aec82082422&utm_medium=mapframe&utm_source=maps&z=10"
-                            style="color:#eee;font-size:12px;position:absolute;top:14px;">Яндекс.Карты — поиск мест
-                        и адресов, городской транспорт</a>
-                        <iframe src="https://yandex.ru/map-widget/v1/-/CSAn4XnI" width="100%" height="400"
-                                frameborder="1" allowfullscreen="true" style="position:relative;"></iframe>
-                    </div>
-                </div>
-              </div>
             </transition>
 
             <transition name="translate">
@@ -306,10 +75,17 @@
   import { email, required, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
   import FirstLook from '../components/onboarding/FirstLook'
   import ProgresBar from '../components/onboarding/ProgresBar'
+  import Step2 from '../components/orderSteps/Step2'
+  import Step3 from '../components/orderSteps/Step3'
 
   export default {
     name: 'Order',
-    components: { ProgresBar, FirstLook },
+    components: {
+      Step3,
+      Step2,
+      ProgresBar,
+      FirstLook
+    },
     metaInfo: {
       title: 'Order',
     },
@@ -397,24 +173,6 @@
         this.updateE(1)
       },
     },
-    computed: {
-      brandsDog () {
-        const dogs = [
-          'Австралийская овчарка (Аусси)', 'Акита-ину', 'Алабай (Среднеазиатская овчарка)', 'Аляскинский кли-кай', 'Аляскинский маламут', 'Американская акита', 'Американский булли', 'Американский бульдог', 'Американский кокер-спаниель', 'Американский стаффордширский терьер', 'Английский бульдог', 'Английский кокер-спаниель', 'Английский мастиф', 'Английский сеттер', 'Аргентинский дог', 'Афганская борзая', 'Аффенпинчер', 'Басенджи', 'Бассет-хаунд', 'Бедлингтон-терьер', 'Белая швейцарская овчарка', 'Бельгийская овчарка', 'Бельгийский гриффон', 'Бернский зенненхунд', 'Бигль', 'Бишон фризе', 'Бладхаунд', 'Бобтейл', 'Боксер', 'Бордер-колли', 'Бордер-терьер', 'Бордоский дог', 'Босерон', 'Бостон-терьер', 'Бриар', 'Брюссельский гриффон', 'Бульмастиф', 'Бультерьер', 'Бурбуль', 'Веймаранер', 'Вельш-корги кардиган', 'Вельш-корги пемброк', 'Вельштерьер', 'Венгерская выжла', 'Вест-хайленд-уайт-терьер', 'Восточноевропейская овчарка', 'Грейхаунд', 'Далматин', 'Джек-рассел-терьер', 'Доберман', 'Дратхаар', 'Западно-сибирская лайка', 'Золотистый ретривер', 'Ирландский волкодав', 'Ирландский сеттер', 'Ирландский терьер', 'Испанский мастиф', 'Йоркширский терьер', 'Ка-де-бо', 'Кавалер-кинг-чарльз-спаниель', 'Кавказская овчарка', 'Канарский дог', 'Кане-корсо', 'Карело-финская лайка', 'Кеесхонд', 'Керн-терьер', 'Китайская хохлатая собака', 'Ксолоитцкуинтли', 'Курцхаар', 'Лабрадор-ретривер', 'Левретка', 'Леонбергер', 'Лхаса апсо', 'Мальтийская болонка', 'Мальтипу', 'Маремма-абруццкая овчарка', 'Миттельшнауцер', 'Мопс', 'Московская сторожевая собака', 'Неаполитанский мастиф', 'Немецкая овчарка', 'Немецкий дог', 'Немецкий ягдтерьер', 'Норвич-терьер', 'Ньюфаундленд', 'Папильон', 'Парсон-рассел-терьер', 'Пекинес', 'Пиренейская горная собака', 'Питбуль', 'Померанский шпиц', 'Помски', 'Пражский крысарик', 'Пти-брабансон', 'Пудель', 'Ризеншнауцер', 'Родезийский риджбек', 'Ротвейлер', 'Русская гончая', 'Русская пегая гончая', 'Русская псовая борзая', 'Русский охотничий спаниель', 'Русский той-терьер', 'Русский черный терьер', 'Салюки', 'Самоедская собака', 'Сенбернар', 'Сиба-ину', 'Сибирский хаски', 'Скотч-терьер', 'Стаффордширский бультерьер', 'Тайский риджбек', 'Такса', 'Тибетский мастиф', 'Тоса-ину', 'Уиппет', 'Фараонова собака', 'Фокстерьер', 'Французский бульдог', 'Цвергпинчер', 'Цвергшнауцер', 'Чау-чау', 'Чихуахуа', 'Шарпей', 'Шелти', 'Ши-тцу', 'Шипперке', 'Шотландская овчарка (колли)', 'Энтлебухер зенненхунд', 'Эрдельтерьер', 'Эстонская гончая', 'Японский хин', 'Японский шпиц',
-        ]
-
-        if (this.breed.trim().length > 2) {
-          const condidate = dogs.filter(el => el.toLowerCase().indexOf(this.breed.toLowerCase()) !== -1)
-          if (condidate.length === 1 && condidate[0] === this.breed.trim()) {
-            return []
-          } else {
-            return condidate
-          }
-        } else {
-          return []
-        }
-      },
-    },
   }
 </script>
 
@@ -476,7 +234,6 @@
         fill: #2289B5;
       }
     }
-  }
 
     .scale-in-hor-left {
         animation: scale-in-hor-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -528,195 +285,201 @@
         left: 0;
     }
 
-  form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  .form_small {
-    width: 650px;
-    margin: 0 auto;
-  }
-
-  .form-section {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .form-group {
-    font-family: Montserrat, sans-serif;
-    text-align: left;
-
-    &__label {
-      font-size: 12px;
-      line-height: 15px;
-      color: #828282;
-      box-sizing: border-box;
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
 
-    &__link {
-      display: block;
-      text-align: right;
-      font-family: Montserrat, sans-serif;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 15px;
-      letter-spacing: 0.3px;
-      text-decoration-line: underline;
-      color: #4F4F4F;
-      padding: 5px 0;
+    .form_small {
+        width: 650px;
+        margin: 0 auto;
     }
 
-    &__helper {
-      height: 50px;
-      display: flex;
-      justify-content: space-between;
+    .form-section {
+        display: flex;
+        flex-direction: column;
     }
 
-    &__errors {
-      color: red;
-      font-family: Montserrat, sans-serif;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 15px;
-      letter-spacing: 0.3px;
+    .form-group {
+        font-family: Montserrat, sans-serif;
+        text-align: left;
 
-      & .error {
-        padding: 5px 5px;
-      }
-    }
-  }
-  .input {
-    font-family: Montserrat, sans-serif;
-    display: inline-flex;
-    align-items: stretch;
-    position: relative;
-    box-sizing: border-box;
-    margin-right: 20px;
-    border-bottom: 1px solid #4f4f4f;
-    font-size: 16px;
-    line-height: 20px;
-    font-weight: 500;
-    padding-top: 5px;
-    min-width: 255px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-
-    &_type_date {
-      min-width: 150px;
-    }
-
-    &_type_time {
-      min-width: 100px;
-    }
-
-    &_type_address {
-      min-width: 325px;
-    }
-
-    &__control {
-      border: none;
-      outline: none;
-      font-style: normal;
-      padding: 10px 5px;
-      width: 100%;
-      box-sizing: border-box;
-      line-height: 20px;
-      font: inherit;
-
-      &_type_datetime {
-        padding: 8px 5px;
-      }
-    }
-
-    &__dropdown {
-      position: absolute;
-      top: 105%;
-      left: 0;
-      right: 0;
-      border-radius: 5px;
-      box-shadow: 0 0 5px 0 rgba(0,0,0,.3);
-      background: #fff;
-      z-index: 1;
-      font-size: 16px;
-      line-height: 20px;
-      font-weight: 500;
-
-      &-option {
-        padding: 10px;
-
-        &:hover {
-          background-color: rgba(#FFCC01, 0.3);
+        &__label {
+            font-size: 12px;
+            line-height: 15px;
+            color: #828282;
+            box-sizing: border-box;
         }
-      }
-    }
-  }
-  .input-group {
-    display: flex;
-    justify-content: space-between;
-  }
-  .radio {
-    margin-right: 10px;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    box-sizing: border-box;
 
-    &:last-child {
-      margin-right: 0;
-    }
+        &__link {
+            display: block;
+            text-align: right;
+            font-family: Montserrat, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: 0.3px;
+            text-decoration-line: underline;
+            color: #4F4F4F;
+            padding: 5px 0;
+        }
 
-    &__control {
-      display: none;
-    }
-    &__button {
-      font-family: Montserrat, sans-serif;
-      font-size: 12px;
-      font-weight: bold;
-      line-height: 25px;
-      border: 2px solid #2289B5;
-      box-sizing: border-box;
-      border-radius: 5px;
-      padding: 0 5px;
-      min-width: 65px;
-      text-align: center;
-      margin-top: 17px;
-    }
-    &__control:checked ~ &__button {
-      background-color: #2289B5;
-      color: #FFFFFF;
+        &__helper {
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &__errors {
+            color: red;
+            font-family: Montserrat, sans-serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: 0.3px;
+
+            & .error {
+                padding: 5px 5px;
+            }
+        }
     }
 
-    &__image {
-      width: 80px;
-      display: block;
-    }
-  }
-  .radio-group {
-    &__list {
-      display: flex;
-    }
-  }
+    .input {
+        font-family: Montserrat, sans-serif;
+        display: inline-flex;
+        align-items: stretch;
+        position: relative;
+        box-sizing: border-box;
+        margin-right: 20px;
+        border-bottom: 1px solid #4f4f4f;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 500;
+        padding-top: 5px;
+        min-width: 255px;
 
-  .textarea {
-    border-radius: 5px;
-    border: 1px solid #828282;
-    box-sizing: border-box;
-    color: #333333;
-    font-family: Montserrat, sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px;
-    margin-top: 10px !important;
-    padding: 10px;
-    resize: none;
-    width: 100%;
-  }
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &_type_date {
+            min-width: 150px;
+        }
+
+        &_type_time {
+            min-width: 100px;
+        }
+
+        &_type_address {
+            min-width: 325px;
+        }
+
+        &__control {
+            border: none;
+            outline: none;
+            font-style: normal;
+            padding: 10px 5px;
+            width: 100%;
+            box-sizing: border-box;
+            line-height: 20px;
+            font: inherit;
+
+            &_type_datetime {
+                padding: 8px 5px;
+            }
+        }
+
+        &__dropdown {
+            position: absolute;
+            top: 105%;
+            left: 0;
+            right: 0;
+            border-radius: 5px;
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, .3);
+            background: #fff;
+            z-index: 1;
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 500;
+
+            &-option {
+                padding: 10px;
+
+                &:hover {
+                    background-color: rgba(#FFCC01, 0.3);
+                }
+            }
+        }
+    }
+
+    .input-group {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .radio {
+        margin-right: 10px;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        box-sizing: border-box;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &__control {
+            display: none;
+        }
+
+        &__button {
+            font-family: Montserrat, sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 25px;
+            border: 2px solid #2289B5;
+            box-sizing: border-box;
+            border-radius: 5px;
+            padding: 0 5px;
+            min-width: 65px;
+            text-align: center;
+            margin-top: 17px;
+        }
+
+        &__control:checked ~ &__button {
+            background-color: #2289B5;
+            color: #FFFFFF;
+        }
+
+        &__image {
+            width: 80px;
+            display: block;
+        }
+    }
+
+    .radio-group {
+        &__list {
+            display: flex;
+        }
+    }
+
+    .textarea {
+        border-radius: 5px;
+        border: 1px solid #828282;
+        box-sizing: border-box;
+        color: #333333;
+        font-family: Montserrat, sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        margin-top: 10px !important;
+        padding: 10px;
+        resize: none;
+        width: 100%;
+    }
 
 </style>

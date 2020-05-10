@@ -228,6 +228,19 @@ export default {
       }
     }
   },
+  computed: {
+    headerText() {
+      if (this.activeTab == 'pets') {
+        return 'Ваши животные'
+      }
+      if (this.activeTab == 'orders') {
+        return 'Ваши заказы'
+      }
+      if (this.activeTab == 'settings') {
+        return 'Настройки пользователя'
+      }
+    }
+  },
   mounted() {
     this.selectedPet = this.pets[0].id;
   },
