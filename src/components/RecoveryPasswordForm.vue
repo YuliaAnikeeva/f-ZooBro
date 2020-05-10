@@ -53,19 +53,35 @@ export default {
     }
   },
   methods: {
-    onSubmit: function () {
+
+      async onSubmit() {
       this.$v.$touch()
-      if (!this.$v.$invalid) {
-        this.messages = []
-        this.$store.dispatch('auth/'+RECOVERY_REQUEST, this.email)
-          .then( () => {
-            this.messages = ["Письмо с паролем отправленно на почту"]
-            this.$router.push('/login')
-          }).catch( (messages) => {
-            this.messages = messages
-          })
+       if (this.$v.$invalid) {
+          return
+        }
+        if(!this.$v.$invalid){
+          this.messages = []
+          const {email} = this
+          console.log('userRegister')
+          await this.$store.dispatch('password_recovey', {email})
+          this.messages = ["Письмо с паролем отправленно на почту"]
+          this.$router.push('/login')
+        }
       }
-    }
+
+    // onSubmit: function () {
+    //   this.$v.$touch()
+    //   if (!this.$v.$invalid) {
+    //     this.messages = []
+    //     this.$store.dispatch('auth/'+RECOVERY_REQUEST, this.email)
+    //       .then( () => {
+    //         this.messages = ["Письмо с паролем отправленно на почту"]
+    //         this.$router.push('/login')
+    //       }).catch( (messages) => {
+    //         this.messages = messages
+    //       })
+    //   }
+    // }
   }
 }
 </script>
