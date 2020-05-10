@@ -12,7 +12,7 @@
         <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error }">
             <div class="instruction">Введите адрес электронной почты</div>
               <div class="input-block">
-                <input v-model="email">
+                <input v-model="email" :disabled="disabled" required> 
                 <label >Адрес электронной почты</label>
               </div>
             <div class="error_block">
@@ -22,7 +22,7 @@
         </div>
           <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
                 <div class="input-block">
-                    <input type="password" v-model="password">
+                    <input type="password" v-model="password" :disabled="disabled" required>
                     <label>Пароль</label>
                 </div>
                 <div class="error_block">
