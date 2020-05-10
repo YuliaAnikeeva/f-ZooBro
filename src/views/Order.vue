@@ -248,6 +248,7 @@
                 fill: #2289B5;
             }
         }
+    }
 
         .scale-in-hor-left {
             animation: scale-in-hor-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -495,6 +496,5 @@
             resize: none;
             width: 100%;
         }
-    }
 
 </style>
