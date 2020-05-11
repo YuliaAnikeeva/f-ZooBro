@@ -6,6 +6,7 @@ import order from './order'
 import toastify from './toastify'
 import user from './user'
 import pet from './pet'
+import infoSnackbar from './infoSnackbar'
 
 Vue.use(Vuex)
 
@@ -50,7 +51,7 @@ export default new Vuex.Store({
         breed: 'Labrador',
         birthday_date: null,
         birthday_years: '1-5',
-        food_exceptions: ['vegetables'],  
+        food_exceptions: ['vegetables'],
       }
     ],
     orders: [
@@ -86,6 +87,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    admin, auth, order, toastify, user, pet
+    admin, auth, order, toastify, user, pet, infoSnackbar,
   }
 })

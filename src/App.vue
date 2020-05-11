@@ -56,5 +56,10 @@
       display: block;
     }
 
+    .toastify {
+        font-family: Montserrat, serif;
+        font-style: normal;
+        font-size: 16px;
+    }
 
 </style>
