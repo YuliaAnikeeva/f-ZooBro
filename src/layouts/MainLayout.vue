@@ -39,24 +39,8 @@
             </div>
         </nav>
         <main>
-            {{snackbarMsg}}
             <router-view/>
         </main>
-
-        <button @click="()=>{toast()}">toast</button>
-
-
-        <!--<template-->
-        <!--v-if=snackbarMsg-->
-        <!--&gt;-->
-        <!---->
-        <!--&lt;!&ndash;:color=snackbarType&ndash;&gt;-->
-        <!--&lt;!&ndash;&ndash;&gt;-->
-        <!--&lt;!&ndash;{{snackbarMsg}}&ndash;&gt;-->
-
-        <!--</template>-->
-
-
     </div>
 </template>
 
