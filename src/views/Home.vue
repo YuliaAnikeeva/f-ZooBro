@@ -467,7 +467,8 @@ main {
   background: #f6f6fa;
 
   &__main {
-    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -567,10 +568,10 @@ main {
 }
 
 .how-work {
-  width: 100%;
   padding: 301px 365px 150px;
   display: grid;
-  grid-template-rows: max-content max-content max-content;
+  grid-template-rows: max-content max-content 1fr;
+  grid-template-columns: 100%;
   align-items: center;
   background: #fff;
   row-gap: 80px;
@@ -581,13 +582,13 @@ main {
   }
   &__container {
     display: grid;
+    width: max-content;
     grid-template-columns: repeat(5, 190px);
     justify-content: center;
     column-gap: 60px;
     z-index: 6;
   }
   &__text {
-    width: 190px;
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
@@ -716,7 +717,7 @@ main {
   display: grid;
   grid-template-columns: max-content;
   justify-content: center;
-  width: 100%;
+  width: max-content;
   background: #fff;
   z-index: 6;
 
@@ -757,16 +758,15 @@ main {
 }
 .social-mission {
   display: grid;
-  grid-template-columns: auto;
   justify-content: center;
+  grid-template-columns: 100%;
   padding: 120px 240px 120px 365px;
-  width: 100%;
   background: linear-gradient(176.37deg, #157DA9 12.91%, rgba(50, 157, 202, 0.82) 58.13%, #1489BB 92.45%);
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
   &__container {
     display: grid;
-    grid-template-columns: 40% 45%;
-    justify-content: space-around;
+    grid-template-columns: 30% 35%;
+    justify-content: center;
     z-index: 6;
   }
   &__content {
@@ -938,19 +938,19 @@ main {
   position: relative;
   padding: 32px 0 33px 253px;
   z-index: 1000;
-  width: 100%;
   background: #464451;
   display: grid;
   grid-template-columns: 90%  10%;
   justify-content: space-between;
   &__container {
     display: grid;
-    grid-template-columns: 30% 20%;
-    justify-content: space-between;
+    grid-template-columns: 20% 20%;
+    justify-content: space-around;
   }
   &__contacts {
     display: grid;
     grid-template-rows: repeat(2, max-content);
+    text-align: left;
   }
   &__contacts-row {
     font-family: Montserrat;
