@@ -55,6 +55,9 @@ export default {
             } else {
               const { message } = json
               console.error(message)
+              commit('clearSnackbar')
+              commit('setSnackbarMsg', message)
+              commit('setSnackbarType', 'error')
               return false
             }
           }
@@ -62,6 +65,9 @@ export default {
         .catch(
           error => {
             console.error('Ошибка получения пользовательских данных', error)
+            commit('clearSnackbar')
+            commit('setSnackbarMsg', 'Не удалось получить данные')
+            commit('setSnackbarType', 'error')
             return false
           }
         )
@@ -93,6 +99,9 @@ export default {
             } else {
               const { message } = json
               console.error(message)
+              commit('clearSnackbar')
+              commit('setSnackbarMsg', message)
+              commit('setSnackbarType', 'error')
               return false
             }
           }
@@ -100,6 +109,9 @@ export default {
         .catch(
           error => {
             console.error('Ошибка обновления пользовательских данных', error)
+            commit('clearSnackbar')
+            commit('setSnackbarMsg', 'Не удалось обновить данные')
+            commit('setSnackbarType', 'error')
             return false
           }
         )
@@ -124,8 +136,6 @@ export default {
           json => {
             if (json.status === 1) {
               const { data } = json
-              // обновить локальные данные если усе успешно
-              commit('setUserHeader', data)
               commit('clearSnackbar')
               commit('setSnackbarMsg', 'Успешная регситрация')
               commit('setSnackbarType', 'success')
@@ -144,6 +154,9 @@ export default {
         .catch(
           error => {
             console.error('Ошибка регситрации пользователя', error)
+            commit('clearSnackbar')
+            commit('setSnackbarMsg', 'Что-то пошло не так...')
+            commit('setSnackbarType', 'error')
             return false
           }
         )
