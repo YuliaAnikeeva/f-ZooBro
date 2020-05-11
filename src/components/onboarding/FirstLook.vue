@@ -171,6 +171,7 @@
     font-size: 14px;
     line-height: 24px;
     margin-bottom: 40px;
+    margin-top: 30px;
   }
 
   .choosen {
