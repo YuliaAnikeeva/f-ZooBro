@@ -1,13 +1,6 @@
 <template>
   <div class="form-registration">
-      <!-- <div class="message_block">
-    <div v-if="status=='success'">
-      <p class="message message--success">{{ msg }}</p>
-    </div>
-    <div v-else>
-      <p v-if="status=='error'" class="message message--error">{{ msg }}</p>
-      </div>
-      </div> -->
+   
     <form class="form" @submit.prevent="onSubmit">
         <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error }">
             <div class="instruction">Введите адрес электронной почты</div>
@@ -88,7 +81,11 @@
           // this.disabled = true
           this.$router.push('/login')
         }
+        this.disabled = false
       }
+
+      
+
       //     const rez  = await this.$store.dispatch('userRegister', {email, password})
        
       //  }

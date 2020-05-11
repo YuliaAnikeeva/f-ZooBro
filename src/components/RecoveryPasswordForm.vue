@@ -62,8 +62,8 @@ export default {
         if(!this.$v.$invalid){
           this.messages = []
           const {email} = this
-          console.log('userRegister')
-          await this.$store.dispatch('password_recovey', {email})
+          console.log('passwordRecovery')
+          await this.$store.dispatch('passwordRecovery', {email})
           this.messages = ["Письмо с паролем отправленно на почту"]
           this.$router.push('/login')
         }

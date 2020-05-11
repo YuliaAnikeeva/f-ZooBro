@@ -125,7 +125,52 @@ export default {
             if (json.status === 1) {
               const { data } = json
               // обновить локальные данные если усе успешно
-              console.log('userRegister', data)
+              commit('setUserHeader', data)
+              commit('clearSnackbar')
+              commit('setSnackbarMsg', 'Успешная регситрация')
+              commit('setSnackbarType', 'success')
+              console.log('Успешная регситрация', data)
+              return true
+            } else {
+              const { message } = json
+              commit('clearSnackbar')
+              commit('setSnackbarMsg', json.message)
+              commit('setSnackbarType', 'error')
+              console.error(message)
+              return false
+            }
+          }
+        )
+        .catch(
+          error => {
+            console.error('Ошибка регситрации пользователя', error)
+            return false
+          }
+        )
+    },
+
+    async passwordRecovey ({ commit, getters }, payload) {
+      return fetch(`${baseURL}/v1/user/recovery`,
+        {
+          mode: 'cors',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+          },
+          method: 'POST',
+          body: JSON.stringify(payload)
+        })
+        .then(response => {
+          return response.json()
+        })
+        .then(
+          json => {
+            if (json.status === 1) {
+              const { data } = json
+              // обновить локальные данные если усе успешно
+              console.log('passwordRecovery', data)
               return true
             } else {
               const { message } = json
@@ -136,7 +181,7 @@ export default {
         )
         .catch(
           error => {
-            console.error('Ошибка регситрации пользователя', error)
+            console.error('Ошибка', error)
             return false
           }
         )
