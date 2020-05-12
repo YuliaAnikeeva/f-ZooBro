@@ -31,7 +31,7 @@ const pet = {
         .then(json => {
           if (json.status === 1) {
             const { data } = json;
-            commit("fillList", data);
+            commit("fillList", data.pets);
             return true;
           }
           if (json.status != 1) {

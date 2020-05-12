@@ -6,6 +6,10 @@
         <p>{{ userInfo.email }}</p>
         <p>{{ userInfo.phone }}</p>
         <p>{{ userInfo.address }}</p>
+        <div class="profile-nav__buttons">
+          <span>Изменить данные</span> || 
+          <span>Добавить питомца</span>
+        </div>
       </div>
       <ul id="profile-nav-tabs">
         <li v-on:click="changeTab('pets')" class="active-tab" id="pets">
@@ -129,15 +133,12 @@
     <div id="profile-header">
       <h2>{{headerText}}</h2>
     </div>
-    <div v-if="activeTab == 'pets'" id="profile-pets">
-      <Loader v-if="false" />
-      <label v-if="pets.length > 1" id="profile-pets-choose">
-        <h2>Choose pet</h2>
-        <select v-model="selectedPet">
-          <option v-for="(pet, index) in pets" :key="index" :value="pet.id">{{ pet.name }}</option>
-        </select>
-      </label>
-      <PetCard :petId="selectedPet" />
+    <div v-if="activeTab == 'pets' && pets.length > 1" id="profile-pets">
+      <Loader v-if="pets.length < 1" />
+      <PetCard 
+        v-for="(pet, index) in pets" 
+        :key="index" 
+        :pet="pet" />
       <button disabled="disabled" @click="createDefaultPet()">Создание дефолтного питомца</button>
     </div>
     <div v-if="activeTab == 'orders'" id="profile-orders">
@@ -166,19 +167,9 @@ export default {
         phone: "2-123-141-32-31",
         address: "Moscow Pushkin st 8 rqwead fdsfasf"
       },
-      pets: [
-        {
-          id: 34,
-          name: "Johny"
-        },
-        {
-          id: 44,
-          name: "Lola"
-        }
-      ],
+      pets: [],
       orders: [3, 5, 7, 12, 44],
       disabled: true,
-      selectedPet: 34,
       activeTab: "pets"
     };
   },
@@ -208,6 +199,13 @@ export default {
           }
         });
       });
+    },
+    fetchPets() {
+      this.$store.dispatch("pet/fetchPet").then(status => {
+        if (status === true) {
+          this.pets = this.$store.getters["pet/petList"];
+        }
+      });
     }
   },
   computed: {
@@ -228,43 +226,23 @@ export default {
       }
     }
   },
-  computed: {
-    headerText() {
-      if (this.activeTab == 'pets') {
-        return 'Ваши животные'
-      }
-      if (this.activeTab == 'orders') {
-        return 'Ваши заказы'
-      }
-      if (this.activeTab == 'settings') {
-        return 'Настройки пользователя'
-      }
+  beforeMount() {
+    if (this.pets.length == 0) {
+      this.fetchPets()
     }
   },
-  mounted() {
-    this.selectedPet = this.pets[0].id;
-  },
-  created() {
-    if (this.$store.getters["pet/petList"].length == 0) {
-      this.$store.dispatch("pet/fetchPet").then(status => {
-        if (status === true) {
-          console.log(this.$store.getters["pet/petList"]);
-        }
-      });
-    }
-  }
 };
 </script>
 
 <style lang="scss" scoped>
 #profile {
   display: grid;
-  grid-gap: 2vw;
+  grid-gap: 1vw;
   grid-template-areas:
     "nav header"
     "nav block";
-  grid-template-columns: 1fr 5fr;
-  grid-template-rows: 10vh 2fr;
+  grid-template-columns: 1.5fr 5fr;
+  grid-template-rows: 0.5fr 5fr;
   &-nav {
     height: 100%;
     grid-area: nav;
@@ -303,11 +281,12 @@ export default {
   &-pets,
   &-orders {
     grid-area: block;
+    overflow-x: scroll;
+    margin-right: 15px;
   }
   &-pets {
-    width: 85%;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
     overflow-y: scroll;
     justify-content: space-evenly;
     &-choose {
