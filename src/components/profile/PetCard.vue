@@ -70,8 +70,14 @@ export default {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     background-color: #f2f3f7;
-    border: 1px solid #d3d4d7;
+    border: 2px solid #2289b5;
     margin-bottom: 10px;
+    img {
+      height: 100px;
+      background: #c4c4cc;
+      border-radius: 50%;
+      padding: 5px;      
+    }
     span {
       margin: auto;
     }
