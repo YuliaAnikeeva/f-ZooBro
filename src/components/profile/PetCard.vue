@@ -1,129 +1,80 @@
 <template>
   <div class="card">
-    <label>
-      <h3>Pet's name</h3>
-      <input type="text" :disabled="disabled" v-model="currentPet.name">
-    </label>
-    <label>
-      <h3>Gender:</h3>
-      <select :disabled="disabled" v-model="currentPet.gender">
-        <option value="m">Male</option>
-        <option value="f">Female</option>
-      </select>
-    </label>
-    <label>
-      <h3>Species</h3>
-      <input type="text" :disabled="disabled" v-model="currentPet.species">
-    </label>
-    <label>
-      <h3>Weight</h3>
-      <select :disabled="disabled" v-model="currentPet.weight">
-        <option value="small">Small: less then 5 kg</option>
-        <option value="middle">Middle: between 5kg and 20kg</option>
-        <option value="big">Big: more then 20kg</option>
-      </select>
-    </label>
-    <label>
-      <h3>Age</h3>
-      <input v-if="currentPet.age.date" type="text" :disabled="disabled" v-model="currentPet.age.date">
-      <select
-        :disabled="disabled"
-        v-model="currentPet.age.years"
-        v-if="!currentPet.age.date"
-      >
-        <option value="small">0 - 1 y.o.</option>
-        <option value="middle">1 - 5 y.o.</option>
-        <option value="big">5 - 10 y.o.</option>
-      </select>
-    </label>
-    <label v-if="currentPet.features">
-      <h3>Food features</h3>
-
-      <h4>Like</h4>
-      <input :disabled="disabled" id="like-meat" type="checkbox" value="meat" v-model="currentPet.features.like">
-      <label for="like-meat">Meat</label>
-      <input :disabled="disabled" id="like-fish" type="checkbox" value="fish" v-model="currentPet.features.like">
-      <label for="like-fish">Fish</label>
-      <input :disabled="disabled" id="like-veg" type="checkbox" value="vegetables" v-model="currentPet.features.like">
-      <label for="like-veg">Vegetables</label>
-
-      <h4>Dislike</h4>
-      <input :disabled="disabled" id="dislike-meat" type="checkbox" value="meat" v-model="currentPet.features.dislike">
-      <label for="dislike-meat">Meat</label>
-      <input :disabled="disabled" id="dislike-fish" type="checkbox" value="fish" v-model="currentPet.features.dislike">
-      <label for="dislike-fish">Fish</label>
-      <input :disabled="disabled" id="dislike-veg" type="checkbox" value="vegetables" v-model="currentPet.features.dislike">
-      <label for="dislike-veg">Vegetables</label>
-    </label>
-
-    <div>
-      <h3>Subscription</h3>
-      <p>Status:
-        <span v-if="currentPet.subscription.status" class="green">Active</span>
-        <span v-else class="red">Disabled</span>
-      </p>
-    </div>
+    <img src="@/assets/default-avatar.png" alt />
+    <span>{{ nameString + this.pet.name }}</span>
+    <span>Размер: {{ sizeString }}</span>
+    <span v-if="pet.breed != null">Порода: {{ pet.breed }}</span>
+    <span v-else>Порода не указана :(</span>
+    <span>{{ yearsOldString }}</span>
+    <span v-if="pet.food_exceptions != null && pet.food_exceptions != ''">Не любит: {{ pet.food_exceptions }}</span>
+    <span v-else>Ест всё! :)</span>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    petId: Number
-  },
+  props: ['pet'],
   data () {
     return {
       disabled: true,
-      select: 'test',
-      pets: {
-        34: {
-          name: 'Johny',
-          gender: 'm',
-          species: 'Bulldog',
-          weight: 'middle',
-          age: {
-            date: false,
-            years: 'middle'
-          },
-          features: {
-            like: ['meat'],
-            dislike: ['fish', 'vegetables']
-          },
-          subscription: {
-            status: true,
-            duration: 'monthly'
-          }
-        },
-        44: {
-          name: 'Lola',
-          gender: 'f',
-          species: 'Labrador',
-          weight: 'big',
-          age: {
-            date: '14.06.2010',
-            years: false
-          },
-          features: false,
-          subscription: {
-            status: false,
-            duration: false
-          }
-        }
-      }
     }
   },
   computed: {
-    currentPet () {
-      return this.pets[this.petId]
+    nameString() {
+      switch (this.pet.gender) {
+        case "m": {
+          return 'Его имя: '
+        }
+        case "f": {
+          return 'Её имя: '
+        }
+        default: {
+          return 'Имя питомца: '
+        }
+      }
+    },
+    sizeString() {
+      switch (this.pet.size) {
+        case '1':{
+          return `маленький`
+        }
+        case '2': {
+          return 'средний'
+        }
+        case '3': {
+          return 'большой'
+        }
+        default: {
+          return 'неопределен'
+        }
+      }
+    },
+    yearsOldString() {
+      if (this.pet.birthday_date) {
+        return `Дата рождения: ${this.pet.birthday_date}`
+      }
+      if (this.pet.birthday_years) {
+        return `Приблизительный возраст: ${this.pet.birthday_years} ${this.pet.birthday_years == '1-3' ? 'года' : 'лет'} `
+      }
+      return 'Возраст не указан :('
     }
+  },
+  mounted() {
+    console.log(this.pet)
   }
 }
 </script>
 
 <style lang="scss" scoped>
   .card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     background-color: #f2f3f7;
     border: 1px solid #d3d4d7;
+    margin-bottom: 10px;
+    span {
+      margin: auto;
+    }
   }
   .green {
     color: green;
