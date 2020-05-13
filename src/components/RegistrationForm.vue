@@ -1,11 +1,11 @@
 <template>
   <div class="form-registration">
-   
+
     <form class="form" @submit.prevent="onSubmit">
         <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error }">
             <div class="instruction">Введите адрес электронной почты</div>
               <div class="input-block">
-                <input v-model="email" :disabled="disabled" required> 
+                <input v-model="email" :disabled="disabled" required>
                 <label >Адрес электронной почты</label>
               </div>
             <div class="error_block">
@@ -55,7 +55,7 @@
     },
 
     validations: {
-      
+
       email: {
         required,
         email,
@@ -63,9 +63,9 @@
 
       password: {
         required,
-        betweenLength: betweenLength(4, 18),
+        betweenLength: betweenLength(6, 18),
       }
-      
+
     },
 
     methods: {
@@ -77,17 +77,18 @@
         if(!this.$v.$invalid){
           const {email, password} = this
           console.log('userRegister')
-          await this.$store.dispatch('userRegister', {email, password})
-          // this.disabled = true
-          this.$router.push('/login')
+          const rez = await this.$store.dispatch('userRegister', {email, password})
+          if (rez){
+            this.onSuccess()
+          }
         }
         this.disabled = false
       }
 
-      
+
 
       //     const rez  = await this.$store.dispatch('userRegister', {email, password})
-       
+
       //  }
       //  if (rez) {
       //       this.onSuccess()
@@ -96,7 +97,7 @@
       //     this.disabled = false
       //   },
 
-  
+
 
         // created() {
         //   this.$emit('ready')

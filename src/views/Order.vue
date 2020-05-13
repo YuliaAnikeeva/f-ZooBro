@@ -36,7 +36,7 @@
         <div class="transition-box">
             <transition name="translate">
                 <div class="abs" v-if="step === 'step-1'">
-                    <FirstLook v-model="plan"/>
+                    <Step1 v-model="plan"/>
                 </div>
             </transition>
 
@@ -73,18 +73,18 @@
 
 <script>
   import { email, required, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
-  import FirstLook from '../components/onboarding/FirstLook'
   import ProgresBar from '../components/onboarding/ProgresBar'
-  import Step2 from '../components/orderSteps/Step2'
-  import Step3 from '../components/orderSteps/Step3'
+  import Step1 from '../components/onboarding/orderSteps/Step1'
+  import Step2 from '../components/onboarding/orderSteps/Step2'
+  import Step3 from '../components/onboarding/orderSteps/Step3'
 
   export default {
     name: 'Order',
     components: {
-      Step3,
+      Step1,
       Step2,
+      Step3,
       ProgresBar,
-      FirstLook
     },
     metaInfo: {
       title: 'Order',

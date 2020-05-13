@@ -18,7 +18,7 @@
     components: { RegistrationForm },
     methods: {
       onSuccess () {
-        this.$router.push('/profile')
+        this.$router.push('/login')
       }
     }
   }
