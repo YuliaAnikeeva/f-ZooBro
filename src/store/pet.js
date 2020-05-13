@@ -68,6 +68,39 @@ const pet = {
           console.error("ERROR -> " + err);
           return false;
         });
+    },
+    async updatePet({getters}, payload) {
+      if (!payload.id) {
+        console.error(`!!! NO PET ID !!!`)
+        return false // Заранее прерываем запрос, который не пройдет
+      }
+      return fetch(`${URL}/v1/pets/update`, {
+        headers: {
+          Accept: 'application/json',
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "*",
+          Authorization: getters.userToken
+        },
+        method: "POST",
+        mode: 'cors',
+        body: JSON.stringify(payload)
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(json => {
+          const { status } = json;
+          if (status === 1) {
+            return true
+          }
+          console.error(`!!! STATUS WRONG (${status})`)
+          return false
+        })
+        .catch(err => {
+          console.error(`!!! ERROR => ${err}`)
+          return false
+        })
     }
   },
   getters: {
