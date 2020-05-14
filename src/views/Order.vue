@@ -5,12 +5,12 @@
         <ProgresBar v-model="step"/>
 
         <div class="onboarding-buttons">
-            <button class="onboarding-button onboarding-button_secondary" @click="()=>updateE(-1)">
+            <button class="onboarding-button onboarding-button_secondary" @click="()=>updateE(-1)" :disabled="loading">
                 <div class="onboarding-button__inner">
                     <span class="onboarding-button__label">Назад</span>
                 </div>
             </button>
-            <button class="onboarding-button" @click="()=>updateE(1)">
+            <button class="onboarding-button" @click="submitHandler" :disabled="loading">
                 <div class="onboarding-button__inner">
                     <span class="onboarding-button__label">Вперед</span>
                     <svg class="onboarding-button__icon" viewBox="0 0 42 35" xmlns="http://www.w3.org/2000/svg">
@@ -33,36 +33,44 @@
             <button @click="()=>updateE(1)"> +</button>
         </div>
 
+        <div>
+          <br>
+          <label>
+            <input type="checkbox" v-model="enableValidation">
+            Validation: {{ enableValidation }}
+          </label>
+          <br>
+          <br>
+        </div>
+
         <div class="transition-box">
             <transition name="translate">
                 <div class="abs" v-if="step === 'step-1'">
-                    <Step1 v-model="plan"/>
+                    <Step1 ref="form" :order.sync="order" />
                 </div>
             </transition>
 
             <transition name="translate">
                 <div class="abs" v-if="step === 'step-2'">
-                    <div class="container">
-
-                        <Step2/>
-
-                    </div>
+                    <Step2 ref="form" :order.sync="order" />
                 </div>
             </transition>
 
             <transition name="translate">
                 <div class="abs" v-if="step === 'step-3'">
 
-                    <Step3/>
-
+                  <template v-if="loading">
+                      <div class="overlay">
+                          <Loader />
+                      </div>
+                  </template>
+                  <Step3 ref="form" :order.sync="order" />
                 </div>
             </transition>
 
             <transition name="translate">
                 <div class="abs" v-if="step === 'step-4'">
-                    <div class="container">
-                        <p>данные отправлены...</p>
-                    </div>
+                    <p>данные отправлены...</p>
                 </div>
             </transition>
 
@@ -77,6 +85,7 @@
   import Step1 from '../components/onboarding/orderSteps/Step1'
   import Step2 from '../components/onboarding/orderSteps/Step2'
   import Step3 from '../components/onboarding/orderSteps/Step3'
+  import Loader from '../components/Loader'
 
   export default {
     name: 'Order',
@@ -85,80 +94,26 @@
       Step2,
       Step3,
       ProgresBar,
+      Loader,
     },
     metaInfo: {
       title: 'Order',
     },
-    validations () {
-      if (this.step === 'step-2') {
-        return {
-          dogName: {
-            required,
-            minLength: minLength(3),
-          },
-          dogGender: {
-            required,
-          },
-          weight: {
-            required,
-          },
-        }
-      } else if (this.step === 'step-3') {
-        return {
-          name: {
-            required,
-          },
-          email: {
-            required,
-            email,
-          },
-          phone: {
-            required,
-            minLength: minLength(10),
-            maxLength: maxLength(10),
-          },
-          address: {
-            required,
-          },
-          date: {
-            required,
-          },
-          time: {
-            required,
-          }
-        }
-      } else {
-        return {}
-      }
-
-    },
     data: () => ({
-      dogName: '',
-      dogGender: '',
-      breed: '',
-      weight: '',
-      dateOfBirth: '',
-      age: '',
-      hasAllergy: false,
-      allergies: '',
-      name: '',
-      email: '',
-      phone: '',
-      address: '',
-      date: '',
-      time: '',
-      plan: '',
-      showMap: false,
-
       step: 'step-1',
       steps: ['step-1', 'step-2', 'step-3', 'step-4'],
+      order: {},
+      loading: false,
+      enableValidation: false
     }),
+    validations () {
+      return { ...this.v }
+    },
     methods: {
       onClick (e) {
         this.coords = e.get('coords')
       },
       updateE (val = 1) {
-        console.log('this.$v', this.$v)
         const idx = this.steps.indexOf(this.step)
         const len = this.steps.length
         if (idx !== -1 && idx + val <= len - 1 && idx + val >= 0) {
@@ -166,11 +121,26 @@
         }
       },
       submitHandler () {
-        this.$v.$touch()
-        if (this.$v.$invalid) {
-          return
+        if (this.loading) return
+        const v = this.$refs.form && this.$refs.form.$v
+        if (this.enableValidation && v) {
+          v.$touch()
+          if (v.$invalid) {
+            return
+          }
         }
-        this.updateE(1)
+        if (this.step === 'step-3') {
+          this.loading = true
+          this.$store.dispatch('order/createOrder', this.order)
+            .then(isSuccess => {
+              this.loading = false
+              if (isSuccess) {
+                this.updateE(1)
+              }
+            })
+        } else {
+          this.updateE(1)
+        }
       },
     },
   }
@@ -178,6 +148,19 @@
 
 <style lang="scss" scoped>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+    .overlay {
+      position: absolute;
+      background-color: rgba(255,255,255, 0.7);
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 555;
+    }
 
     .onboarding {
         &-buttons {
