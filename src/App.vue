@@ -17,7 +17,13 @@
     computed: {
       layout() {
         return (this.$route.meta.layout || 'main') + '-layout';
+       
       },
+    },
+    data() {
+    return {
+      showModal: this.$route.meta.showModal
+    }
     },
   }
 </script>

@@ -1,10 +1,14 @@
 <template>
-  <div class="container">
+  
+  <div class="container" v-if="showModal">
+    
   <div class="border">
     <h1>Регистрация</h1>
     <RegistrationForm :onSuccess="onSuccess"/>
     </div>
+    
   </div>
+  
 </template>
 
 <script>
@@ -16,12 +20,19 @@
       title: 'Registration',
     },
     components: { RegistrationForm },
+    data() {
+    return {
+      showModal: this.$route.meta.showModal
+    }
+    },
     methods: {
       onSuccess () {
         this.$router.push('/login')
       }
     }
-  }
+   
+}
+
 </script>
 
 <style scoped lang="scss">

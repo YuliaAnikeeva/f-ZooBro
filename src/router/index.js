@@ -44,7 +44,10 @@ const routes = [
     path: '/registration',
     name: 'Registration',
     component: () => import( '../views/Registration.vue'),
-    meta: { layout: 'main' },
+    meta: { layout: 'main',
+    showModal: true,
+   },
+    
   },
   {
     path: '*',

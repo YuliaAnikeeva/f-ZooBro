@@ -83,7 +83,9 @@
           }).showToast()
 
         }
-      }
+      },
+      "$route.meta"({ showModal }) {
+      this.showModal = showModal}
     },
   }
 </script>
