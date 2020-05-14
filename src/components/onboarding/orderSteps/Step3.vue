@@ -1,126 +1,110 @@
 <template>
-    <div class="abs">
-        <div class="container">
-
-            <form @submit.prevent="submitHandler" class="form_small">
-                <div class="form-section">
-                    <div class="form-group">
-                        <label class="form-group__label">Ваше имя</label>
-                        <div class="form-group__content">
-                            <div class="input">
-                                <input
-                                        type="text"
-                                        placeholder="Петя"
-                                        v-model="$v.name.$model"
-                                        class="input__control"
-                                />
-                            </div>
-                        </div>
-                        <div class="form-group__helper">
-                            <div class="form-group__errors">
-                                <div class="error" v-if="$v.name.$dirty && !$v.name.required">Введите ваше имя</div>
-                            </div>
-                        </div>
+    <form @submit.prevent="submitHandler" class="form_small">
+        <div class="form-section">
+            <div class="form-group">
+                <label class="form-group__label">Ваше имя</label>
+                <div class="form-group__content">
+                    <div class="input">
+                        <input
+                                type="text"
+                                placeholder="Петя"
+                                v-model="user_name"
+                                class="input__control"
+                        />
                     </div>
-                    <div class="form-group">
-                        <label class="form-group__label">E-mail</label>
-                        <div class="form-group__content">
-                            <div class="input">
-                                <input
-                                        type="text"
-                                        placeholder="user@example.com"
-                                        v-model="$v.email.$model"
-                                        class="input__control"
-                                />
-                            </div>
-                        </div>
-                        <div class="form-group__helper">
-                            <div class="form-group__errors">
-                                <div class="error" v-if="$v.email.$dirty && !$v.email.required">Введите email</div>
-                                <div class="error" v-if="$v.email.$dirty && !$v.email.email">Введите корректный email
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="form-group__helper">
+                    <div class="form-group__errors">
+                        <div class="error" v-if="$v.user_name.$dirty && !$v.user_name.required">Введите ваше имя</div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-group__label">Телефон</label>
-                        <div class="form-group__content">
-                            <div class="input">
-                                <the-mask
-                                        type="tel"
-                                        placeholder="+7 (000) 000-00-00"
-                                        v-model.trim="$v.phone.$model"
-                                        mask="+7 (###) ###-##-##"
-                                        class="input__control"
-                                />
-                            </div>
-                        </div>
-                        <div class="form-group__helper">
-                            <div class="form-group__errors">
-                                <div class="error" v-if="$v.phone.$dirty && !$v.phone.required">Введите телефон</div>
-                                <div class="error" v-if="$v.phone.$dirty && !$v.phone.minLength">Введите корректный
-                                    номер телефона
-                                </div>
-                            </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-group__label">E-mail</label>
+                <div class="form-group__content">
+                    <div class="input">
+                        <input
+                                type="text"
+                                placeholder="user@example.com"
+                                v-model="email"
+                                class="input__control"
+                        />
+                    </div>
+                </div>
+                <div class="form-group__helper">
+                    <div class="form-group__errors">
+                        <div class="error" v-if="$v.email.$dirty && !$v.email.required">Введите email</div>
+                        <div class="error" v-if="$v.email.$dirty && !$v.email.email">Введите корректный email
                         </div>
                     </div>
                 </div>
-                <div class="form-section">
-                    <div class="form-group form-group_with_link">
-                        <label class="form-group__label">Адрес доставки</label>
-                        <div class="form-group__content">
-                            <div class="input input_type_address">
-                                <input
-                                        type="text"
-                                        placeholder="г. Москва ул. Ленина 35 кв.10"
-                                        v-model="$v.address.$model"
-                                        class="input__control"
-                                />
-                            </div>
-                        </div>
-                        <div class="form-group__helper">
-                            <div class="form-group__errors">
-                                <div class="error" v-if="$v.address.$dirty && !$v.address.required">Введите адрес</div>
-                            </div>
-                            <a class="form-group__link" href="#" @click="showMap = !showMap">Зоны доставки</a>
-                        </div>
+            </div>
+            <div class="form-group">
+                <label class="form-group__label">Телефон</label>
+                <div class="form-group__content">
+                    <div class="input">
+                        <the-mask
+                                type="tel"
+                                placeholder="+7 (000) 000-00-00"
+                                v-model.trim.number="phone"
+                                mask="+7 (###) ###-##-##"
+                                class="input__control"
+                        />
                     </div>
-                    <div class="form-group">
-                        <label class="form-group__label">Желаемые дата и время доставки</label>
-                        <div class="form-group__content">
-                            <div class="input-group">
-                                <div class="input input_type_date">
-                                    <input type="date" class="input__control input__control_type_datetime"
-                                           v-model="$v.date.$model">
-                                </div>
-                                <div class="input input_type_time">
-                                    <input type="time" class="input__control input__control_type_datetime"
-                                           v-model="$v.time.$model">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group__helper">
-                            <div class="form-group__errors">
-                            </div>
+                </div>
+                <div class="form-group__helper">
+                    <div class="form-group__errors">
+                        <div class="error" v-if="$v.phone.$dirty && !$v.phone.required">Введите телефон</div>
+                        <div class="error" v-if="$v.phone.$dirty && !$v.phone.minLength">Введите корректный
+                            номер телефона
                         </div>
                     </div>
                 </div>
-            </form>
-
-        </div>
-        <div v-if="showMap">
-            <p>зона доставки</p>
-            <div style="position:relative;overflow:hidden;"><a
-                    href="https://yandex.ru/maps/213/moscow/?utm_medium=mapframe&utm_source=maps"
-                    style="color:#eee;font-size:12px;position:absolute;top:0px;">Москва</a><a
-                    href="https://yandex.ru/maps/213/moscow/?ll=37.604136%2C55.760765&mode=usermaps&source=constructorLink&um=constructor%3A6909fae852e9144b06470b26df6895bb7a9ef26ccbd40dfa7a516aec82082422&utm_medium=mapframe&utm_source=maps&z=10"
-                    style="color:#eee;font-size:12px;position:absolute;top:14px;">Яндекс.Карты — поиск мест
-                и адресов, городской транспорт</a>
-                <iframe src="https://yandex.ru/map-widget/v1/-/CSAn4XnI" width="100%" height="400"
-                        frameborder="1" allowfullscreen="true" style="position:relative;"></iframe>
             </div>
         </div>
-    </div>
+        <div class="form-section">
+            <div class="form-group form-group_with_link">
+                <label class="form-group__label">Адрес доставки</label>
+                <div class="form-group__content">
+                    <div class="input input_type_address">
+                        <input
+                                type="text"
+                                placeholder="г. Москва ул. Ленина 35 кв.10"
+                                v-model="address"
+                                class="input__control"
+                        />
+                    </div>
+                </div>
+                <div class="form-group__helper">
+                    <div class="form-group__errors">
+                        <div class="error" v-if="$v.address.$dirty && !$v.address.required">Введите адрес</div>
+                    </div>
+                    <a class="form-group__link" href="#" @click="showMap = !showMap">Зоны доставки</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-group__label">Желаемые дата и время доставки</label>
+                <div class="form-group__content">
+                    <div class="input-group">
+                        <div class="input input_type_date">
+                            <input type="date" class="input__control input__control_type_datetime"
+                                    v-model="date_delivery">
+                        </div>
+                        <div class="input input_type_time">
+                            <input type="time" class="input__control input__control_type_datetime"
+                                    v-model="time_delivery">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group__helper">
+                    <div class="form-group__errors">
+                        <div class="error" v-if="$v.date_delivery.$dirty && !$v.date_delivery.required">Введите желаемую дату доставки</div>
+                        <div class="error" v-if="$v.time_delivery.$dirty && !$v.time_delivery.required">Введите желаемое время доставки</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </template>
 
 <script>
@@ -128,10 +112,10 @@
 
   export default {
     name: 'Step3',
+    props: ['order'],
     validations () {
-
       return {
-        name: {
+        user_name: {
           required,
         },
         email: {
@@ -146,138 +130,36 @@
         address: {
           required,
         },
-        date: {
+        date_delivery: {
           required,
         },
-        time: {
+        time_delivery: {
           required,
         }
       }
-
     },
     data: () => ({
-      dogName: '',
-      dogGender: '',
-      breed: '',
-      weight: '',
-      dateOfBirth: '',
-      age: '',
-      hasAllergy: false,
-      allergies: '',
-      name: '',
-      email: '',
-      phone: '',
-      address: '',
-      date: '',
-      time: '',
-      plan: '',
       showMap: false,
-
-      step: 'step-1',
-      steps: ['step-1', 'step-2', 'step-3', 'step-4'],
     }),
+    computed: {
+      ...(() => {
+        let o = {}
+        let f = ["user_name", "email", "phone", "address", "date_delivery", "time_delivery"]
+        f.forEach( n => o[[n]] = {
+          get () {
+            return this.order[n]
+          },
+          set (val) {
+            this.$emit('update:order', { ...this.order, [n]: val })
+          }
+        })
+        return o
+      })(),
+    }
   }
 </script>
 
 <style lang="scss" scoped>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
-
-    .buttons {
-        width: 100%;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-around;
-
-        &__prev, &__next {
-            width: 255px;
-            height: 55px;
-            border-radius: 10px;
-
-            span {
-                font-size: 21px;
-                text-align: center;
-                letter-spacing: 0.2px;
-                line-height: 55px;
-            }
-
-            &:hover {
-                cursor: pointer;
-            }
-        }
-
-        &__prev {
-            background-color: rgba(249, 242, 246, 0.8);
-        }
-
-        &__next {
-            background-color: #ffcc01;
-            position: relative;
-
-            svg {
-                position: absolute;
-                top: 10px;
-                right: 32.4px;
-                fill: #FAFAFA;
-            }
-
-            &:hover {
-                svg {
-                    fill: #2289b5;
-                }
-            }
-        }
-    }
-
-    .scale-in-hor-left {
-        animation: scale-in-hor-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-    }
-
-    @keyframes scale-in-hor-left {
-        0% {
-            transform: scaleX(0);
-            transform-origin: 0% 0%;
-            opacity: 1;
-        }
-        100% {
-            transform: scaleX(1);
-            transform-origin: 0% 0%;
-            opacity: 1;
-        }
-    }
-
-    .container {
-        width: 920px;
-        margin: 0 auto;
-    }
-
-    .transition-box {
-        position: relative;
-    }
-
-    .translate-enter-active,
-    .translate-leave-active {
-        transition: all .5s;
-    }
-
-    .translate-enter,
-    .translate-leave-active {
-        opacity: 0;
-    }
-
-    .translate-enter {
-        transform: translateX(31px);
-    }
-
-    .translate-leave-active {
-        transform: translateX(-31px);
-    }
-
-    .abs {
-        position: absolute;
-        right: 0;
-        left: 0;
-    }
-
     form {
         display: flex;
         flex-wrap: wrap;
