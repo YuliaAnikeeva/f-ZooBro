@@ -28,11 +28,9 @@ export default {
         id: this.pet.id,
         gender: this.pet.gender == "m" ? "f" : "m"
       };
-      console.log(payload);
       this.$store.dispatch("pet/updatePet", payload).then(() => {
         this.$store.dispatch("pet/fetchPet").then(status => {
           if (status === true) {
-            console.log(this.$store.getters["pet/petList"]);
             location.reload();
           }
         });
@@ -81,9 +79,6 @@ export default {
       return "Возраст не указан :(";
     }
   },
-  mounted() {
-    console.log(this.pet);
-  }
 };
 </script>
 
