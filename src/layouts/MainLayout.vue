@@ -4,9 +4,11 @@
         <div id="nav">
             <router-link to="/">Home</router-link>
             |
-            <router-link to="/login">login</router-link>
+            <!--<router-link to="/login">login</router-link>-->
+            <a  @click="loginModal = true">login</a>
             |
-            <router-link to="/recovery-password">recovery-password</router-link>
+            <!--<router-link to="/recovery-password">recovery-password</router-link>-->
+            <a @click="recoveryPasswordModal = true">recovery-password</a>
             |
             <router-link to="/profile">profile</router-link>
             |
@@ -14,7 +16,8 @@
             |
             <router-link to="/order">order</router-link>
             |
-            <router-link to="/registration">registration</router-link>
+            <!--<router-link to="/registration">registration</router-link>-->
+            <a @click="registerModal = true">registration</a>
         </div>
         <nav class="nav-menu">
             <div class="logo">
@@ -38,6 +41,36 @@
 
             </div>
         </nav>
+
+        <template>
+            <vue-modaltor
+                    :visible="loginModal"
+                    :resize-width='{1920:"440px",940:"90%"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="loginModal = false">
+                <LoginForm :onSuccess="toggleLoginModal"/>
+            </vue-modaltor>
+
+            <vue-modaltor
+                    :visible="registerModal"
+                    :resize-width='{1920:"440px",940:"90%"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="registerModal = false">
+                <RegistrationForm/>
+            </vue-modaltor>
+
+            <vue-modaltor
+                    :visible="recoveryPasswordModal"
+                    :resize-width='{1920:"440px",940:"90%"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="recoveryPasswordModal = false">
+                <RecoveryPasswordForm/>
+            </vue-modaltor>
+        </template>
+
         <main>
             <router-view/>
         </main>
@@ -47,15 +80,35 @@
 <script>
   import { mapGetters } from 'vuex'
   import Toastify from 'toastify-js'
+  import LoginForm from '../components/LoginForm'
+  import RegistrationForm from '../components/RegistrationForm'
+  import RecoveryPasswordForm from '../components/RecoveryPasswordForm'
 
   export default {
     name: 'MainLayout',
+    components: { RecoveryPasswordForm, RegistrationForm, LoginForm },
+    data: () => ({
+      loginModal: false,
+      registerModal: false,
+      recoveryPasswordModal: false,
+    }),
     computed: {
       ...mapGetters([
         'snackbarType',
         'snackbarMsg',
         'snackbarObj',
       ]),
+    },
+    methods:{
+      toggleLoginModal(){
+        this.loginModal = !this.loginModal
+      },
+      toggleRegisterModal(){
+        this.registerModal = !this.registerModal
+      },
+      toggleRecoveryPasswordModal(){
+        this.recoveryPasswordModal = !this.recoveryPasswordModal
+      },
     },
     watch: {
       snackbarObj: (newMsg, oldMsg) => {
@@ -88,7 +141,10 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+    .modal-vue-panel{
+        border-radius: 20px;
+    }
     .router-link {
         text-decoration: none;
         font-family: Montserrat, serif;
