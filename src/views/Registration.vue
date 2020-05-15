@@ -1,6 +1,6 @@
 <template>
-  
-  <div class="container" v-if="showModal">
+  <modal v-if="showModal" name="modalWindow">
+  <div class="container">
     
   <div class="border">
     <h1>Регистрация</h1>
@@ -8,7 +8,7 @@
     </div>
     
   </div>
-  
+  </modal>
 </template>
 
 <script>

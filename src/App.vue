@@ -25,6 +25,9 @@
       showModal: this.$route.meta.showModal
     }
     },
+    showModal() {
+      this.$modal.show(modalWindow);
+    }
   }
 </script>
 

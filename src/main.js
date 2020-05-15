@@ -9,6 +9,7 @@ import VueTheMask from 'vue-the-mask'
 import VueModalTor from "vue-modaltor";
 import "toastify-js/src/toastify.css"
 import Toastify from 'toastify-js'
+import VModal from 'vue-js-modal';
 
 
 Vue.config.productionTip = false
@@ -17,6 +18,7 @@ Vue.use(VueLidate)
 Vue.use(VueTheMask)
 Vue.use(VueModalTor);
 Vue.use(Toastify);
+Vue.use(VModal);
 
 new Vue({
   router,
