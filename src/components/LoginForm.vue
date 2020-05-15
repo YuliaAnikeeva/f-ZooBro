@@ -16,7 +16,7 @@
 
             <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
                 <div class="input-block">
-                    <input v-model="password" :disabled="disabled" required>
+                    <input type="password" v-model="password" :disabled="disabled" required>
                     <label>Пароль</label>
                 </div>
                 <div class="error_block">
@@ -91,6 +91,7 @@
           })
           if (rez) {
             this.onSuccess()
+            this.$router.push('/profile')
           }
           this.disabled = false
         }

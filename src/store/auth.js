@@ -58,6 +58,9 @@ export default {
         .catch(
           error => {
             console.error('Ошибка авторизации', error)
+            commit('clearSnackbar')
+            commit('setSnackbarMsg', 'Ошибка авторизации')
+            commit('setSnackbarType', 'error')
             return false
           }
         )
