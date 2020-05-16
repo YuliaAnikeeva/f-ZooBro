@@ -1,4 +1,6 @@
 <template>
+<div class="border">
+    <h1>Восстановление пароля</h1>
   <div class="form-recovery">
     <div class="message_block">
     <div v-if="status=='success'">
@@ -22,7 +24,7 @@
           </div>
           <input class="button" type="submit" value="Далее" :disabled="disabled">
       </form>
-    
+    </div>
   </div>
 </template>
 

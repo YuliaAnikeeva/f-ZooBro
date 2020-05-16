@@ -1,4 +1,6 @@
 <template>
+<div class="border">
+   <h1>Вход</h1>
     <div class="form-login">
 
         <form class="form" @submit.prevent="onSubmit">
@@ -32,17 +34,19 @@
 
             <Loader v-if="disabled"/>
 
-            <router-link class="link" to="/recovery-password">Я не помню пароль</router-link>
-            <router-link class="link" to="/registration">Зарегистрироваться</router-link>
+            <a @click="recoveryPasswordModal = true">Я не помню пароль</a>
+            <a @click="toggleRegisterModal = true">Зарегистрироваться</a>
 
         </form>
 
+    </div>
     </div>
 </template>
 
 <script>
   import { required, email, minLength, maxLength, and, helpers } from 'vuelidate/lib/validators'
   import Loader from './Loader'
+ 
 
   const betweenLength = (min, max) => helpers.withParams(
     {

@@ -5,10 +5,10 @@
             <router-link to="/">Home</router-link>
             |
             <!--<router-link to="/login">login</router-link>-->
-            <a  @click="loginModal = true">login</a>
+            <a class="nav-link" @click="loginModal = true">login</a>
             |
             <!--<router-link to="/recovery-password">recovery-password</router-link>-->
-            <a @click="recoveryPasswordModal = true">recovery-password</a>
+            <a class="nav-link" @click="recoveryPasswordModal = true">recovery-password</a>
             |
             <router-link to="/profile">profile</router-link>
             |
@@ -17,7 +17,7 @@
             <router-link to="/order">order</router-link>
             |
             <!--<router-link to="/registration">registration</router-link>-->
-            <a @click="registerModal = true">registration</a>
+            <a class="nav-link" @click="registerModal = true">registration</a>
         </div>
         <nav class="nav-menu">
             <div class="logo">
@@ -30,7 +30,7 @@
                 <div class="rout-buttons__tel">49218419481</div>
                 <div class="rout-buttons__auth" v-if="true">
                     <button class="rout-buttons__auth-button">
-                        <router-link class="router-link" to="/login">Войти</router-link>
+                        <a  @click="loginModal = true">Войти</a>
                     </button>
                 </div>
                 <div class="rout-buttons__profile" v-if="false">
@@ -58,7 +58,7 @@
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="registerModal = false">
-                <RegistrationForm/>
+                <RegistrationForm :onSuccess="toggleRegisterModal"/>
             </vue-modaltor>
 
             <vue-modaltor
@@ -67,7 +67,7 @@
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="recoveryPasswordModal = false">
-                <RecoveryPasswordForm/>
+                <RecoveryPasswordForm :onSuccess="toggleRecoveryPasswordModal"/>
             </vue-modaltor>
         </template>
 
@@ -142,8 +142,20 @@
 </script>
 
 <style lang="scss">
+
     .modal-vue-panel{
         border-radius: 20px;
+        z-index: 9998;
+    }
+    .nav-link{
+       text-decoration: none;
+        font-family: Montserrat, serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: #FFFFFF;
+        cursor: pointer;
     }
     .router-link {
         text-decoration: none;
@@ -155,7 +167,6 @@
         color: #FFFFFF;
 
     }
-
     .nav-menu {
         width: 100%;
         height: 65px;
