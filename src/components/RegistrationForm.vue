@@ -1,6 +1,8 @@
 <template>
+ <!-- <div class="container"> -->
+  <div class="border">
+    <h1>Регистрация</h1>
   <div class="form-registration">
-
     <form class="form" @submit.prevent="onSubmit">
         <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error }">
             <div class="instruction">Введите адрес электронной почты</div>
@@ -30,6 +32,8 @@
       <Loader v-if="disabled"/>
     </form>
   </div>
+    </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -86,26 +90,11 @@
       }
 
 
-
-      //     const rez  = await this.$store.dispatch('userRegister', {email, password})
-
-      //  }
-      //  if (rez) {
-      //       this.onSuccess()
-      //       this.$router.push('/login')
-      //     }
-      //     this.disabled = false
-      //   },
-
-
-
-        // created() {
-        //   this.$emit('ready')
-        // }
     }
    }
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/styles/_forms.scss"
+@import "../assets/styles/_forms.scss";
+
 </style>
