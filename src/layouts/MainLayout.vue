@@ -146,11 +146,14 @@
     .modal-vue-wrapper-show.modal-fade, .modal-vue-wrapper-show.modal-scale{
     
         z-index: 9999;
-
+ border-radius: 20px;
+}
+.modal-vue-panel.modal-fade{
+  border-radius: 20px;
 }
     .modal-vue-panel{
         border-radius: 20px;
-        z-index: 9998;
+      
     }
     .nav-link{
        text-decoration: none;
