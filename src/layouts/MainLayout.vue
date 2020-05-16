@@ -63,6 +63,7 @@
 
             <vue-modaltor
                     :visible="recoveryPasswordModal"
+                    
                     :resize-width='{1920:"440px",940:"90%"}'
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
@@ -142,7 +143,11 @@
 </script>
 
 <style lang="scss">
+    .modal-vue-wrapper-show.modal-fade, .modal-vue-wrapper-show.modal-scale{
+    
+        z-index: 9999;
 
+}
     .modal-vue-panel{
         border-radius: 20px;
         z-index: 9998;

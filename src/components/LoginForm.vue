@@ -34,8 +34,8 @@
 
             <Loader v-if="disabled"/>
 
-            <a @click="recoveryPasswordModal = true">Я не помню пароль</a>
-            <a @click="toggleRegisterModal = true">Зарегистрироваться</a>
+            <a class="link" @click="recoveryPasswordModal = true">Я не помню пароль</a>
+            <a class="link" @click="toggleRegisterModal = true">Зарегистрироваться</a>
 
         </form>
 
