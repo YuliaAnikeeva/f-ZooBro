@@ -61,6 +61,7 @@
     created() {
       if (this.$store.state.admin.orders.length == 0) {
         this.$store.dispatch('admin/fillState')
+        this.$store.dispatch("admin/fetchOrders")
       } 
     }
   }

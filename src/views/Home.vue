@@ -1,14 +1,13 @@
 <template>
   <div class="landing-container">
-    <img class="bg-content bg-content__ball" src="../assets/ball_bg.svg" alt="">
-      <img class="bg-content bg-content__paw" src="../assets/paw_bg.svg" alt="">
-      <img class="bg-content bg-content__box" src="../assets/box_bg.svg" alt="">
-      <img class="bg-content bg-content__big-bone" src="../assets/big_bone_bg.svg" alt="">
-      <img class="bg-content bg-content__small-bone" src="../assets/small_bone_bg.svg" alt="">
-      <img class="bg-content bg-content__paws" src="../assets/paws_bg.svg" alt="">
-      <img class="bg-content bg-content__big-box" src="../assets/big-box_bg.svg" alt="">
+    <!-- <img class="bg-content bg-content__ball" src="../assets/ball_bg.svg" alt="">
+    <img class="bg-content bg-content__paw" src="../assets/paw_bg.svg" alt="">
+    <img class="bg-content bg-content__box" src="../assets/box_bg.svg" alt="">
+    <img class="bg-content bg-content__big-bone" src="../assets/big_bone_bg.svg" alt="">
+    <img class="bg-content bg-content__small-bone" src="../assets/small_bone_bg.svg" alt="">
+    <img class="bg-content bg-content__paws" src="../assets/paws_bg.svg" alt="">
+    <img class="bg-content bg-content__big-box" src="../assets/big-box_bg.svg" alt=""> -->
     <main class="landing-container__main">
-      
       <div class="order">
         <section class="order__container">
           <h1 class="order__head">Любовь и забота хозяина в одной коробочке специально для тебя</h1>
@@ -29,12 +28,13 @@
       </div>
       <div class="how-work">
         <div class="block__head">
+          <a name="how-work"></a>
           <h4 class="block__head-text">Как работает сервис</h4>
         </div>
         <div class="how-work__container">
           <section class="how-work__section">
             <div class="how-work__image-container">
-              <img src="../assets/how-work-dog-1.png" alt />
+              <img src="../assets/how-work-dog-1.png" alt/>
             </div>
             <h5 class="how-work__section-head">Закажи на сайте</h5>
             <p class="how-work__text">Расскажи нам о себе, чтобы мы подобрали то, что тебе точно понравится</p>
@@ -46,8 +46,7 @@
             <div class="how-work__image-container">
               <img src="../assets/how-work-dog-2.png" alt />
             </div>
-            <h5 class="how-work__section-head how-work__section-head
-            _margin-b-20">Договорись о доставке</h5>
+            <h5 class="how-work__section-head how-work__sectiontrue_margin-b-20">Договорись о доставке</h5>
             <p class="how-work__text">Расскажи как и когда тебе удобнее получить коробочку</p>
           </section>
           <div class="how-work__arrow-container">
@@ -197,7 +196,10 @@
       </div>
       <div class="faq">
         <div class="faq__container">
-          <h5 class="faq__head">FAQ</h5>
+          <div>
+            <a name="faq"></a>
+            <h5 class="faq__head">FAQ</h5>
+          </div>
           <div class="faq__question" @click="answerFirst = !answerFirst">
             <span class="faq__question-text">А доставка бесплатная?</span>
             <div class="faq__plus-minus">
@@ -262,6 +264,7 @@
         </div>
       </div>
       <div class="footer__image">
+        <a name="contacts"></a>
         <img src="../assets/footer_pows.svg" alt="">
       </div>
     </footer>
@@ -277,10 +280,10 @@ export default {
     title: "Home"
   },
   data: () => ({
-    answerFirst: false,
-    answerSecond: false,
-    answerThird: false,
-    answerFourth: false
+    answerFirst: true,
+    answerSecond: true,
+    answerThird: true,
+    answerFourth: true
   }),
   components: {}
 };
@@ -344,49 +347,49 @@ main {
     height: 20px;
   }
 }
-.arrow {
-    display: grid;
-    height: 100%;
-    align-items: center;
+// .arrow {
+//     display: grid;
+//     height: 100%;
+//     align-items: center;
 
-  &__content {
-    position: relative;
-    margin-bottom: 100px;
-    display: block;
-    width: 160px;
-    height: 0px;
-    border-top: 1px solid #000000;
-    box-sizing: border-box;
+//   &__content {
+//     position: relative;
+//     margin-bottom: 100px;
+//     display: block;
+//     width: 160px;
+//     height: 0px;
+//     border-top: 1px solid #000000;
+//     box-sizing: border-box;
 
-    &_rotate30 {
-      transform: rotate(30deg);
-    }
-    &_rotate-30 {
-      transform: rotate(-30deg);
-    }
-  }
-  &__content::after {
-    content: '';
-    position: absolute;
-    width: 22px;
-    height: 1px;
-    top: -8.5px;
-    right: -3px;
-    background-color: #000;
-    transform: rotate(45deg);
-  }
-  &__content::before {
-    content: '';
-    position: absolute;
-    width: 22px;
-    height: 1px;
-    top: 6.7px;
-    right: -3px;
-    background-color: #000;
-    transform: rotate(-45deg);
-  }
+//     &_rotate30 {
+//       transform: rotate(30deg);
+//     }
+//     &_rotate-30 {
+//       transform: rotate(-30deg);
+//     }
+//   }
+//   &__content::after {
+//     content: '';
+//     position: absolute;
+//     width: 22px;
+//     height: 1px;
+//     top: -8.5px;
+//     right: -3px;
+//     background-color: #000;
+//     transform: rotate(45deg);
+//   }
+//   &__content::before {
+//     content: '';
+//     position: absolute;
+//     width: 22px;
+//     height: 1px;
+//     top: 6.7px;
+//     right: -3px;
+//     background-color: #000;
+//     transform: rotate(-45deg);
+//   }
 
-}
+// }
 
 .bg-content {
   position: fixed;
@@ -437,7 +440,7 @@ main {
     display: grid;
     align-items: center;
     text-decoration: none;
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
@@ -455,7 +458,7 @@ main {
   &__head-text {
     width: max-content;
     height: 40px;
-    font-family: Montserrat Alternates;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 32px;
@@ -499,7 +502,7 @@ main {
     margin-bottom: 70px;
     width: 700px;
     height: 177px;
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 48px;
@@ -511,7 +514,7 @@ main {
   &__text {
     width: 620px;
     height: 34px;
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 28px;
@@ -537,7 +540,7 @@ main {
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
   &__button-text {
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 21px;
@@ -589,7 +592,7 @@ main {
     z-index: 6;
   }
   &__text {
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -605,7 +608,7 @@ main {
   &__section-head {
     width: 190px;
     height: 24px;
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
@@ -633,7 +636,7 @@ main {
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
   &__button-text {
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 21px;
@@ -662,7 +665,7 @@ main {
   &__head-text {
     width: 275px;
     height: 40px;
-    font-family: Montserrat Alternates;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 32px;
@@ -671,7 +674,7 @@ main {
   }
   &__container {
     display: grid;
-    grid-template-columns: 25% 50% 25%;
+    grid-template-columns: 22% 50% 22%;
     column-gap: 2em;
     margin-bottom: 70px;
     z-index: 6;
@@ -679,7 +682,8 @@ main {
   }
   &__content {
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(2, max-content);
+    row-gap: 320px;
   }
   &__content-text {
     display: grid;
@@ -689,9 +693,13 @@ main {
   &__content-text:last-child {
     align-content: flex-end;
   }
+  &__content-image {
+    display: grid;
+    align-items: center;
+  }
   &__content-head {
     width: 100%;
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
@@ -703,7 +711,7 @@ main {
   &__content-text-text {
     width: 100%;
     height: 80px;
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -713,11 +721,11 @@ main {
   }
 }
 .how-use {
-  padding: 150px 365px;
+  padding: 150px 0;
   display: grid;
+  width: 100%;
   grid-template-columns: max-content;
   justify-content: center;
-  width: max-content;
   background: #fff;
   z-index: 6;
 
@@ -735,7 +743,7 @@ main {
   }
   &__content-text {
     width: 190px;
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -760,24 +768,25 @@ main {
   display: grid;
   justify-content: center;
   grid-template-columns: 100%;
-  padding: 120px 240px 120px 365px;
+  padding: 120px 0 120px;
   background: linear-gradient(176.37deg, #157DA9 12.91%, rgba(50, 157, 202, 0.82) 58.13%, #1489BB 92.45%);
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
   &__container {
     display: grid;
-    grid-template-columns: 30% 35%;
+    grid-template-columns: 29% 37%;
     justify-content: center;
+    column-gap: 60px;
     z-index: 6;
   }
   &__content {
     display: grid;
     height: 100%;
-    align-content: center;
+    align-content: start;
     text-align: left;
 
   }
   &__text-content {
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -820,7 +829,7 @@ main {
   &__text {
     margin: 80px auto 60px auto;
     width: 40%;
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -831,18 +840,21 @@ main {
 }
 .faq {
   background: #fff;
-  padding: 170px 240px 35px 560px;
+  padding: 170px 0 35px 0;
   display: grid;
-  grid-template-rows: 2fr 1fr;
-  justify-content: center;
+  grid-template-rows: 3fr 318px;
   z-index: 6;
+  grid-template-columns: 100%;
+  row-gap: 153px;
 
   &__image {
-    background: url('../assets/faq_dog.png') no-repeat;
+    background: url(/img/faq_dog.a8a2bd2e.png) no-repeat;
     background-size: contain;
-    margin-left: 400px;
+    width: 50%;
+    justify-self: right;
   }
   &__container {
+    width: 49%;
     background: #FBFBFB;
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
     border-radius: 80px;
@@ -851,10 +863,10 @@ main {
     grid-template-rows: 4em repeat(4, 4em max-content);
     row-gap: .8em;
     z-index: 6;
-    margin-right: 320px;
+    justify-self: center;
   }
   &__head {
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 32px;
@@ -870,7 +882,7 @@ main {
     width: 100%;
     background: #2289B5;
     border-radius: 10px;
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
@@ -882,7 +894,7 @@ main {
   }
   &__answer {
     overflow: hidden;
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -898,7 +910,6 @@ main {
       // animation-iteration-count: 1;
     }
   }
-  
   &__plus-minus {
     display: grid;
     align-items: center;
@@ -940,12 +951,12 @@ main {
   z-index: 1000;
   background: #464451;
   display: grid;
-  grid-template-columns: 90%  10%;
+  grid-template-columns: 80% 20%;
   justify-content: space-between;
   &__container {
     display: grid;
     grid-template-columns: 20% 20%;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   &__contacts {
     display: grid;
@@ -953,7 +964,7 @@ main {
     text-align: left;
   }
   &__contacts-row {
-    font-family: Montserrat;
+    font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -971,6 +982,7 @@ main {
 .social-icons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  
 }
 @keyframes collapse {
   from {

@@ -21,13 +21,13 @@
         </div>
         <nav class="nav-menu">
             <div class="logo">
-                <router-link class="router-link" to="/"><h4>logo</h4></router-link>
+                <router-link class="router-link" to="/"><img src="../assets/logo-zoobro.svg" alt=""></router-link>
             </div>
             <div class="rout-buttons">
                 <div class="rout-buttons__dilivery">Доставка</div>
-                <div class="rout-buttons__how-work">Как это работает</div>
-                <div class="rout-buttons__faq">FAQ</div>
-                <div class="rout-buttons__tel">49218419481</div>
+                <div class="rout-buttons__how-work"><a class="router-link" href="#how-work">Как это работает</a></div>
+                <div class="rout-buttons__faq"><a class="router-link" href="#faq">FAQ</a></div>
+                <div class="rout-buttons__tel"><a class="router-link" href="#contacts">Контакты</a></div>
                 <div class="rout-buttons__auth" v-if="true">
                     <button class="rout-buttons__auth-button">
                         <a  @click="loginModal = true">Войти</a>
@@ -213,6 +213,11 @@
                 border: 1px solid #2289B5;
                 box-sizing: border-box;
                 border-radius: 5px;
+            }
+            &__how-work {
+              display: block;
+              text-decoration: none;
+              color: #fff;
             }
         }
 
