@@ -34,7 +34,7 @@
     </div>
     <div class="admin__orders">
       <AdminOrder
-        v-for="(order, index) in this.$store.getters['admin/getOrdersByStatus'](selectedCategory)"
+        v-for="(order, index) in allOrders"
         :key="index" 
         :order="order" 
       />
@@ -60,9 +60,13 @@
     },
     created() {
       if (this.$store.state.admin.orders.length == 0) {
-        this.$store.dispatch('admin/fillState')
         this.$store.dispatch("admin/fetchOrders")
       } 
+    },
+    computed: {
+      allOrders() {
+        return this.$store.getters['admin/getOrders']
+      }
     }
   }
 </script>
@@ -76,7 +80,7 @@
     "header header"
     "filter orders";
     grid-template-columns: 0.5fr 3fr;
-    grid-template-rows: 1fr 5fr;
+    grid-template-rows: 0.5fr 5fr;
     grid-gap: 5px;
     height: 100%;
     &__header {
