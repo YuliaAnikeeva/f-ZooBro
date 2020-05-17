@@ -1,106 +1,145 @@
 <template>
   <div class="order-data">
-    <span class="order-data__id">
-      Order id #{{order.id}}
-    </span>
-    <ul>
-      <li><h3>User's data</h3></li>
-      <li>Email: <span class="black">{{userInfo.email}}</span></li>
-      <li>Phone number: <span class="black">{{userInfo.mobile}}</span></li>
-      <li>Address: <span class="black">{{userInfo.address}}</span></li>
-    </ul>
-    <ul>
-      <li><h3>Pet's data</h3></li>
-      <li>Name: <span class="black">{{petInfo.name}}</span></li>
-      <li>Gender: <span class="black">{{petInfo.gender}}</span></li>
-      <li>Size: <span class="black">{{petInfo.size}}</span></li>
-      <li>Breed: <span class="black">{{petInfo.breed}}</span></li>
-      <li>Food exceptions: <span class="black">{{petInfo.food_exceptions != null ? petInfo.food_exceptions : 'none'}}</span></li>
-    </ul>
-    <span>
-      <p>Current status: <span class="black">{{statusString}}</span></p>
-      <button v-if="!changeStatus" @click="changeStatus = !changeStatus">Изменить статус</button>
-    </span>
-    <select v-if="changeStatus" v-model="selectedStatus" >
+    <div class="order-data__id">
+      <span>Order id #{{order.id}}</span>
+      <span v-if="order.comment">Last comment: {{ order.comment }}</span>
+    </div>
+    <div class="order-data__user">
+      <ul>
+        <li>
+          <h3>User's data</h3>
+        </li>
+        <li>
+          Email:
+          <span class="black">{{ order.user.email }}</span>
+        </li>
+        <li>
+          Name:
+          <span class="black">{{ order.user.name }}</span>
+        </li>
+        <li>
+          Phone number:
+          <span class="black">{{ order.user.phone }}</span>
+        </li>
+        <li>
+          Address:
+          <span class="black">{{order.address}}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="order-data__pet" v-if="order.pet != null">
+      <ul>
+        <li>
+          <h3>Pet's data</h3>
+        </li>
+        <!-- <li>Name: <span class="black">{{petInfo.name}}</span></li>
+        <li>Gender: <span class="black">{{petInfo.gender}}</span></li>
+        <li>Size: <span class="black">{{petInfo.size}}</span></li>
+        <li>Breed: <span class="black">{{petInfo.breed}}</span></li>
+        <li>Food exceptions: <span class="black">{{petInfo.food_exceptions != null ? petInfo.food_exceptions : 'none'}}</span></li>-->
+      </ul>
+    </div>
+    <div class="order-data__pet" v-else>
+      <span>No pet info</span>
+    </div>
+    <div class="order-data__status">
+      <span>
+        <p>
+          Current status:
+          <span class="black">{{order.status.title}}</span>
+        </p>
+        <button
+          disabled="true"
+          v-if="!changeStatus"
+          @click="changeStatus = !changeStatus"
+        >Изменить статус</button>
+      </span>
+    </div>
+    <!-- <select v-if="changeStatus" v-model="selectedStatus" >
       <option :disabled="true" value="">Выбор нового статуса</option>
       <option value="0">Новый</option>
       <option value="1">Обрабатывается</option>
       <option value="2">В пути</option>
       <option value="3">Выполнен</option>
       <option value="4">Отменен</option>
-    </select>
-    <button v-if="statusChanged">Отправить изменение</button>
+    </select>-->
+    <!-- <button v-if="statusChanged">Отправить изменение</button> -->
   </div>
 </template>
 
 <script>
 export default {
-  props: ['order'],
+  props: ["order"],
   data() {
     return {
-      selectedStatus: '',
-      changeStatus: false,
-    }
+      selectedStatus: "",
+      changeStatus: false
+    };
   },
   computed: {
     statusChanged() {
-      if (this.selectedStatus != '' && this.selectedStatus != this.statusString) {
-        return true
+      if (
+        this.selectedStatus != "" &&
+        this.selectedStatus != this.statusString
+      ) {
+        return true;
       }
-      return false
+      return false;
     },
     petInfo() {
-      return this.$store.getters['admin/getPetInfo'](this.order.pet_id)
+      return this.$store.getters["admin/getPetInfo"](this.order.pet_id);
     },
     userInfo() {
-      return this.$store.getters['admin/getUserInfo'](this.petInfo.user_id)
+      return this.$store.getters["admin/getUserInfo"](this.petInfo.user_id);
     },
     statusString() {
       switch (this.order.status) {
         case 0: {
-          return 'Новый'
+          return "Новый";
         }
         case 1: {
-          return 'Обрабатывается'
+          return "Обрабатывается";
         }
         case 2: {
-          return 'В пути'
+          return "В пути";
         }
         case 3: {
-          return 'Выполнен'
+          return "Выполнен";
         }
         case 4: {
-          return 'Отменен'
+          return "Отменен";
         }
       }
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  .order-data {
-    // display: flex;
-    // flex-flow: row nowrap;
-    // justify-content: space-evenly;
-    // align-items: center;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    border: 2px solid #2289b5;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    text-align: left;
-    &__id {
-      margin: auto;
-    }
+.order-data {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+  border: 2px solid #2289b5;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+  &__id, &__user, &__pet, &__status {
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    justify-content: center;
   }
+  &__id {
+    text-align: center;
+  }
+}
 
-  ul {
-    list-style-type: none;
-  }
+ul {
+  list-style-type: none;
+}
 
-  .black {
-    color: black;
-    font-weight: 600;
-  }
+.black {
+  color: black;
+  font-weight: 600;
+}
 </style>
