@@ -34,8 +34,8 @@
 
             <Loader v-if="disabled"/>
 
-            <a class="link" @click="recoveryPasswordModal = true">Я не помню пароль</a>
-            <a class="link" @click="toggleRegisterModal = true">Зарегистрироваться</a>
+            <a class="link" @click="toggleRecoveryPasswordModal">Я не помню пароль</a>
+            <a class="link" @click="toggleRegisterModal">Зарегистрироваться</a>
 
         </form>
 
@@ -99,7 +99,13 @@
           }
           this.disabled = false
         }
-      }
+      },
+      toggleRegisterModal () {
+        this.$root.toggleRegisterModal
+      },
+      toggleRecoveryPasswordModal(){
+        this.$MainLayout.recoveryPasswordModal
+      },
     }
   }
 </script>
