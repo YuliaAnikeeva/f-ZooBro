@@ -43,27 +43,24 @@
       <span>No pet info</span>
     </div>
     <div class="order-data__status">
-      <span>
-        <p>
-          Current status:
-          <span class="black">{{order.status.title}}</span>
-        </p>
-        <button
-          disabled="true"
-          v-if="!changeStatus"
-          @click="changeStatus = !changeStatus"
-        >Изменить статус</button>
-      </span>
+      <p>
+        Current status:
+        <span class="black">{{selectedStatus ? statusString : order.status.title}}</span>
+      </p>
+      <button
+        v-if="!changeStatus"
+        @click="changeStatus = !changeStatus"
+      >Изменить статус</button>
+      <select v-if="changeStatus" v-model="selectedStatus">
+        <option :disabled="true" value="false">Выбор нового статуса</option>
+        <option value="1">Новый</option>
+        <option value="2">Обрабатывается</option>
+        <option value="3">В пути</option>
+        <option value="4">Выполнен</option>
+        <option value="5">Отменен</option>
+      </select>
+      <button v-if="statusChanged" @click="updateOrder">Отправить изменение</button>
     </div>
-    <!-- <select v-if="changeStatus" v-model="selectedStatus" >
-      <option :disabled="true" value="">Выбор нового статуса</option>
-      <option value="0">Новый</option>
-      <option value="1">Обрабатывается</option>
-      <option value="2">В пути</option>
-      <option value="3">Выполнен</option>
-      <option value="4">Отменен</option>
-    </select>-->
-    <!-- <button v-if="statusChanged">Отправить изменение</button> -->
   </div>
 </template>
 
@@ -72,15 +69,16 @@ export default {
   props: ["order"],
   data() {
     return {
-      selectedStatus: "",
+      selectedStatus: false,
       changeStatus: false
     };
+  },
+  created() {
   },
   computed: {
     statusChanged() {
       if (
-        this.selectedStatus != "" &&
-        this.selectedStatus != this.statusString
+        this.changeStatus && this.selectedStatus != this.order.status_id
       ) {
         return true;
       }
@@ -93,23 +91,38 @@ export default {
       return this.$store.getters["admin/getUserInfo"](this.petInfo.user_id);
     },
     statusString() {
-      switch (this.order.status) {
-        case 0: {
-          return "Новый";
+      switch (this.selectedStatus) {
+        case '1': {
+          return 'Новый'
         }
-        case 1: {
-          return "Обрабатывается";
+        case '2': {
+          return 'Обрабатывается'
         }
-        case 2: {
-          return "В пути";
+        case '3': {
+          return 'В пути'
+        }        
+        case '4': {
+          return 'Выполнен'
         }
-        case 3: {
-          return "Выполнен";
+        case '5': {
+          return 'Отменен'
         }
-        case 4: {
-          return "Отменен";
+        default: {
+          return 'Что-то пошло не так'
         }
       }
+    }
+  },
+  methods: {
+    updateOrder() {
+      this.order.status_id = this.selectedStatus
+      this.order.comment = 'updated by admin'
+      this.$store.dispatch('admin/updateOrder', this.order)
+        .then(res => {
+          if (res) {
+            this.changeStatus = false
+          }
+        })
     }
   }
 };
@@ -123,7 +136,10 @@ export default {
   border-radius: 10px;
   margin-bottom: 10px;
   text-align: left;
-  &__id, &__user, &__pet, &__status {
+  &__id,
+  &__user,
+  &__pet,
+  &__status {
     display: flex;
     flex-flow: column;
     align-content: center;
@@ -131,6 +147,13 @@ export default {
   }
   &__id {
     text-align: center;
+  }
+  button {
+    margin-top: 15px;
+    width: 50%;
+  }
+  select {
+    width: 75%;
   }
 }
 

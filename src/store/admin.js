@@ -24,21 +24,45 @@ const admin = {
   },
   actions: {
     async fetchOrders({ commit, rootGetters }, payload) {
+      let route = false
+
+      if (payload) {
+        route = `/v1/orders-admin?expand=pet,status,user&status_id=${payload}`
+      }
+
       const fetchData = {
         token: rootGetters.token,
         method: 'GET',
-        route: '/v1/orders-admin?expand=pet,status,user'
+        route: route ? route : '/v1/orders-admin?expand=pet,status,user'
       }
+
       createFetch(fetchData)
         .then(res => {
           if (!res.status) {
             commit('saveErrorMsg', res.message)
           }
 
-          commit('fillStateFromFetch', res.data)
+          if (res.status) {
+            commit('fillStateFromFetch', res.data)
+          }
           
           return res.status
         });
+    },
+    async updateOrder({ commit, rootGetters }, payload) {
+      const fetchData = {
+        token: rootGetters.token,
+        method: 'POST',
+        route: '/v1/orders/update'
+      }
+
+      return createFetch(fetchData, payload)
+        .then(res => {
+          if (!res.status) {
+            commit('saveErrorMsg', res.message)
+          }
+          return res.status
+        })
     }
   },
   getters: {
