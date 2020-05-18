@@ -29,7 +29,7 @@ const pet = {
           }
 
           if (!res.status) {
-            commit('saveErr', res.payload)
+            commit('saveErr', res.message)
           }
 
           return res.status
@@ -52,37 +52,11 @@ const pet = {
           }
 
           if (!res.status) {
-            commit('saveErr', res.payload)
+            commit('saveErr', res.message)
           }
 
           return res.status
         })
-
-      // return fetch(`${URL}/v1/pets`, {
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //     "Access-Control-Allow-Origin": "*",
-      //     "Access-Control-Allow-Headers": "*",
-      //     Authorization: rootGetters.token
-      //   },
-      //   method: "POST",
-      //   mode: "cors",
-      //   body: JSON.stringify(payload)
-      // })
-      //   .then(response => {
-      //     return response.json();
-      //   })
-      //   .then(json => {
-      //     const { status } = json;
-      //     if (status === 1) {
-      //       return true;
-      //     }
-      //   })
-      //   .catch(err => {
-      //     console.error("ERROR -> " + err);
-      //     return false;
-      //   });
     },
     async updatePet({rootGetters}, payload) {
       if (!payload.id) {
