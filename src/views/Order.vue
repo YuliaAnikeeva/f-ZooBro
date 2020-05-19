@@ -70,7 +70,7 @@
 
             <transition name="translate">
                 <div class="abs" v-if="step === 'step-4'">
-                    <p>данные отправлены...</p>
+                    <SuccessOrder :order="order" />
                 </div>
             </transition>
 
@@ -85,6 +85,7 @@
   import Step1 from '../components/onboarding/orderSteps/Step1'
   import Step2 from '../components/onboarding/orderSteps/Step2'
   import Step3 from '../components/onboarding/orderSteps/Step3'
+  import SuccessOrder from '../components/onboarding/orderSteps/SuccessOrder'
   import Loader from '../components/Loader'
 
   export default {
@@ -93,6 +94,7 @@
       Step1,
       Step2,
       Step3,
+      SuccessOrder,
       ProgresBar,
       Loader,
     },
