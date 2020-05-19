@@ -119,11 +119,9 @@ export default {
       color: black;
     }
     p:first-child {
-      width: 40%;
       margin-left: 15px;
     }
     ul {
-      width: 30%;
       list-style-type: none;
     }
   }
