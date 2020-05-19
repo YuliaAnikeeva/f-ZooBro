@@ -183,6 +183,23 @@ flex-direction: column;
     animation: wobble-error 0.8s both;
 }
 
+.iconPassowordHide{
+    width: 24px;
+  height: 24px;
+   background-repeat: no-repeat;
+background-image: url(../assets/passHide.svg);
+background-position-y: center;
+}
+
+.iconPassowordShow{
+    width: 24px;
+  height: 24px;
+   background-repeat: no-repeat;
+background-image: url(../assets/passShow.svg);
+background-position-y: center;
+}
+
+
 @keyframes wobble-error {
     0%,
     100% {
