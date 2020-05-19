@@ -88,6 +88,7 @@
             </button>
         </div>
 
+
     </div>
 </template>
 
@@ -97,6 +98,7 @@
   import Step1 from '../components/onboarding/orderSteps/Step1'
   import Step2 from '../components/onboarding/orderSteps/Step2'
   import Step3 from '../components/onboarding/orderSteps/Step3'
+  import SuccessOrder from '../components/onboarding/orderSteps/SuccessOrder'
   import Loader from '../components/Loader'
 
   export default {
@@ -105,6 +107,7 @@
       Step1,
       Step2,
       Step3,
+      SuccessOrder,
       ProgresBar,
       Loader,
     },
