@@ -1,16 +1,20 @@
 <template>
   <div class="card">
     <img src="@/assets/default-avatar.png" alt />
-    <span>{{ nameString + this.pet.name }}</span>
-    <span>Размер: {{ sizeString }}</span>
-    <span v-if="pet.breed != null">Порода: {{ pet.breed }}</span>
-    <span v-else>Порода не указана :(</span>
+    <span class="card__name">
+      <p>{{ this.pet.name }}</p>
+      <p>Edit data</p>  
+    </span> 
+    <span>Порода:</span>
+    <span>{{ pet.breed }}</span>
+    <span>Дата рождения:</span>
     <span>{{ yearsOldString }}</span>
-    <span
-      v-if="pet.food_exceptions != 'null' && pet.food_exceptions != ''"
-    >Не любит: {{ pet.food_exceptions }}</span>
-    <span v-else>Ест всё! :)</span>
-    <button @click="updatePet()">Изменить пол собаки О_О</button>
+    <span>Пол:</span>
+    <span>{{ pet.gender }}</span>
+    <span>Размер:</span>
+    <span>{{ sizeString }}</span>
+    <span>Аллергия:</span>
+    <span>{{ pet.food_exceptions }}</span>
   </div>
 </template>
 
@@ -84,19 +88,43 @@ export default {
 
 <style lang="scss" scoped>
 .card {
+  // display: flex;
+  // flex-flow: column nowrap;
+  // justify-content: flex-start;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  background-color: #f2f3f7;
-  border: 2px solid #2289b5;
-  margin-bottom: 10px;
-  img {
-    height: 100px;
-    background: #c4c4cc;
-    border-radius: 50%;
-    padding: 5px;
+  grid-template-areas: 
+  "avatar name"
+  "breed breed_text"
+  "dob dob_text"
+  "gender gender_text"
+  "size size_text"
+  "food food_text"
+  ;
+  grid-template-columns: 50%;
+  grid-gap: 20px;
+  background: #FBFBFB;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  margin-bottom: 40px;
+  padding: 40px;
+  font-size: 16px;
+  &__name {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    // align-items: center;
   }
   span {
-    margin: auto;
+    margin-bottom: 20px;
+    text-align: left;
+  
+  }
+  img {
+    height: 100px;
+    background: #c4c4c4;
+    border-radius: 50%;
+    padding: 10px;
+    
   }
 }
 </style>
