@@ -1,7 +1,8 @@
 <template>
     <form @submit.prevent="submitHandler" class="form_small">
         <div class="form-section">
-            <div class="form-group">
+
+            <div :class="{ 'field--error wobble-error': $v.pet_name.$error }"  class="form-group">
                 <label class="form-group__label">Имя питомца</label>
                 <div class="form-group__content">
                     <div class="input">
@@ -14,6 +15,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="form-group__label">Порода</label>
                 <div class="form-group__content">
@@ -46,7 +48,8 @@
             </div>
         </div>
         <div class="form-section">
-            <div class="form-group">
+
+            <div :class="{ 'field--error wobble-error': $v.gender.$error }"  class="form-group">
                 <label class="form-group__label">Пол питомца</label>
                 <div class="form-group__content">
                     <div class="radio-group">
@@ -70,7 +73,8 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+
+            <div :class="{ 'field--error wobble-error': $v.size.$error }"  class="form-group">
                 <label class="form-group__label">Размер питомца</label>
                 <div class="form-group__content">
                     <div class="radio-group">
@@ -99,6 +103,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="form-group__label">Аллергия</label>
                 <div class="form-group__content">
@@ -190,6 +195,7 @@
 
 <style lang="scss" scoped>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+    @import "@/assets/styles/_forms.scss";
 
     .buttons {
         width: 100%;
@@ -345,6 +351,7 @@
 
             & .error {
                 padding: 5px 5px;
+                display: flex;
             }
         }
     }
@@ -382,7 +389,6 @@
         &__control {
             border: none;
             outline: none;
-            font-style: normal;
             padding: 10px 5px;
             width: 100%;
             box-sizing: border-box;
