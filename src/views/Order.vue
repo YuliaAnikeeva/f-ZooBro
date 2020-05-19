@@ -1,8 +1,12 @@
 <template>
     <div class="container">
-        <h1 class="title">Оформление заявки</h1>
+        <template v-if="step !== 'step-4'">
+            <h1 class="title">Оформление заявки</h1>
 
-        <ProgresBar v-model="step"/>
+            <ProgresBar v-model="step"/>
+        </template>
+
+
 
 
         <!--<p>-->
@@ -58,14 +62,13 @@
             <div :class="{ abs: step !== 'step-4' }">
                 <transition name="translate">
                     <div v-if="step === 'step-4'">
-                        <p>данные отправлены...</p>
+                        <SuccessOrder order="order"/>
                     </div>
                 </transition>
             </div>
         </div>
 
-
-        <div class="onboarding-buttons">
+        <div  v-if="step !== 'step-4'" class="onboarding-buttons">
 
             <div v-if="step === 'step-1'"></div>
             <button v-else class="onboarding-button onboarding-button_secondary" @click="()=>updateE(-1)" :disabled="loading">
@@ -270,7 +273,7 @@
     }
 
     .container {
-        width: 940px;
+        max-width: 940px;
         margin: 0 auto;
     }
 
