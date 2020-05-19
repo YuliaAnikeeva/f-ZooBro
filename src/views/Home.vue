@@ -86,8 +86,8 @@
               <p class="what-in-box__content-text-text">Это очень полезно пожевать после еды, вместо чистки зубов. С ними у тебя будет сильная челюсть и свежее дыхание - можно чаще целовать хозяина</p>
             </div>
           </div>
-          <div class="what-in-box__content-image">
-            <img src="../assets/what-in-box_content.png" alt="what-in-box image" />
+          <div class="what-in-box__content-image-container">
+            <div class="what-in-box__content-image"></div>
           </div>
           <div class="what-in-box__content">
             <div class="what-in-box__content-text">
@@ -272,12 +272,10 @@
 </template>
 
 <script>
-
-
 export default {
-  name: "Home",
+  name: 'Home',
   metaInfo: {
-    title: "Home"
+    title: 'Home'
   },
   data: () => ({
     answerFirst: true,
@@ -286,7 +284,7 @@ export default {
     answerFourth: true
   }),
   components: {}
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -338,7 +336,9 @@ main {
     }
   }
 }
-.paw {
+
+
+  .paw {
   display: block;
   fill: #FAFAFA;
 
@@ -346,52 +346,52 @@ main {
     width: 25px;
     height: 20px;
   }
-}
-// .arrow {
-//     display: grid;
-//     height: 100%;
-//     align-items: center;
+  }
+  // .arrow {
+  //     display: grid;
+  //     height: 100%;
+  //     align-items: center;
 
-//   &__content {
-//     position: relative;
-//     margin-bottom: 100px;
-//     display: block;
-//     width: 160px;
-//     height: 0px;
-//     border-top: 1px solid #000000;
-//     box-sizing: border-box;
+  //   &__content {
+  //     position: relative;
+  //     margin-bottom: 100px;
+  //     display: block;
+  //     width: 160px;
+  //     height: 0px;
+  //     border-top: 1px solid #000000;
+  //     box-sizing: border-box;
 
-//     &_rotate30 {
-//       transform: rotate(30deg);
-//     }
-//     &_rotate-30 {
-//       transform: rotate(-30deg);
-//     }
-//   }
-//   &__content::after {
-//     content: '';
-//     position: absolute;
-//     width: 22px;
-//     height: 1px;
-//     top: -8.5px;
-//     right: -3px;
-//     background-color: #000;
-//     transform: rotate(45deg);
-//   }
-//   &__content::before {
-//     content: '';
-//     position: absolute;
-//     width: 22px;
-//     height: 1px;
-//     top: 6.7px;
-//     right: -3px;
-//     background-color: #000;
-//     transform: rotate(-45deg);
-//   }
+  //     &_rotate30 {
+  //       transform: rotate(30deg);
+  //     }
+  //     &_rotate-30 {
+  //       transform: rotate(-30deg);
+  //     }
+  //   }
+  //   &__content::after {
+  //     content: '';
+  //     position: absolute;
+  //     width: 22px;
+  //     height: 1px;
+  //     top: -8.5px;
+  //     right: -3px;
+  //     background-color: #000;
+  //     transform: rotate(45deg);
+  //   }
+  //   &__content::before {
+  //     content: '';
+  //     position: absolute;
+  //     width: 22px;
+  //     height: 1px;
+  //     top: 6.7px;
+  //     right: -3px;
+  //     background-color: #000;
+  //     transform: rotate(-45deg);
+  //   }
 
-// }
+  // }
 
-.bg-content {
+  .bg-content {
   position: fixed;
   z-index: 5;
   &__paw {
@@ -422,9 +422,9 @@ main {
     left: 0;
     top: 70vh
   }
-}
+  }
 
-.order-button {
+  .order-button {
   display: grid;
   justify-content: center;
 
@@ -448,8 +448,8 @@ main {
     color: $default-text-color;
     width: max-content;
   }
-}
-.block {
+  }
+  .block {
   &__head {
     display: grid;
     justify-content: center;
@@ -554,28 +554,29 @@ main {
     width: 100%;
     position: relative;
     &_yelow-bone {
-      width: max-content;
       position: absolute;
-      left: -16vh;
-      top: 5vh;
+      width: max-content;
+      left: -150px;
+      top: 30px;
       z-index: 100;
     }
     &_dog {
       position: absolute;
       width: max-content;
-      left: -9vh;
-      top: 35vh;
+      left: -80px;
+      top: 280px;
       z-index: 101;
     }
   }
 }
 
 .how-work {
-  padding: 301px 365px 150px;
+  padding: 301px 0 150px;
   display: grid;
   grid-template-rows: max-content max-content 1fr;
   grid-template-columns: 100%;
   align-items: center;
+  justify-items: center ;
   background: #fff;
   row-gap: 80px;
   &__arrow-container {
@@ -650,11 +651,13 @@ main {
 
 .what-in-box {
   display: grid;
+  grid-template-columns: 77%;
+  justify-content: center;
   grid-template-rows: max-content max-content;
   width: 100%;
   background: url('../assets/what-in-box_bg.svg');
   box-sizing: border-box;
-  padding: 120px 240px 93px;
+  padding: 120px 0 93px;
 
   &__head {
     display: grid;
@@ -674,8 +677,7 @@ main {
   }
   &__container {
     display: grid;
-    grid-template-columns: 22% 50% 22%;
-    column-gap: 2em;
+    grid-template-columns: 24% 50% 24%;
     margin-bottom: 70px;
     z-index: 6;
     justify-content: center;
@@ -693,9 +695,18 @@ main {
   &__content-text:last-child {
     align-content: flex-end;
   }
-  &__content-image {
+  &__content-image-container {
+    position: relative;
+    padding: 120px 0 0 0;
     display: grid;
     align-items: center;
+  }
+  &__content-image {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    background: url('../assets/what-in-box_content.png') no-repeat;
+    background-size: contain;
   }
   &__content-head {
     width: 100%;
@@ -992,5 +1003,19 @@ main {
     opacity: 0;
   }
 }
-
+@media screen and (max-width: 1440px) {
+  .social-mission {
+    &__container {
+      grid-template-columns: 50%;
+      justify-items: center;
+      row-gap: 10px;
+    }
+    &__content {
+      width: 685px;
+      justify-self: center;
+    }
+    &__content-image {
+    }
+  }
+}
 </style>
