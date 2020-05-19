@@ -27,13 +27,13 @@ const admin = {
       let route = false
 
       if (payload) {
-        route = `/v1/orders-admin?expand=pet,status,user&status_id=${payload}`
+        route = `/v1/orders-admin?sort=-id&expand=pet,status,user&status_id=${payload}`
       }
 
       const fetchData = {
         token: rootGetters.token,
         method: 'GET',
-        route: route ? route : '/v1/orders-admin?expand=pet,status,user'
+        route: route ? route : '/v1/orders-admin?sort=-id&expand=pet,status,user'
       }
 
       createFetch(fetchData)
