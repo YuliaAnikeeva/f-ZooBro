@@ -45,7 +45,7 @@
         <template>
             <vue-modaltor
                     :visible="loginModal"
-                    :resize-width='{1920:"440px",940:"90%"}'
+                    :resize-width='{1920:"440px",940:"46.8%"}'
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="loginModal = false">
@@ -54,7 +54,7 @@
 
             <vue-modaltor
                     :visible="registerModal"
-                    :resize-width='{1920:"440px",940:"90%"}'
+                    :resize-width='{1920:"440px",940:"46.8%"}'
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="registerModal = false">
@@ -64,7 +64,7 @@
             <vue-modaltor
                     :visible="recoveryPasswordModal"
                     
-                    :resize-width='{1920:"440px",940:"90%"}'
+                    :resize-width='{1920:"440px",940:"46.8%"}'
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="recoveryPasswordModal = false">

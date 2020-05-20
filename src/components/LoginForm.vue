@@ -37,11 +37,11 @@
 
             <button :disabled="disabled" class="button" type="submit">Войти</button>
 
-            <Loader v-if="disabled"/>
+            
 
             <a class="link_recovery" @click="toggleRecoveryPasswordModal">Я не помню пароль</a>
             <p class="link_noacc"> Нет аккаунта? <a class="link_reg" @click="toggleRegisterModal"> Создать </a></p>
-
+<Loader  v-if="disabled"/>
         </form>
  
 
