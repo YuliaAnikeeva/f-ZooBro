@@ -1,36 +1,30 @@
 <template>
   <div id="profile">
+    <div id="profile-header">
+      <h2>Личный кабинет</h2>
+    </div>
     <div id="profile-nav">
       <ul id="profile-nav-tabs">
-        <li v-on:click="changeTab('pets')" class="active-tab" id="pets">
-          Pets
-        </li>
-        <li v-on:click="changeTab('orders')" id="orders">
-          Orders
-        </li>
-        <li v-on:click="changeTab('settings')" id="settings">
-          Settings
-        </li>
-        <li v-on:click="changeTab('exit')" id="exit">
-          Exit
-        </li>
+        <li v-on:click="changeTab('pets')" class="active-tab" id="pets">Питомцы</li>
+        <li v-on:click="changeTab('settings')" id="settings">Хозяин</li>
+        <li v-on:click="changeTab('orders')" id="orders">Заказы</li>
       </ul>
     </div>
-    <div id="profile-header">
-      <h2>{{headerText}}</h2>
-    </div>
+
     <div v-if="activeTab == 'pets' && pets.length > 1" id="profile-pets">
       <Loader v-if="pets.length < 1" />
-      <PetCard 
-        v-for="(pet, index) in pets" 
-        :key="index" 
-        :pet="pet" />
+      <PetCard v-for="(pet, index) in pets" :key="index" :pet="pet" />
       <button disabled="disabled" @click="createDefaultPet()">Создание дефолтного питомца</button>
     </div>
+
+    <div v-if="activeTab == 'settings'" id="profile-settings">
+      <SettingsCard :profile="profileData" />
+      <button>Изменить</button>
+    </div>
+
     <div v-if="activeTab == 'orders'" id="profile-orders">
       <OrderCard v-for="(orderId, index) in orders" :key="index" :orderId="orderId" />
     </div>
-    <SettingsCard :profile="userInfo" v-if="activeTab == 'settings'" id="profile-settings" />
   </div>
 </template>
 
@@ -48,11 +42,6 @@ export default {
   components: { PetCard, OrderCard, SettingsCard, Loader },
   data() {
     return {
-      userInfo: {
-        email: "test@test.test",
-        phone: "2-123-141-32-31",
-        address: "Moscow Pushkin st 8 rqwead fdsfasf"
-      },
       pets: [],
       orders: [3, 5, 7, 12, 44],
       disabled: true,
@@ -110,20 +99,31 @@ export default {
           return "Что-то пошло не так";
           break;
       }
+    },
+    profileData() {
+      return this.$store.getters["user/userInfo"];
     }
   },
   beforeMount() {
     if (this.pets.length == 0) {
-      this.fetchPets()
+      this.fetchPets();
     }
-  },
+    this.$store.dispatch("order/fetchOrdersList");
+    this.$store.dispatch("user/fetchUserInfo");
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css2?family=Montserrat");
+
 #profile {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   display: grid;
-  grid-gap: 1vw;
+  grid-gap: 80px;
+  padding-right: 12.5%;
+  padding-left: 12.5%;
   grid-template-areas:
     "header"
     "nav"
@@ -132,7 +132,6 @@ export default {
   &-nav {
     height: 100%;
     grid-area: nav;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     &-tabs {
       display: flex;
       flex-flow: row nowrap;
@@ -141,15 +140,26 @@ export default {
       padding: 0;
       list-style-type: none;
       li {
+        border-left: 1px solid #2289b5;
+        border-top: 1px solid #2289b5;
+        border-bottom: 1px solid #2289b5;
         height: 40px;
-        font-size: 25px;
-        padding: 10px;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 22px;
+        padding: 19px 97px;
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
+        transition: 0.5s linear all;
+        &:last-child {
+          border-right: 1px solid #2289b5;
+        }
         &:hover {
-          background-color: #f2f3f7;
           cursor: pointer;
+          transition: 0.5s linear all;
+          background-color: rgba(34, 137, 181, 0.7);
+          color: white;
         }
         svg {
           height: 40px;
@@ -161,35 +171,55 @@ export default {
   }
   &-header {
     grid-area: header;
-    margin-top: 10px;
+    margin-top: 85px;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 44px;
+    color: #464451;
   }
   &-pets,
   &-orders {
     grid-area: block;
     overflow-x: scroll;
-    margin-right: 15px;
   }
   &-pets {
+    display: grid;
+    grid-gap: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(23vw, 1fr));
+  }
+  &-settings {
     display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    div {
-      width: 22.9%;
-      margin-right: 60px;
-      &:nth-child(3n+3) {
-        margin-right: 0;
+    margin-left: 13vw;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    button {
+      margin-top: 80px;
+      max-width: 13vw;
+      outline: none;
+      padding: 15px 67px;
+      font-weight: 600;
+      font-size: 21px;
+      line-height: 26px;
+      color: #464451;
+      background: #ffffff;
+      border: 1px solid #464451;
+      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      transition: 0.5s linear all;
+      &:hover {
+        transition: 0.5s linear all;
+        cursor: pointer;
+        background: #c5c5c5;
       }
     }
   }
   &-orders {
-    width: 85%;
-    overflow-y: scroll;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
     div:nth-child(even) {
       background: #f2f3f7;
     }
-  }
-  &-settings {
-    width: 85%;
   }
 }
 
@@ -204,8 +234,8 @@ textarea {
 }
 
 .active-tab {
-  background-color: #f2f3f7;
-  border-top: 1px solid #d3d4d7;
-  border-bottom: 1px solid #d3d4d7;
+  background-color: #2289b5;
+  color: white;
+  transition: 0.2s linear all;
 }
 </style>

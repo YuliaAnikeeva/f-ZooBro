@@ -130,7 +130,7 @@ export default {
           return "сука";
         }
         case "m": {
-          return "кабель";
+          return "кобель";
         }
       }
     },
