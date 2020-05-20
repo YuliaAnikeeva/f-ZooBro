@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img src="@/assets/default-avatar.png" alt />
+    <img src="@/assets/profile-pic/default-avatar.png" alt='default avatar' />
     <span class="card__name">
       <p>{{ this.pet.name }}</p>
       <p class="edit">Изменить данные</p>  
@@ -142,6 +142,8 @@ export default {
     position: relative;
     outline: none;
     border: 0;
+    margin-left: 17px;
+    margin-right: 17px;
     transition: 0.2s linear all;
     svg {
       position: absolute;
