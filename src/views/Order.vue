@@ -62,7 +62,7 @@
             <div :class="{ abs: step !== 'step-4' }">
                 <transition name="translate">
                     <div v-if="step === 'step-4'">
-                        <SuccessOrder order="order"/>
+                        <SuccessOrder :order="order" @new="resetOrderHandler" />
                     </div>
                 </transition>
             </div>
@@ -124,10 +124,11 @@
       loading: false,
       enableValidation: true,
     }),
-    validations () {
-      return { ...this.v }
-    },
     methods: {
+      resetOrderHandler() {
+        this.order = {}
+        this.step = this.steps[0]
+      },
       onClick (e) {
         this.coords = e.get('coords')
       },
@@ -150,9 +151,13 @@
         if (this.step === 'step-3') {
           this.loading = true
           this.$store.dispatch('order/createOrder', this.order)
-            .then(isSuccess => {
+            .then(resp => {
               this.loading = false
-              if (isSuccess) {
+              if (resp) {
+                this.order = {
+                  ...this.order,
+                  id: resp.id
+                }
                 this.updateE(1)
               }
             })
