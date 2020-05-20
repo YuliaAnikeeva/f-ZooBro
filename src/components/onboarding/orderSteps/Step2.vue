@@ -2,11 +2,20 @@
     <form @submit.prevent="submitHandler" class="form_small">
         <div class="form-section">
 
-            <div :class="{ 'field--error wobble-error': $v.pet_name.$error }"  class="form-group">
+            <div :class="{ 'field--error wobble-error': $v.pet_name.$error }" class="form-group">
                 <label class="form-group__label">Имя питомца</label>
                 <div class="form-group__content">
                     <div class="input">
                         <input type="text" class="input__control" v-model="pet_name"/>
+                        <div class="input__dropdown" v-if="pets.length">
+                            <div v-for="(el, idx) in pets" class="input__dropdown-option"
+                                 :key="idx"
+                                 @click="()=>{updatePet(el.id)}"
+                            >
+                                {{el.name}}
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="form-group__helper">
@@ -49,7 +58,7 @@
         </div>
         <div class="form-section">
 
-            <div :class="{ 'field--error wobble-error': $v.gender.$error }"  class="form-group">
+            <div :class="{ 'field--error wobble-error': $v.gender.$error }" class="form-group">
                 <label class="form-group__label">Пол питомца</label>
                 <div class="form-group__content">
                     <div class="radio-group">
@@ -67,14 +76,14 @@
                 </div>
                 <div class="form-group__helper">
                     <div class="form-group__errors">
-                      <div class="form-group__errors">
-                        <div class="error" v-if="$v.gender.$dirty && !$v.gender.required">Выберите пол питомца</div>
-                      </div>
+                        <div class="form-group__errors">
+                            <div class="error" v-if="$v.gender.$dirty && !$v.gender.required">Выберите пол питомца</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div :class="{ 'field--error wobble-error': $v.size.$error }"  class="form-group">
+            <div :class="{ 'field--error wobble-error': $v.size.$error }" class="form-group">
                 <label class="form-group__label">Размер питомца</label>
                 <div class="form-group__content">
                     <div class="radio-group">
@@ -99,7 +108,7 @@
                 </div>
                 <div class="form-group__helper">
                     <div class="form-group__errors">
-                      <div class="error" v-if="$v.size.$dirty && !$v.size.required">Выберите размер питомца</div>
+                        <div class="error" v-if="$v.size.$dirty && !$v.size.required">Выберите размер питомца</div>
                     </div>
                 </div>
             </div>
@@ -162,13 +171,16 @@
     computed: {
       ...(() => {
         let o = {}
-        let f = ["pet_name", "gender", "size", "breed", "birthday_date", "birthday_years", "food_exceptions"]
-        f.forEach( n => o[[n]] = {
+        let f = ['pet_name', 'gender', 'size', 'breed', 'birthday_date', 'birthday_years', 'food_exceptions', 'pet_id']
+        f.forEach(n => o[[n]] = {
           get () {
             return this.order[n]
           },
           set (val) {
-            this.$emit('update:order', { ...this.order, [n]: val })
+            this.$emit('update:order', {
+              ...this.order,
+              [n]: val
+            })
           }
         })
         return o
@@ -188,6 +200,41 @@
         } else {
           return []
         }
+      },
+      pets () {
+        const pets = this.$store.getters['pet/petList']
+
+        if (this.pet_name && this.pet_name.trim().length > 0 && !this.pet_id) {
+          const condidate = pets.filter(el => el.name.toLowerCase().indexOf(this.pet_name.toLowerCase()) !== -1)
+          if (condidate.length === 1 && condidate[0] === this.pet_name.trim()) {
+            return []
+          } else {
+            return condidate
+          }
+        } else {
+          return []
+        }
+      },
+    },
+    methods: {
+      updatePet (pet_id) {
+
+        const pet = this.pets.filter(el => el.id === pet_id)[0]
+        const { birthday_date, birthday_years, breed, food_exceptions, gender, id, name, size } = pet
+        this.pet_name = name
+
+        this.$emit('update:order', {
+          ...this.order,
+          pet_name: name,
+          gender,
+          size,
+          breed,
+          birthday_date,
+          birthday_years,
+          food_exceptions,
+          pet_id: id,
+        })
+
       },
     },
   }

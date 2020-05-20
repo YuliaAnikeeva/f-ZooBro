@@ -49,7 +49,7 @@ const order = {
       .then(({status, payload}) => {
         console.log('createOrder', {status, payload})
         if (status) {
-          return true
+          return payload
         } else {
           commit('clearSnackbar', null , { root: true })
           commit('setSnackbarMsg', payload, { root: true })
