@@ -20,7 +20,10 @@
                 <div class="input-block">
                     <input type="password" v-model="password" :disabled="disabled" v-show="!showPassword" required>
                     <input type="text" v-model="password" :disabled="disabled" v-show="showPassword" required>
-                   
+                   <div class="buttonShowPassword" @click="showPassword=!showPassword" >
+                      <div class="iconPassowordShow" v-show="showPassword"></div>
+                      <div class="iconPassowordHide" v-show="!showPassword"></div>
+                    </div>
                     <label>Пароль</label>
                 </div>
                 <div class="error_block">
@@ -36,14 +39,11 @@
 
             <Loader v-if="disabled"/>
 
-            <a class="link" @click="toggleRecoveryPasswordModal">Я не помню пароль</a>
-            <a class="link" @click="toggleRegisterModal">Зарегистрироваться</a>
+            <a class="link_recovery" @click="toggleRecoveryPasswordModal">Я не помню пароль</a>
+            <p class="link_noacc"> Нет аккаунта? <a class="link_reg" @click="toggleRegisterModal"> Создать </a></p>
 
         </form>
- <button class="buttonShowPassword" @click="showPassword=!showPassword" >
-                      <div class="iconPassowordShow" v-show="showPassword"></div>
-                      <div class="iconPassowordHide" v-show="!showPassword"></div>
-                    </button>
+ 
 
     </div>
     </div>
@@ -121,16 +121,6 @@
 @import "../assets/variables.scss";
 @import "../assets/styles/_forms.scss";
 
-.buttonShowPassword{
-  width: 24px;
-  height: 24px;
- background: transparent;
-  position: absolute;
-  background-repeat: no-repeat;
-  right: calc(100% - 375px);
-  top: 40%;
-  border: none;
-  padding: 0;
-}
+
 
 </style>
