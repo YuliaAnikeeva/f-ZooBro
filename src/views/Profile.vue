@@ -23,7 +23,21 @@
     </div>
 
     <div v-if="activeTab == 'orders'" id="profile-orders">
-      <OrderCard v-for="(orderId, index) in orders" :key="index" :orderId="orderId" />
+      <table>
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>Номер</th>
+            <th>Для кого</th>
+            <th>Вид покупки</th>
+            <th>Статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          <OrderCard v-for="(order, index) in ordersList" :key="index" :order="order" />
+        </tbody>
+      </table>
+      <!-- <OrderCard :orders="ordersList" /> -->
     </div>
   </div>
 </template>
@@ -102,6 +116,9 @@ export default {
     },
     profileData() {
       return this.$store.getters["user/userInfo"];
+    },
+    ordersList() {
+      return this.$store.getters["order/getOrdersList"].reverse();
     }
   },
   beforeMount() {
@@ -182,6 +199,11 @@ export default {
     grid-area: block;
     overflow-x: scroll;
   }
+  &-settings,
+  &-orders {
+    margin-left: 13vw;
+    margin-right: 13vw;
+  }
   &-pets {
     display: grid;
     grid-gap: 50px;
@@ -189,7 +211,6 @@ export default {
   }
   &-settings {
     display: flex;
-    margin-left: 13vw;
     flex-flow: column nowrap;
     justify-content: flex-start;
     button {
@@ -214,11 +235,28 @@ export default {
     }
   }
   &-orders {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    div:nth-child(even) {
-      background: #f2f3f7;
+    table {
+      display: grid;
+      grid-template-columns:
+        minmax(150px, 1fr)
+        minmax(150px, 0.33fr)
+        minmax(150px, 1.67fr)
+        minmax(150px, 1.67fr)
+        minmax(150px, 1.67fr);
+      // minmax(150px, 3.33fr)
+    }
+    thead,
+    tbody,
+    tr {
+      display: contents;
+    }
+    th {
+      text-align: left;
+      padding-left: 5px;
+      font-size: 12px;
+      line-height: 15px;
+      color: #8b8a95;
+      margin-bottom: 30px;
     }
   }
 }

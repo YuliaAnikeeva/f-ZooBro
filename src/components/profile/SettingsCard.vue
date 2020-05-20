@@ -55,6 +55,9 @@ export default {
     }
     img {
       grid-area: photo;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     span {
       display: flex;
