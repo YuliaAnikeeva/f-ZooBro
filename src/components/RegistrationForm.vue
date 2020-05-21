@@ -16,6 +16,8 @@
         </div>
         </div>
           <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
+            <div class="instruction-reg">На Вашу электронную почту отправлен пароль. <br>
+Пожалуйста, введите его в поле ниже.</div>
                 <div class="input-block">
                     
                     <input type="password" v-model="password" :disabled="disabled" v-show="!showPassword" required>
@@ -34,6 +36,9 @@
                         }} символов
                     </div>
                 </div>
+                <div class="instruction-reg2">Не получили пароль? Проверье папку Спам 
+или отправьте<a class="link_reg" @click="onSubmit"> Создать </a></div>
+                
             </div>
         <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.email.required && $v.password.required && $v.check.required}" type="submit">Далее</button>
                  <p class="link_noacc"> Уже есть аккаунт?<a class="link_reg" @click="toggleLoginModal"> Войти </a></p>

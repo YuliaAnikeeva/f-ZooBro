@@ -110,7 +110,7 @@
       toggleRegisterModal () {
         this.$router.toggleRegisterModal
       },
-      toggleRecoveryPasswordModal(){
+      toggloveryPasswordModal(){
         this.$router.recoveryPasswordModal
       },
     }
