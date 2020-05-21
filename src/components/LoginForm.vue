@@ -7,7 +7,7 @@
 
             <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error}">
                 <div class="input-block">
-                    <input v-model="email" :disabled="disabled" required>
+                    <input v-model="email" autocomplete="email" :disabled="disabled" required>
                     <label>Адрес электронной почты</label>
                 </div>
                 <div class="error_block">
@@ -20,10 +20,11 @@
                 <div class="input-block">
                     <input type="password" v-model="password" :disabled="disabled" v-show="!showPassword" required>
                     <input type="text" v-model="password" :disabled="disabled" v-show="showPassword" required>
-                   <div class="buttonShowPassword" @click="showPassword=!showPassword" >
-                      <div class="iconPassowordShow" v-show="showPassword"></div>
-                      <div class="iconPassowordHide" v-show="!showPassword"></div>
-                    </div>
+                    <button class="buttonShowPassword" @click="showPassword=!showPassword">
+                      <div class="iconPassowrdShow" v-show="!showPassword"></div>
+                      <div class="iconPassowrdHide" v-show="showPassword"></div>
+                    </button>
+
                     <label>Пароль</label>
                 </div>
                 <div class="error_block">
@@ -35,15 +36,14 @@
                 </div>
             </div>
 
-            <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.email.required && $v.password.required}" type="submit">Войти</button>
+            <button :disabled="disabled" class="button" type="submit">Войти</button>
 
-            
+            <Loader v-if="disabled"/>
 
-            <a class="link_recovery" @click="toggleRecoveryPasswordModal">Я не помню пароль</a>
-            <p class="link_noacc"> Нет аккаунта? <a class="link_reg" @click="toggleRegisterModal"> Создать </a></p>
-<Loader  v-if="disabled"/>
+            <a class="link" @click="toggleRecoveryPasswordModal">Я не помню пароль</a>
+            <a class="link" @click="toggleRegisterModal">Зарегистрироваться</a>
+
         </form>
- 
 
     </div>
     </div>
@@ -108,19 +108,38 @@
         }
       },
       toggleRegisterModal () {
-        this.$router.toggleRegisterModal
+        this.$root.toggleRegisterModal
       },
       toggleRecoveryPasswordModal(){
-        this.$router.recoveryPasswordModal
+        this.$MainLayout.recoveryPasswordModal
       },
     }
   }
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/variables.scss";
 @import "../assets/styles/_forms.scss";
+.iconPasswordHide{
+    width: 24px;
+  height: 24px;
+   background-repeat: no-repeat;
+// background-image: url(../assets/passHide.svg);
+}
 
-
+.iconPasswordHide{
+    width: 24px;
+  height: 24px;
+   background-repeat: no-repeat;
+background-image: url(../assets/passShow.svg);
+}
+.buttonShowPassword{
+  width: 24px;
+  height: 24px;
+ background-image: url(../assets/passHide.svg);
+  position: absolute;
+background-repeat: no-repeat;
+right: calc(100% - 300px);
+top: 33%;
+}
 
 </style>
