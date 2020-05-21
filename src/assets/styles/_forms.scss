@@ -76,7 +76,7 @@ text-align: center;
     padding: 15px 90px;
     align-self: center;
     background-color:  $forms-btn-disabled-color;
-    background-image: url(../assets/paw.svg);
+    background-image: url(~@/assets/paw.svg);
     background-position: calc(100% - 30px) 50%;
     background-repeat: no-repeat;
     opacity: 0.8;
@@ -136,7 +136,7 @@ border-radius: 10px;
     padding: 15px 56px;
     align-self: center;
     background-color:  $forms-btn-color;
-    background-image: url(../assets/paw.svg);
+    background-image: url(~@/assets/paw.svg);
     background-position: calc(100% - 15px) 50%;
     background-repeat: no-repeat;
     opacity: 0.8;
@@ -280,7 +280,7 @@ border-radius: 10px;
     width: 24px;
   height: 24px;
    background-repeat: no-repeat;
-background-image: url(../assets/passHide.svg);
+background-image: url(~@/assets/passHide.svg);
 background-position-y: center;
 }
 
@@ -288,7 +288,7 @@ background-position-y: center;
     width: 24px;
   height: 24px;
    background-repeat: no-repeat;
-background-image: url(../assets/passShow.svg);
+background-image: url(~@/assets/passShow.svg);
 background-position-y: center;
 }
 .check-block{
@@ -311,7 +311,7 @@ line-height: 15px;
     align-self: center;
     margin-top: 75px;
     margin-bottom: 80px;
-    background-image: url(../assets/check.svg);
+    background-image: url(~@/assets/check.svg);
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
