@@ -11,10 +11,8 @@
 <style>
 .lds-dual-ring {
   display: inline-block;
-  width: 15px;
-  height: 15px;
-  position: absolute;
-  bottom: 135px;
+  width: 80px;
+  height: 80px;
 }
 .lds-dual-ring:after {
   content: " ";
