@@ -14,7 +14,8 @@
     <div v-if="activeTab == 'pets' && pets.length > 1" id="profile-pets">
       <Loader v-if="pets.length < 1" />
       <PetCard v-for="(pet, index) in pets" :key="index" :pet="pet" />
-      <button disabled="disabled" @click="createDefaultPet()">Создание дефолтного питомца</button>
+      <PetCard :pet="emptyPet" />
+      <!-- <button disabled="disabled" @click="createDefaultPet()">Создание дефолтного питомца</button> -->
     </div>
 
     <div v-if="activeTab == 'settings'" id="profile-settings">
@@ -39,6 +40,11 @@
       </table>
       <!-- <OrderCard :orders="ordersList" /> -->
     </div>
+
+    <div v-if="loader" id="profile-loader">
+      <Loader/>
+    </div>
+    
   </div>
 </template>
 
@@ -59,17 +65,38 @@ export default {
       pets: [],
       orders: [3, 5, 7, 12, 44],
       disabled: true,
-      activeTab: "pets"
+      activeTab: "pets",
+      loader: false
     };
   },
   methods: {
-    changeTab: function(tabName) {
+    changeTab(tabName) {
       if (tabName != this.activeTab) {
+        // Для показа лучше так, потом переделать так, чтобы после фетча сразу прогружался нужный ТАБ
+
+        switch (tabName) {
+          case 'settings': {
+            this.$store.dispatch("user/fetchUserInfo");
+            break
+          }
+          case 'orders': {
+            this.$store.dispatch("order/fetchOrdersList");
+            break 
+          }
+        }
+
         document
           .querySelector(`#${this.activeTab}`)
           .classList.remove("active-tab");
-        document.querySelector(`#${tabName}`).classList.add("active-tab");
-        this.activeTab = tabName;
+
+        this.activeTab = false;
+        this.loader = true
+
+        setTimeout(() => {
+          this.activeTab = tabName
+          document.querySelector(`#${tabName}`).classList.add("active-tab");
+          this.loader = false
+        }, 1000);
       }
     },
     createDefaultPet() {
@@ -95,24 +122,18 @@ export default {
           this.pets = this.$store.getters["pet/petList"];
         }
       });
-    }
+    },
   },
   computed: {
-    headerText() {
-      switch (this.activeTab) {
-        case "pets":
-          return "Ваши животные";
-          break;
-        case "orders":
-          return "Ваши заказы";
-          break;
-        case "settings":
-          return "Настройки";
-          break;
-        default:
-          return "Что-то пошло не так";
-          break;
+    emptyPet() {
+      const empty = {
+        empty: true,
+        name: 'Кличка',
+        breed: '',
+        gender: '',
+        food_exceptions: ''
       }
+      return empty
     },
     profileData() {
       return this.$store.getters["user/userInfo"];
@@ -125,8 +146,6 @@ export default {
     if (this.pets.length == 0) {
       this.fetchPets();
     }
-    this.$store.dispatch("order/fetchOrdersList");
-    this.$store.dispatch("user/fetchUserInfo");
   }
 };
 </script>
@@ -135,8 +154,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Montserrat");
 
 #profile {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: Montserrat, serif;
   display: grid;
   grid-gap: 80px;
   padding-right: 12.5%;
@@ -195,7 +213,10 @@ export default {
     color: #464451;
   }
   &-pets,
-  &-orders {
+  &-orders,
+  &-settings,
+  &-loader {
+    transition: 0.3s linear all;
     grid-area: block;
     overflow-x: scroll;
   }
@@ -217,6 +238,7 @@ export default {
       margin-top: 80px;
       max-width: 13vw;
       outline: none;
+      font-family: Montserrat, serif;
       padding: 15px 67px;
       font-weight: 600;
       font-size: 21px;
@@ -242,7 +264,7 @@ export default {
         minmax(150px, 0.33fr)
         minmax(150px, 1.67fr)
         minmax(150px, 1.67fr)
-        minmax(150px, 1.67fr);
+        minmax(150px, 1fr);
       // minmax(150px, 3.33fr)
     }
     thead,
@@ -258,6 +280,12 @@ export default {
       color: #8b8a95;
       margin-bottom: 30px;
     }
+  }
+  &-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
   }
 }
 
@@ -275,5 +303,18 @@ textarea {
   background-color: #2289b5;
   color: white;
   transition: 0.2s linear all;
+}
+
+@media screen and (max-width: 1440px) {
+  #profile-settings,
+  #profile-orders {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  #profile-settings {
+    button {
+      max-width: 20vw;
+    }
+  }
 }
 </style>

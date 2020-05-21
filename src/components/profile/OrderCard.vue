@@ -1,10 +1,10 @@
 <template>
   <tr >
     <td>{{ order.date_create.split(' ')[0] }}</td>
-    <td>{{ order.id }}</td>
+    <td class="black">{{ order.id }}</td>
     <td>{{ petName }}</td>
-    <td>{{ priceIdToString }}</td>
-    <td>{{ order.status_id }}</td>
+    <td>{{ priceString }}</td>
+    <td class="new">{{ statusString }}</td>
   </tr>
 </template>
 
@@ -28,8 +28,8 @@ export default {
       }
       return 'Имя не найдено :('
     },
-    priceIdToString() {
-      switch (this.order.price_id.toString()) {
+    statusString() {
+      switch (this.order.status_id.toString()) {
         case '1': {
           return 'Новый'
         }
@@ -44,6 +44,19 @@ export default {
         }
         case '5': {
           return 'Отменен'
+        }
+      }
+    },
+    priceString() {
+      switch (this.order.price_id.toString()) {
+        case '1': {
+          return 'Разовая покупка'
+        }
+        case '2': {
+          return 'Подписка на 6 месяцев'
+        }
+        case '3': {
+          return 'Разовая покупка на 6 месяцев'
         }
       }
     }
@@ -68,5 +81,25 @@ td {
   padding-bottom: 5px;
   margin-bottom: 20px;
   color: #464451;
+  position: relative;
+}
+
+.black {
+  font-weight: 600;
+}
+
+.new {
+  padding-left: 22px;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    width: 12px;
+    height: 12px;
+    background: yellow;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+ }
 }
 </style>
