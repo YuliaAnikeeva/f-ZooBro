@@ -1,7 +1,6 @@
 import baseURL from './baseURL'
 
 export default {
-  namespaced: true,
   state: {
     name: null,
     email: null,
@@ -30,7 +29,7 @@ export default {
     },
   },
   actions: {
-    async fetchUserInfo ({ commit, rootGetters }, payload) {
+    async fetchUserInfo ({ commit, getters }, payload) {
       return fetch(`${baseURL}/v1/user`,
         {
           mode: 'cors',
@@ -39,7 +38,7 @@ export default {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': '*',
-            'Authorization': rootGetters.token,
+            'Authorization': getters.userToken,
           },
           method: 'GET',
         })
@@ -50,7 +49,7 @@ export default {
           json => {
             if (json.status === 1) {
               const { data } = json
-              commit('setUserInfo', data)
+              commit('setUserHeader', data)
               console.log('fetchUserInfo', data)
               return true
             } else {
@@ -214,12 +213,5 @@ export default {
     userIsAdmin (state) {
       return state.is_admin
     },
-    userInfo (state) {
-      return {
-        name: state.name,
-        email: state.email,
-        phone: state.phone
-      }
-    }
   }
 }

@@ -11,7 +11,7 @@
           step_hidden: step.hidden,
           step_error: step.error}"
         >
-          <!--<input type="radio" class="step__control" v-model="val" :value="step.value">-->
+          <input type="radio" class="step__control" v-model="val" :value="step.value">
           <div class="step__header">
             <div class="step__divider"></div>
             <div class="step__button"></div>
@@ -60,7 +60,6 @@
     .progressbar {
         display: flex;
         font-size: 14px;
-      margin-bottom: 50px;
     }
 
     .step {
@@ -146,7 +145,7 @@
       }
 
       &_error &__button {
-       // border-color: red;
+        border-color: red;
       }
 
       &:hover &__button:after {
