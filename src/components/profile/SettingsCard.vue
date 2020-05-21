@@ -9,7 +9,7 @@
     <span class="settings__label">Телефон</span>
     <span class="settings__info">{{ profile.phone }}</span>
     <span class="settings__label">Адрес доставки</span>
-    <span class="settings__info">скоро будет</span>
+    <span class="settings__info">{{ profile.address }}</span>
     <img src="@/assets/profile-pic/user-avatar.png" alt="user photo">
   </div>
 </template>
@@ -19,16 +19,6 @@ export default {
   props: {
     profile: Object,
   },
-  data() {
-    return {
-      pass: 'qwerty123Ytrewq'
-    }
-  },
-  mounted() {
-    document.querySelectorAll('input').forEach(el => {
-      el.disabled = true
-    })
-  }
 }
 </script>
 

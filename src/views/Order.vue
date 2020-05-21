@@ -1,7 +1,26 @@
 <template>
-    <div class="container">
+    <div class="container container_onboarding">
         <template v-if="step !== 'step-4'">
-            <h1 class="title">Оформление заявки</h1>
+            <h1 class="title onboarding__title">Оформление заказа</h1>
+            
+            <div class="order-info" :class="{ 'order-info_invisible': step == 'step-1' }">
+                <div class="order-info__box">
+                    <img src="@/assets/box.png" alt="">
+                </div>
+                <div class="order-info__pricing-plan">
+                    {{ 
+                        (['Разовая покупка', 'Подписка на 6 месяцев', 'Покупка на 6 месяцев'])[order.price_id-1]
+                    }}
+                </div>
+                <div class="order-info__cost">
+                    <div class="order-info__cost-value">1500</div>
+                    <div class="order-info__cost-currency">
+                        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.22708 15.1361H4.09076V17.591C4.09076 17.7104 4.12898 17.8082 4.20586 17.8846C4.28254 17.9615 4.38056 18 4.49997 18H6.6348C6.74559 18 6.84146 17.9615 6.92244 17.8846C7.00342 17.8082 7.04379 17.7104 7.04379 17.591V15.1361H13.4997C13.6189 15.1361 13.717 15.0981 13.7938 15.0212C13.8707 14.9444 13.9089 14.8465 13.9089 14.7271V13.0906C13.9089 12.9719 13.8707 12.8734 13.7938 12.797C13.7172 12.7201 13.6189 12.6816 13.4997 12.6816H7.04358V11.173H11.3902C13.0946 11.173 14.4857 10.6537 15.5642 9.61345C16.6422 8.57434 17.1814 7.23205 17.1814 5.58651C17.1814 3.94208 16.6422 2.59975 15.5642 1.55958C14.486 0.520423 13.0946 0 11.3902 0H4.49975C4.38031 0 4.2825 0.0384257 4.20565 0.114889C4.12898 0.191776 4.09055 0.290222 4.09055 0.408992V8.45038H1.22708C1.10767 8.45038 1.00982 8.49078 0.932972 8.57172C0.856332 8.6527 0.817871 8.74857 0.817871 8.85933V10.764C0.817871 10.8834 0.856085 10.9813 0.932972 11.0581C1.00986 11.135 1.10746 11.173 1.22708 11.173H4.09076V12.6816H1.22708C1.10767 12.6816 1.00982 12.72 0.932972 12.797C0.856332 12.8734 0.817871 12.9717 0.817871 13.0906V14.727C0.817871 14.8465 0.856085 14.9443 0.932972 15.0212C1.00982 15.0981 1.10763 15.1361 1.22708 15.1361ZM7.04358 2.72329H11.1345C12.0378 2.72329 12.7664 2.9874 13.3205 3.5158C13.8744 4.04423 14.1515 4.7348 14.1515 5.58673C14.1515 6.43908 13.8744 7.12986 13.3205 7.65766C12.7664 8.18651 12.0378 8.45063 11.1345 8.45063H7.04358V2.72329Z" fill="#464451"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
 
             <ProgresBar v-model="step"/>
         </template>
@@ -79,7 +98,7 @@
 
             <button class="onboarding-button" @click="submitHandler" :disabled="loading">
                 <div class="onboarding-button__inner">
-                    <span class="onboarding-button__label">Вперед</span>
+                    <span class="onboarding-button__label">{{ step=='step-3' ? 'Оформить' : 'Вперед' }}</span>
                     <svg class="onboarding-button__icon" viewBox="0 0 42 35" xmlns="http://www.w3.org/2000/svg">
                         <path d="M31.8233 8.64617L31.8223 8.6497C31.2506 10.5076 30.1844 11.9879 28.9431 12.8927C27.7025 13.7971 26.3144 14.1121 25.0483 13.7192L25.0484 13.7191L25.0375 13.716C23.8391 13.3736 22.9129 12.3546 22.4241 10.9C21.936 9.44715 21.9054 7.60491 22.478 5.74379C23.0497 3.88587 24.1159 2.40563 25.3572 1.50078C26.597 0.596967 27.9841 0.281764 29.2495 0.673526C30.4579 1.0629 31.3873 2.11359 31.8762 3.56849C32.3647 5.02244 32.3942 6.83859 31.8233 8.64617Z"/>
                         <path d="M32.2759 15.6536C32.849 13.8866 33.8452 12.4767 34.9791 11.6089C36.1134 10.7408 37.3481 10.4372 38.4532 10.7772C39.5489 11.1143 40.3793 12.077 40.7967 13.4566C41.2135 14.8345 41.1973 16.5795 40.6247 18.3451C40.0516 20.1121 39.0553 21.522 37.9214 22.3898C36.7871 23.2579 35.5524 23.5615 34.4473 23.2214C33.3516 22.8843 32.5212 21.9217 32.1038 20.542C31.687 19.1642 31.7032 17.4192 32.2759 15.6536Z"/>
@@ -91,6 +110,9 @@
             </button>
         </div>
 
+        <div class="terms" v-if="step == 'step-3'">
+            Оформляя заказ, Вы соглашаетесь на обработку персональных данных
+        </div>
 
     </div>
 </template>
@@ -195,6 +217,9 @@
             display: flex;
             flex-flow: row nowrap;
             justify-content: space-between;
+            max-width: 690px;
+            margin: 0 auto;
+            margin-top: 30px;
         }
 
         &-button {
@@ -220,13 +245,16 @@
                 border: 1px solid #2289B5;
                 box-sizing: border-box;
                 border-radius: 10px;
+                box-shadow: none;
 
                 &:hover {
                     background-color: lighten(#2289B5, 50);
+                    box-shadow: none;
                 }
 
                 &:active {
                     background-color: lighten(#2289B5, 40);
+                    box-shadow: none;
                 }
             }
 
@@ -280,6 +308,10 @@
     .container {
         max-width: 940px;
         margin: 0 auto;
+
+        &_onboarding {
+            padding-bottom: 50px;
+        }
     }
 
     .transition-box {
@@ -312,6 +344,68 @@
     }
 
     .title{
-        padding: 70px 10px;
+        padding: 70px 10px 30px 10px;
+        font-family: Montserrat, sans-serif;
+    }
+
+    .order-info {
+        margin-bottom: 30px;
+        display: flex;
+        transition: opacity .3s linear;
+        padding: 0 20px;
+        align-items: center;
+        justify-content: center;
+
+        &_invisible {
+            opacity: 0;
+        }
+
+        &__box {
+            margin-right: 25px;
+        }
+        &__pricing-plan {
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 22px;
+            color: #464451;
+            margin: 0 25px;
+        }
+        &__cost {
+            font-size: 18px;
+            display: flex;
+            align-items: flex-end;
+            line-height: 22px;
+
+            &-value {
+                display: inline;
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: 600;
+                color: #464451;
+            }
+            &-currency {
+                display: inline;
+                margin-left: 5px;
+
+                & svg {
+                    display: block;
+                    height: 1em;
+                    width: 1em;
+                }
+            }
+        }
+    }
+
+    .terms {
+        font-family: Montserrat, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 15px;
+        color: #000000;
+        margin-top: 80px;
+        margin-bottom: 160px;
     }
 </style>

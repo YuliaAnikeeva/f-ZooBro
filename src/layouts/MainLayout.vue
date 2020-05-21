@@ -49,7 +49,13 @@
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="loginModal = false">
-                <LoginForm :onSuccess="toggleLoginModal"/>
+                <LoginForm
+                        :onSuccess="toggleLoginModal"
+                        :toggleLoginModal="toggleLoginModal"
+                        :toggleRegisterModal="toggleRegisterModal"
+                        :toggleRegistrationSuccessModal="toggleRegistrationSuccessModal"
+                        :toggleRecoveryPasswordModal="toggleRecoveryPasswordModal"
+                />
             </vue-modaltor>
 
             <vue-modaltor
@@ -58,18 +64,47 @@
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="registerModal = false">
-                <RegistrationForm :onSuccess="toggleRegisterModal"/>
+                <RegistrationForm
+                        :onSuccess="toggleRegisterModal"
+                        :toggleLoginModal="toggleLoginModal"
+                        :toggleRegisterModal="toggleRegisterModal"
+                        :toggleRegistrationSuccessModal="toggleRegistrationSuccessModal"
+                        :toggleRecoveryPasswordModal="toggleRecoveryPasswordModal"
+                />
             </vue-modaltor>
 
             <vue-modaltor
                     :visible="recoveryPasswordModal"
-                    
-                    :resize-width='{1920:"440px",940:"90%"}'
+
+                    :resize-width='{1920:"440px",940:"46.8%"}'
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="recoveryPasswordModal = false">
-                <RecoveryPasswordForm :onSuccess="toggleRecoveryPasswordModal"/>
+                <RecoveryPasswordForm
+                        :onSuccess="toggleRecoveryPasswordModal"
+                        :toggleLoginModal="toggleLoginModal"
+                        :toggleRegisterModal="toggleRegisterModal"
+                        :toggleRegistrationSuccessModal="toggleRegistrationSuccessModal"
+                        :toggleRecoveryPasswordModal="toggleRecoveryPasswordModal"
+                />
             </vue-modaltor>
+
+            <vue-modaltor
+                    :visible="registrationSuccessModal"
+
+                    :resize-width='{1920:"440px",940:"46.8%"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="registrationSuccessModal = false">
+                <RegistrationSuccess
+                        :onSuccess="toggleRegistrationSuccessModal"
+                        :toggleLoginModal="toggleLoginModal"
+                        :toggleRegisterModal="toggleRegisterModal"
+                        :toggleRegistrationSuccessModal="toggleRegistrationSuccessModal"
+                        :toggleRecoveryPasswordModal="toggleRecoveryPasswordModal"
+                />
+            </vue-modaltor>
+
         </template>
 
         <main>
@@ -144,7 +179,7 @@
 
 <style lang="scss">
     .modal-vue-wrapper-show.modal-fade, .modal-vue-wrapper-show.modal-scale{
-    
+
         z-index: 9999;
  border-radius: 20px;
 }
@@ -153,7 +188,7 @@
 }
     .modal-vue-panel{
         border-radius: 20px;
-      
+
     }
     .nav-link{
        text-decoration: none;
