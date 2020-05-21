@@ -4,9 +4,11 @@
         <div id="nav">
             <router-link to="/">Home</router-link>
             |
-            <router-link to="/login">login</router-link>
+            <!--<router-link to="/login">login</router-link>-->
+            <a class="nav-link" @click="loginModal = true">login</a>
             |
-            <router-link to="/recovery-password">recovery-password</router-link>
+            <!--<router-link to="/recovery-password">recovery-password</router-link>-->
+            <a class="nav-link" @click="recoveryPasswordModal = true">recovery-password</a>
             |
             <router-link to="/profile">profile</router-link>
             |
@@ -14,20 +16,23 @@
             |
             <router-link to="/order">order</router-link>
             |
-            <router-link to="/registration">registration</router-link>
+            <!--<router-link to="/registration">registration</router-link>-->
+            <a class="nav-link" @click="registerModal = true">registration</a>
+            |
+            <a class="nav-link" @click="registrationSuccessModal = true">RegistrationSuccess</a>
         </div>
         <nav class="nav-menu">
             <div class="logo">
-                <router-link class="router-link" to="/"><h4>logo</h4></router-link>
+                <router-link class="router-link" to="/"><img src="../assets/logo-zoobro.svg" alt=""></router-link>
             </div>
             <div class="rout-buttons">
                 <div class="rout-buttons__dilivery">Доставка</div>
-                <div class="rout-buttons__how-work">Как это работает</div>
-                <div class="rout-buttons__faq">FAQ</div>
-                <div class="rout-buttons__tel">49218419481</div>
+                <div class="rout-buttons__how-work"><a class="router-link" href="#how-work">Как это работает</a></div>
+                <div class="rout-buttons__faq"><a class="router-link" href="#faq">FAQ</a></div>
+                <div class="rout-buttons__tel"><a class="router-link" href="#contacts">Контакты</a></div>
                 <div class="rout-buttons__auth" v-if="true">
                     <button class="rout-buttons__auth-button">
-                        <router-link class="router-link" to="/login">Войти</router-link>
+                        <a  @click="loginModal = true">Войти</a>
                     </button>
                 </div>
                 <div class="rout-buttons__profile" v-if="false">
@@ -38,6 +43,46 @@
 
             </div>
         </nav>
+
+        <template>
+            <vue-modaltor
+                    :visible="loginModal"
+                    :resize-width='{1920:"440px",940:"46.8%"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="loginModal = false">
+                <LoginForm :onSuccess="toggleLoginModal"/>
+            </vue-modaltor>
+
+            <vue-modaltor
+                    :visible="registerModal"
+                    :resize-width='{1920:"440px",940:"46.8%"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="registerModal = false">
+                <RegistrationForm :onSuccess="toggleRegisterModal"/>
+            </vue-modaltor>
+
+            <vue-modaltor
+                    :visible="recoveryPasswordModal"
+                    
+                    :resize-width='{1920:"440px",940:"46.8%"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="recoveryPasswordModal = false">
+                <RecoveryPasswordForm :onSuccess="toggleRecoveryPasswordModal"/>
+            </vue-modaltor>
+            <vue-modaltor
+                    :visible="registrationSuccessModal"
+                    
+                    :resize-width='{1920:"440px",940:"46.8%"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="registrationSuccessModal = false">
+                <RegistrationSuccess :onSuccess="toggleRegistrationSuccessModal"/>
+            </vue-modaltor>
+        </template>
+
         <main>
             <router-view/>
         </main>
@@ -47,15 +92,40 @@
 <script>
   import { mapGetters } from 'vuex'
   import Toastify from 'toastify-js'
+  import LoginForm from '../components/LoginForm'
+  import RegistrationForm from '../components/RegistrationForm'
+  import RecoveryPasswordForm from '../components/RecoveryPasswordForm'
+  import RegistrationSuccess from '../components/RegistrationSuccess'
 
   export default {
     name: 'MainLayout',
+    components: { RecoveryPasswordForm, RegistrationForm, LoginForm, RegistrationSuccess },
+    data: () => ({
+      loginModal: false,
+      registerModal: false,
+      recoveryPasswordModal: false,
+      registrationSuccessModal: false,
+    }),
     computed: {
       ...mapGetters([
         'snackbarType',
         'snackbarMsg',
         'snackbarObj',
       ]),
+    },
+    methods:{
+      toggleLoginModal(){
+        this.loginModal = !this.loginModal
+      },
+      toggleRegisterModal(){
+        this.registerModal = !this.registerModal
+      },
+      toggleRegistrationSuccessModal(){
+        this.registrationSuccessModal = !this.registrationSuccessModal
+      },
+      toggleRecoveryPasswordModal(){
+        this.recoveryPasswordModal = !this.recoveryPasswordModal
+      },
     },
     watch: {
       snackbarObj: (newMsg, oldMsg) => {
@@ -90,7 +160,29 @@
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+    .modal-vue-wrapper-show.modal-fade, .modal-vue-wrapper-show.modal-scale{
+    
+        z-index: 9999;
+ border-radius: 20px;
+}
+.modal-vue-panel.modal-fade{
+  border-radius: 20px;
+}
+    .modal-vue-panel{
+        border-radius: 20px;
+      
+    }
+    .nav-link{
+       text-decoration: none;
+        font-family: Montserrat, serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: #FFFFFF;
+        cursor: pointer;
+    }
     .router-link {
         text-decoration: none;
         font-family: Montserrat, serif;
@@ -101,7 +193,6 @@
         color: #FFFFFF;
 
     }
-
     .nav-menu {
         width: 100%;
         height: 65px;
@@ -140,6 +231,11 @@
                 border: 1px solid #2289B5;
                 box-sizing: border-box;
                 border-radius: 5px;
+            }
+            &__how-work {
+              display: block;
+              text-decoration: none;
+              color: #fff;
             }
         }
 

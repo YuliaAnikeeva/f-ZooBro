@@ -1,4 +1,5 @@
 import baseURL from './baseURL'
+import createFetch from './createFetch'
 
 const order = {
   namespaced: true,
@@ -11,27 +12,20 @@ const order = {
     },
   },
   actions: {
-    fetchOrdersList ({commit, getters, rootGetters}, payload = {}) {
-      return fetch(`${baseURL}/v1/orders`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "*",
-          ...rootGetters.userToken && {"Authorization": rootGetters.userToken}
-        }
+    fetchOrdersList ({commit, rootGetters}) {
+      return createFetch({
+        route: '/v1/orders',
+        method: 'GET',
+        ...rootGetters.userToken && {token : rootGetters.userToken}
       })
       .then(json => {
-        if (json.status === 1) {
+        console.log('fetchOrdersList', json)
+        if (json.status) {
           const { data } = json
-          console.log('fetchOrdersList', data)
-          commit('setOrdersList', data)
+          commit('setOrdersList', data.orders)
           return true
         } else {
           const { message } = json
-          console.error(message)
           commit('clearSnackbar', null , { root: true })
           commit('setSnackbarMsg', message, { root: true })
           commit('setSnackbarType', 'error', { root: true })
@@ -46,33 +40,19 @@ const order = {
         return false
       })
     },
-    createOrder ({commit, getters, rootGetters}, payload) {
-      return fetch(`${baseURL}/v1/orders/create`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "*",
-          ...rootGetters.userToken && {"Authorization": rootGetters.userToken}
-        },
-        body: JSON.stringify(payload)
-      })
-      .then(response => {
-        console.log(response)
-        return response.json()
-      })
-      .then(json => {
-        if (json.status === 1) {
-          const { data } = json
-          console.log('createOrder', data)
-          return true
+    createOrder ({commit, rootGetters}, payload) {
+      return createFetch({
+        route: '/v1/orders/create',
+        method: 'POST',
+        ...rootGetters.userToken && {token : rootGetters.userToken}
+      }, payload)
+      .then(({status, payload}) => {
+        console.log('createOrder', {status, payload})
+        if (status) {
+          return payload
         } else {
-          const { message } = json
-          console.error(message)
           commit('clearSnackbar', null , { root: true })
-          commit('setSnackbarMsg', message, { root: true })
+          commit('setSnackbarMsg', payload, { root: true })
           commit('setSnackbarType', 'error', { root: true })
           return false
         }
