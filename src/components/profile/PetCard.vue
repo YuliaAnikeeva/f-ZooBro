@@ -147,6 +147,11 @@ export default {
     p {
       width: 100%;
       margin: 0;
+      &:first-child{
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 29px;
+      }
       &:last-child {
         margin-top: 15px;
       }
@@ -158,7 +163,15 @@ export default {
     justify-content: center;
     align-items: center;
     grid-area: order;
+    &:hover {
+      cursor: pointer;
+      div {
+        transition: 0.5s linear all;
+        background: rgb(28, 107, 141);
+      }
+    }
     div {
+      transition: 0.5s linear all;
       margin-right: 20px;
       width: 60px;
       height: 60px;
