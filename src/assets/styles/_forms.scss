@@ -1,13 +1,16 @@
+@import "@/assets/variables.scss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
 
 .border{
     display: flex;
     flex-direction: column;
-    
+    width: 90%;
     max-width: 450px;
-    min-height: 446px;
-    padding-top: 41px;
+    min-height: 450px;
+    padding: 50px 0;
     background: #FFFFFF;
-    
+    border-radius: 20px;
+    margin: 0 auto;
   }
 
   .container {
@@ -30,49 +33,30 @@ h1{
 }
 
 .form {
-margin-top: 40px;
+margin: 5% auto;
 display: flex;
 flex-direction: column;
-margin-left: 3.66%;
-margin-right: 3.66%;
 
-// @media (min-width: 425px) {
-//   width: 400px;
-// }
-// @media (min-width: 350px) {
-//         width: 90%;
-//     }
+@media (min-width: 425px) {
+  width: 400px;
+}
+@media (min-width: 350px) {
+        width: 90%;
+    }
 }
 
-.link_recovery, .link_noacc, .link_reg {
-    
-    // width: 155px;
+.link {
+    margin: 10px 0;
+    width: 155px;
     height: 20px;
     text-decoration: none;
-    // border-bottom: 0.3px solid #1A1A22;
-    color: #464451;
+    border-bottom: 0.3px solid $forms-text-color;
+    color: $forms-text-color;
     align-self: center;
-    font-family: Montserrat;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 17px;
-text-align: center;
 }
-.link_recovery{
-    border-bottom: 0.3px solid #1A1A22;
-    margin-top: 30px;
-}
-.link_reg {
-    color: #2289B5;
-    border-bottom: 0.3px solid #2289B5;
-}
-.link_noacc{
-    margin-top: 20px;
-    margin-bottom: 35px;
-}
+
 .button {
-    margin-top: 20px;
+    margin: 20px 0;
     padding: 15px 90px;
     align-self: center;
     background-color:  $forms-btn-disabled-color;
@@ -90,45 +74,13 @@ text-align: center;
     border: none;
 }
 
-.button-valid:active {
+.button:hover {
     background-color: $forms-btn-hover-color;
-    
-    // box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
-
-.button-valid:hover {
+.button:focus,
+.button:active {
     outline-color: transparent;
-    background-color: $forms-btn-color;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
-}
-
-
-.button-valid{
-    
-    background-color: $forms-btn-color;
-    // box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
-}
-.button-link1{
-    margin-top: 30px;
-    padding: 15px 84.5px;
-    align-self: center;
-    
-    font-family: Montserrat, serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 27px;
-    color: $forms-btn-color;
-    opacity: 0.8;
-border: 1px solid #2289B5;
-box-sizing: border-box;
-border-radius: 10px;
-    cursor: default;
-}
-.button-link1:hover {
-    outline-color: transparent;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .button-link2{
@@ -159,6 +111,7 @@ border-radius: 10px;
     background-color: $forms-btn-hover-color;
     
 }
+
 .error {
     margin-top: 5px;
     align-self: flex-start;
@@ -177,11 +130,10 @@ border-radius: 10px;
 
 .field--error .error {
     display: block;
-    height: 40px;
 }
 
 .error_block {
-    min-height: 20px;
+    height: 20px;
 }
 
 .message {
@@ -198,25 +150,19 @@ border-radius: 10px;
 .input-block {
     position: relative;
 }
-.group-field{
-    display: flex;
-    flex-direction: column;
-}
 
 .group-field input {
     font-size: 18px;
-    padding: 27px 20px 10px 20px;
+    padding: 30px 20px 10px 20px;
     display: block;
     box-sizing: border-box;
     width: 100%;
-    border: 1px solid rgba(70, 68, 81, 0.4);;
+    border: 2px solid $forms-input-bckgr-color;
     background: $forms-input-bckgr-color;
     border-radius: 10px;
     color: #1A1A22;
     transition: 0.2s ease all;
 
-    position: relative;
-   
 }
 
 .group-field input:focus {
@@ -264,6 +210,7 @@ border-radius: 10px;
 .wobble-error {
     animation: wobble-error 0.8s both;
 }
+
 .buttonShowPassword{
     width: 24px;
     height: 24px;
@@ -339,6 +286,7 @@ line-height: 18px;
 text-align: center;
 color: #949595;
 }
+
 
 @keyframes wobble-error {
     0%,
