@@ -1,4 +1,5 @@
 module.exports = {
+
   lintOnSave: false,
   pwa: {
     name: 'Коробочка счастья ZooBro',
@@ -17,4 +18,5 @@ module.exports = {
       }
     }
   } 
+
 }
