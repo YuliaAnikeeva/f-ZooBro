@@ -1,9 +1,9 @@
 <template>
-    <form @submit.prevent="submitHandler" class="form_small">
+    <form @submit.prevent="submitHandler">
         <div class="form-section">
 
             <div :class="{ 'field--error wobble-error': $v.pet_name.$error }" class="form-group">
-                <label class="form-group__label">Имя питомца</label>
+                <label class="form-group__label">Твое имя</label>
                 <div class="form-group__content">
                     <div class="input">
                         <input type="text" class="input__control" v-model="pet_name"/>
@@ -44,6 +44,7 @@
                     <div class="form-group__errors"></div>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="form-group__label">Дата рождения</label>
                 <div class="form-group__content">
@@ -55,26 +56,61 @@
                     <div class="form-group__errors"></div>
                 </div>
             </div>
-        </div>
-        <div class="form-section">
-
-            <div :class="{ 'field--error wobble-error': $v.gender.$error }" class="form-group">
-                <label class="form-group__label">Пол питомца</label>
+            <div class="form-group">
+                <label class="form-group__label">Если ты не помнишь дату своего рождения, выбери примерный возраст</label>
                 <div class="form-group__content">
-                    <div class="radio-group">
+                    <div class="radio-group radio-group_dog-years">
                         <div class="radio-group__list">
-                            <label class="radio">
-                                <input type="radio" class="radio__control" value="m" v-model="gender"/>
-                                <span class="radio__button">M</span>
+                            <label class="radio radio_big">
+                                <input type="radio" class="radio__control" value="0-1" v-model="birthday_years"/>
+                                <div class="radio__button">
+                                  <span class="radio__button-label radio__button-label_sub">до 1 года</span>
+                                </div>
                             </label>
-                            <label class="radio">
-                                <input type="radio" class="radio__control" value="w" v-model="gender"/>
-                                <span class="radio__button">Ж</span>
+                            <label class="radio radio_big">
+                                <input type="radio" class="radio__control" value="1-5" v-model="birthday_years"/>
+                                <div class="radio__button">
+                                  <span class="radio__button-label radio__button-label_sub">1-5 лет</span>
+                                </div>
+                            </label>
+                            <label class="radio radio_big">
+                                <input type="radio" class="radio__control" value="5+" v-model="birthday_years"/>
+                                <div class="radio__button">
+                                  <span class="radio__button-label radio__button-label_sub">старше 5 лет</span>
+                                </div>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group__helper">
+                    <div class="form-group__errors">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-section">
+
+            <div :class="{ 'field--error wobble-error': $v.gender.$error }" class="form-group">
+                <label class="form-group__label">Твой пол</label>
+                <div class="form-group__content">
+                    <div class="radio-group">
+                        <div class="radio-group__list">
+                            <label class="radio">
+                                <input type="radio" class="radio__control" value="m" v-model="gender"/>
+                                <div class="radio__button">
+                                    <span class="radio__button-label">М</span>
+                                </div>
+                            </label>
+                            <label class="radio">
+                                <input type="radio" class="radio__control" value="w" v-model="gender"/>
+                                <div class="radio__button">
+                                    <span class="radio__button-label">Ж</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group__helper form-group__helper_small">
                     <div class="form-group__errors">
                         <div class="form-group__errors">
                             <div class="error" v-if="$v.gender.$dirty && !$v.gender.required">Выберите пол питомца</div>
@@ -84,29 +120,44 @@
             </div>
 
             <div :class="{ 'field--error wobble-error': $v.size.$error }" class="form-group">
-                <label class="form-group__label">Размер питомца</label>
+                <label class="form-group__label">Твой размер</label>
                 <div class="form-group__content">
-                    <div class="radio-group">
-                        <div class="radio-group__list radio-group__list_with-images">
-                            <label class="radio">
+                    <div class="radio-group radio-group_dog-size">
+                        <div class="radio-group__list">
+                            <label class="radio radio_big">
                                 <input type="radio" class="radio__control" value="1" v-model="size"/>
-                                <img class="radio__image" src="@/assets/small-dog.png" alt="">
-                                <span class="radio__button">маленький</span>
+                                <div class="radio__image">
+                                	<img src="@/assets/small-dog.png" alt="">
+                                </div>
+                                <div class="radio__button">
+                                  <span class="radio__button-label">маленький</span>
+                                  <span class="radio__button-label radio__button-label_sub">до 10 кг</span>
+                                </div>
                             </label>
-                            <label class="radio">
+                            <label class="radio radio_big">
                                 <input type="radio" class="radio__control" value="2" v-model="size"/>
-                                <img class="radio__image" src="@/assets/medium-dog.png" alt="">
-                                <span class="radio__button">средний</span>
+                                <div class="radio__image">
+                                	<img src="@/assets/medium-dog.png" alt="">
+                                </div>
+                                <div class="radio__button">
+                                  <span class="radio__button-label">средний</span>
+                                  <span class="radio__button-label radio__button-label_sub">от 10 до 25 кг</span>
+                                </div>
                             </label>
-                            <label class="radio">
+                            <label class="radio radio_big">
                                 <input type="radio" class="radio__control" value="3" v-model="size"/>
-                                <img class="radio__image" src="@/assets/large-dog.png" alt="">
-                                <span class="radio__button">большой</span>
+                                <div class="radio__image">
+                                	<img src="@/assets/large-dog.png" alt="">
+                                </div>
+                                <div class="radio__button">
+                                  <span class="radio__button-label">большой</span>
+                                  <span class="radio__button-label radio__button-label_sub">свыше 25 кг</span>
+                                </div>
                             </label>
                         </div>
                     </div>
                 </div>
-                <div class="form-group__helper">
+                <div class="form-group__helper form-group__helper_small">
                     <div class="form-group__errors">
                         <div class="error" v-if="$v.size.$dirty && !$v.size.required">Выберите размер питомца</div>
                     </div>
@@ -117,14 +168,18 @@
                 <label class="form-group__label">Аллергия</label>
                 <div class="form-group__content">
                     <div class="radio-group">
-                        <div class="radio-group__list radio-group__list_with-images">
+                        <div class="radio-group__list">
                             <label class="radio">
                                 <input type="radio" class="radio__control" :value="true" v-model="hasAllergy"/>
-                                <span class="radio__button">Да</span>
+                                <div class="radio__button">
+                                    <span class="radio__button-label">Да</span>
+                                </div>
                             </label>
                             <label class="radio">
                                 <input type="radio" class="radio__control" :value="false" v-model="hasAllergy"/>
-                                <span class="radio__button">Нет</span>
+                                <div class="radio__button">
+                                    <span class="radio__button-label">Нет</span>
+                                </div>
                             </label>
                         </div>
                     </div>
@@ -133,7 +188,7 @@
                             rows="2"
                             class="textarea"
                             v-model="food_exceptions"
-                            placeholder="Рыба, курица"
+                            placeholder="Укажи, на что у тебя аллергия"
                     >
                           </textarea>
                 </div>
@@ -343,17 +398,32 @@
     form {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        padding: 0 5px;
     }
 
     .form_small {
-        width: 650px;
+        width: 690px;
         margin: 0 auto;
+        padding: 0;
+    }
+
+    .form_contact {
+        .form-group__helper {
+            height: 40px;
+        }
     }
 
     .form-section {
         display: flex;
         flex-direction: column;
+        flex: 1;
+        margin-left: 55px;
+        &:first-child {
+            margin-left: 0;
+        }
+        &:first-child {
+
+        }
     }
 
     .form-group {
@@ -365,6 +435,8 @@
             line-height: 15px;
             color: #828282;
             box-sizing: border-box;
+            display: inline-block;
+            max-width: 400px;
         }
 
         &__link {
@@ -382,9 +454,13 @@
         }
 
         &__helper {
-            height: 50px;
+            height: 60px;
             display: flex;
             justify-content: space-between;
+
+            &_small {
+                height: 50px;
+            }
         }
 
         &__errors {
@@ -431,6 +507,7 @@
 
         &_type_address {
             min-width: 325px;
+            width: 100%;
         }
 
         &__control {
@@ -444,6 +521,7 @@
 
             &_type_datetime {
                 padding: 8px 5px;
+                text-transform: uppercase;
             }
         }
 
@@ -479,6 +557,7 @@
         margin-right: 10px;
         display: flex;
         flex-direction: column;
+        align-items: center;
         cursor: pointer;
         box-sizing: border-box;
 
@@ -494,40 +573,98 @@
             font-family: Montserrat, sans-serif;
             font-size: 12px;
             font-weight: bold;
-            line-height: 25px;
+            line-height: 16px;
             border: 2px solid #2289B5;
             box-sizing: border-box;
             border-radius: 5px;
             padding: 0 5px;
             min-width: 65px;
             text-align: center;
-            margin-top: 17px;
+            padding: 3px 5px;
+
+            &-label {
+            	display: block;
+            	margin: 0;
+
+            	&_sub {
+            		color: #828282;
+            	}
+            }
+        }
+        &_big &__button {
+            min-height: 40px;
+            min-width: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        &__control:checked ~ &__button {
-            background-color: #2289B5;
-            color: #FFFFFF;
-        }
 
-        &__control:checked ~ &__button:hover {
-            background-color: #2289B5;
-            color: #FFFFFF;
-        }
-
-        &__control:hover ~ &__button {
+        &:hover > &__button {
             background-color: rgba(34, 137, 181, 0.2);
             transition-duration: .8s;
         }
 
+        &__control:checked ~ &__button {
+            background-color: #2289B5;
+        }
+
+        &__control:checked ~ &__button &__button-label {
+            color: #fff;
+        }
+
+
         &__image {
-            width: 80px;
-            display: block;
+            margin-top: auto;
+            margin-bottom: 10px;
+
+            width: 100%;
+
+            & img {
+                display: block;
+                margin: 0 auto;
+            }
         }
     }
 
     .radio-group {
+        
+        margin-top: 17px;
+
         &__list {
             display: flex;
+        }
+
+        &_dog-size {
+            margin-top: 0;
+        }
+
+        &_dog-size &__list {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        &_dog-size .radio {
+            margin: 0;
+
+            &:first-child {
+                justify-self: flex-start;
+                align-items: flex-start;
+            }
+
+            &:last-child {
+                justify-self: flex-end;
+                align-items: flex-end;
+            }
+        }
+
+        &_dog-years {
+            max-width: 330px;
+        }
+
+        &_dog-years &__list {
+            justify-content: space-between;
         }
     }
 
@@ -535,9 +672,9 @@
         border-radius: 5px;
         border: 1px solid #828282;
         box-sizing: border-box;
-        color: #333333;
+        font-size: 12px;
+        line-height: 15px;
         font-family: Montserrat, sans-serif;
-        font-size: 16px;
         font-style: normal;
         font-weight: 500;
         line-height: 20px;
@@ -545,6 +682,7 @@
         padding: 10px;
         resize: none;
         width: 100%;
+        max-width: 280px;
     }
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="submitHandler" class="form_small">
+    <form @submit.prevent="submitHandler" class="form_contact form_small">
         <div class="form-section">
 
             <div :class="{ 'field--error wobble-error': $v.user_name.$error }" class="form-group">
@@ -172,17 +172,32 @@
     form {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        padding: 0 5px;
     }
 
     .form_small {
-        width: 650px;
+        width: 690px;
         margin: 0 auto;
+        padding: 0;
+    }
+
+    .form_contact {
+        .form-group__helper {
+            height: 40px;
+        }
     }
 
     .form-section {
         display: flex;
         flex-direction: column;
+        flex: 1;
+        margin-left: 55px;
+        &:first-child {
+            margin-left: 0;
+        }
+        &:first-child {
+
+        }
     }
 
     .form-group {
@@ -194,6 +209,8 @@
             line-height: 15px;
             color: #828282;
             box-sizing: border-box;
+            display: inline-block;
+            max-width: 400px;
         }
 
         &__link {
@@ -211,9 +228,13 @@
         }
 
         &__helper {
-            height: 50px;
+            height: 60px;
             display: flex;
             justify-content: space-between;
+
+            &_small {
+                height: 50px;
+            }
         }
 
         &__errors {
@@ -260,12 +281,12 @@
 
         &_type_address {
             min-width: 325px;
+            width: 100%;
         }
 
         &__control {
             border: none;
             outline: none;
-            font-style: normal;
             padding: 10px 5px;
             width: 100%;
             box-sizing: border-box;
@@ -274,6 +295,7 @@
 
             &_type_datetime {
                 padding: 8px 5px;
+                text-transform: uppercase;
             }
         }
 
@@ -304,68 +326,4 @@
         display: flex;
         justify-content: space-between;
     }
-
-    .radio {
-        margin-right: 10px;
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
-        box-sizing: border-box;
-
-        &:last-child {
-            margin-right: 0;
-        }
-
-        &__control {
-            display: none;
-        }
-
-        &__button {
-            font-family: Montserrat, sans-serif;
-            font-size: 12px;
-            font-weight: bold;
-            line-height: 25px;
-            border: 2px solid #2289B5;
-            box-sizing: border-box;
-            border-radius: 5px;
-            padding: 0 5px;
-            min-width: 65px;
-            text-align: center;
-            margin-top: 17px;
-        }
-
-        &__control:checked ~ &__button {
-            background-color: #2289B5;
-            color: #FFFFFF;
-        }
-
-        &__image {
-            width: 80px;
-            display: block;
-        }
-    }
-
-    .radio-group {
-        &__list {
-            display: flex;
-        }
-    }
-
-    .textarea {
-        border-radius: 5px;
-        border: 1px solid #828282;
-        box-sizing: border-box;
-        color: #333333;
-        font-family: Montserrat, sans-serif;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 20px;
-        margin-top: 10px !important;
-        padding: 10px;
-        resize: none;
-        width: 100%;
-    }
-
 </style>
-
