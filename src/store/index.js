@@ -86,11 +86,6 @@ export default new Vuex.Store({
   },
   actions: {
   },
-  getters: {
-    token() {
-      return localStorage.getItem("userToken");
-    },
-  },
   modules: {
     admin, auth, order, toastify, user, pet, infoSnackbar,
   }

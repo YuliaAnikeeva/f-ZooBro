@@ -1,6 +1,4 @@
 <template>
-<div class="border">
-   <h1>Вход</h1>
     <div class="form-login">
 
         <form class="form" @submit.prevent="onSubmit">
@@ -18,12 +16,7 @@
 
             <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
                 <div class="input-block">
-                    <input type="password" v-model="password" :disabled="disabled" v-show="!showPassword" required>
-                    <input type="text" v-model="password" :disabled="disabled" v-show="showPassword" required>
-                   <div class="buttonShowPassword" @click="showPassword=!showPassword" >
-                      <div class="iconPassowordShow" v-show="showPassword"></div>
-                      <div class="iconPassowordHide" v-show="!showPassword"></div>
-                    </div>
+                    <input v-model="password" :disabled="disabled" required>
                     <label>Пароль</label>
                 </div>
                 <div class="error_block">
@@ -35,24 +28,21 @@
                 </div>
             </div>
 
-            <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.email.required && $v.password.required}" type="submit">Войти</button>
+            <button :disabled="disabled" class="button" type="submit">Войти</button>
 
-            
+            <Loader v-if="disabled"/>
 
-            <a class="link_recovery" @click="toggleRecoveryPasswordModal">Я не помню пароль</a>
-            <p class="link_noacc"> Нет аккаунта? <a class="link_reg" @click="toggleRegisterModal"> Создать </a></p>
-<Loader  v-if="disabled"/>
+            <router-link class="link" to="/recovery-password">Я не помню пароль</router-link>
+            <router-link class="link" to="/registration">Зарегистрироваться</router-link>
+
         </form>
- 
 
-    </div>
     </div>
 </template>
 
 <script>
   import { required, email, minLength, maxLength, and, helpers } from 'vuelidate/lib/validators'
   import Loader from './Loader'
- 
 
   const betweenLength = (min, max) => helpers.withParams(
     {
@@ -72,7 +62,6 @@
         password: '',
         messages: [],
         disabled: false,
-        showPassword: false,
       }
     },
     validations: {
@@ -102,25 +91,14 @@
           })
           if (rez) {
             this.onSuccess()
-            this.$router.push('/profile')
           }
           this.disabled = false
         }
-      },
-      toggleRegisterModal () {
-        this.$router.toggleRegisterModal
-      },
-      toggleRecoveryPasswordModal(){
-        this.$router.recoveryPasswordModal
-      },
+      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/variables.scss";
-@import "../assets/styles/_forms.scss";
-
-
-
+@import "../assets/styles/_forms.scss"
 </style>

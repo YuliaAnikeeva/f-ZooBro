@@ -1,8 +1,6 @@
 <template>
- <!-- <div class="container"> -->
-  <div class="border">
-    <h1>Регистрация</h1>
   <div class="form-registration">
+
     <form class="form" @submit.prevent="onSubmit">
         <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error }">
             <div class="instruction">Введите адрес электронной почты</div>
@@ -17,15 +15,8 @@
         </div>
           <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
                 <div class="input-block">
-                    
-                    <input type="password" v-model="password" :disabled="disabled" v-show="!showPassword" required>
-                    <input type="text" v-model="password" :disabled="disabled" v-show="showPassword" required>
-                    
+                    <input type="password" v-model="password" :disabled="disabled" required>
                     <label>Пароль</label>
-                     <div class="buttonShowPassword" @click="showPassword=!showPassword" >
-                      <div class="iconPassowordShow" v-show="showPassword"></div>
-                      <div class="iconPassowordHide" v-show="!showPassword"></div>
-                    </div>
                 </div>
                 <div class="error_block">
                     <div class="error" v-if="!$v.password.required">Введите пароль</div>
@@ -35,19 +26,10 @@
                     </div>
                 </div>
             </div>
-        <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.email.required && $v.password.required && $v.check.required}" type="submit">Далее</button>
-                 <p class="link_noacc"> Уже есть аккаунт?<a class="link_reg" @click="toggleLoginModal"> Войти </a></p>
-
-      <div class="check-block">
-      <input type="checkbox" id="check" v-model="check" required>
-      <label for="check" class="check-label">Даю согласие на обработку моих персональных данных</label>
-    </div>
+        <button :disabled="disabled" class="button" type="submit">Далее</button>
       <Loader v-if="disabled"/>
     </form>
-   
   </div>
-    </div>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -69,8 +51,6 @@
         password: '',
         disabled: false,
         messages: [],
-         showPassword: false,
-         check: false,
       }
     },
 
@@ -84,10 +64,8 @@
       password: {
         required,
         betweenLength: betweenLength(6, 18),
-      },
-      check:{
-        required,
       }
+
     },
 
     methods: {
@@ -101,36 +79,33 @@
           console.log('userRegister')
           const rez = await this.$store.dispatch('userRegister', {email, password})
           if (rez){
-            this.onSuccess();
-            
+            this.onSuccess()
           }
         }
         this.disabled = false
-      },
-       toggleLoginModal(){
-        this.loginModal = !this.loginModal
-      },
-      toggleRegistrationSuccessModal(){
-        this.registrationSuccessModal = !this.registrationSuccessModal
-      },
+      }
 
 
+
+      //     const rez  = await this.$store.dispatch('userRegister', {email, password})
+
+      //  }
+      //  if (rez) {
+      //       this.onSuccess()
+      //       this.$router.push('/login')
+      //     }
+      //     this.disabled = false
+      //   },
+
+
+
+        // created() {
+        //   this.$emit('ready')
+        // }
     }
    }
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/styles/_forms.scss";
-
-.buttonShowPassword{
-  width: 24px;
-  height: 24px;
- background: transparent;
-  position: absolute;
-  background-repeat: no-repeat;
-  right: calc(100% - 375px);
-  top: 33%;
-  border: none;
-  padding: 0;
-}
+@import "../assets/styles/_forms.scss"
 </style>

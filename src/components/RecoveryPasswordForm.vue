@@ -1,15 +1,13 @@
 <template>
-<div class="border">
-    <h1>Восстановление пароля</h1>
   <div class="form-recovery">
-    <!-- <div class="message_block">
+    <div class="message_block">
     <div v-if="status=='success'">
       <p class="message message--success">{{ msg }}</p>
     </div>
     <div v-else>
       <p v-if="status=='error'" class="message message--error">{{ msg }}</p>
       </div>
-      </div> -->
+      </div>
       <form  class="form" @submit.prevent="onSubmit" ref="form">
           <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error }">
               <div class="instruction" >Введите адрес электронной почты</div>
@@ -22,9 +20,9 @@
               <div class="error" v-if="!$v.email.email">Введите корректный e-mail</div>
           </div>
           </div>
-          <input class="button" :class="{ 'button-valid': $v.email.required}" type="submit" value="Далее" :disabled="disabled">
+          <input class="button" type="submit" value="Далее" :disabled="disabled">
       </form>
-    </div>
+    
   </div>
 </template>
 
