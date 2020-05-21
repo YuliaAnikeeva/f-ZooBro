@@ -22,6 +22,10 @@
                     <input type="text" v-model="password" :disabled="disabled" v-show="showPassword" required>
                     
                     <label>Пароль</label>
+                     <div class="buttonShowPassword" @click="showPassword=!showPassword" >
+                      <div class="iconPassowordShow" v-show="showPassword"></div>
+                      <div class="iconPassowordHide" v-show="!showPassword"></div>
+                    </div>
                 </div>
                 <div class="error_block">
                     <div class="error" v-if="!$v.password.required">Введите пароль</div>
@@ -31,13 +35,10 @@
                     </div>
                 </div>
             </div>
-        <button :disabled="disabled" class="button" type="submit">Далее</button>
+        <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.email.required && $v.password.required}" type="submit">Далее</button>
       <Loader v-if="disabled"/>
     </form>
-    <button class="buttonShowPassword" @click="showPassword=!showPassword" >
-                      <div class="iconPassowordShow" v-show="showPassword"></div>
-                      <div class="iconPassowordHide" v-show="!showPassword"></div>
-                    </button>
+   
   </div>
     </div>
   <!-- </div> -->
@@ -112,7 +113,7 @@
   position: absolute;
   background-repeat: no-repeat;
   right: calc(100% - 375px);
-  top: 46%;
+  top: 33%;
   border: none;
   padding: 0;
 }

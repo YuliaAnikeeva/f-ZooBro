@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <button :disabled="disabled" class="button" type="submit">Войти</button>
+            <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.email.required && $v.password.required}" type="submit">Войти</button>
 
             
 
@@ -108,10 +108,10 @@
         }
       },
       toggleRegisterModal () {
-        this.$root.toggleRegisterModal
+        this.$router.toggleRegisterModal
       },
       toggleRecoveryPasswordModal(){
-        this.$MainLayout.recoveryPasswordModal
+        this.$router.recoveryPasswordModal
       },
     }
   }

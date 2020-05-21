@@ -1,4 +1,5 @@
 @import "../assets/variables.scss";
+// @import "_fonts.scss";
 @import url('https://fonts.googleapis.com/css2?family=Montserrat');
 
 .border{
@@ -77,7 +78,7 @@ text-align: center;
     margin-top: 20px;
     padding: 15px 90px;
     align-self: center;
-    background-color:  $forms-btn-color;
+    background-color:  $forms-btn-disabled-color;
     background-image: url(../assets/paw.svg);
     background-position: calc(100% - 30px) 50%;
     background-repeat: no-repeat;
@@ -92,23 +93,24 @@ text-align: center;
     border: none;
 }
 
-.button:active {
+.button-valid:active {
     background-color: $forms-btn-hover-color;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+    // box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 
-.button:hover {
+.button-valid:hover {
     outline-color: transparent;
     background-color: $forms-btn-color;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 
-.button:disabled,
-.button[disabled]
-{
-    background-color: $forms-btn-disabled-color;
+.button-valid{
+    background-color: $forms-btn-color;
+    // box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 }
+
 
 .error {
     margin-top: 5px;
@@ -148,6 +150,10 @@ text-align: center;
 
 .input-block {
     position: relative;
+}
+.group-field{
+    display: flex;
+    flex-direction: column;
 }
 
 .group-field input {
@@ -237,6 +243,18 @@ background-position-y: center;
    background-repeat: no-repeat;
 background-image: url(../assets/passShow.svg);
 background-position-y: center;
+}
+.check-block{
+    position: absolute;
+    bottom: 50px;
+}
+.check-label{
+    position: relative;
+    font-family: Montserrat;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 15px;
 }
 
 @keyframes wobble-error {

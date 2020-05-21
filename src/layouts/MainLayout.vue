@@ -18,6 +18,8 @@
             |
             <!--<router-link to="/registration">registration</router-link>-->
             <a class="nav-link" @click="registerModal = true">registration</a>
+            |
+            <a class="nav-link" @click="registrationSuccessModal = true">RegistrationSuccess</a>
         </div>
         <nav class="nav-menu">
             <div class="logo">
@@ -70,6 +72,15 @@
                     @hide="recoveryPasswordModal = false">
                 <RecoveryPasswordForm :onSuccess="toggleRecoveryPasswordModal"/>
             </vue-modaltor>
+            <vue-modaltor
+                    :visible="registrationSuccessModal"
+                    
+                    :resize-width='{1920:"440px",940:"46.8%"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="registrationSuccessModal = false">
+                <RegistrationSuccess :onSuccess="toggleRegistrationSuccessModal"/>
+            </vue-modaltor>
         </template>
 
         <main>
@@ -84,14 +95,16 @@
   import LoginForm from '../components/LoginForm'
   import RegistrationForm from '../components/RegistrationForm'
   import RecoveryPasswordForm from '../components/RecoveryPasswordForm'
+  import RegistrationSuccess from '../components/RegistrationSuccess'
 
   export default {
     name: 'MainLayout',
-    components: { RecoveryPasswordForm, RegistrationForm, LoginForm },
+    components: { RecoveryPasswordForm, RegistrationForm, LoginForm, RegistrationSuccess },
     data: () => ({
       loginModal: false,
       registerModal: false,
       recoveryPasswordModal: false,
+      registrationSuccessModal: false,
     }),
     computed: {
       ...mapGetters([
@@ -106,6 +119,9 @@
       },
       toggleRegisterModal(){
         this.registerModal = !this.registerModal
+      },
+      toggleRegistrationSuccessModal(){
+        this.registrationSuccessModal = !this.registrationSuccessModal
       },
       toggleRecoveryPasswordModal(){
         this.recoveryPasswordModal = !this.recoveryPasswordModal
