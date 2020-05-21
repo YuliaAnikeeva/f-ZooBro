@@ -37,13 +37,13 @@
 
             <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.email.required && $v.password.required}" type="submit">Войти</button>
 
-            
 
-            <a class="link_recovery" @click="toggleRecoveryPasswordModal">Я не помню пароль</a>
-            <p class="link_noacc"> Нет аккаунта? <a class="link_reg" @click="toggleRegisterModal"> Создать </a></p>
+
+            <a class="link_recovery" @click="()=>{toggleRecoveryPassword()}">Я не помню пароль</a>
+            <p class="link_noacc"> Нет аккаунта? <a class="link_reg" @click="()=>{toggleRegister()}"> Создать </a></p>
 <Loader  v-if="disabled"/>
         </form>
- 
+
 
     </div>
     </div>
@@ -52,7 +52,7 @@
 <script>
   import { required, email, minLength, maxLength, and, helpers } from 'vuelidate/lib/validators'
   import Loader from './Loader'
- 
+
 
   const betweenLength = (min, max) => helpers.withParams(
     {
@@ -65,7 +65,7 @@
   export default {
     name: 'LoginForm',
     components: { Loader },
-    props: ['onSuccess'],
+    props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal'],
     data () {
       return {
         email: '',
@@ -107,11 +107,13 @@
           this.disabled = false
         }
       },
-      toggleRegisterModal () {
-        this.$router.toggleRegisterModal
+      toggleRegister () {
+        this.toggleLoginModal()
+        this.toggleRegisterModal()
       },
-      toggleRecoveryPasswordModal(){
-        this.$router.recoveryPasswordModal
+      toggleRecoveryPassword(){
+        this.toggleLoginModal()
+        this.toggleRecoveryPasswordModal()
       },
     }
   }
