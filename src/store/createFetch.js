@@ -50,7 +50,7 @@ export default async (fetchData, payload) => {
         })
         .then(json => {
           if (json.status === 1) {
-            return createAnswer(true, "post succeed");
+            return createAnswer(true, json.data);
           }
           if (json.status != 1) {
             const { message } = json;

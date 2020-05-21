@@ -1,15 +1,82 @@
 <template>
     <div class="container">
-        <h1>Оформление заявки</h1>
+        <template v-if="step !== 'step-4'">
+            <h1 class="title">Оформление заявки</h1>
 
-        <ProgresBar v-model="step"/>
+            <ProgresBar v-model="step"/>
+        </template>
 
-        <div class="onboarding-buttons">
-            <button class="onboarding-button onboarding-button_secondary" @click="()=>updateE(-1)" :disabled="loading">
+
+
+
+        <!--<p>-->
+        <!--<span>{{step}}</span> из <span>{{steps.length}}</span>-->
+        <!--</p>-->
+
+        <!--<div>-->
+        <!--<button @click="()=>updateE(-1)"> -</button>-->
+        <!--<button @click="()=>updateE(1)"> +</button>-->
+        <!--</div>-->
+
+        <!--<div>-->
+        <!--<br>-->
+        <!--<label>-->
+        <!--<input type="checkbox" v-model="enableValidation">-->
+        <!--Validation: {{ enableValidation }}-->
+        <!--</label>-->
+        <!--<br>-->
+        <!--<br>-->
+        <!--</div>-->
+
+        <div class="transition-box">
+            <div :class="{ abs: step !== 'step-1' }">
+                <transition name="translate">
+                    <div v-if="step === 'step-1'">
+                        <Step1 ref="form" :order.sync="order"/>
+                    </div>
+                </transition>
+            </div>
+
+            <div :class="{ abs: step !== 'step-2' }">
+                <transition name="translate">
+                    <div v-if="step === 'step-2'">
+                        <Step2 ref="form" :order.sync="order"/>
+                    </div>
+                </transition>
+            </div>
+
+            <div :class="{ abs: step !== 'step-3' }">
+                <transition name="translate">
+                    <div v-if="step === 'step-3'">
+
+                        <template v-if="loading">
+                            <div class="overlay">
+                                <Loader/>
+                            </div>
+                        </template>
+                        <Step3 ref="form" :order.sync="order"/>
+                    </div>
+                </transition>
+            </div>
+
+            <div :class="{ abs: step !== 'step-4' }">
+                <transition name="translate">
+                    <div v-if="step === 'step-4'">
+                        <SuccessOrder :order="order" @new="resetOrderHandler" />
+                    </div>
+                </transition>
+            </div>
+        </div>
+
+        <div  v-if="step !== 'step-4'" class="onboarding-buttons">
+
+            <div v-if="step === 'step-1'"></div>
+            <button v-else class="onboarding-button onboarding-button_secondary" @click="()=>updateE(-1)" :disabled="loading">
                 <div class="onboarding-button__inner">
                     <span class="onboarding-button__label">Назад</span>
                 </div>
             </button>
+
             <button class="onboarding-button" @click="submitHandler" :disabled="loading">
                 <div class="onboarding-button__inner">
                     <span class="onboarding-button__label">Вперед</span>
@@ -24,57 +91,6 @@
             </button>
         </div>
 
-        <p>
-            <span>{{step}}</span> из <span>{{steps.length}}</span>
-        </p>
-
-        <div>
-            <button @click="()=>updateE(-1)"> -</button>
-            <button @click="()=>updateE(1)"> +</button>
-        </div>
-
-        <div>
-          <br>
-          <label>
-            <input type="checkbox" v-model="enableValidation">
-            Validation: {{ enableValidation }}
-          </label>
-          <br>
-          <br>
-        </div>
-
-        <div class="transition-box">
-            <transition name="translate">
-                <div class="abs" v-if="step === 'step-1'">
-                    <Step1 ref="form" :order.sync="order" />
-                </div>
-            </transition>
-
-            <transition name="translate">
-                <div class="abs" v-if="step === 'step-2'">
-                    <Step2 ref="form" :order.sync="order" />
-                </div>
-            </transition>
-
-            <transition name="translate">
-                <div class="abs" v-if="step === 'step-3'">
-
-                  <template v-if="loading">
-                      <div class="overlay">
-                          <Loader />
-                      </div>
-                  </template>
-                  <Step3 ref="form" :order.sync="order" />
-                </div>
-            </transition>
-
-            <transition name="translate">
-                <div class="abs" v-if="step === 'step-4'">
-                    <p>данные отправлены...</p>
-                </div>
-            </transition>
-
-        </div>
 
     </div>
 </template>
@@ -85,6 +101,7 @@
   import Step1 from '../components/onboarding/orderSteps/Step1'
   import Step2 from '../components/onboarding/orderSteps/Step2'
   import Step3 from '../components/onboarding/orderSteps/Step3'
+  import SuccessOrder from '../components/onboarding/orderSteps/SuccessOrder'
   import Loader from '../components/Loader'
 
   export default {
@@ -93,6 +110,7 @@
       Step1,
       Step2,
       Step3,
+      SuccessOrder,
       ProgresBar,
       Loader,
     },
@@ -104,12 +122,13 @@
       steps: ['step-1', 'step-2', 'step-3', 'step-4'],
       order: {},
       loading: false,
-      enableValidation: false
+      enableValidation: true,
     }),
-    validations () {
-      return { ...this.v }
-    },
     methods: {
+      resetOrderHandler() {
+        this.order = {}
+        this.step = this.steps[0]
+      },
       onClick (e) {
         this.coords = e.get('coords')
       },
@@ -132,9 +151,13 @@
         if (this.step === 'step-3') {
           this.loading = true
           this.$store.dispatch('order/createOrder', this.order)
-            .then(isSuccess => {
+            .then(resp => {
               this.loading = false
-              if (isSuccess) {
+              if (resp) {
+                this.order = {
+                  ...this.order,
+                  id: resp.id
+                }
                 this.updateE(1)
               }
             })
@@ -149,17 +172,21 @@
 <style lang="scss" scoped>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
 
+    button {
+        outline-color: transparent;
+    }
+
     .overlay {
-      position: absolute;
-      background-color: rgba(255,255,255, 0.7);
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 555;
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.7);
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 555;
     }
 
     .onboarding {
@@ -233,53 +260,58 @@
         }
     }
 
-        .scale-in-hor-left {
-            animation: scale-in-hor-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-        }
+    .scale-in-hor-left {
+        animation: scale-in-hor-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    }
 
-        @keyframes scale-in-hor-left {
-            0% {
-                transform: scaleX(0);
-                transform-origin: 0% 0%;
-                opacity: 1;
-            }
-            100% {
-                transform: scaleX(1);
-                transform-origin: 0% 0%;
-                opacity: 1;
-            }
+    @keyframes scale-in-hor-left {
+        0% {
+            transform: scaleX(0);
+            transform-origin: 0% 0%;
+            opacity: 1;
         }
+        100% {
+            transform: scaleX(1);
+            transform-origin: 0% 0%;
+            opacity: 1;
+        }
+    }
 
-        .container {
-            width: 920px;
-            margin: 0 auto;
-        }
+    .container {
+        max-width: 940px;
+        margin: 0 auto;
+    }
 
-        .transition-box {
-            position: relative;
-        }
+    .transition-box {
+        position: relative;
+        overflow: hidden;
+    }
 
-        .translate-enter-active,
-        .translate-leave-active {
-            transition: all .5s;
-        }
+    .translate-enter-active,
+    .translate-leave-active {
+        transition: all .5s;
+    }
 
-        .translate-enter,
-        .translate-leave-active {
-            opacity: 0;
-        }
+    .translate-enter,
+    .translate-leave-active {
+        opacity: 0;
+    }
 
-        .translate-enter {
-            transform: translateX(31px);
-        }
+    .translate-enter {
+        transform: translateX(31px);
+    }
 
-        .translate-leave-active {
-            transform: translateX(-31px);
-        }
+    .translate-leave-active {
+        transform: translateX(-31px);
+    }
 
-        .abs {
-            position: absolute;
-            right: 0;
-            left: 0;
-        }
+    .abs {
+        position: absolute;
+        right: 0;
+        left: 0;
+    }
+
+    .title{
+        padding: 70px 10px;
+    }
 </style>

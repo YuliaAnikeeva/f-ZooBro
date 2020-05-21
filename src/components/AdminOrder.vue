@@ -1,28 +1,28 @@
 <template>
   <div class="order-data">
     <div class="order-data__id">
-      <span>Order id #{{order.id}}</span>
-      <span v-if="order.comment">Last comment: {{ order.comment }}</span>
+      <span>Номер заказа #{{order.id}}</span>
+      <span v-if="order.comment">Последний комментарий: {{ order.comment }}</span>
     </div>
     <div class="order-data__user">
       <ul>
         <li>
-          <h3>User's data</h3>
+          <h3>Данные заказчика</h3>
         </li>
         <li>
           Email:
           <span class="black">{{ order.user.email }}</span>
         </li>
         <li>
-          Name:
+          Имя:
           <span class="black">{{ order.user.name }}</span>
         </li>
         <li>
-          Phone number:
+          Телефонный номер:
           <span class="black">{{ order.user.phone }}</span>
         </li>
         <li>
-          Address:
+          Адрес:
           <span class="black">{{order.address}}</span>
         </li>
       </ul>
@@ -30,13 +30,30 @@
     <div class="order-data__pet" v-if="order.pet != null">
       <ul>
         <li>
-          <h3>Pet's data</h3>
+          <h3>Данные питомца</h3>
         </li>
-        <!-- <li>Name: <span class="black">{{petInfo.name}}</span></li>
-        <li>Gender: <span class="black">{{petInfo.gender}}</span></li>
-        <li>Size: <span class="black">{{petInfo.size}}</span></li>
-        <li>Breed: <span class="black">{{petInfo.breed}}</span></li>
-        <li>Food exceptions: <span class="black">{{petInfo.food_exceptions != null ? petInfo.food_exceptions : 'none'}}</span></li>-->
+        <li>
+          Имя:
+          <span class="black">{{ order.pet.name }}</span>
+        </li>
+        <li>
+          Пол:
+          <span class="black">{{ genderString }}</span>
+        </li>
+        <li>
+          Размер:
+          <span class="black">{{ sizeString }}</span>
+        </li>
+        <li>
+          Порода:
+          <span class="black">{{ order.pet.breed }}</span>
+        </li>
+        <li>
+          Аллергия:
+          <span
+            class="black"
+          >{{order.pet.food_exceptions != null ? order.pet.food_exceptions : 'отсутсвует'}}</span>
+        </li>
       </ul>
     </div>
     <div class="order-data__pet" v-else>
@@ -47,10 +64,7 @@
         Current status:
         <span class="black">{{selectedStatus ? statusString : order.status.title}}</span>
       </p>
-      <button
-        v-if="!changeStatus"
-        @click="changeStatus = !changeStatus"
-      >Изменить статус</button>
+      <button v-if="!changeStatus" @click="changeStatus = !changeStatus">Изменить статус</button>
       <select v-if="changeStatus" v-model="selectedStatus">
         <option :disabled="true" value="false">Выбор нового статуса</option>
         <option value="1">Новый</option>
@@ -74,15 +88,13 @@ export default {
     };
   },
   created() {
+    console.log(this.order.pet);
   },
   computed: {
     statusChanged() {
-      if (
-        this.changeStatus && this.selectedStatus != this.order.status_id
-      ) {
-        return true;
+      if (this.selectedStatus != false) {
+        return true
       }
-      return false;
     },
     petInfo() {
       return this.$store.getters["admin/getPetInfo"](this.order.pet_id);
@@ -92,37 +104,59 @@ export default {
     },
     statusString() {
       switch (this.selectedStatus) {
-        case '1': {
-          return 'Новый'
+        case "1": {
+          return "Новый";
         }
-        case '2': {
-          return 'Обрабатывается'
+        case "2": {
+          return "Обрабатывается";
         }
-        case '3': {
-          return 'В пути'
-        }        
-        case '4': {
-          return 'Выполнен'
+        case "3": {
+          return "В пути";
         }
-        case '5': {
-          return 'Отменен'
+        case "4": {
+          return "Выполнен";
+        }
+        case "5": {
+          return "Отменен";
         }
         default: {
-          return 'Что-то пошло не так'
+          return "Что-то пошло не так";
+        }
+      }
+    },
+    genderString() {
+      switch (this.order.pet.gender) {
+        case "f": {
+          return "сука";
+        }
+        case "m": {
+          return "кобель";
+        }
+      }
+    },
+    sizeString() {
+      switch (this.order.pet.size) {
+        case "1": {
+          return "маленький";
+        }
+        case "2": {
+          return "средний";
+        }
+        case "3": {
+          return "большой";
         }
       }
     }
   },
   methods: {
     updateOrder() {
-      this.order.status_id = this.selectedStatus
-      this.order.comment = 'updated by admin'
-      this.$store.dispatch('admin/updateOrder', this.order)
-        .then(res => {
-          if (res) {
-            this.changeStatus = false
-          }
-        })
+      this.order.status_id = this.selectedStatus;
+      this.order.comment = "updated by admin";
+      this.$store.dispatch("admin/updateOrder", this.order).then(res => {
+        if (res) {
+          this.changeStatus = false;
+        }
+      });
     }
   }
 };

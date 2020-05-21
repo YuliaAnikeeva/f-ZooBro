@@ -1,7 +1,8 @@
 <template>
     <form @submit.prevent="submitHandler" class="form_small">
         <div class="form-section">
-            <div class="form-group">
+
+            <div :class="{ 'field--error wobble-error': $v.user_name.$error }" class="form-group">
                 <label class="form-group__label">Ваше имя</label>
                 <div class="form-group__content">
                     <div class="input">
@@ -19,7 +20,8 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+
+            <div :class="{ 'field--error wobble-error': $v.email.$error }"  class="form-group">
                 <label class="form-group__label">E-mail</label>
                 <div class="form-group__content">
                     <div class="input">
@@ -39,7 +41,8 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+
+            <div :class="{ 'field--error wobble-error': $v.phone.$error }" class="form-group">
                 <label class="form-group__label">Телефон</label>
                 <div class="form-group__content">
                     <div class="input">
@@ -61,9 +64,11 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="form-section">
-            <div class="form-group form-group_with_link">
+
+            <div :class="{ 'field--error wobble-error': $v.address.$error }"  class="form-group form-group_with_link">
                 <label class="form-group__label">Адрес доставки</label>
                 <div class="form-group__content">
                     <div class="input input_type_address">
@@ -82,7 +87,8 @@
                     <a class="form-group__link" href="#" @click="showMap = !showMap">Зоны доставки</a>
                 </div>
             </div>
-            <div class="form-group">
+
+            <div :class="{ 'field--error wobble-error': ($v.date_delivery.$error || $v.time_delivery.$error) }"  class="form-group">
                 <label class="form-group__label">Желаемые дата и время доставки</label>
                 <div class="form-group__content">
                     <div class="input-group">
@@ -103,6 +109,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </form>
 </template>
@@ -160,6 +167,8 @@
 </script>
 
 <style lang="scss" scoped>
+    @import "@/assets/styles/_forms.scss";
+
     form {
         display: flex;
         flex-wrap: wrap;
@@ -218,6 +227,7 @@
 
             & .error {
                 padding: 5px 5px;
+                display: flex;
             }
         }
     }
