@@ -14,6 +14,10 @@
   export default {
     name: "App",
     components: {MainLayout},
+    metaInfo: {
+      title: 'Коробочка счастья',
+      titleTemplate: '%s | ZooBro'
+    },
     computed: {
       layout() {
         return (this.$route.meta.layout || 'main') + '-layout';
