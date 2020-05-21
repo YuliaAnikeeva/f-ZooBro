@@ -29,9 +29,9 @@
       steps: {
         type: Array,
         default: () => [
-          { value: 'step-1', label: 'Выберите формат заказа' },
-          { value: 'step-2', label: 'Данные питомца', error: true },
-          { value: 'step-3', label: 'Персональные данные'},
+          { value: 'step-1', label: 'Формат заказа' },
+          { value: 'step-2', label: 'Твои данные' },
+          { value: 'step-3', label: 'Данные твоего человека'},
           { value: 'step-4', label: 'Результат', hidden: true },
         ]
       },
@@ -58,8 +58,9 @@
 
 <style lang="scss" scoped>
     .progressbar {
-        display: flex;
-        font-size: 14px;
+      font-family: Montserrat, sans-serif;
+      display: flex;
+      font-size: 12px;
       margin-bottom: 50px;
     }
 
@@ -96,14 +97,13 @@
       }
 
       &__button {
-        width: 14px;
-        height: 14px;
+        width: 31px;
+        height: 31px;
         border: 2px solid #bdbdbd;
         border-radius: 100%;
         display: block;
         margin: 0 auto 10px auto;
         background-color: #fff;
-        padding: 5px;
         position: relative;
 
         &:after {
