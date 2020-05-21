@@ -59,8 +59,8 @@ flex-direction: column;
     margin: 20px 0;
     padding: 15px 90px;
     align-self: center;
-    background: $forms-btn-color;
-    background-image: url(/assets/paw.svg);
+    background-color:  $forms-btn-disabled-color;
+    background-image: url(~@/assets/paw.svg);
     background-position: calc(100% - 30px) 50%;
     background-repeat: no-repeat;
     opacity: 0.8;
@@ -81,6 +81,35 @@ flex-direction: column;
 .button:focus,
 .button:active {
     outline-color: transparent;
+}
+
+.button-link2{
+    margin-top: 30px;
+    padding: 15px 56px;
+    align-self: center;
+    background-color:  $forms-btn-color;
+    background-image: url(~@/assets/paw.svg);
+    background-position: calc(100% - 15px) 50%;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    border-radius: 10px;
+    font-family: Montserrat, serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    color: $forms-btn-text-color;
+    border: none;
+    cursor: default;
+}
+.button-link2:hover {
+    outline-color: transparent;
+    background-color: $forms-btn-color;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
+.button-link2:active {
+    background-color: $forms-btn-hover-color;
+    
 }
 
 .error {
@@ -181,6 +210,63 @@ flex-direction: column;
 .wobble-error {
     animation: wobble-error 0.8s both;
 }
+
+.buttonShowPassword{
+    width: 24px;
+    height: 24px;
+   background: transparent;
+    position: absolute;
+    background-repeat: no-repeat;
+    right: calc(100% - 375px);
+    top: 32%;
+    border: none;
+    padding: 0;
+    position: absolute;
+  }
+.iconPassowordHide{
+    width: 24px;
+  height: 24px;
+   background-repeat: no-repeat;
+background-image: url(~@/assets/passHide.svg);
+background-position-y: center;
+}
+
+.iconPassowordShow{
+    width: 24px;
+  height: 24px;
+   background-repeat: no-repeat;
+background-image: url(~@/assets/passShow.svg);
+background-position-y: center;
+}
+.check-block{
+    position: absolute;
+    bottom: 7%;
+}
+.check-label{
+    position: relative;
+    font-family: Montserrat;
+font-style: normal;
+font-weight: normal;
+font-size: 12px;
+line-height: 15px;
+}
+.round{
+    height: 94px;
+    width: 94px;
+    border-radius: 47px;
+    background-color: $forms-btn-color;
+    align-self: center;
+    margin-top: 75px;
+    margin-bottom: 80px;
+    background-image: url(~@/assets/check.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.form-success-registration{
+    display: flex;
+    flex-direction: column;
+}
+
 
 @keyframes wobble-error {
     0%,
