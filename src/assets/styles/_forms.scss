@@ -239,8 +239,8 @@ background-image: url(~@/assets/passShow.svg);
 background-position-y: center;
 }
 .check-block{
-    position: absolute;
-    bottom: 7%;
+    position: relative;
+    // bottom: 7%;
 }
 .check-label{
     position: relative;
@@ -265,6 +265,26 @@ line-height: 15px;
 .form-success-registration{
     display: flex;
     flex-direction: column;
+}
+.instruction-reg{
+    font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 13px;
+line-height: 18px;
+/* or 138% */
+margin-bottom: 20px;
+color: $forms-btn-color;
+}
+.instruction-reg2{
+    font-family: Montserrat;
+font-style: normal;
+font-weight: 500;
+font-size: 13px;
+line-height: 18px;
+/* or 138% */
+text-align: center;
+color: #949595;
 }
 
 

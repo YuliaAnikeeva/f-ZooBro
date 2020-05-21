@@ -110,6 +110,7 @@
       toggleRegisterModal () {
         this.$root.toggleRegisterModal
       },
+
       toggleRecoveryPasswordModal(){
         this.$MainLayout.recoveryPasswordModal
       },
