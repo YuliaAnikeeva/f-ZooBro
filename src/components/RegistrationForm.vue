@@ -35,7 +35,13 @@
                     </div>
                 </div>
             </div>
-        <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.email.required && $v.password.required}" type="submit">Далее</button>
+        <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.email.required && $v.password.required && $v.check.required}" type="submit">Далее</button>
+                 <p class="link_noacc"> Уже есть аккаунт?<a class="link_reg" @click="toggleLoginModal"> Войти </a></p>
+
+      <div class="check-block">
+      <input type="checkbox" id="check" v-model="check" required>
+      <label for="check" class="check-label">Даю согласие на обработку моих персональных данных</label>
+    </div>
       <Loader v-if="disabled"/>
     </form>
    
@@ -64,6 +70,7 @@
         disabled: false,
         messages: [],
          showPassword: false,
+         check: false,
       }
     },
 
@@ -77,8 +84,10 @@
       password: {
         required,
         betweenLength: betweenLength(6, 18),
+      },
+      check:{
+        required,
       }
-
     },
 
     methods: {
@@ -96,7 +105,10 @@
           }
         }
         this.disabled = false
-      }
+      },
+       toggleLoginModal(){
+        this.loginModal = !this.loginModal
+      },
 
 
     }
