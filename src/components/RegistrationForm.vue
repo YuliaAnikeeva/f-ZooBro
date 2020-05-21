@@ -101,13 +101,17 @@
           console.log('userRegister')
           const rez = await this.$store.dispatch('userRegister', {email, password})
           if (rez){
-            this.onSuccess()
+            this.onSuccess();
+            
           }
         }
         this.disabled = false
       },
        toggleLoginModal(){
         this.loginModal = !this.loginModal
+      },
+      toggleRegistrationSuccessModal(){
+        this.registrationSuccessModal = !this.registrationSuccessModal
       },
 
 

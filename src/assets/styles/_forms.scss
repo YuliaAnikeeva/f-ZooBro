@@ -95,6 +95,7 @@ text-align: center;
 
 .button-valid:active {
     background-color: $forms-btn-hover-color;
+    
     // box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -107,11 +108,60 @@ text-align: center;
 
 
 .button-valid{
+    
     background-color: $forms-btn-color;
     // box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
 }
+.button-link1{
+    margin-top: 30px;
+    padding: 15px 84.5px;
+    align-self: center;
+    
+    font-family: Montserrat, serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    color: $forms-btn-color;
+    opacity: 0.8;
+border: 1px solid #2289B5;
+box-sizing: border-box;
+border-radius: 10px;
+    cursor: default;
+}
+.button-link1:hover {
+    outline-color: transparent;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
 
-
+.button-link2{
+    margin-top: 30px;
+    padding: 15px 56px;
+    align-self: center;
+    background-color:  $forms-btn-color;
+    background-image: url(../assets/paw.svg);
+    background-position: calc(100% - 15px) 50%;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    border-radius: 10px;
+    font-family: Montserrat, serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    color: $forms-btn-text-color;
+    border: none;
+    cursor: default;
+}
+.button-link2:hover {
+    outline-color: transparent;
+    background-color: $forms-btn-color;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
+.button-link2:active {
+    background-color: $forms-btn-hover-color;
+    
+}
 .error {
     margin-top: 5px;
     align-self: flex-start;
@@ -246,7 +296,7 @@ background-position-y: center;
 }
 .check-block{
     position: absolute;
-    bottom: 50px;
+    bottom: 7%;
 }
 .check-label{
     position: relative;
@@ -255,6 +305,22 @@ font-style: normal;
 font-weight: normal;
 font-size: 12px;
 line-height: 15px;
+}
+.round{
+    height: 94px;
+    width: 94px;
+    border-radius: 47px;
+    background-color: $forms-btn-color;
+    align-self: center;
+    margin-top: 75px;
+    margin-bottom: 80px;
+    background-image: url(../assets/check.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.form-success-registration{
+    display: flex;
+    flex-direction: column;
 }
 
 @keyframes wobble-error {
