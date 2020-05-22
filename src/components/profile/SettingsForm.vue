@@ -3,7 +3,7 @@
     <form>
       <!-- email -->
       <div class="form-group email">
-        <label class="form__label" for="email">Email</label>
+        <label class="form__label" autocomplete="email" for="email">Email</label>
         <input type="text" name="email" class="form__input" v-model="email" />
         <div class="error" v-if="$v.email.$dirty && !$v.email.required">Обязательное поле</div>
         <div class="error" v-if="!$v.email.email">Введите действующий email</div>
@@ -11,26 +11,26 @@
       <!-- pass -->
       <div class="form-group pass">
         <label for="old-pass">Старый пароль</label>
-        <input type="password" name="old-pass" v-model="pass.old" />
+        <input type="password" autocomplete="current-password" name="old-pass" v-model="pass.old" />
         <label for="new-pass">Новый пароль</label>
-        <input type="password" name="new-pass" v-model="pass.new" />
+        <input type="password" name="new-pass" autocomplete="new-password" v-model="pass.new" />
         <label for="new-pass-dupl">Повторите новый пароль</label>
-        <input type="password" name="new-pass-dupl" v-model="pass.newDuplicate" />
+        <input type="password" name="new-pass-dupl" autocomplete="new-password" v-model="pass.newDuplicate" />
       </div>
       <!-- name -->
       <div class="form-group name">
         <label for="name">Имя</label>
-        <input type="text" name="name" v-model="name" />
+        <input type="text" name="name" autocomplete="name" v-model="name" />
       </div>
       <!-- phone -->
       <div class="form-group phone">
         <label for="phone">Телефон</label>
-        <input type="tel" name="phone" v-model.trim.number="phone" mask="+7 (###) ###-##-##" />
+        <input type="tel" name="phone" autocomplete="tel" v-model.trim.number="phone" mask="+7 (###) ###-##-##" />
       </div>
       <!-- address -->
       <div class="form-group address">
         <label for="address">Адрес доставки</label>
-        <textarea name="address" style="resize: none;" cols="30" rows="5" v-model="address"></textarea>
+        <textarea name="address" autocomplete="street-address" style="resize: none;" cols="30" rows="5" v-model="address"></textarea>
       </div>
     </form>
   </div>
