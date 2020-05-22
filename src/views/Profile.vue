@@ -18,8 +18,8 @@
     </div>
 
     <div v-if="activeTab == 'settings'" id="profile-settings">
-      <SettingsCard :profile="profileData" />
-      <!-- <SettingsForm :profile="profileData" /> -->
+      <SettingsCard v-if="!profileEditor" :profile="profileData" />
+      <SettingsForm v-else :profile="profileData" />
       <button @click="editProfile()">Изменить</button>
     </div>
 
@@ -65,7 +65,8 @@ export default {
       orders: [3, 5, 7, 12, 44],
       disabled: true,
       activeTab: "pets",
-      loader: false
+      loader: false,
+      profileEditor: false,
     };
   },
   methods: {
@@ -123,7 +124,7 @@ export default {
       });
     },
     editProfile() {
-      alert("Функция пока не работает :(");
+      this.profileEditor = true;
     }
   },
   computed: {
