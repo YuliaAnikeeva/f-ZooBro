@@ -11,8 +11,8 @@
       </ul>
     </div>
 
-    <div v-if="activeTab == 'pets' && pets.length > 1" id="profile-pets">
-      <Loader v-if="pets.length < 1" />
+    <div v-if="activeTab == 'pets' && pets.length > 0" id="profile-pets">
+      <Loader v-if="pets.length ==  0" />
       <PetCard v-for="(pet, index) in pets" :key="index" :pet="pet" />
       <PetCard :pet="emptyPet" />
     </div>
@@ -221,7 +221,6 @@ export default {
   &-loader {
     transition: 0.3s linear all;
     grid-area: block;
-    overflow-x: scroll;
   }
   &-settings,
   &-orders {
