@@ -15,12 +15,14 @@
 
 export default {
   name: 'RegistrationSuccess',
-
+    props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal'],
   methods: {
 toProfile(){
+  this.toggleRegistrationSuccessModal();
   this.$router.push('/profile');
 },
 toMain(){
+  this.toggleRegistrationSuccessModal();
   this.$router.push('/')
 },
   }

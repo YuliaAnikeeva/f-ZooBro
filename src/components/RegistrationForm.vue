@@ -36,7 +36,7 @@
                 </div>
             </div>
         <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.email.required && $v.password.required && $v.check.required}" type="submit">Далее</button>
-                 <p class="link_noacc"> Уже есть аккаунт?<a class="link_reg" @click="toggleLoginModal"> Войти </a></p>
+                 <p class="link_noacc"> Уже есть аккаунт?<a class="link_reg" @click="()=>{toggleLogin()}"> Войти </a></p>
 
       <div class="check-block">
       <input type="checkbox" id="check" v-model="check" required>
@@ -62,7 +62,7 @@
    export default {
     name: 'RegistrationForm',
     components: { Loader },
-    props: ['onSuccess'],
+    props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal'],
     data () {
       return {
         email: '',
@@ -99,19 +99,17 @@
         if(!this.$v.$invalid){
           const {email, password} = this
           console.log('userRegister')
-          const rez = await this.$store.dispatch('userRegister', {email, password})
+          const rez = await this.$store.dispatch('user/userRegister', {email, password})
           if (rez){
             this.onSuccess();
-            
+           this.toggleRegistrationSuccessModal();
           }
         }
         this.disabled = false
       },
-       toggleLoginModal(){
-        this.loginModal = !this.loginModal
-      },
-      toggleRegistrationSuccessModal(){
-        this.registrationSuccessModal = !this.registrationSuccessModal
+       toggleLogin () {
+        this.toggleRegisterModal()
+        this.toggleLoginModal()
       },
 
 
