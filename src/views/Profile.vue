@@ -19,8 +19,8 @@
 
     <div v-if="activeTab == 'settings'" id="profile-settings">
       <SettingsCard v-if="!profileEditor" :profile="profileData" />
-      <SettingsForm v-else :profile="profileData" />
-      <button @click="editProfile()">Изменить</button>
+      <SettingsForm v-else :profile="profileData"  :editStatus.sync="profileEditor"/>
+      <button v-if="!profileEditor" @click="editProfile()">Изменить</button>
     </div>
 
     <div v-if="activeTab == 'orders'" id="profile-orders">
@@ -219,7 +219,6 @@ export default {
   &-orders,
   &-settings,
   &-loader {
-    transition: 0.3s linear all;
     grid-area: block;
   }
   &-settings,
@@ -304,7 +303,6 @@ textarea {
 .active-tab {
   background-color: #2289b5;
   color: white;
-  transition: 0.2s linear all;
 }
 
 @media screen and (max-width: 1440px) {
