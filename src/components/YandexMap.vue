@@ -37,7 +37,7 @@
             <div id="message"></div>
             <div ref="address" id="address"></div>
 
-            <button id="btn-adr" class="bnone" @click="()=>adr()">123</button>
+            <button id="btn-adr" class="bnone" @click="()=>adr()">забрать адрес</button>
         </div>
 
     </div>
@@ -50,10 +50,13 @@
 <script>
   export default {
     name: 'YandexMap',
+    props: ['updateAddress'],
     methods: {
       adr () {
         console.log('adr')
-        console.log(this.$refs.address.textContent)
+        const adr = this.$refs.address.textContent
+        console.log(adr)
+        this.updateAddress(adr)
       },
     },
     mounted () {
