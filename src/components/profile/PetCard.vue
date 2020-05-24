@@ -3,7 +3,7 @@
     <img src="@/assets/profile-pic/default-avatar.png" alt="default avatar" />
     <span class="card__name">
       <p>{{ pet.name }}</p>
-      <p v-if="!pet.empty" class="edit">Изменить данные</p>
+      <p v-if="!pet.empty" @click="changeData()" class="edit">Изменить данные</p>
     </span>
     <span class="label">Порода:</span>
     <span class="text">{{ pet.breed }}</span>
@@ -15,7 +15,7 @@
     <span class="text">{{ sizeString }}</span>
     <span class="label">Аллергия:</span>
     <span class="text">{{ pet.food_exceptions }}</span>
-    <button v-if="!pet.empty">
+    <button v-if="!pet.empty" @click="makeOrder()">
       Заказать коробочку
       <svg
         width="30"
@@ -74,6 +74,12 @@ export default {
           }
         });
       });
+    },
+    makeOrder() {
+      this.$router.push('order')
+    },
+    changeData() {
+      alert('Функция дорабатывается')
     }
   },
   computed: {

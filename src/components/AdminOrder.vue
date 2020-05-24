@@ -126,7 +126,7 @@ export default {
     },
     genderString() {
       switch (this.order.pet.gender) {
-        case "f": {
+        case "w": {
           return "сука";
         }
         case "m": {
