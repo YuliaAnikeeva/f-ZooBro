@@ -220,14 +220,15 @@
         height: 65px;
         background: #464451;
         display: grid;
-        grid-template-columns: repeat(2, max-content);
-        justify-content: space-between;
+        grid-template-columns: 1fr 1fr;
+        justify-content: space-around;
+        justify-items: center;
 
         .logo {
+            align-self: center;
             display: grid;
             margin: 0;
             color: #fff;
-            padding-left: 240px;
             align-items: center;
 
         }

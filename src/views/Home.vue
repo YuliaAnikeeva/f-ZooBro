@@ -112,8 +112,8 @@
         </div>
       </div>
       <div class="how-use">
-        <div class="block__head">
-          <h4 class="block__head-text">Как использовать коробку</h4>
+        <div class="how-use__head">
+          <h4 class="how-use__head-text">Как использовать коробку</h4>
         </div>
         <div class="how-use__container">
           <div class="how-use__content">
@@ -155,12 +155,12 @@
             </p>
           </div>
           <div class="social-mission__content-image">
-            <div class="social-mission__image social-mission__image_one">
-              <img src="../assets/social-dogs-1.png" alt="">
+            <div class="social-mission__image">
+              <img class="social-mission__image_one" src="../assets/social-dogs-1.png" alt="">
             </div>
-            <div class="social-mission__image social-mission__image_two">
-              <img src="../assets/social-dogs-2.png" alt="">
-              <img src="../assets/social-dogs-3.png" alt="">
+            <div class="social-mission__image">
+              <img class="social-mission__image_two" src="../assets/social-dogs-2.png" alt="">
+              <img class="social-mission__image_two" src="../assets/social-dogs-3.png" alt="">
             </div>
           </div>
         </div>
@@ -297,46 +297,6 @@ footer,
 main {
   display: block;
 }
-@media screen and (max-width: 575px) {
-  .landing-container {
-    &__header {
-      background-color: #217121;
-      width: 100%;
-      height: 100px;
-    }
-  }
-}
-
-@media screen and (min-width: 576px) and (max-width: 767px) {
-  .landing-container {
-    &__header {
-      background-color: #fafa;
-      width: 100%;
-      height: 100px;
-    }
-  }
-}
-
-@media screen and (max-width: 921px) and (min-width: 768px) {
-  .landing-container {
-    &__header {
-      background-color: #aa222f;
-      width: 100%;
-      height: 100px;
-    }
-  }
-}
-
-@media screen and (max-width: 1280px) and (min-width: 922px) {
-  .landing-container {
-    &__header {
-      background-color: #f2222f;
-      width: 100%;
-      height: 100px;
-    }
-  }
-}
-
 
   .paw {
   display: block;
@@ -347,49 +307,6 @@ main {
     height: 20px;
   }
   }
-  // .arrow {
-  //     display: grid;
-  //     height: 100%;
-  //     align-items: center;
-
-  //   &__content {
-  //     position: relative;
-  //     margin-bottom: 100px;
-  //     display: block;
-  //     width: 160px;
-  //     height: 0px;
-  //     border-top: 1px solid #000000;
-  //     box-sizing: border-box;
-
-  //     &_rotate30 {
-  //       transform: rotate(30deg);
-  //     }
-  //     &_rotate-30 {
-  //       transform: rotate(-30deg);
-  //     }
-  //   }
-  //   &__content::after {
-  //     content: '';
-  //     position: absolute;
-  //     width: 22px;
-  //     height: 1px;
-  //     top: -8.5px;
-  //     right: -3px;
-  //     background-color: #000;
-  //     transform: rotate(45deg);
-  //   }
-  //   &__content::before {
-  //     content: '';
-  //     position: absolute;
-  //     width: 22px;
-  //     height: 1px;
-  //     top: 6.7px;
-  //     right: -3px;
-  //     background-color: #000;
-  //     transform: rotate(-45deg);
-  //   }
-
-  // }
 
   .bg-content {
   position: fixed;
@@ -556,14 +473,14 @@ main {
     &_yelow-bone {
       position: absolute;
       width: max-content;
-      left: -150px;
+      right: 0;
       top: 30px;
       z-index: 100;
     }
     &_dog {
       position: absolute;
       width: max-content;
-      left: -80px;
+      right: 50px;
       top: 280px;
       z-index: 101;
     }
@@ -629,7 +546,7 @@ main {
     display: grid;
     grid-template-columns: 5fr 1fr;
     align-items: center;
-    background: #FFCC01;
+    background: $buy-btn-color;
     border-radius: 15px;
     border: none;
   }
@@ -655,7 +572,7 @@ main {
   justify-content: center;
   grid-template-rows: max-content max-content;
   width: 100%;
-  background: url('../assets/what-in-box_bg.svg');
+  background:linear-gradient(158.25deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
   box-sizing: border-box;
   padding: 120px 0 93px;
 
@@ -677,7 +594,7 @@ main {
   }
   &__container {
     display: grid;
-    grid-template-columns: 24% 50% 24%;
+    grid-template-columns: 314px 774px 314px;
     margin-bottom: 70px;
     z-index: 6;
     justify-content: center;
@@ -696,16 +613,14 @@ main {
     align-content: flex-end;
   }
   &__content-image-container {
-    position: relative;
-    padding: 120px 0 0 0;
     display: grid;
-    align-items: center;
   }
   &__content-image {
-    height: 100%;
-    width: 100%;
     display: grid;
-    background: url('../assets/what-in-box_content.png') no-repeat;
+    width: 828.18px;
+    height: 709.89px;
+    display: grid;
+    background: url('../assets/what-in-box_content.svg') no-repeat;
     background-size: contain;
   }
   &__content-head {
@@ -735,25 +650,45 @@ main {
   padding: 150px 0;
   display: grid;
   width: 100%;
-  grid-template-columns: max-content;
   justify-content: center;
   background: #fff;
   z-index: 6;
 
+  &__head {
+  display: grid;
+  justify-content: center;
+  margin-bottom: 120px;
+  }
+  &__head-text {
+    width: max-content;
+    height: 40px;
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 39px;
+    color: $default-text-color;
+  }
   &__container {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(5, max-content);
+    grid-template-columns: repeat(5, 190px);
     column-gap: 60px;
   }
   &__content {
     display: grid;
+    &:first-child  {
+      .how-use__content-text {
+        margin-top: 40px;
+      }
+    }
   }
 
   &__content-image {
     width: max-content;
   }
   &__content-text {
-    width: 190px;
+    width: 100%;
     font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -761,11 +696,13 @@ main {
     line-height: 20px;
     text-align: center;
     color: #464451;
+
   }
   &__content-arrow {
     display: grid;
     justify-content: center;
     align-items: center;
+    height: 70%;
     z-index: 6;
     &_rotate-right {
       transform: rotate(20deg);
@@ -784,7 +721,8 @@ main {
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
   &__container {
     display: grid;
-    grid-template-columns: 29% 37%;
+    grid-template-columns: max-content max-content;
+    grid-template-rows: max-content;
     justify-content: center;
     column-gap: 60px;
     z-index: 6;
@@ -792,6 +730,7 @@ main {
   &__content {
     display: grid;
     height: 100%;
+    width: 565px;
     align-content: start;
     text-align: left;
 
@@ -803,17 +742,23 @@ main {
     font-size: 18px;
     line-height: 30px;
     color: #FFFFFF;
+    margin: 0;
   }
 
   &__content-image {
     display: grid;
-    grid-template-columns: max-content max-content;
+    grid-template-columns: 442px 238px;
+    column-gap: 10px;
+    height: 340px;
   }
   &__image {
     display: grid;
 
     &_one {
-
+      width: 100%;
+    }
+    &_two {
+      width: 100%;
     }
   }
 }
@@ -832,10 +777,13 @@ main {
   }
   &__image-container {
     display: grid;
-    grid-template-columns: 1fr 2fr 3fr 2fr 1fr;
-    column-gap: 10px;
+    grid-template-columns: 12% 20% 30% 20% 12%;
+    column-gap: 5px;
     align-items: center;
-    justify-items: center;
+    justify-content: center;
+  }
+  &__image {
+    width: 100%;
   }
   &__text {
     margin: 80px auto 60px auto;
@@ -854,14 +802,12 @@ main {
   padding: 170px 0 35px 0;
   display: grid;
   grid-template-rows: 3fr 318px;
-  z-index: 6;
   grid-template-columns: 100%;
-  row-gap: 153px;
 
   &__image {
-    background: url(/img/faq_dog.a8a2bd2e.png) no-repeat;
+    background: url('../assets/faq_dog.png') no-repeat;
     background-size: contain;
-    width: 50%;
+    width: 60%;
     justify-self: right;
   }
   &__container {
@@ -869,11 +815,13 @@ main {
     background: #FBFBFB;
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
     border-radius: 80px;
-    padding: 100px 124px 100px;
+    padding: 100px  0 100px;
     display: grid;
-    grid-template-rows: 4em repeat(4, 4em max-content);
+    grid-template-rows: 4em repeat(4, 1fr max-content);
+    grid-template-columns: 70%;
     row-gap: .8em;
     z-index: 6;
+    justify-content: center;
     justify-self: center;
   }
   &__head {
@@ -887,11 +835,11 @@ main {
   }
   &__question {
     display: grid;
-    grid-template-columns: 4fr 1fr;;
+    grid-template-columns: 1fr max-content;;
     justify-content: space-between;
     align-content: center;
     width: 100%;
-    background: #2289B5;
+    background: $forms-btn-color;
     border-radius: 10px;
     font-family: Montserrat, sans-serif;
     font-style: normal;
@@ -899,9 +847,8 @@ main {
     font-size: 18px;
     line-height: 22px;
     color: #FFFFFF;
-    padding: 0 20px;
+    padding: 12px 20px;
     text-align: left;
-    margin: 0 0 10px 0;
   }
   &__answer {
     overflow: hidden;
@@ -925,7 +872,8 @@ main {
     display: grid;
     align-items: center;
     justify-items: end;
-    padding-right: 10px;
+    padding: 12px 20px;
+    pa
 
     & i {
       position: relative;
@@ -958,21 +906,22 @@ main {
 }
 .footer {
   position: relative;
-  padding: 32px 0 33px 253px;
+  padding: 32px 0 33px;
   z-index: 1000;
   background: #464451;
   display: grid;
-  grid-template-columns: 80% 20%;
+  grid-template-columns: 70% 30%;
   justify-content: space-between;
+  overflow: hidden;
   &__container {
     display: grid;
-    grid-template-columns: 20% 20%;
-    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
   }
   &__contacts {
     display: grid;
     grid-template-rows: repeat(2, max-content);
     text-align: left;
+    justify-self: end;
   }
   &__contacts-row {
     font-family: Montserrat, sans-serif;
@@ -993,28 +942,87 @@ main {
 .social-icons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  
+  justify-self: center;
+  column-gap: 55px;
 }
-@keyframes collapse {
-  from {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
+
 @media screen and (max-width: 1440px) {
+
+  .order {
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  background: linear-gradient(163.79deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
+
+    &__container {
+      padding-top: 161px;
+      padding-left: 172px;
+    }
+    &__text {
+      width: 605px;
+    }
+
+    &__images-content {
+      &_yelow-bone {
+        width: calc(956px + 1%);
+        left: -190px;
+        top: 100px;
+      }
+      &_dog {
+        width: calc(725px + 1%);
+        left: -150px;
+        top: 380px;
+      }
+    }
+  }
+  .how-work {
+
+  }
+  .what-in-box {
+    &__container {
+    display: grid;
+    grid-template-columns: 314px 471px 314px;
+    margin-bottom: 70px;
+    z-index: 6;
+    justify-content: center;
+  }
+    &__content-image {
+      margin-left: -120px;
+      background: url('../assets/what-in-box_content-1440.svg') no-repeat;
+      width: 712.18px;
+      height: 652.26px;
+    }
+  }
+  .how-use {
+    &__container {
+      column-gap: 40px;
+    }
+  }
   .social-mission {
     &__container {
-      grid-template-columns: 50%;
+      grid-template-columns: 23% 43.09%;
       justify-items: center;
-      row-gap: 10px;
+      column-gap: 150px;
     }
     &__content {
-      width: 685px;
+      width: 348px;
       justify-self: center;
     }
     &__content-image {
+    display: grid;
+    grid-template-columns: 387px 238px;
+    column-gap: 10px;
+  }
+    &__image {
+      display: grid;
+      height: 293px;      
+
+      &_one {
+        height: 293px;
+        width: 100%;
+      }
+      &_two {
+        height: 100%;
+      }
     }
   }
 }
