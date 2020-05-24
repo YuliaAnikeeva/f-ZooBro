@@ -275,7 +275,7 @@
 export default {
   name: 'Home',
   metaInfo: {
-    title: 'Home'
+    title: 'Лакомства и игрушки для собак'
   },
   data: () => ({
     answerFirst: true,
@@ -1014,7 +1014,7 @@ main {
   }
     &__image {
       display: grid;
-      height: 293px;      
+      height: 293px;
 
       &_one {
         height: 293px;
