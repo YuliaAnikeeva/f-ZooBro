@@ -7,14 +7,16 @@ export default {
     email: null,
     is_admin: null,
     phone: null,
+    address: null,
   },
   mutations: {
     setUserInfo (state, payload) {
-      let { name, email, is_admin, phone } = payload
+      let { name, email, is_admin, phone, address } = payload
       state.name = name
       state.email = email
       state.is_admin = is_admin
       state.phone = phone
+      state.address = address
     },
     setUserName (state, payload) {
       state.name = payload
@@ -66,9 +68,9 @@ export default {
         .catch(
           error => {
             console.error('Ошибка получения пользовательских данных', error)
-            commit('clearSnackbar')
-            commit('setSnackbarMsg', 'Не удалось получить данные')
-            commit('setSnackbarType', 'error')
+            commit('clearSnackbar', null, { root: true })
+            commit('setSnackbarMsg', 'Не удалось получить данные', { root: true })
+            commit('setSnackbarType', 'error', { root: true })
             return false
           }
         )
@@ -137,16 +139,16 @@ export default {
           json => {
             if (json.status === 1) {
               const { data } = json
-              commit('clearSnackbar')
-              commit('setSnackbarMsg', 'Успешная регситрация')
-              commit('setSnackbarType', 'success')
+              commit('clearSnackbar', null, { root: true })
+              commit('setSnackbarMsg', 'Успешная регистрация', { root: true })
+              commit('setSnackbarType', 'success', { root: true })
               console.log('Успешная регситрация', data)
               return true
             } else {
               const { message } = json
-              commit('clearSnackbar')
-              commit('setSnackbarMsg', json.message)
-              commit('setSnackbarType', 'error')
+              commit('clearSnackbar', null, { root: true })
+              commit('setSnackbarMsg', json.message, { root: true })
+              commit('setSnackbarType', 'error', { root: true })
               console.error(message)
               return false
             }
@@ -154,10 +156,10 @@ export default {
         )
         .catch(
           error => {
-            console.error('Ошибка регситрации пользователя', error)
-            commit('clearSnackbar')
-            commit('setSnackbarMsg', 'Что-то пошло не так...')
-            commit('setSnackbarType', 'error')
+            console.error('Ошибка регистрации пользователя', error)
+            commit('clearSnackbar', null, { root: true })
+            commit('setSnackbarMsg', 'Что-то пошло не так...', { root: true })
+            commit('setSnackbarType', 'error', { root: true })
             return false
           }
         )
@@ -218,7 +220,8 @@ export default {
       return {
         name: state.name,
         email: state.email,
-        phone: state.phone
+        phone: state.phone,
+        address: state.address,
       }
     }
   }
