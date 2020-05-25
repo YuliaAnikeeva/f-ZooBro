@@ -75,7 +75,7 @@ export default {
           }
         )
     },
-    async userUpdate ({ commit, getters }, payload) {
+    async userUpdate ({ commit, getters, rootGetters }, payload) {
       return fetch(`${baseURL}/v1/user/update`,
         {
           mode: 'cors',
@@ -84,7 +84,7 @@ export default {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': '*',
-            'Authorization': getters.userToken,
+            'Authorization': rootGetters.token,
           },
           method: 'POST',
           body: JSON.stringify(payload)
