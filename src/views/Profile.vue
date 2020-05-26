@@ -13,8 +13,17 @@
 
     <div v-if="activeTab == 'pets' && pets.length > 0" id="profile-pets">
       <Loader v-if="pets.length ==  0" />
-      <PetCard v-for="(pet, index) in pets" :key="index" :pet="pet" />
-      <PetCard :pet="emptyPet" />
+      <template v-if="!petEditor">
+        <PetCard v-for="(pet, index) in pets" :key="index" :pet="pet" @focus:pet="onFocusPet" />
+        <PetCard :pet="emptyPet" @add:pet="onAddPet" />
+      </template>
+      <template v-else>
+        <PetForm
+          :pet="petTemp"
+          @save="onSavePet"
+          @close="petEditor = false"
+          />
+      </template>
     </div>
 
     <div v-if="activeTab == 'settings'" id="profile-settings">
@@ -52,13 +61,14 @@ import OrderCard from "@/components/profile/OrderCard";
 import SettingsCard from "@/components/profile/SettingsCard";
 import SettingsForm from "@/components/profile/SettingsForm";
 import Loader from "@/components/Loader";
+import PetForm from "@/components/profile/PetForm";
 
 export default {
   name: "Profile",
   metaInfo: {
     title: "Profile"
   },
-  components: { PetCard, OrderCard, SettingsCard, SettingsForm, Loader },
+  components: { PetCard, OrderCard, SettingsCard, SettingsForm, Loader, PetForm },
   data() {
     return {
       pets: [],
@@ -67,6 +77,8 @@ export default {
       activeTab: "pets",
       loader: false,
       profileEditor: false,
+      petEditor: false,
+      petTemp: {},
     };
   },
   methods: {
@@ -125,6 +137,27 @@ export default {
     },
     editProfile() {
       this.profileEditor = true;
+    },
+    onFocusPet(pet) {
+      this.petTemp = pet;
+      this.petEditor = true;
+    },
+    onAddPet() {
+      this.petTemp = {};
+      this.petEditor = true;
+    },
+    async onSavePet(pet) {
+      this.loader = true;
+      let res;
+      if (pet.id) {
+        res = await this.$store.dispatch("pet/updatePet", pet)
+      } else {
+        res = await this.$store.dispatch("pet/createPet", pet)
+      }
+      if (res) {
+        this.petEditor = false;
+      }
+      this.loader = false;
     }
   },
   computed: {
