@@ -7,14 +7,16 @@ export default {
     email: null,
     is_admin: null,
     phone: null,
+    address: null,
   },
   mutations: {
     setUserInfo (state, payload) {
-      let { name, email, is_admin, phone } = payload
+      let { name, email, is_admin, phone, address } = payload
       state.name = name
       state.email = email
       state.is_admin = is_admin
       state.phone = phone
+      state.address = address
     },
     setUserName (state, payload) {
       state.name = payload
@@ -73,7 +75,7 @@ export default {
           }
         )
     },
-    async userUpdate ({ commit, getters }, payload) {
+    async userUpdate ({ commit, getters, rootGetters }, payload) {
       return fetch(`${baseURL}/v1/user/update`,
         {
           mode: 'cors',
@@ -82,7 +84,7 @@ export default {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': '*',
-            'Authorization': getters.userToken,
+            'Authorization': rootGetters.token,
           },
           method: 'POST',
           body: JSON.stringify(payload)
@@ -218,7 +220,8 @@ export default {
       return {
         name: state.name,
         email: state.email,
-        phone: state.phone
+        phone: state.phone,
+        address: state.address,
       }
     }
   }
