@@ -2,25 +2,8 @@
     <div class="container container_onboarding">
         <template v-if="step !== 'step-4'">
             <h1 class="title onboarding__title">Оформление заказа</h1>
-            
-            <div class="order-info" :class="{ 'order-info_invisible': step == 'step-1' }">
-                <div class="order-info__box">
-                    <img src="@/assets/box.png" alt="">
-                </div>
-                <div class="order-info__pricing-plan">
-                    {{ selectedPricingPlan.title }}
-                </div>
-                <div class="order-info__cost">
-                    <div class="order-info__cost-value">{{selectedPricingPlan.cost}}</div>
-                    <div class="order-info__cost-currency">
-                        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.22708 15.1361H4.09076V17.591C4.09076 17.7104 4.12898 17.8082 4.20586 17.8846C4.28254 17.9615 4.38056 18 4.49997 18H6.6348C6.74559 18 6.84146 17.9615 6.92244 17.8846C7.00342 17.8082 7.04379 17.7104 7.04379 17.591V15.1361H13.4997C13.6189 15.1361 13.717 15.0981 13.7938 15.0212C13.8707 14.9444 13.9089 14.8465 13.9089 14.7271V13.0906C13.9089 12.9719 13.8707 12.8734 13.7938 12.797C13.7172 12.7201 13.6189 12.6816 13.4997 12.6816H7.04358V11.173H11.3902C13.0946 11.173 14.4857 10.6537 15.5642 9.61345C16.6422 8.57434 17.1814 7.23205 17.1814 5.58651C17.1814 3.94208 16.6422 2.59975 15.5642 1.55958C14.486 0.520423 13.0946 0 11.3902 0H4.49975C4.38031 0 4.2825 0.0384257 4.20565 0.114889C4.12898 0.191776 4.09055 0.290222 4.09055 0.408992V8.45038H1.22708C1.10767 8.45038 1.00982 8.49078 0.932972 8.57172C0.856332 8.6527 0.817871 8.74857 0.817871 8.85933V10.764C0.817871 10.8834 0.856085 10.9813 0.932972 11.0581C1.00986 11.135 1.10746 11.173 1.22708 11.173H4.09076V12.6816H1.22708C1.10767 12.6816 1.00982 12.72 0.932972 12.797C0.856332 12.8734 0.817871 12.9717 0.817871 13.0906V14.727C0.817871 14.8465 0.856085 14.9443 0.932972 15.0212C1.00982 15.0981 1.10763 15.1361 1.22708 15.1361ZM7.04358 2.72329H11.1345C12.0378 2.72329 12.7664 2.9874 13.3205 3.5158C13.8744 4.04423 14.1515 4.7348 14.1515 5.58673C14.1515 6.43908 13.8744 7.12986 13.3205 7.65766C12.7664 8.18651 12.0378 8.45063 11.1345 8.45063H7.04358V2.72329Z" fill="#464451"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
 
-            <ProgresBar v-model="step"/>
+            <ProgresBar v-model="step" :info="progresbarOrderInfo" />
         </template>
 
 
@@ -160,6 +143,12 @@
                     cost: 4200
                 }
             }[this.order.price_id] || {}
+        },
+        progresbarOrderInfo () {
+            return [
+                this.order.price_id && `${this.selectedPricingPlan.title}, ${this.selectedPricingPlan.cost} руб`,
+                this.order.pet_name
+            ]
         }
     },
     methods: {
@@ -284,8 +273,6 @@
                 position: absolute;
                 left: 100%;
                 fill: #fff;
-                stroke: #C8A20F;
-                stroke-width: 1px;
                 height: 100%;
                 margin-left: 10px;
             }
@@ -357,8 +344,9 @@
     }
 
     .title{
-        padding: 70px 10px 30px 10px;
+        padding: 85px 10px 50px 10px;
         font-family: Montserrat, sans-serif;
+        font-weight: 600;
     }
 
     .order-info {
