@@ -4,14 +4,14 @@
       <span>Номер заказа #{{order.id}}</span>
       <span v-if="order.comment">Последний комментарий: {{ order.comment }}</span>
     </div>
-    <div class="order-data__user">
+    <div class="order-data__user" v-if="order.user != null">
       <ul>
         <li>
           <h3>Данные заказчика</h3>
         </li>
         <li>
           Email:
-          <span class="black">{{ order.user.email }}</span>
+          <span class="black">{{ order.user.email ? order.user.email : 'No email' }}</span>
         </li>
         <li>
           Имя:
@@ -87,13 +87,10 @@ export default {
       changeStatus: false
     };
   },
-  created() {
-    console.log(this.order.pet);
-  },
   computed: {
     statusChanged() {
       if (this.selectedStatus != false) {
-        return true
+        return true;
       }
     },
     petInfo() {
@@ -155,6 +152,7 @@ export default {
       this.$store.dispatch("admin/updateOrder", this.order).then(res => {
         if (res) {
           this.changeStatus = false;
+          this.selectedStatus = false;
         }
       });
     }

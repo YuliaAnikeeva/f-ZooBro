@@ -78,10 +78,6 @@ export default {
       }
     }
   },
-  methods: {},
-  created() {
-    console.log(this.orders);
-  }
 };
 </script>
 <style lang="scss" scoped>
