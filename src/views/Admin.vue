@@ -85,8 +85,7 @@ export default {
 <style lang="scss" scoped>
 .admin {
   font-size: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: Montserrat, serif;
   display: grid;
   grid-template-areas:
     "header header"
