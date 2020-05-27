@@ -2,7 +2,7 @@
     <div class="container container_onboarding">
         <template v-if="step !== 'step-4'">
             <h1 class="title onboarding__title">Оформление заказа</h1>
-            
+
             <div class="order-info" :class="{ 'order-info_invisible': step == 'step-1' }">
                 <div class="order-info__box">
                     <img src="@/assets/box.png" alt="">
@@ -79,7 +79,7 @@
             <div :class="{ abs: step !== 'step-4' }">
                 <transition name="translate">
                     <div v-if="step === 'step-4'">
-                        <SuccessOrder :order="order" @new="resetOrderHandler" />
+                        <SuccessOrder :order="order" :isUserLoggedIn="isUserLoggedIn" @new="resetOrderHandler" />
                     </div>
                 </transition>
             </div>
@@ -160,7 +160,10 @@
                     cost: 4200
                 }
             }[this.order.price_id] || {}
-        }
+        },
+        isUserLoggedIn () {
+            return this.$store.getters["isUserLoggedIn"];
+        },
     },
     methods: {
       resetOrderHandler() {
