@@ -162,7 +162,7 @@
                 this.order.price_id && `${this.selectedPricingPlan.title}, ${this.selectedPricingPlan.cost} руб`,
                 this.order.pet_name
             ]
-        }
+        },
         isUserLoggedIn () {
             return this.$store.getters["isUserLoggedIn"];
         },
