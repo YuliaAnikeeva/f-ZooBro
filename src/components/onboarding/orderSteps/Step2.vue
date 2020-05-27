@@ -84,6 +84,8 @@
                 </div>
                 <div class="form-group__helper">
                     <div class="form-group__errors">
+                        <div class="error" v-if="$v.birthday_years.$dirty && !$v.birthday_years.required">Укажи дату рождения или примерный возраст</div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -201,7 +203,7 @@
 </template>
 
 <script>
-  import { email, required, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
+  import { email, required, requiredIf, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
 
   export default {
     name: 'Step2',
@@ -218,6 +220,12 @@
         size: {
           required,
         },
+        birthday_years:{
+            required: requiredIf(function() {
+                return !this.birthday_date;
+            })
+           
+        }
       }
     },
     data: () => ({
@@ -421,9 +429,9 @@
         &:first-child {
             margin-left: 0;
         }
-        &:first-child {
+        // &:first-child {
 
-        }
+        // }
     }
 
     .form-group {
