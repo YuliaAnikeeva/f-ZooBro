@@ -19,12 +19,8 @@
                     </div>
                 </div>
             </div>
-
-            <ProgresBar v-model="step"/>
+            <ProgresBar v-model="step" :info="progresbarOrderInfo" />
         </template>
-
-
-
 
         <!--<p>-->
         <!--<span>{{step}}</span> из <span>{{steps.length}}</span>-->
@@ -161,6 +157,12 @@
                 }
             }[this.order.price_id] || {}
         },
+        progresbarOrderInfo () {
+            return [
+                this.order.price_id && `${this.selectedPricingPlan.title}, ${this.selectedPricingPlan.cost} руб`,
+                this.order.pet_name
+            ]
+        }
         isUserLoggedIn () {
             return this.$store.getters["isUserLoggedIn"];
         },
@@ -287,8 +289,6 @@
                 position: absolute;
                 left: 100%;
                 fill: #fff;
-                stroke: #C8A20F;
-                stroke-width: 1px;
                 height: 100%;
                 margin-left: 10px;
             }
@@ -360,8 +360,9 @@
     }
 
     .title{
-        padding: 70px 10px 30px 10px;
+        padding: 85px 10px 50px 10px;
         font-family: Montserrat, sans-serif;
+        font-weight: 600;
     }
 
     .order-info {
