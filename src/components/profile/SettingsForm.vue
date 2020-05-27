@@ -5,23 +5,34 @@
       <div class="form-group email">
         <label class="form__label" for="email">Email</label>
         <input type="text" autocomplete="email" name="email" class="form__input" v-model="email" />
-        <div class="error" v-if="$v.email.$dirty && !$v.email.required">Обязательное поле</div>
-        <div class="error" v-if="!$v.email.email">Введите действующий email</div>
+        <div class="error" v-if="!$v.email.required">Обязательное поле</div>
+        <div class="error" v-if="$v.email.$dirty && !$v.email.email">Введите действующий email</div>
       </div>
       <!-- pass -->
       <div class="form-group pass">
         <label for="old-pass">Старый пароль</label>
-        <input disabled="true" type="password" autocomplete="current-password" name="old-pass" v-model="pass.old" />
-        <label for="new-pass">Новый пароль</label>
-        <input disabled="true" type="password" name="new-pass" autocomplete="new-password" v-model="pass.new" />
-        <label for="new-pass-dupl">Повторите новый пароль</label>
         <input
           disabled="true"
           type="password"
+          autocomplete="current-password"
+          name="old-pass"
+          v-model="oldPass"
+        />
+        <label for="new-pass">Новый пароль</label>
+        <input
+          type="password"
+          name="new-pass"
+          autocomplete="new-password"
+          v-model="pass"
+        />
+        <label for="new-pass-dupl">Повторите новый пароль</label>
+        <input
+          type="password"
           name="new-pass-dupl"
           autocomplete="new-password"
-          v-model="pass.newDuplicate"
+          v-model="passRepeat"
         />
+        <div class="error" v-if="$v.passRepeat.$dirty && !$v.passRepeat.sameAsPassword">Новый пароль не совпадает</div>
       </div>
       <!-- name -->
       <div class="form-group name">
@@ -38,6 +49,11 @@
           mask="+7 (###) ###-##-##"
           class="input__control"
         />
+        <div class="error" v-if="$v.phone.$dirty && !$v.phone.required">Введите телефон</div>
+        <div
+          class="error"
+          v-if="$v.phone.$dirty && !$v.phone.minLength"
+        >Введите корректный номер телефона</div>
       </div>
       <!-- address -->
       <div class="form-group address">
@@ -63,27 +79,44 @@ import {
   required,
   minLength,
   maxLength,
-  numeric
+  numeric,
+  sameAs
 } from "vuelidate/lib/validators";
 export default {
   props: ["profile", "editStatus"],
   data() {
     return {
       editedInfo: {},
-      pass: { new: "", old: "", newDuplicate: "" }
+      pass: "",
+      passRepeat: "",
+      oldPass: "",
     };
   },
   validations: {
     email: {
       required,
       email
+    },
+    phone: {
+      required,
+      minLength: minLength(10),
+      maxLength: maxLength(10)
+    },
+    address: {
+      required
+    },
+    name: {
+      required
+    },
+    passRepeat: {
+      sameAsPassword: sameAs('pass')
     }
   },
   computed: {
     email: {
       get() {
         if (this.editedInfo.email) {
-          return this.editedInfo.email
+          return this.editedInfo.email;
         }
         return this.profile.email;
       },
@@ -94,7 +127,7 @@ export default {
     name: {
       get() {
         if (this.editedInfo.name) {
-          return this.editedInfo.name
+          return this.editedInfo.name;
         }
         return this.profile.name;
       },
@@ -105,9 +138,9 @@ export default {
     phone: {
       get() {
         if (this.editedInfo.phone) {
-          return this.editedInfo.phone
+          return this.editedInfo.phone;
         }
-        const phone = this.profile.phone
+        const phone = this.profile.phone;
         return `+7 (${phone[0]}${phone[1]}${phone[2]}) ${phone[3]}${phone[4]}${phone[5]}-${phone[6]}${phone[7]}-${phone[8]}${phone[9]}`;
       },
       set(val) {
@@ -117,7 +150,7 @@ export default {
     address: {
       get() {
         if (this.editedInfo.address) {
-          return this.editedInfo.address
+          return this.editedInfo.address;
         }
         return this.profile.address;
       },
@@ -131,7 +164,9 @@ export default {
       if (event) {
         event.preventDefault();
       }
-      this.$store.dispatch('user/userUpdate', this.editedInfo).then(status => console.log(status))
+      // this.$store.dispatch('user/userUpdate', this.editedInfo).then(status => console.log(status))
+      console.log(this.$v.email)
+      this.$v.$touch()
       // this.$emit("update:editStatus", false);
     },
     back(event) {
@@ -170,7 +205,8 @@ form {
   }
 }
 
-input, the-mask {
+input,
+the-mask {
   border: none;
   border-bottom: 1px solid #4f4f4f;
 }
@@ -242,5 +278,11 @@ button {
 .form-button__back {
   grid-area: btn_back;
   border: 1px solid #464451;
+}
+.error {
+  color: red;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.3px;
 }
 </style>
