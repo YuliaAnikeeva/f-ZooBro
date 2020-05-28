@@ -182,8 +182,8 @@
             }
 
             &:hover {
-                border-color: #ffcc01;
-                box-shadow: 0 0 10px 0 rgba(0, 0, 0, .7);
+                // border-color: #ffcc01;
+                box-shadow: 0 3px 5px rgba(#2289B5,.6), inset 0 3px 5px rgba(#2289B5,.6);
             }
         }
 

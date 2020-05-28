@@ -168,12 +168,12 @@ today.setHours(0, 0, 0, 0);
     },
     data: () => ({
       showMap: false,
-      address: null,
+      //address: null,
     }),
     computed: {
       ...(() => {
         let o = {}
-        let f = ["user_name", "email", "phone", "date_delivery", "time_delivery"]
+        let f = ["user_name", "email", "phone", "date_delivery", "time_delivery", "address"]
         f.forEach( n => o[[n]] = {
           get () {
             return this.order[n]

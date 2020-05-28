@@ -2,7 +2,7 @@
     <div class="container container_onboarding">
         <template v-if="step !== 'step-4'">
             <h1 class="title onboarding__title">Оформление заказа</h1>
-            
+
             <div class="order-info" :class="{ 'order-info_invisible': step == 'step-1' }">
                 <div class="order-info__box">
                     <img src="@/assets/box.png" alt="">
@@ -19,12 +19,8 @@
                     </div>
                 </div>
             </div>
-
-            <ProgresBar v-model="step"/>
+            <ProgresBar v-model="step" :info="progresbarOrderInfo" />
         </template>
-
-
-
 
         <!--<p>-->
         <!--<span>{{step}}</span> из <span>{{steps.length}}</span>-->
@@ -79,7 +75,7 @@
             <div :class="{ abs: step !== 'step-4' }">
                 <transition name="translate">
                     <div v-if="step === 'step-4'">
-                        <SuccessOrder :order="order" @new="resetOrderHandler" />
+                        <SuccessOrder :order="order" :isUserLoggedIn="isUserLoggedIn" @new="resetOrderHandler" />
                     </div>
                 </transition>
             </div>
@@ -160,7 +156,16 @@
                     cost: 4200
                 }
             }[this.order.price_id] || {}
-        }
+        },
+        progresbarOrderInfo () {
+            return [
+                this.order.price_id && `${this.selectedPricingPlan.title}, ${this.selectedPricingPlan.cost} руб`,
+                this.order.pet_name
+            ]
+        },
+        isUserLoggedIn () {
+            return this.$store.getters["isUserLoggedIn"];
+        },
     },
     methods: {
       resetOrderHandler() {
@@ -284,8 +289,6 @@
                 position: absolute;
                 left: 100%;
                 fill: #fff;
-                stroke: #C8A20F;
-                stroke-width: 1px;
                 height: 100%;
                 margin-left: 10px;
             }
@@ -357,8 +360,9 @@
     }
 
     .title{
-        padding: 70px 10px 30px 10px;
+        padding: 85px 10px 50px 10px;
         font-family: Montserrat, sans-serif;
+        font-weight: 600;
     }
 
     .order-info {

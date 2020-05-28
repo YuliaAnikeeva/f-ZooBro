@@ -75,7 +75,7 @@ export default {
           }
         )
     },
-    async userUpdate ({ commit, getters, rootGetters }, payload) {
+    async userUpdate ({ commit, rootGetters }, payload) {
       return fetch(`${baseURL}/v1/user/update`,
         {
           mode: 'cors',

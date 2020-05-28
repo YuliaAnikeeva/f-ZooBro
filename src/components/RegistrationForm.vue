@@ -17,10 +17,10 @@
         </div>
           <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
                 <div class="input-block">
-                    
+
                     <input type="password" v-model="password" :disabled="disabled" v-show="!showPassword" required>
                     <input type="text" v-model="password" :disabled="disabled" v-show="showPassword" required>
-                    
+
                     <label>Пароль</label>
                      <div class="buttonShowPassword" @click="showPassword=!showPassword" >
                       <div class="iconPassowordShow" v-show="showPassword"></div>
@@ -44,7 +44,7 @@
     </div>
       <Loader v-if="disabled"/>
     </form>
-   
+
   </div>
     </div>
   <!-- </div> -->
@@ -126,7 +126,7 @@
  background: transparent;
   position: absolute;
   background-repeat: no-repeat;
-  right: calc(100% - 375px);
+  //right: calc(100% - 375px);
   top: 33%;
   border: none;
   padding: 0;
