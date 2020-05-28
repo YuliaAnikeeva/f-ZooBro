@@ -96,8 +96,8 @@
                             <div class="input-date">
                                 <!-- <input type="date" class="input__control input__control_type_datetime"
                                        v-model="date_delivery"> -->
-                                       <date-picker v-model="date_delivery" valueType="format" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ"></date-picker>
-                                <date-picker v-model="time_delivery" valueType="format" class="date-picker-time" format="HH:mm" value-type="format" placeholder="ЧЧ.ММ"  :minute-step="30" type="time" ></date-picker>
+                                       <date-picker v-model="date_delivery" valueType="format" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ" :disabled-date="notBeforeToday"></date-picker>
+                                <date-picker v-model="time_delivery" valueType="format" class="date-picker-time" format="HH:mm" value-type="format" placeholder="ЧЧ.ММ"  :minute-step="30" type="time"  :disabled-time="notBeforeTime" :default-value="new Date().setHours(9, 0, 0)"></date-picker>
                             </div>
                             <!-- <div class="input input_type_time">
                                 <input type="time" class="input__control input__control_type_datetime"
@@ -132,6 +132,10 @@
   import YandexMap from '../../YandexMap'
     import DatePicker from 'vue2-datepicker';
   import 'vue2-datepicker/index.css';
+
+  const today = new Date();
+  const tomorrow = new Date();
+today.setHours(0, 0, 0, 0);
 
   export default {
     name: 'Step3',
@@ -187,6 +191,13 @@
         this.address = address
         this.showMap = false
       },
+      notBeforeToday(date_delivery) {
+      return date_delivery < tomorrow;
+      
+    },
+    notBeforeTime(time_delivery) {
+      return time_delivery.getHours() < 9;
+    },
     },
 
    components: { DatePicker },
