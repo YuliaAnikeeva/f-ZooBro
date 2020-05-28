@@ -9,8 +9,7 @@ import VueTheMask from 'vue-the-mask'
 import VueModalTor from "vue-modaltor";
 import "toastify-js/src/toastify.css"
 import Toastify from 'toastify-js'
-import Calendar from 'v-calendar/lib/components/calendar.umd'
-import DatePicker from 'v-calendar/lib/components/date-picker.umd'
+
 
 
 Vue.config.productionTip = false
@@ -19,8 +18,7 @@ Vue.use(VueLidate)
 Vue.use(VueTheMask)
 Vue.use(VueModalTor);
 Vue.use(Toastify);
-Vue.component('calendar', Calendar)
-Vue.component('date-picker', DatePicker)
+
 
 new Vue({
   router,

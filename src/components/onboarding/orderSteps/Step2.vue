@@ -49,7 +49,10 @@
                 <label class="form-group__label">Дата рождения</label>
                 <div class="form-group__content">
                     <div class="input input_type_date">
-                        <input type="date" class="input__control input__control_type_datetime" v-model="birthday_date">
+                        <!-- <input type="date" class="input__control input__control_type_datetime" v-model="birthday_date"> -->
+                        <date-picker v-model="birthday_date" valueType="format" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ"></date-picker>
+                        <!-- <date-picker v-model="time2" type="datetime"></date-picker>
+                        <date-picker v-model="time3" range></date-picker> -->
                     </div>
                 </div>
                 <div class="form-group__helper">
@@ -204,6 +207,8 @@
 
 <script>
   import { email, required, requiredIf, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
+  import DatePicker from 'vue2-datepicker';
+  import 'vue2-datepicker/index.css';
 
   export default {
     name: 'Step2',
@@ -300,6 +305,7 @@
 
       },
     },
+    components: { DatePicker },
   }
 </script>
 
@@ -560,7 +566,9 @@
         display: flex;
         justify-content: space-between;
     }
-
+    .date-picker{
+        min-width: 255px;
+    }
     .radio {
         margin-right: 10px;
         display: flex;
