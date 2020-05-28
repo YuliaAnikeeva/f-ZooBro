@@ -65,9 +65,10 @@ export default {
           this.messages = []
           const {email} = this
           console.log('passwordRecovery')
-          await this.$store.dispatch('passwordRecovery', {email})
+          await this.$store.dispatch('user/passwordRecovery', {email})
           this.messages = ["Письмо с паролем отправленно на почту"]
-          this.$router.push('/login')
+          // this.$router.push('/login')
+          this.toggleRegistrationSuccessModal();
         }
       }
 
