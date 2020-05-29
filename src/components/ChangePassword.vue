@@ -74,7 +74,7 @@
         if (!this.$v.$invalid) {
           const { password, token } = this
           // const { link } = this
-          console.log($route.params)
+          console.log('change')
           this.disabled = true
           const rez = await this.$store.dispatch('user/newPassword', {
             password, token})
