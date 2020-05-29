@@ -202,6 +202,50 @@ export default {
           }
         )
     },
+     async newPassword ({ commit, rootGetters }, payload) {
+      return fetch(`${baseURL}/v1/user/set-password`,
+        {
+          mode: 'cors',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            
+          },
+          method: 'POST',
+          body: JSON.stringify(payload)
+        })
+        .then(response => {
+          return response.json()
+        })
+        .then(
+          json => {
+            if (json.status === 1) {
+              const { data } = json
+              // обновить локальные данные если усе успешно
+              console.log('newPassword', data)
+              return true
+            } else {
+              const { message } = json
+              console.error(message)
+              commit('clearSnackbar')
+              commit('setSnackbarMsg', message)
+              commit('setSnackbarType', 'error')
+              return false
+            }
+          }
+        )
+        .catch(
+          error => {
+            console.error('Ошибка обновления пользовательских данных', error)
+            commit('clearSnackbar')
+            commit('setSnackbarMsg', 'Не удалось обновить данные')
+            commit('setSnackbarType', 'error')
+            return false
+          }
+        )
+    },
   },
   getters: {
     userName (state) {
