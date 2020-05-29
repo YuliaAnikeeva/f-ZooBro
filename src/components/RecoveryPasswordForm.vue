@@ -68,23 +68,11 @@ export default {
           await this.$store.dispatch('user/passwordRecovery', {email})
           this.messages = ["Письмо с паролем отправленно на почту"]
           // this.$router.push('/login')
-          this.toggleRegistrationSuccessModal();
+          // this.toggleRegistrationSuccessModal();
         }
       }
 
-    // onSubmit: function () {
-    //   this.$v.$touch()
-    //   if (!this.$v.$invalid) {
-    //     this.messages = []
-    //     this.$store.dispatch('auth/'+RECOVERY_REQUEST, this.email)
-    //       .then( () => {
-    //         this.messages = ["Письмо с паролем отправленно на почту"]
-    //         this.$router.push('/login')
-    //       }).catch( (messages) => {
-    //         this.messages = messages
-    //       })
-    //   }
-    // }
+    
   }
 }
 </script>

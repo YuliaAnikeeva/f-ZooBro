@@ -165,8 +165,8 @@ export default {
         )
     },
 
-    async passwordRecovey ({ commit, getters }, payload) {
-      return fetch(`${baseURL}/v1/user/recovery`,
+    async passwordRecovery ({ commit, getters }, payload) {
+      return fetch(`${baseURL}/v1/user/password-reset`,
         {
           mode: 'cors',
           headers: {
