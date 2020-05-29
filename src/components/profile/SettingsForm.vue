@@ -5,26 +5,19 @@
       <div class="form-group email">
         <label class="form__label" for="email">Email</label>
         <input type="text" autocomplete="email" name="email" class="form__input" v-model="email" />
-        <div class="error" v-if="!$v.email.required">Обязательное поле</div>
+        <div class="error" v-if="$v.email.$dirty && !$v.email.required">Обязательное поле</div>
         <div class="error" v-if="$v.email.$dirty && !$v.email.email">Введите действующий email</div>
       </div>
       <!-- pass -->
       <div class="form-group pass">
+        <!-- old pass -->
         <label for="old-pass">Старый пароль</label>
-        <input
-          disabled="true"
-          type="password"
-          autocomplete="current-password"
-          name="old-pass"
-          v-model="oldPass"
-        />
+        <input type="password" autocomplete="current-password" name="old-pass" v-model="oldPass" />
+        <!-- new pass -->
         <label for="new-pass">Новый пароль</label>
-        <input
-          type="password"
-          name="new-pass"
-          autocomplete="new-password"
-          v-model="pass"
-        />
+        <input type="password" name="new-pass" autocomplete="new-password" v-model="pass" />
+        <div class="error" v-if="$v.pass.$dirty && !$v.pass.minLength">Минимум шесть символов</div>
+        <!-- repeat new pass -->
         <label for="new-pass-dupl">Повторите новый пароль</label>
         <input
           type="password"
@@ -32,12 +25,16 @@
           autocomplete="new-password"
           v-model="passRepeat"
         />
-        <div class="error" v-if="$v.passRepeat.$dirty && !$v.passRepeat.sameAsPassword">Новый пароль не совпадает</div>
+        <div
+          class="error"
+          v-if="$v.passRepeat.$dirty && !$v.passRepeat.sameAsPassword"
+        >Новый пароль не совпадает</div>
       </div>
       <!-- name -->
       <div class="form-group name">
         <label for="name">Имя</label>
         <input type="text" name="name" autocomplete="name" v-model="name" />
+        <div class="error" v-if="$v.name.$dirty && !$v.name.required">Обязательное поле</div>
       </div>
       <!-- phone -->
       <div class="form-group phone">
@@ -66,6 +63,7 @@
           rows="5"
           v-model="address"
         ></textarea>
+        <div class="error" v-if="$v.address.dirty && !$v.address.required">Обязательное поле</div>
       </div>
       <button @click="update" class="form-button__save">Cохранить</button>
       <button @click="back" class="form-button__back">Отмена</button>
@@ -87,9 +85,13 @@ export default {
   data() {
     return {
       editedInfo: {},
+      email: "",
+      name: "",
+      phone: "",
+      address: "",
       pass: "",
       passRepeat: "",
-      oldPass: "",
+      oldPass: ""
     };
   },
   validations: {
@@ -108,54 +110,35 @@ export default {
     name: {
       required
     },
+    pass: {
+      minLength: minLength(6)
+    },
     passRepeat: {
-      sameAsPassword: sameAs('pass')
+      sameAsPassword: sameAs("pass")
     }
   },
+  mounted() {
+    if (!this.profile) {
+      this.profile = this.$store.getters["user/userInfo"];
+    }
+    const { email, name, phone, address } = this.profile;
+    this.email = email;
+    this.address = address;
+    this.name = name;
+    this.phone = phone;
+  },
   computed: {
-    email: {
-      get() {
-        if (this.editedInfo.email) {
-          return this.editedInfo.email;
-        }
-        return this.profile.email;
-      },
-      set(val) {
-        this.editedInfo.email = val;
+    oldPasswordAppearance() {
+      if (this.pass != "" && this.oldPass) {
+        return true;
       }
-    },
-    name: {
-      get() {
-        if (this.editedInfo.name) {
-          return this.editedInfo.name;
-        }
-        return this.profile.name;
-      },
-      set(val) {
-        this.editedInfo.name = val;
+
+      if (this.pass != "" && this.oldPass == "") {
+        return false;
       }
-    },
-    phone: {
-      get() {
-        if (this.editedInfo.phone) {
-          return this.editedInfo.phone;
-        }
-        const phone = this.profile.phone;
-        return `+7 (${phone[0]}${phone[1]}${phone[2]}) ${phone[3]}${phone[4]}${phone[5]}-${phone[6]}${phone[7]}-${phone[8]}${phone[9]}`;
-      },
-      set(val) {
-        this.editedInfo.phone = val;
-      }
-    },
-    address: {
-      get() {
-        if (this.editedInfo.address) {
-          return this.editedInfo.address;
-        }
-        return this.profile.address;
-      },
-      set(val) {
-        this.editedInfo.address = val;
+
+      if (this.pass == "") {
+        return true;
       }
     }
   },
@@ -164,10 +147,24 @@ export default {
       if (event) {
         event.preventDefault();
       }
-      // this.$store.dispatch('user/userUpdate', this.editedInfo).then(status => console.log(status))
-      console.log(this.$v.email)
-      this.$v.$touch()
-      // this.$emit("update:editStatus", false);
+      this.$v.$touch();
+      if (!this.$v.$anyError && this.oldPasswordAppearance) {
+        const { email, name, phone, address } = this.profile;
+        const password = this.pass != "" ? this.pass : null;
+        const updatedData = { email, name, phone, address };
+        password ? (updatedData.password = password) : "";
+        password ? (updatedData.old_password = this.oldPass) : "";
+        this.$store
+          .dispatch("user/userUpdate", updatedData)
+          .then(status => console.log(status));
+      } else {
+        this.$store.commit("clearSnackbar");
+        this.$store.commit(
+          "setSnackbarMsg",
+          "Некоторые поля заполнены неверно"
+        );
+        this.$store.commit("setSnackbarType", "error");
+      }
     },
     back(event) {
       if (event) {
