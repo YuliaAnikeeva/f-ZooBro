@@ -19,9 +19,6 @@ export default {
   props: {
     profile: Object,
   },
-  created() {
-    console.log(this.profile)
-  }
 }
 </script>
 
