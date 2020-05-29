@@ -321,6 +321,11 @@ line-height: 15px;
     display: flex;
     flex-direction: column;
 }
+.form-new-password{
+    display: flex;
+    flex-direction: column;
+    margin: 30px 10px;
+}
 
 @keyframes wobble-error {
     0%,
