@@ -1,6 +1,5 @@
 <template>
         <form @submit.prevent="submitHandler" class="form_contact form_small">
-            {{showMap}}
             <div class="form-section">
 
                 <div :class="{ 'field--error wobble-error': $v.user_name.$error }" class="form-group">
@@ -139,7 +138,7 @@ today.setHours(0, 0, 0, 0);
 
   export default {
     name: 'Step3',
-    components: { YandexMap },
+    components: { YandexMap, DatePicker },
     props: ['order'],
     validations () {
       return {
@@ -168,7 +167,6 @@ today.setHours(0, 0, 0, 0);
     },
     data: () => ({
       showMap: false,
-      //address: null,
     }),
     computed: {
       ...(() => {
@@ -193,20 +191,18 @@ today.setHours(0, 0, 0, 0);
       },
       notBeforeToday(date_delivery) {
       return date_delivery < tomorrow;
-      
+
     },
     notBeforeTime(time_delivery) {
       return time_delivery.getHours() < 9;
     },
     },
-
-   components: { DatePicker },
   }
 </script>
 
 <style>
 .mx-input {
-     border: none; 
+     border: none;
             box-shadow: none;
             -webkit-box-shadow: none;
 }
