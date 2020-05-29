@@ -204,6 +204,13 @@ today.setHours(0, 0, 0, 0);
   }
 </script>
 
+<style>
+.mx-input {
+     border: none; 
+            box-shadow: none;
+            -webkit-box-shadow: none;
+}
+</style>
 <style lang="scss" scoped>
     @import "@/assets/styles/_forms.scss";
 

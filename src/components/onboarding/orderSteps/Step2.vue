@@ -314,7 +314,13 @@ today.setHours(0, 0, 0, 0);
     components: { DatePicker },
   }
 </script>
-
+<style>
+.mx-input {
+     border: none; 
+            box-shadow: none;
+            -webkit-box-shadow: none;
+}
+</style>
 <style lang="scss" scoped>
     // @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
     @import "@/assets/styles/_forms.scss";
@@ -621,7 +627,7 @@ today.setHours(0, 0, 0, 0);
             align-items: center;
             justify-content: center;
         }
-
+       
 
         &:hover > &__button {
             background-color: rgba(34, 137, 181, 0.2);
