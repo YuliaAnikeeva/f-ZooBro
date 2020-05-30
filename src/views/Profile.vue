@@ -11,20 +11,18 @@
       </ul>
     </div>
 
-    <div v-if="activeTab == 'pets' && pets.length > 0" id="profile-pets">
+    <div v-if="activeTab == 'pets' && pets.length > 0 && !petEditor" id="profile-pets">
       <Loader v-if="pets.length ==  0" />
-      <template v-if="!petEditor">
-        <PetCard v-for="(pet, index) in pets" :key="index" :pet="pet" @focus:pet="onFocusPet" />
-        <PetCard :pet="emptyPet" @add:pet="onAddPet" />
-      </template>
-      <template v-else>
-        <PetForm
-          :pet="petTemp"
-          @save="onSavePet"
-          @close="petEditor = false"
-          />
-      </template>
+      <PetCard v-for="(pet, index) in pets" :key="index" :pet="pet" @focus:pet="onFocusPet" />
+      <PetCard :pet="emptyPet" @add:pet="onAddPet" />
     </div>
+
+    <PetForm
+      v-if="activeTab == 'pets' && petEditor"
+      :pet="petTemp"
+      @save="onSavePet"
+      @close="petEditor = false"
+      />
 
     <div v-if="activeTab == 'settings'" id="profile-settings">
       <SettingsCard v-if="!profileEditor" :profile="profileData" />

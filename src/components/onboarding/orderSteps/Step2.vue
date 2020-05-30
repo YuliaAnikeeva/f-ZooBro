@@ -49,7 +49,10 @@
                 <label class="form-group__label">Дата рождения</label>
                 <div class="form-group__content">
                     <div class="input input_type_date">
-                        <input type="date" class="input__control input__control_type_datetime" v-model="birthday_date">
+                        <!-- <input type="date" class="input__control input__control_type_datetime" v-model="birthday_date"> -->
+                        <date-picker v-model="birthday_date" valueType="format" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ" :disabled-date="notAfterToday"></date-picker>
+                        <!-- <date-picker v-model="time2" type="datetime"></date-picker>
+                        <date-picker v-model="time3" range></date-picker> -->
                     </div>
                 </div>
                 <div class="form-group__helper">
@@ -204,6 +207,11 @@
 
 <script>
   import { email, required, requiredIf, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
+  import DatePicker from 'vue2-datepicker';
+  import 'vue2-datepicker/index.css';
+
+  const today = new Date();
+today.setHours(0, 0, 0, 0);
 
   export default {
     name: 'Step2',
@@ -299,10 +307,20 @@
         })
 
       },
+      notAfterToday(birthday_date) {
+      return birthday_date > today;
     },
+    },
+    components: { DatePicker },
   }
 </script>
-
+<style>
+.mx-input {
+     border: none; 
+            box-shadow: none;
+            -webkit-box-shadow: none;
+}
+</style>
 <style lang="scss" scoped>
     // @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
     @import "@/assets/styles/_forms.scss";
@@ -560,7 +578,9 @@
         display: flex;
         justify-content: space-between;
     }
-
+    .date-picker{
+        min-width: 255px;
+    }
     .radio {
         margin-right: 10px;
         display: flex;
@@ -607,7 +627,7 @@
             align-items: center;
             justify-content: center;
         }
-
+       
 
         &:hover > &__button {
             background-color: rgba(34, 137, 181, 0.2);

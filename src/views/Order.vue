@@ -209,6 +209,20 @@
         }
       },
     },
+    async mounted () {
+      const isUserLoggedIn = this.$store.getters['isUserLoggedIn']
+
+      if (isUserLoggedIn) {
+        await this.$store.dispatch("user/fetchUserInfo")
+        const  user = await this.$store.getters['user/userInfo']
+        const {name, email, phone, address} = user
+        this.order['user_name'] = name
+        this.order['email'] = email
+        this.order['phone'] = phone
+        this.order['address'] = address
+      }
+
+    }
   }
 </script>
 

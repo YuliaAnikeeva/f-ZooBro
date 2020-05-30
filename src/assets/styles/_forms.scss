@@ -321,6 +321,11 @@ line-height: 15px;
     display: flex;
     flex-direction: column;
 }
+.form-new-password{
+    display: flex;
+    flex-direction: column;
+    margin: 30px 10px;
+}
 
 @keyframes wobble-error {
     0%,
@@ -344,3 +349,313 @@ line-height: 15px;
         transform: translateX(-3px);
     }
 }
+
+
+.form-group {
+    font-family: Montserrat, sans-serif;
+    text-align: left;
+
+    &__label {
+        font-size: 12px;
+        line-height: 15px;
+        color: #828282;
+        box-sizing: border-box;
+        display: inline-block;
+        max-width: 400px;
+    }
+
+    &__link {
+        display: block;
+        text-align: right;
+        font-family: Montserrat, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 0.3px;
+        text-decoration-line: underline;
+        color: #4F4F4F;
+        padding: 5px 0;
+    }
+
+    &__helper {
+        min-height: 60px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__errors {
+        color: red;
+        font-family: Montserrat, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 0.3px;
+
+        & .error {
+            padding: 5px 5px;
+            display: flex;
+        }
+    }
+
+    &_center {
+        text-align: center;
+    }
+}
+
+.input {
+    font-family: Montserrat, sans-serif;
+    display: inline-flex;
+    align-items: stretch;
+    position: relative;
+    box-sizing: border-box;
+    margin-right: 20px;
+    border-bottom: 1px solid #4f4f4f;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    padding-top: 5px;
+    max-width: 255px;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &_type_date {
+        min-width: 150px;
+    }
+
+    &_type_time {
+        min-width: 100px;
+    }
+
+    &_type_address {
+        min-width: 325px;
+        width: 100%;
+    }
+
+    &__control {
+        border: none;
+        outline: none;
+        padding: 10px 5px;
+        width: 100%;
+        box-sizing: border-box;
+        line-height: 20px;
+        font: inherit;
+        text-align: inherit;
+
+        &_type_datetime {
+            padding: 8px 5px;
+            text-transform: uppercase;
+        }
+    }
+
+    &__dropdown {
+        position: absolute;
+        top: 105%;
+        left: 0;
+        right: 0;
+        border-radius: 5px;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, .3);
+        background: #fff;
+        z-index: 1;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 500;
+
+        &-option {
+            padding: 10px;
+
+            &:hover {
+                background-color: rgba(#FFCC01, 0.3);
+            }
+        }
+    }
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.radio {
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    box-sizing: border-box;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &__control {
+        display: none;
+    }
+
+    &__button {
+        font-family: Montserrat, sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 16px;
+        border: 2px solid #2289B5;
+        box-sizing: border-box;
+        border-radius: 5px;
+        padding: 0 5px;
+        min-width: 65px;
+        text-align: center;
+        padding: 3px 5px;
+
+        &-label {
+            display: block;
+            margin: 0;
+
+            &_sub {
+                color: #828282;
+            }
+        }
+    }
+    &_big &__button {
+        min-height: 40px;
+        min-width: 90px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    &:hover > &__button {
+        background-color: rgba(34, 137, 181, 0.2);
+        transition-duration: .8s;
+    }
+
+    &__control:checked ~ &__button {
+        background-color: #2289B5;
+    }
+
+    &__control:checked ~ &__button &__button-label {
+        color: #fff;
+    }
+
+
+    &__image {
+        margin-top: auto;
+        margin-bottom: 10px;
+
+        width: 100%;
+
+        & img {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+}
+
+.radio-group {
+    
+    margin-top: 17px;
+
+    &__list {
+        display: flex;
+    }
+
+    &_dog-size {
+        margin-top: 0;
+    }
+
+    &_dog-size &__list {
+        display: grid;
+        grid-template-columns: repeat(3, 100px);
+        justify-content: space-between;
+        grid-gap: 20px;
+    }
+
+    &_dog-size .radio {
+        margin: 0;
+
+        &__button {
+            min-width: 100px;
+        }
+
+        &:last-child {
+            justify-self: flex-end;
+            align-items: flex-end;
+        }
+    }
+
+    &_dog-years {
+        max-width: 330px;
+    }
+
+    &_dog-years &__list {
+        justify-content: space-between;
+    }
+}
+
+.textarea {
+    border-radius: 5px;
+    border: 1px solid #828282;
+    box-sizing: border-box;
+    font-size: 12px;
+    line-height: 15px;
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    margin-top: 10px !important;
+    padding: 10px;
+    resize: none;
+    width: 100%;
+    max-width: 280px;
+}
+
+.avatar-input {
+    display: block;
+    width: 100%;
+    background: #c4c4c4;
+    border-radius: 50%;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    img {
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+
+    &__overlay {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        background: rgba(70, 68, 81, 0.8);
+        color: #fff;
+        font-size: 40px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &:hover &__overlay {
+        display: flex;
+        cursor: pointer;
+    }
+
+    &:active &__overlay {
+        background: rgba(70, 68, 81, 0.9);
+    }
+
+    &__control {
+        display: none;
+    } 
+} 

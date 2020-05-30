@@ -1,6 +1,5 @@
 <template>
         <form @submit.prevent="submitHandler" class="form_contact form_small">
-            {{showMap}}
             <div class="form-section">
 
                 <div :class="{ 'field--error wobble-error': $v.user_name.$error }" class="form-group">
@@ -93,14 +92,16 @@
                     <label class="form-group__label">Желаемые дата и время доставки</label>
                     <div class="form-group__content">
                         <div class="input-group">
-                            <div class="input input_type_date">
-                                <input type="date" class="input__control input__control_type_datetime"
-                                       v-model="date_delivery">
+                            <div class="input-date">
+                                <!-- <input type="date" class="input__control input__control_type_datetime"
+                                       v-model="date_delivery"> -->
+                                       <date-picker v-model="date_delivery" valueType="format" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ" :disabled-date="notBeforeToday"></date-picker>
+                                <date-picker v-model="time_delivery" valueType="format" class="date-picker-time" format="HH:mm" value-type="format" placeholder="ЧЧ.ММ"  :minute-step="30" type="time"  :disabled-time="notBeforeTime" :default-value="new Date().setHours(9, 0, 0)"></date-picker>
                             </div>
-                            <div class="input input_type_time">
+                            <!-- <div class="input input_type_time">
                                 <input type="time" class="input__control input__control_type_datetime"
                                        v-model="time_delivery">
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="form-group__helper">
@@ -128,10 +129,16 @@
 <script>
   import { email, required, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
   import YandexMap from '../../YandexMap'
+    import DatePicker from 'vue2-datepicker';
+  import 'vue2-datepicker/index.css';
+
+  const today = new Date();
+  const tomorrow = new Date();
+today.setHours(0, 0, 0, 0);
 
   export default {
     name: 'Step3',
-    components: { YandexMap },
+    components: { YandexMap, DatePicker },
     props: ['order'],
     validations () {
       return {
@@ -160,7 +167,6 @@
     },
     data: () => ({
       showMap: false,
-      //address: null,
     }),
     computed: {
       ...(() => {
@@ -183,10 +189,24 @@
         this.address = address
         this.showMap = false
       },
+      notBeforeToday(date_delivery) {
+      return date_delivery < tomorrow;
+
+    },
+    notBeforeTime(time_delivery) {
+      return time_delivery.getHours() < 9;
+    },
     },
   }
 </script>
 
+<style>
+.mx-input {
+     border: none;
+            box-shadow: none;
+            -webkit-box-shadow: none;
+}
+</style>
 <style lang="scss" scoped>
     @import "@/assets/styles/_forms.scss";
 
@@ -347,4 +367,30 @@
         display: flex;
         justify-content: space-between;
     }
+
+    .input_date{
+        font-family: Montserrat, sans-serif;
+        display: inline-flex;
+        align-items: stretch;
+        position: relative;
+        box-sizing: border-box;
+        // border-bottom: 1px solid #4f4f4f;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 500;
+        padding-top: 5px;
+        // min-width: 255px;
+    }
+    .date-picker-time{
+        max-width: 125px;
+        margin-left: 30px;
+        border-bottom: 1px solid #4f4f4f;
+
+    }
+    .date-picker{
+        max-width: 170px;
+        border-bottom: 1px solid #4f4f4f;
+
+    }
+
 </style>
