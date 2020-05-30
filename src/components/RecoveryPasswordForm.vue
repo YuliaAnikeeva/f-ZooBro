@@ -3,9 +3,9 @@
     <h1>Восстановление пароля</h1>
   <div class="form-recovery">
     <div class="message_block">
-    <!-- <div v-if="status=='success'"> -->
+    <div v-if="status=='success'">
       <p v-if="status=='success'" class="message message--success">{{ messages }}</p>
-    <!-- </div> -->
+    </div>
     <div v-else>
       <p v-if="status=='error'" class="message message--error">{{ messages }}</p>
       </div>

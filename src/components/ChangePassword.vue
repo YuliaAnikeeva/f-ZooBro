@@ -3,6 +3,7 @@
     <h1>Введите пароль</h1>
   <div class="form-new-password">
          <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
+                
                 <div class="input-block">
 
                     <input type="password" v-model="password" :disabled="disabled" v-show="!showPassword" required>
