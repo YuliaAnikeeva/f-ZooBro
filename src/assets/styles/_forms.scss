@@ -444,11 +444,19 @@ line-height: 15px;
         line-height: 20px;
         font: inherit;
         text-align: inherit;
+        color: inherit;
+    }
 
-        &_type_datetime {
-            padding: 8px 5px;
-            text-transform: uppercase;
-        }
+    &_type_date /deep/ .mx-input {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 5px;
+        font: inherit;
+        text-transform: uppercase;
+        border: none; 
+        box-shadow: none;
+        height: auto;
+        color: inherit;
     }
 
     &__dropdown {

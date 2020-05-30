@@ -20,7 +20,7 @@
     <PetForm
       v-if="activeTab == 'pets' && petEditor"
       :pet="petTemp"
-      @save="onSavePet"
+      @save="petEditor = false"
       @close="petEditor = false"
       />
 
@@ -144,19 +144,6 @@ export default {
       this.petTemp = {};
       this.petEditor = true;
     },
-    async onSavePet(pet) {
-      this.loader = true;
-      let res;
-      if (pet.id) {
-        res = await this.$store.dispatch("pet/updatePet", pet)
-      } else {
-        res = await this.$store.dispatch("pet/createPet", pet)
-      }
-      if (res) {
-        this.petEditor = false;
-      }
-      this.loader = false;
-    }
   },
   computed: {
     emptyPet() {

@@ -123,7 +123,7 @@
           <label class="form-group__label">Дата рождения</label>
           <div class="form-group__content">
             <div class="input input_type_date">
-              <input type="date" class="input__control input__control_type_datetime" v-model="tempPet.birthday_date">
+              <date-picker v-model="tempPet.birthday_date" valueType="YYYY-MM-DD" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ"></date-picker>
             </div>
           </div>
           <div class="form-group__helper">
@@ -225,12 +225,19 @@
           Отменить
       </button>
     </div>
+
+    <div v-if="loader" class="pet-form__loader-overlay">
+      <Loader />
+    </div>
+
   </div>
 </template>
 
 <script>
 import { helpers, withParams, required, requiredIf, minLength } from 'vuelidate/lib/validators'
-// import Step2 from '@/components/onboarding/orderSteps/Step2'
+import Loader from '@/components/Loader'
+import DatePicker from 'vue2-datepicker'
+import 'vue2-datepicker/index.css'
 
 const validateFileType = types => helpers.withParams(
   {
@@ -256,12 +263,12 @@ export default {
     }
   },
   components: {
-    // Step2
+    Loader,
+    DatePicker
   },
   data() {
     return {
-      tempPet: this.pet ? {
-        id: null,
+      tempPet: {
         name: null,
         breed: null,
         gender: null,
@@ -269,10 +276,11 @@ export default {
         birthday_years: null,
         food_exceptions: null,
         ...this.pet, 
-      } : {},
+      },
       avatarFile: null,
       avatarDataURL: null,
       hasAllergy: this.pet && !!this.pet.food_exceptions,
+      loader: false,
     }
   },
   computed: {
@@ -312,22 +320,26 @@ export default {
         },
         birthday_years:{
           required: requiredIf(function() {
-            return !this.birthday_date;
+            return !this.tempPet.birthday_date;
           })
         }
       }
     }
   },
   methods: {
-    onSave () {
+    async onSave () {
       this.$v.$touch()
-      let invalid = this.$v.$invalid
-      if (!invalid) {
-        let {id, name, breed, birthday_date, birthday_years, gender, size, food_exceptions} = this.tempPet
-        this.$emit('save', {
-          ...id && { id },
-          name, breed, birthday_date, birthday_years, gender, size, food_exceptions
-        })
+      if (!this.$v.$invalid) {
+        this.loader = true
+        let payload = {
+          ...this.tempPet,
+          ...!this.hasAllergy && this.tempPet.food_exceptions && { food_exceptions: null }
+        }
+        let res = await this.$store.dispatch(this.pet.id ? "pet/updatePet" : "pet/createPet", payload)
+        this.loader = false
+        if (res) {
+          this.$emit('save', res)
+        }
       }
     },
     async onSelectAvatar (e) {
@@ -363,6 +375,8 @@ export default {
 @import "@/assets/styles/_forms.scss";
 
 .pet-form {
+  position: relative;
+
   &__container {
     display: grid;
     margin: 0 auto;
@@ -440,6 +454,23 @@ export default {
 
     &:active &__icon {
       fill: #2289B5;
+    }
+  }
+
+  &__loader-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,.7);
+
+    > :first-child {
+      position: relative;
+      margin: 0;
     }
   }
 }
