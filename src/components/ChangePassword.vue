@@ -1,8 +1,9 @@
 <template>
 <div class="border">
-    <h1>New password</h1>
+    <h1>Введите пароль</h1>
   <div class="form-new-password">
          <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
+                
                 <div class="input-block">
 
                     <input type="password" v-model="password" :disabled="disabled" v-show="!showPassword" required>
@@ -44,6 +45,7 @@
     },
     and(minLength(min), maxLength(max))
   )
+const token="x0841AKQUUyaB93Ihe9a5N4zHFGn8jv3_1590826274"
 
   export default {
     name: 'ChangePassword',
@@ -72,9 +74,7 @@
          
         }
         if (!this.$v.$invalid) {
-          const { password, token } = this
-          // const { link } = this
-          console.log('change')
+          const { password } = this
           this.disabled = true
           const rez = await this.$store.dispatch('user/newPassword', {
             password, token})

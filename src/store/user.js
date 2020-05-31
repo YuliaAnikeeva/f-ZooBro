@@ -222,9 +222,9 @@ export default {
         .then(
           json => {
             if (json.status === 1) {
-              const { data } = json
+              const {  password, token } = json
               // обновить локальные данные если усе успешно
-              console.log('newPassword', data)
+              console.log('newPassword', password)
               return true
             } else {
               const { message } = json
