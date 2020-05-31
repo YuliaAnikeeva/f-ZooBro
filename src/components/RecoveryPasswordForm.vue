@@ -3,12 +3,13 @@
     <h1>Восстановление пароля</h1>
   <div class="form-recovery">
     <div class="message_block">
-    <div v-if="status=='success'">
-      <p v-if="status=='success'" class="message message--success">{{ messages }}</p>
+      <p class="instruction">{{messages}}</p>
+    <!-- <div v-if="status==='success'">
+      <p v-if="status==='success'" class="message message--success">Пароль отправлен на почту</p>
     </div>
     <div v-else>
-      <p v-if="status=='error'" class="message message--error">{{ messages }}</p>
-      </div>
+      <p v-if="status==='error'" class="message message--error">Ошибка</p>
+      </div> -->
       </div>
       <form  class="form" @submit.prevent="onSubmit" ref="form">
           <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error }">
@@ -41,7 +42,7 @@ export default {
   data () {
     return {
       email: '',
-      messages: [],
+      messages: '',
     }
   },
   computed: {
@@ -64,18 +65,13 @@ export default {
           return
         }
         if(!this.$v.$invalid){
-          this.messages = []
+          this.messages = 'Проверьте почту. Если вы зарегистрированы, Вам будет отправлено письмо.'
           const {email} = this
           console.log('passwordRecovery')
-          await this.$store.dispatch('user/passwordRecovery', {email})
-          this.messages = "Письмо с паролем отправленно на почту"
-          // this.$router.push('/login')
-          // this.toggleRegistrationSuccessModal();
-          // this.toggleChangePasswordModal();
+          await this.$store.dispatch('user/passwordRecovery', {email}) 
         }
-        // else{
-        //   this.messages = "Произошла ошибка, возможно, Ваш почтовый ящик не зарегистрирован "
-        // }
+
+        
       }
 
     
@@ -84,5 +80,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/styles/_forms.scss"
+@import "../assets/styles/_forms.scss";
+
+
+.message_block{
+  
+  text-align: center;
+}
 </style>

@@ -28,7 +28,7 @@
         <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.password.betweenLength && $v.password.required}" type="submit" @click="onSubmit">Далее</button>
 
        
-
+<Loader v-if="disabled"/>
 </div>
 </div>
 </template>
@@ -45,7 +45,7 @@
     },
     and(minLength(min), maxLength(max))
   )
-const token="x0841AKQUUyaB93Ihe9a5N4zHFGn8jv3_1590826274"
+const token="XDzruQmInasahFPeEkUKkQ01J0yXfvpR_1590907968"
 
   export default {
     name: 'ChangePassword',
@@ -82,14 +82,15 @@ const token="x0841AKQUUyaB93Ihe9a5N4zHFGn8jv3_1590826274"
             this.onSuccess()
             this.toggleLoginModal()
           }
+
           this.disabled = false
         }
       },
      
-toggleLogin2 () {
-        this.toggleRegisterModal()
-        this.toggleLoginModal()
-      },
+// toggleLogin2 () {
+//         this.toggleRegisterModal()
+//         this.toggleLoginModal()
+//       },
   }
     }
   

@@ -104,8 +104,10 @@
             this.onSuccess();
            this.toggleRegistrationSuccessModal();
           }
+          
         }
         this.disabled = false
+       
       },
        toggleLogin () {
         this.toggleRegisterModal()
