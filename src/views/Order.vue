@@ -214,6 +214,7 @@
 
       if (isUserLoggedIn) {
         await this.$store.dispatch("user/fetchUserInfo")
+        await this.$store.dispatch("pet/fetchPet")
         const  user = await this.$store.getters['user/userInfo']
         const {name, email, phone, address} = user
         this.order['user_name'] = name
