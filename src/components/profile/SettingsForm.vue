@@ -149,14 +149,17 @@ export default {
       }
       this.$v.$touch();
       if (!this.$v.$anyError && this.oldPasswordAppearance) {
-        const { email, name, phone, address } = this.profile;
+        const { email, name, phone, address } = this;
         const password = this.pass != "" ? this.pass : null;
         const updatedData = { email, name, phone, address };
         password ? (updatedData.password = password) : "";
         password ? (updatedData.old_password = this.oldPass) : "";
-        this.$store
-          .dispatch("user/userUpdate", updatedData)
-          .then(status => console.log(status));
+        this.$store.dispatch("user/userUpdate", updatedData).then(status => {
+          if (status) {
+            this.$store.dispatch("user/fetchUserInfo");
+            this.$emit("update:editStatus", false);
+          }
+        });
       } else {
         this.$store.commit("clearSnackbar");
         this.$store.commit(
