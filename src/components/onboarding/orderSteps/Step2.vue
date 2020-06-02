@@ -50,7 +50,7 @@
                 <div class="form-group__content">
                     <div class="input input_type_date">
                         <!-- <input type="date" class="input__control input__control_type_datetime" v-model="birthday_date"> -->
-                        <date-picker v-model="birthday_date" valueType="format" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ" :disabled-date="notAfterToday"></date-picker>
+                        <date-picker v-model="birthday_date" valueType="format" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ" :disabled-date="notAfterToday" :lang="lang"></date-picker>
                         <!-- <date-picker v-model="time2" type="datetime"></date-picker>
                         <date-picker v-model="time3" range></date-picker> -->
                     </div>
@@ -209,6 +209,7 @@
   import { email, required, requiredIf, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
   import DatePicker from 'vue2-datepicker';
   import 'vue2-datepicker/index.css';
+  import 'vue2-datepicker/locale/ru';
 
   const today = new Date();
 today.setHours(0, 0, 0, 0);
@@ -238,7 +239,14 @@ today.setHours(0, 0, 0, 0);
     },
     data: () => ({
       hasAllergy: false,
+       lang: {
+          formatLocale: {
+            firstDayOfWeek: 1,
+          },
+          monthBeforeYear: true,
+        },
     }),
+   
     computed: {
       ...(() => {
         let o = {}
@@ -312,6 +320,7 @@ today.setHours(0, 0, 0, 0);
     },
     },
     components: { DatePicker },
+    
   }
 </script>
 <style>
