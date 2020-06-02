@@ -59,8 +59,8 @@ const routes = [
   },
   {
     path: '*',
-    name: '404',
-    component: () => import('../views/404.vue'),
+    name: 'InvalidPage',
+    component: () => import('../views/InvalidPage.vue'),
   },
 ]
 
