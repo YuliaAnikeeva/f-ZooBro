@@ -187,10 +187,16 @@ export default {
               const { data } = json
               // обновить локальные данные если усе успешно
               console.log('passwordRecovery', data)
+              commit('clearSnackbar', null, { root: true })
+              commit('setSnackbarMsg', 'Пароль отправлен на почту', { root: true })
+              commit('setSnackbarType', 'success', { root: true }) 
               return true
             } else {
               const { message } = json
               console.error(message)
+              commit('clearSnackbar', null, { root: true })
+              commit('setSnackbarMsg', 'Что-то пошло не так...', { root: true })
+              commit('setSnackbarType', 'error', { root: true })
               return false
             }
           }
@@ -198,6 +204,7 @@ export default {
         .catch(
           error => {
             console.error('Ошибка', error)
+   
             return false
           }
         )
@@ -224,6 +231,10 @@ export default {
             if (json.status === 1) {
               const {  password, token } = json
               // обновить локальные данные если усе успешно
+              // commit('setUserHeader', data)
+              commit('clearSnackbar', null, { root: true })
+              commit('setSnackbarMsg', 'Новый пароль сохранен', { root: true })
+              commit('setSnackbarType', 'success', { root: true }) 
               console.log('newPassword', password)
               return true
             } else {

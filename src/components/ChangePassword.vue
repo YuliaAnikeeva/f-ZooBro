@@ -28,7 +28,7 @@
         <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.password.betweenLength && $v.password.required}" type="submit" @click="onSubmit">Далее</button>
 
        
-
+<Loader v-if="disabled"/>
 </div>
 </div>
 </template>
@@ -45,11 +45,11 @@
     },
     and(minLength(min), maxLength(max))
   )
-const token="x0841AKQUUyaB93Ihe9a5N4zHFGn8jv3_1590826274"
+// const token="ZNfV8XpF1ByXrY7F34xUoDSALpbBqlWN_1591186287"
 
   export default {
     name: 'ChangePassword',
-    props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal','toggleChangePasswordModal'],
+    // props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal','toggleChangePasswordModal'],
     components: { Loader },
     data () {
       return {
@@ -68,28 +68,27 @@ const token="x0841AKQUUyaB93Ihe9a5N4zHFGn8jv3_1590826274"
     methods: {
       async onSubmit () {
         this.$v.$touch()
-        
         if (this.$v.$invalid) {
           return
-         
         }
         if (!this.$v.$invalid) {
           const { password } = this
+          const url = this.$route.query
+          const token=url['reset-password']
+          console.log(token)
+          console.log(password)
           this.disabled = true
-          const rez = await this.$store.dispatch('user/newPassword', {
-            password, token})
+          const rez = await this.$store.dispatch('user/newPassword', {password, token})
           if (rez) {
-            this.onSuccess()
+            this.toggleChangePasswordModal()
             this.toggleLoginModal()
           }
+
           this.disabled = false
         }
       },
      
-toggleLogin2 () {
-        this.toggleRegisterModal()
-        this.toggleLoginModal()
-      },
+
   }
     }
   
