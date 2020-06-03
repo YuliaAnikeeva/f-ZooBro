@@ -7,7 +7,7 @@
     </head>
     <body>
 
-    <h1> Зона покрытия доставки </h1> 
+    <h1> Зона покрытия доставки </h1>
     <div id="map"></div>
 
     <div id="mapStatic">
@@ -130,7 +130,8 @@
               [mapContainer.width(), mapContainer.height()]
             ),
             // Сохраняем полный адрес для сообщения под картой.
-            address = [obj.getCountry(), obj.getAddressLine()].join(', '),
+            //address = [obj.getCountry(), obj.getAddressLine()].join(', '),
+            address = [obj.getAddressLine()].join(', '),
             // Сохраняем укороченный адрес для подписи метки.
             shortAddress = [obj.getThoroughfare(), obj.getPremiseNumber(), obj.getPremise()].join(' ')
           // Убираем контролы с карты.
@@ -140,6 +141,7 @@
           // Выводим сообщение под картой.
           showMessage('')
           showAddress(address)
+          console.log('address', address)
           const cont = document.querySelector('#map')
           cont.classList.add('dblock')
           cont.classList.remove('dnone')
