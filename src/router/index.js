@@ -39,13 +39,6 @@ const routes = [
     beforeEnter: ifAuth,
   },
   {
-    path: '/admin',
-    name: 'Admin',
-    component: () => import( '../views/Admin.vue'),
-    meta: { layout: 'main' },
-    beforeEnter: ifAuth,
-  },
-  {
     path: '/order',
     name: 'Order',
     component: () => import( '../views/Order.vue'),
@@ -59,8 +52,8 @@ const routes = [
   },
   {
     path: '*',
-    name: '404',
-    component: () => import('../views/404.vue'),
+    name: 'InvalidPage',
+    component: () => import('../views/InvalidPage.vue'),
   },
 ]
 
