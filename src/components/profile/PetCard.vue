@@ -133,7 +133,6 @@ export default {
   display: grid;
   width: 100%;
   min-width: 320px;
-  // max-width: 440px;
   box-sizing: border-box;
   grid-template-areas:
     "avatar name"

@@ -31,7 +31,7 @@
     </div>
 
     <div v-if="activeTab == 'orders'" id="profile-orders">
-      <table>
+      <table class="profile-orders__table">
         <thead>
           <tr>
             <th>Дата</th>
@@ -45,6 +45,9 @@
           <OrderCard v-for="(order, index) in ordersList" :key="index" :order="order" />
         </tbody>
       </table>
+      <div class="profile-orders__list">
+        <OrderCardMobile v-for="(order, index) in ordersList" :key="index" :order="order" />
+      </div>
     </div>
 
     <div v-if="loader" id="profile-loader">
@@ -60,13 +63,14 @@ import SettingsCard from "@/components/profile/SettingsCard";
 import SettingsForm from "@/components/profile/SettingsForm";
 import Loader from "@/components/Loader";
 import PetForm from "@/components/profile/PetForm";
+import OrderCardMobile from "@/components/profile/OrderCardMobile";
 
 export default {
   name: "Profile",
   metaInfo: {
     title: "Profile"
   },
-  components: { PetCard, OrderCard, SettingsCard, SettingsForm, Loader, PetForm },
+  components: { PetCard, OrderCard, SettingsCard, SettingsForm, Loader, PetForm, OrderCardMobile },
   data() {
     return {
       pets: [],
@@ -177,12 +181,10 @@ export default {
 #profile {
   font-family: Montserrat, serif;
   display: grid;
-  // grid-gap: 80px;
-  // padding-right: 12.5%;
-  // padding-left: 12.5%;
   padding: 0 12px;
-  max-width: 1200px;
+  max-width: 1920px;
   margin: 0 auto;
+  margin-bottom: 120px;
   grid-template-areas:
     "header"
     "nav"
@@ -192,6 +194,7 @@ export default {
     height: 100%;
     grid-area: nav;
     padding: 120px 0 80px;
+    box-sizing: border-box;
     &-tabs {
       display: flex;
       flex-flow: row nowrap;
@@ -246,30 +249,28 @@ export default {
   &-settings,
   &-loader {
     grid-area: block;
-  }
-  &-settings,
-  &-orders {
-    margin-left: 13vw;
-    margin-right: 13vw;
+    width: 100%;
+    margin: 0 auto;
   }
   &-pets {
     display: grid;
     grid-gap: 50px;
-    //grid-template-columns: repeat(auto-fit, minmax(23vw, 1fr));
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    // margin: 0 auto;
+    grid-template-columns: repeat(3, 440px);
+    justify-content: center;
   }
   &-settings {
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
+    max-width: 940px;
     button {
       margin-top: 80px;
-      max-width: 13vw;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 250px;
       outline: none;
       font-family: Montserrat, serif;
-      padding: 15px 67px;
+      padding: 15px;
       font-weight: 600;
       font-size: 21px;
       line-height: 26px;
@@ -289,6 +290,9 @@ export default {
   &-orders {
     table {
       display: grid;
+      max-width: 945px;
+      width: 100%;
+      margin: 0 auto;
       grid-template-columns:
         minmax(150px, 1fr)
         minmax(150px, 0.33fr)
@@ -319,6 +323,12 @@ export default {
   }
 }
 
+.profile-orders {
+  &__list {
+    display: none;
+  }
+}
+
 input {
   text-align: center;
 }
@@ -335,18 +345,13 @@ textarea {
 }
 
 @media screen and (max-width: 1440px) {
-  #profile-settings,
-  #profile-orders {
-    margin-left: 0;
-    margin-right: 0;
-  }
-  #profile-settings {
-    button {
-      max-width: 20vw;
-    }
-  }
   #profile {
-    max-width: 1200px;
+    max-width: 1150px;
+    &-orders {
+      table {
+        max-width: 919px;
+      }
+    }
     &-header {
       font-size: 24px;
       margin-top: 40px;
@@ -355,6 +360,7 @@ textarea {
       padding: 50px 0;
       &-tabs {
         li {
+          box-sizing: border-box;
           max-width: 220px;
           padding: 12px;
           font-size: 18px;
@@ -362,16 +368,37 @@ textarea {
       }
     }
     &-pets {
+      grid-template-columns: repeat(auto-fit, 350px);
       grid-gap: 30px;
+    }
+    &-settings {
+      max-width: 728px;
     }
   }
 }
 
 @media screen and (max-width: 414px) {
+  #profile-settings {
+    button {
+      max-width: 180px;
+    }
+  }
+  .profile-orders {
+    &__list {
+      display: block;
+    }
+  }
   #profile {
     &-header {
       font-size: 22px;
       margin-top: 50px;
+    }
+    &-orders {
+      display: flex;
+      flex-direction: column;
+      table {
+        display: none;
+      }
     }
     &-nav {
       padding: 30px 0 50px;
