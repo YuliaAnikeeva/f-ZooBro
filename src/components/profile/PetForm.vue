@@ -5,7 +5,7 @@
         <label class="avatar-input">
           <img v-if="avatarFile && $v.avatarFile.$dirty && !$v.avatarFile.$invalid" :src="avatarDataURL" alt="avatar" />
           <img v-else src="@/assets/profile-pic/default-avatar.png" alt="avatar" />
-          <input 
+          <input
             class="avatar-input__control"
             type="file"
             accept="image/jpg,image/jpeg,image/png"
@@ -118,7 +118,7 @@
       </div>
 
       <div class="pet-form__form-section">
-      
+
         <div class="form-group pet-form__birthday-date"  :class="{ 'field--error wobble-error': $v.tempPet.birthday_years.$error }">
           <label class="form-group__label">Дата рождения</label>
           <div class="form-group__content">
@@ -275,7 +275,7 @@ export default {
         birthday_date: null,
         birthday_years: null,
         food_exceptions: null,
-        ...this.pet, 
+        ...this.pet,
       },
       avatarFile: null,
       avatarDataURL: null,

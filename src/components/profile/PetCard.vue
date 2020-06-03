@@ -131,6 +131,10 @@ export default {
 <style lang="scss" scoped>
 .card {
   display: grid;
+  width: 100%;
+  min-width: 320px;
+  // max-width: 440px;
+  box-sizing: border-box;
   grid-template-areas:
     "avatar name"
     "breed breed_text"

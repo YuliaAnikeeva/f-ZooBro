@@ -177,9 +177,12 @@ export default {
 #profile {
   font-family: Montserrat, serif;
   display: grid;
-  grid-gap: 80px;
-  padding-right: 12.5%;
-  padding-left: 12.5%;
+  // grid-gap: 80px;
+  // padding-right: 12.5%;
+  // padding-left: 12.5%;
+  padding: 0 12px;
+  max-width: 1200px;
+  margin: 0 auto;
   grid-template-areas:
     "header"
     "nav"
@@ -188,6 +191,7 @@ export default {
   &-nav {
     height: 100%;
     grid-area: nav;
+    padding: 120px 0 80px;
     &-tabs {
       display: flex;
       flex-flow: row nowrap;
@@ -195,6 +199,7 @@ export default {
       justify-content: center;
       padding: 0;
       list-style-type: none;
+      margin: 0;
       li {
         border-left: 1px solid #2289b5;
         border-top: 1px solid #2289b5;
@@ -203,10 +208,13 @@ export default {
         font-weight: 500;
         font-size: 24px;
         line-height: 22px;
-        padding: 19px 97px;
+        padding: 19px;
+        width: 100%;
+        max-width: 315px;
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
+        justify-content: center;
         transition: 0.5s linear all;
         &:last-child {
           border-right: 1px solid #2289b5;
@@ -249,6 +257,8 @@ export default {
     grid-gap: 50px;
     //grid-template-columns: repeat(auto-fit, minmax(23vw, 1fr));
     grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    // margin: 0 auto;
   }
   &-settings {
     display: flex;
@@ -333,6 +343,49 @@ textarea {
   #profile-settings {
     button {
       max-width: 20vw;
+    }
+  }
+  #profile {
+    max-width: 1200px;
+    &-header {
+      font-size: 24px;
+      margin-top: 40px;
+    }
+    &-nav {
+      padding: 50px 0;
+      &-tabs {
+        li {
+          max-width: 220px;
+          padding: 12px;
+          font-size: 18px;
+        }
+      }
+    }
+    &-pets {
+      grid-gap: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 414px) {
+  #profile {
+    &-header {
+      font-size: 22px;
+      margin-top: 50px;
+    }
+    &-nav {
+      padding: 30px 0 50px;
+      &-tabs {
+        li {
+          max-width: 120px;
+          padding: 9px;
+          font-size: 16px;
+        }
+      }
+    }
+    &-pets {
+      grid-template-columns: 1fr;
+      grid-gap: 30px;
     }
   }
 }
