@@ -45,11 +45,11 @@
     },
     and(minLength(min), maxLength(max))
   )
-const token='QW1zI70JLmMup70h3N_zMQg-QynuC2Je_1591178084'
+// const token="ZNfV8XpF1ByXrY7F34xUoDSALpbBqlWN_1591186287"
 
   export default {
     name: 'ChangePassword',
-    props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal','toggleChangePasswordModal'],
+    // props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal','toggleChangePasswordModal'],
     components: { Loader },
     data () {
       return {
@@ -68,20 +68,19 @@ const token='QW1zI70JLmMup70h3N_zMQg-QynuC2Je_1591178084'
     methods: {
       async onSubmit () {
         this.$v.$touch()
-        
         if (this.$v.$invalid) {
           return
-         
         }
         if (!this.$v.$invalid) {
           const { password } = this
+          const url = this.$route.query
+          const token=url['reset-password']
           console.log(token)
           console.log(password)
           this.disabled = true
-          const rez = await this.$store.dispatch('user/newPassword', {
-            password, token})
+          const rez = await this.$store.dispatch('user/newPassword', {password, token})
           if (rez) {
-            this.onSuccess()
+            this.toggleChangePasswordModal()
             this.toggleLoginModal()
           }
 
