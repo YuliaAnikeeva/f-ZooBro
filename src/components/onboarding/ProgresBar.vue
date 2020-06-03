@@ -12,11 +12,12 @@
           step_error: step.error}"
         >
           <!--<input type="radio" class="step__control" v-model="val" :value="step.value">-->
+          <div class="step__label">{{ step.label }}</div>
           <div class="step__header">
             <div class="step__divider"></div>
             <div class="step__button"></div>
           </div>
-          <div class="step__label">{{ step.label }}</div>
+          <div class="step__label">{{ info[idx] }} </div>
       </label>
     </template>
   </div>
@@ -34,6 +35,9 @@
           { value: 'step-3', label: 'Данные твоего человека'},
           { value: 'step-4', label: 'Результат', hidden: true },
         ]
+      },
+      info: {
+        type: Array,
       },
       value: {
         type: String,
@@ -61,14 +65,13 @@
       font-family: Montserrat, sans-serif;
       display: flex;
       font-size: 12px;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
+      color: #464451;
     }
 
     .step {
       flex: 1;
-      color: #bdbdbd;
       cursor: pointer;
-      padding: 10px 0;
 
       &_hidden {
         display: none;
@@ -97,33 +100,31 @@
       }
 
       &__button {
-        width: 31px;
-        height: 31px;
+        width: 30px;
+        height: 30px;
         border: 2px solid #bdbdbd;
         border-radius: 100%;
         display: block;
-        margin: 0 auto 10px auto;
+        margin: 0 auto;
         background-color: #fff;
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &:after {
           display: block;
-          width: 50%;
-          height: 50%;
-          position: absolute;
-          left: 50%;
-          top: 50%;
+          height: 14px;
+          width: 14px;
           background-color: #bdbdbd;
-          margin-top: -25%;
-          margin-left: -25%;
           border-radius: 50%;
         }
       }
 
       &__label {
-        color: #2c3e50;
         text-align: center;
         line-height: 25px;
+        margin: 10px 0;
       }
 
       &_cur &__divider,
@@ -139,6 +140,10 @@
       &_cur &__button:after {
         content: '';
         background-color: #2289b5;
+      }
+
+      &_prev {
+        color: #2289b5;
       }
 
       &_prev &__button {

@@ -3,6 +3,15 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+const ifAuth = (to, from, next) => {
+  if (!localStorage.getItem('userToken')) {
+    next('/?message=no-login')
+  } else {
+    next()
+  }
+}
+
+
 const routes = [
   {
     path: '/',
@@ -27,12 +36,14 @@ const routes = [
     name: 'Profile',
     component: () => import( '../views/Profile.vue'),
     meta: { layout: 'main' },
+    beforeEnter: ifAuth,
   },
   {
     path: '/admin',
     name: 'Admin',
     component: () => import( '../views/Admin.vue'),
     meta: { layout: 'main' },
+    beforeEnter: ifAuth,
   },
   {
     path: '/order',

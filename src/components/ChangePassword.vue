@@ -1,52 +1,36 @@
 <template>
 <div class="border">
-   <h1>Вход</h1>
-    <div class="form-login">
-
-        <form class="form" @submit.prevent="onSubmit">
-
-            <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error}">
+    <h1>Введите пароль</h1>
+  <div class="form-new-password">
+         <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
+                
                 <div class="input-block">
-                    <input v-model="email" autocomplete="email" :disabled="disabled" required>
-                    <label>Адрес электронной почты</label>
-                </div>
-                <div class="error_block">
-                    <div class="error" v-if="($v.email.$dirty && !$v.email.required)">Введите e-mail</div>
-                    <div class="error" v-if="($v.email.$dirty && !$v.email.email)">Введите корректный e-mail</div>
-                </div>
-            </div>
 
-            <div class="group-field" :class="{ 'field--error wobble-error': $v.password.$error }">
-                <div class="input-block">
                     <input type="password" v-model="password" :disabled="disabled" v-show="!showPassword" required>
                     <input type="text" v-model="password" :disabled="disabled" v-show="showPassword" required>
-                    <button class="buttonShowPassword" @click="showPassword=!showPassword">
-                      <div class="iconPassowrdShow" v-show="!showPassword"></div>
-                      <div class="iconPassowrdHide" v-show="showPassword"></div>
-                    </button>
 
                     <label>Пароль</label>
+                     <div class="buttonShowPassword" @click="showPassword=!showPassword" >
+                      <div class="iconPassowordShow" v-show="showPassword"></div>
+                      <div class="iconPassowordHide" v-show="!showPassword"></div>
+                    </div>
                 </div>
                 <div class="error_block">
+                  
                     <div class="error" v-if="!$v.password.required">Введите пароль</div>
                     <div class="error" v-if="!$v.password.betweenLength">{{ $v.password.between }}Длина пароля должна
                         быть от {{ $v.password.$params.betweenLength.min }} до {{ $v.password.$params.betweenLength.max
                         }} символов
                     </div>
                 </div>
+                <div class="instruction">Длина пароля должна  быть от 6 до 18</div>
             </div>
+        <button :disabled="disabled" class="button" :class="{ 'button-valid': $v.password.betweenLength && $v.password.required}" type="submit" @click="onSubmit">Далее</button>
 
-            <button :disabled="disabled" class="button" type="submit">Войти</button>
+       
 
-            <Loader v-if="disabled"/>
-
-            <a class="link" @click="toggleRecoveryPasswordModal">Я не помню пароль</a>
-            <a class="link" @click="toggleRegisterModal">Зарегистрироваться</a>
-
-        </form>
-
-    </div>
-    </div>
+</div>
+</div>
 </template>
 
 <script>
@@ -61,60 +45,54 @@
     },
     and(minLength(min), maxLength(max))
   )
+const token="x0841AKQUUyaB93Ihe9a5N4zHFGn8jv3_1590826274"
 
   export default {
-    name: 'LoginForm',
+    name: 'ChangePassword',
+    props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal','toggleChangePasswordModal'],
     components: { Loader },
-    props: ['onSuccess'],
     data () {
       return {
-        email: '',
         password: '',
-        messages: [],
+        token: '',
         disabled: false,
         showPassword: false,
       }
     },
     validations: {
-      email: {
-        required,
-        email,
-      },
       password: {
         required,
-        betweenLength: betweenLength(4, 18),
+        betweenLength: betweenLength(6, 18),
       }
     },
     methods: {
       async onSubmit () {
         this.$v.$touch()
+        
         if (this.$v.$invalid) {
           return
+         
         }
         if (!this.$v.$invalid) {
-          const { email, password } = this
-          console.log('loginUser')
-
+          const { password } = this
           this.disabled = true
-          const rez = await this.$store.dispatch('loginUser', {
-            email,
-            password
-          })
+          const rez = await this.$store.dispatch('user/newPassword', {
+            password, token})
           if (rez) {
             this.onSuccess()
-            this.$router.push('/profile')
+            this.toggleLoginModal()
           }
           this.disabled = false
         }
       },
-      toggleRegisterModal () {
-        this.$root.toggleRegisterModal
+     
+toggleLogin2 () {
+        this.toggleRegisterModal()
+        this.toggleLoginModal()
       },
-      toggleRecoveryPasswordModal(){
-        this.$MainLayout.recoveryPasswordModal
-      },
-    }
   }
+    }
+  
 </script>
 
 <style lang="scss" scoped>
@@ -138,7 +116,7 @@ background-image: url(../assets/passShow.svg);
  background-image: url(../assets/passHide.svg);
   position: absolute;
 background-repeat: no-repeat;
-right: calc(100% - 300px);
+right: 5%;
 top: 33%;
 }
 

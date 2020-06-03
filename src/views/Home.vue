@@ -280,7 +280,7 @@
 export default {
   name: 'Home',
   metaInfo: {
-    title: 'Home'
+    title: 'Лакомства и игрушки для собак'
   },
   data: () => ({
     answerFirst: true,
@@ -288,7 +288,15 @@ export default {
     answerThird: true,
     answerFourth: true
   }),
-  components: {}
+  components: {},
+  mounted() {
+    const url = this.$route.query
+    if (url['reset-password']){
+      //ToDo использовать для работы с формой восстановления пароля
+      const resetPassword = url['reset-password']
+      console.log(`есть токен, нужно показать форму для смены пароля.  resetPassword = ${resetPassword}`)
+    }
+  },
 }
 </script>
 

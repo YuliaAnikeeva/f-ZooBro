@@ -2,14 +2,14 @@
 <div class="border">
     <h1>Восстановление пароля</h1>
   <div class="form-recovery">
-    <!-- <div class="message_block">
+    <div class="message_block">
     <div v-if="status=='success'">
-      <p class="message message--success">{{ msg }}</p>
+      <p v-if="status=='success'" class="message message--success">{{ messages }}</p>
     </div>
     <div v-else>
-      <p v-if="status=='error'" class="message message--error">{{ msg }}</p>
+      <p v-if="status=='error'" class="message message--error">{{ messages }}</p>
       </div>
-      </div> -->
+      </div>
       <form  class="form" @submit.prevent="onSubmit" ref="form">
           <div class="group-field" :class="{ 'field--error wobble-error': $v.email.$error }">
               <div class="instruction" >Введите адрес электронной почты</div>
@@ -36,6 +36,8 @@ import { RECOVERY_REQUEST } from '../store/auth'
 
 export default {
   name: 'RecoveryPasswordForm',
+  props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal', 'toggleChangePasswordModal'],
+
   data () {
     return {
       email: '',
@@ -65,25 +67,18 @@ export default {
           this.messages = []
           const {email} = this
           console.log('passwordRecovery')
-          await this.$store.dispatch('passwordRecovery', {email})
-          this.messages = ["Письмо с паролем отправленно на почту"]
-          this.$router.push('/login')
+          await this.$store.dispatch('user/passwordRecovery', {email})
+          this.messages = "Письмо с паролем отправленно на почту"
+          // this.$router.push('/login')
+          // this.toggleRegistrationSuccessModal();
+          // this.toggleChangePasswordModal();
         }
+        // else{
+        //   this.messages = "Произошла ошибка, возможно, Ваш почтовый ящик не зарегистрирован "
+        // }
       }
 
-    // onSubmit: function () {
-    //   this.$v.$touch()
-    //   if (!this.$v.$invalid) {
-    //     this.messages = []
-    //     this.$store.dispatch('auth/'+RECOVERY_REQUEST, this.email)
-    //       .then( () => {
-    //         this.messages = ["Письмо с паролем отправленно на почту"]
-    //         this.$router.push('/login')
-    //       }).catch( (messages) => {
-    //         this.messages = messages
-    //       })
-    //   }
-    // }
+    
   }
 }
 </script>

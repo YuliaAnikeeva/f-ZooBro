@@ -11,16 +11,23 @@
       </ul>
     </div>
 
-    <div v-if="activeTab == 'pets' && pets.length > 1" id="profile-pets">
-      <Loader v-if="pets.length < 1" />
-      <PetCard v-for="(pet, index) in pets" :key="index" :pet="pet" />
-      <PetCard :pet="emptyPet" />
-      <!-- <button disabled="disabled" @click="createDefaultPet()">Создание дефолтного питомца</button> -->
+    <div v-if="activeTab == 'pets' && pets.length > 0 && !petEditor" id="profile-pets">
+      <Loader v-if="pets.length ==  0" />
+      <PetCard v-for="(pet, index) in pets" :key="index" :pet="pet" @focus:pet="onFocusPet" />
+      <PetCard :pet="emptyPet" @add:pet="onAddPet" />
     </div>
 
+    <PetForm
+      v-if="activeTab == 'pets' && petEditor"
+      :pet="petTemp"
+      @save="petEditor = false"
+      @close="petEditor = false"
+      />
+
     <div v-if="activeTab == 'settings'" id="profile-settings">
-      <SettingsCard :profile="profileData" />
-      <button>Изменить</button>
+      <SettingsCard v-if="!profileEditor" :profile="profileData" />
+      <SettingsForm v-else :profile="profileData"  :editStatus.sync="profileEditor"/>
+      <button v-if="!profileEditor" @click="editProfile()">Изменить</button>
     </div>
 
     <div v-if="activeTab == 'orders'" id="profile-orders">
@@ -38,13 +45,11 @@
           <OrderCard v-for="(order, index) in ordersList" :key="index" :order="order" />
         </tbody>
       </table>
-      <!-- <OrderCard :orders="ordersList" /> -->
     </div>
 
     <div v-if="loader" id="profile-loader">
-      <Loader/>
+      <Loader />
     </div>
-    
   </div>
 </template>
 
@@ -52,21 +57,26 @@
 import PetCard from "@/components/profile/PetCard";
 import OrderCard from "@/components/profile/OrderCard";
 import SettingsCard from "@/components/profile/SettingsCard";
+import SettingsForm from "@/components/profile/SettingsForm";
 import Loader from "@/components/Loader";
+import PetForm from "@/components/profile/PetForm";
 
 export default {
   name: "Profile",
   metaInfo: {
     title: "Profile"
   },
-  components: { PetCard, OrderCard, SettingsCard, Loader },
+  components: { PetCard, OrderCard, SettingsCard, SettingsForm, Loader, PetForm },
   data() {
     return {
       pets: [],
       orders: [3, 5, 7, 12, 44],
       disabled: true,
       activeTab: "pets",
-      loader: false
+      loader: false,
+      profileEditor: false,
+      petEditor: false,
+      petTemp: {},
     };
   },
   methods: {
@@ -75,13 +85,13 @@ export default {
         // Для показа лучше так, потом переделать так, чтобы после фетча сразу прогружался нужный ТАБ
 
         switch (tabName) {
-          case 'settings': {
+          case "settings": {
             this.$store.dispatch("user/fetchUserInfo");
-            break
+            break;
           }
-          case 'orders': {
+          case "orders": {
             this.$store.dispatch("order/fetchOrdersList");
-            break 
+            break;
           }
         }
 
@@ -90,12 +100,12 @@ export default {
           .classList.remove("active-tab");
 
         this.activeTab = false;
-        this.loader = true
+        this.loader = true;
 
         setTimeout(() => {
-          this.activeTab = tabName
+          this.activeTab = tabName;
           document.querySelector(`#${tabName}`).classList.add("active-tab");
-          this.loader = false
+          this.loader = false;
         }, 1000);
       }
     },
@@ -123,17 +133,28 @@ export default {
         }
       });
     },
+    editProfile() {
+      this.profileEditor = true;
+    },
+    onFocusPet(pet) {
+      this.petTemp = pet;
+      this.petEditor = true;
+    },
+    onAddPet() {
+      this.petTemp = {};
+      this.petEditor = true;
+    },
   },
   computed: {
     emptyPet() {
       const empty = {
         empty: true,
-        name: 'Кличка',
-        breed: '',
-        gender: '',
-        food_exceptions: ''
-      }
-      return empty
+        name: "Кличка",
+        breed: "",
+        gender: "",
+        food_exceptions: ""
+      };
+      return empty;
     },
     profileData() {
       return this.$store.getters["user/userInfo"];
@@ -216,9 +237,7 @@ export default {
   &-orders,
   &-settings,
   &-loader {
-    transition: 0.3s linear all;
     grid-area: block;
-    overflow-x: scroll;
   }
   &-settings,
   &-orders {
@@ -228,7 +247,8 @@ export default {
   &-pets {
     display: grid;
     grid-gap: 50px;
-    grid-template-columns: repeat(auto-fit, minmax(23vw, 1fr));
+    //grid-template-columns: repeat(auto-fit, minmax(23vw, 1fr));
+    grid-template-columns: repeat(3, 1fr);
   }
   &-settings {
     display: flex;
@@ -302,7 +322,6 @@ textarea {
 .active-tab {
   background-color: #2289b5;
   color: white;
-  transition: 0.2s linear all;
 }
 
 @media screen and (max-width: 1440px) {
