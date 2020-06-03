@@ -74,7 +74,7 @@
       </div>
       <div class="what-in-box">
         <div class="block__head">
-          <h4 class="block__head-text">Внутри коробки ты найдешь</h4>
+          <h4 class="block__head-text block__head-text_white">Внутри коробки ты найдешь</h4>
         </div>
         <div class="what-in-box__container">
           <div class="what-in-box__content">
@@ -1035,7 +1035,20 @@ main {
 @media screen and (max-width: 425px) {
   .block {
     &__head {
-      margin-bottom: 0;
+      margin-bottom: 50px;
+    }
+    &__head-text {
+      width: max-content;
+      height: 27px;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 27px;
+
+      &_white {
+        color: #fff;
+      }
     }
   }
 
@@ -1136,78 +1149,168 @@ main {
       height: max-content;
     }
   }
+
   .what-in-box {
     grid-template-columns: 100%;
     width: 100%;
     padding: 50px 12px 50px;
 
-  &__head {
-    display: grid;
-    justify-content: center;
-    margin-top: 125px;
-    margin-bottom: 70px;
-  }
-  &__head-text {
-    width: 275px;
-    height: 40px;
-    font-family: Montserrat, sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 32px;
-    line-height: 39px;
-    color: $default-text-color;
-  }
-  &__container {
-    display: grid;
-    grid-template-columns: 100%;
-    margin-bottom: 70px;
-    z-index: 6;
-    justify-content: center;
-  }
-  &__content {
-    display: grid;
-    grid-template-rows: repeat(2, max-content);
-    row-gap: 0;
-  }
-  &__content-text {
-    display: grid;
-    justify-items: center;
-    align-content: flex-start;
-  }
-  &__content-text:last-child {
-    align-content: flex-start;
-  }
-  &__content-image-container {
-    display: none;
-  }
-  &__content-image {
-    display: none;
-    &_mobile {
-      display: block;
+    &__container {
+      display: grid;
+      grid-template-columns: 100%;
+      margin-bottom: 70px;
+      z-index: 6;
+      justify-content: center;
+      row-gap: 40px;
+    }
+    &__content {
+      row-gap: 40px;
+    }
+    &__content-text {
+      display: grid;
+      justify-items: center;
+      align-content: flex-start;
+    }
+    &__content-text:last-child {
+      align-content: flex-start;
+    }
+    &__content-image-container {
+      display: none;
+    }
+    &__content-image {
+      display: none;
+      &_mobile {
+        margin: 20px 0;
+        display: block;
+      }
+    }
+    &__content-head {
+      width: 100%;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    &__content-text-text {
+      width: 100%;
+      height: 80px;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      color: #fff;
     }
   }
-  &__content-head {
+
+  .how-use {
+    padding: 70px 50px;
     width: 100%;
-    font-family: Montserrat, sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 24px;
-    text-align: center;
-    color: #464451;
-    margin-bottom: 20px;
+
+    &__head {
+    display: grid;
+    justify-content: center;
+    margin-bottom: 50px;
+    }
+    &__head-text {
+      width: max-content;
+      height: 27px;
+      font-size: 22px;
+      line-height: 27px;
+      color: $default-text-color;
+    }
+    &__container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 100%;
+      column-gap: 0;
+      row-gap: 40px;
+    }
+    &__content {
+      display: grid;
+      justify-items: center;
+      row-gap: 20px;
+      &:first-child  {
+        .how-use__content-text {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &__content-image {
+      width: max-content;
+    }
+    &__content-text {
+      width: 100%;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      color: #464451;
+
+    }
+    &__content-arrow {
+      display: none;
+    }
   }
-  &__content-text-text {
-    width: 100%;
-    height: 80px;
-    font-family: Montserrat, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 20px;
-    text-align: center;
-    color: #464451;
+
+  .social-mission {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 100%;
+    padding: 50px 0;
+    background: linear-gradient(176.37deg, #157DA9 12.91%, rgba(50, 157, 202, 0.82) 58.13%, #1489BB 92.45%);
+    box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
+    &__container {
+      display: grid;
+      grid-template-columns: 100%;
+      justify-content: center;
+      column-gap: 60px;
+      z-index: 6;
+    }
+    &__content {
+      display: grid;
+      grid-row: 2/2;
+      height: 100%;
+      width: 100%;
+      align-content: center;
+      text-align: center;
+      padding: 0 12px;
+
+    }
+    &__text-content {
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 30px;
+      color: #FFFFFF;
+      margin: 0;
+    }
+
+    &__content-image {
+      display: grid;
+      grid-template-columns: 442px 238px;
+      column-gap: 10px;
+      height: 340px;
+    }
+    &__image {
+      display: grid;
+
+      &_one {
+        width: 100%;
+      }
+      &_two {
+        width: 100%;
+      }
+    }
   }
-}
 }
 </style>
