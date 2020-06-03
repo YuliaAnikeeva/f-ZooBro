@@ -7,14 +7,16 @@ export default {
     email: null,
     is_admin: null,
     phone: null,
+    address: null,
   },
   mutations: {
     setUserInfo (state, payload) {
-      let { name, email, is_admin, phone } = payload
+      let { name, email, is_admin, phone, address } = payload
       state.name = name
       state.email = email
       state.is_admin = is_admin
       state.phone = phone
+      state.address = address
     },
     setUserName (state, payload) {
       state.name = payload
@@ -73,7 +75,7 @@ export default {
           }
         )
     },
-    async userUpdate ({ commit, getters }, payload) {
+    async userUpdate ({ commit, rootGetters }, payload) {
       return fetch(`${baseURL}/v1/user/update`,
         {
           mode: 'cors',
@@ -82,7 +84,7 @@ export default {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': '*',
-            'Authorization': getters.userToken,
+            'Authorization': rootGetters.token,
           },
           method: 'POST',
           body: JSON.stringify(payload)
@@ -163,8 +165,8 @@ export default {
         )
     },
 
-    async passwordRecovey ({ commit, getters }, payload) {
-      return fetch(`${baseURL}/v1/user/recovery`,
+    async passwordRecovery ({ commit, getters }, payload) {
+      return fetch(`${baseURL}/v1/user/password-reset`,
         {
           mode: 'cors',
           headers: {
@@ -185,10 +187,16 @@ export default {
               const { data } = json
               // обновить локальные данные если усе успешно
               console.log('passwordRecovery', data)
+              commit('clearSnackbar', null, { root: true })
+              commit('setSnackbarMsg', 'Пароль отправлен на почту', { root: true })
+              commit('setSnackbarType', 'success', { root: true }) 
               return true
             } else {
               const { message } = json
               console.error(message)
+              commit('clearSnackbar', null, { root: true })
+              commit('setSnackbarMsg', 'Что-то пошло не так...', { root: true })
+              commit('setSnackbarType', 'error', { root: true })
               return false
             }
           }
@@ -196,6 +204,55 @@ export default {
         .catch(
           error => {
             console.error('Ошибка', error)
+   
+            return false
+          }
+        )
+    },
+     async newPassword ({ commit, rootGetters }, payload) {
+      return fetch(`${baseURL}/v1/user/set-password`,
+        {
+          mode: 'cors',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            
+          },
+          method: 'POST',
+          body: JSON.stringify(payload)
+        })
+        .then(response => {
+          return response.json()
+        })
+        .then(
+          json => {
+            if (json.status === 1) {
+              const {  password, token } = json
+              // обновить локальные данные если усе успешно
+              // commit('setUserHeader', data)
+              commit('clearSnackbar', null, { root: true })
+              commit('setSnackbarMsg', 'Новый пароль сохранен', { root: true })
+              commit('setSnackbarType', 'success', { root: true }) 
+              console.log('newPassword', password)
+              return true
+            } else {
+              const { message } = json
+              console.error(message)
+              commit('clearSnackbar')
+              commit('setSnackbarMsg', message)
+              commit('setSnackbarType', 'error')
+              return false
+            }
+          }
+        )
+        .catch(
+          error => {
+            console.error('Ошибка обновления пользовательских данных', error)
+            commit('clearSnackbar')
+            commit('setSnackbarMsg', 'Не удалось обновить данные')
+            commit('setSnackbarType', 'error')
             return false
           }
         )
@@ -218,7 +275,8 @@ export default {
       return {
         name: state.name,
         email: state.email,
-        phone: state.phone
+        phone: state.phone,
+        address: state.address,
       }
     }
   }

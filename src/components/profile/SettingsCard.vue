@@ -7,7 +7,7 @@
     <span class="settings__label">Пароль</span>
     <span class="settings__info">••••••</span>
     <span class="settings__label">Телефон</span>
-    <span class="settings__info">{{ profile.phone }}</span>
+    <span class="settings__info">+7 {{ profile.phone }}</span>
     <span class="settings__label">Адрес доставки</span>
     <span class="settings__info">{{ profile.address }}</span>
     <img src="@/assets/profile-pic/user-avatar.png" alt="user photo">
