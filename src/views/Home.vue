@@ -24,6 +24,7 @@
         <div class="order__images-content">
           <img class="order__images-content_yelow-bone" src="../assets/yelow-bone.svg" alt="">
           <img  class="order__images-content_dog" src="../assets/dog_PNG50331.png" alt="">
+          <img  class="order__images-content_dog-mobile" src="../assets/dog_mobile.png" alt="">
         </div>
       </div>
       <div class="how-work">
@@ -46,7 +47,7 @@
             <div class="how-work__image-container">
               <img src="../assets/how-work-dog-2.png" alt />
             </div>
-            <h5 class="how-work__section-head how-work__sectiontrue_margin-b-20">Договорись о доставке</h5>
+            <h5 class="how-work__section-head">Договорись о доставке</h5>
             <p class="how-work__text">Расскажи как и когда тебе удобнее получить коробочку</p>
           </section>
           <div class="how-work__arrow-container">
@@ -79,10 +80,12 @@
           <div class="what-in-box__content">
             <div class="what-in-box__content-text">
               <h5 class="what-in-box__content-head">Премиальные вкусняшки-лакомства</h5>
+              <img class="what-in-box__content-image_mobile" src="../assets/what-in-box-1.png" alt="">
               <p class="what-in-box__content-text-text">Эту вкуснятину можно получить за выполнение команд или просто так, если хозяин тебя очень сильно любит</p>
             </div>
             <div class="what-in-box__content-text">
               <h5 class="what-in-box__content-head">Жевательные лакомства</h5>
+              <img class="what-in-box__content-image_mobile" src="../assets/what-in-box-2.png" alt="">
               <p class="what-in-box__content-text-text">Это очень полезно пожевать после еды, вместо чистки зубов. С ними у тебя будет сильная челюсть и свежее дыхание - можно чаще целовать хозяина</p>
             </div>
           </div>
@@ -92,10 +95,12 @@
           <div class="what-in-box__content">
             <div class="what-in-box__content-text">
               <h5 class="what-in-box__content-head">Мягкие игрушки</h5>
+              <img class="what-in-box__content-image_mobile" src="../assets/what-in-box-3.png" alt="">
               <p class="what-in-box__content-text-text">Круто пищат или хрустят, когда их жуешь. Они безопасные и долговечные. Их можно порвать и за это ничего не будет</p>
             </div>
             <div class="what-in-box__content-text">
               <h5 class="what-in-box__content-head">Мячик из ворса и резины</h5>
+              <img class="what-in-box__content-image_mobile" src="../assets/what-in-box-4.png" alt="">
               <p class="what-in-box__content-text-text">Это вообще кайф. Его можно ощипать или побегать за ним. Принеси хозяину и тебе обязательно перепадет кусочек лакомства</p>
             </div>
           </div>
@@ -343,38 +348,37 @@ main {
   }
 
   .bg-content {
-  position: fixed;
-  z-index: 5;
-  &__paw {
-    left: 93vw;
-    top:10vw;
-  }
-  &__box {
-    left: 30vw;
-    top: 75vh;
-  }
+    position: fixed;
+    z-index: 5;
+    &__paw {
+      left: 93vw;
+      top:10vw;
+    }
+    &__box {
+      left: 30vw;
+      top: 75vh;
+    }
 
-  &__ball {
-    left: 0;
-    top: 20vh;
+    &__ball {
+      left: 0;
+      top: 20vh;
+    }
+    &__big-bone {
+      top: 40vh;
+      left: 85vw;
+    }
+    &__small-bone {
+      left: 35vw;
+      top: 65vh;
+    }
+    &__paws {
+      left: 30vw;
+    }
+    &__big-box {
+      left: 0;
+      top: 70vh
+    }
   }
-  &__big-bone {
-    top: 40vh;
-    left: 85vw;
-  }
-  &__small-bone {
-    left: 35vw;
-    top: 65vh;
-  }
-  &__paws {
-    left: 30vw;
-  }
-  &__big-box {
-    left: 0;
-    top: 70vh
-  }
-  }
-
   .order-button {
   display: grid;
   justify-content: center;
@@ -518,6 +522,10 @@ main {
       top: 280px;
       z-index: 101;
     }
+    &_dog-mobile {
+      position: absolute;
+      display: none;
+    }
   }
 }
 
@@ -656,6 +664,9 @@ main {
     display: grid;
     background: url('../assets/what-in-box_content.svg') no-repeat;
     background-size: contain;
+    &_mobile {
+      display: none;
+    }
   }
   &__content-head {
     width: 100%;
@@ -983,10 +994,6 @@ main {
 @media screen and (max-width: 1440px) {
 
   .order {
-  width: 100%;
-  grid-template-columns: 1fr 1fr;
-  background: linear-gradient(163.79deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
-
     &__container {
       padding-top: 161px;
       padding-left: 172px;
@@ -1008,9 +1015,7 @@ main {
       }
     }
   }
-  .how-work {
-
-  }
+  
   .what-in-box {
     &__container {
     display: grid;
@@ -1059,5 +1064,184 @@ main {
       }
     }
   }
+}
+
+@media screen and (max-width: 425px) {
+  .block {
+    &__head {
+      margin-bottom: 0;
+    }
+  }
+
+  .order {
+    grid-template-columns: 425px;
+    justify-items: center;
+    height: 615px;
+    &__container {
+      grid-row: 2/2;
+      padding: 330px 12px 0;
+      width: 100%;
+      text-align: center;
+      justify-items: center;
+    }
+    &__text {
+      width: 390px;
+    }
+
+    &__images-content {
+      grid-row: 0/1;
+      &_yelow-bone {
+        width: calc(460px + 1%);
+        top: -25px;
+        left: 80px;
+
+      }
+      &_dog {
+        display: none;
+      }
+      &_dog-mobile {
+        display: block;
+        width: calc(379px + 1%);
+        top: 30px;
+        left: 60px;
+        z-index: 101;
+      }
+    }
+
+    &__head {
+      width: 390px;
+      height: 90px;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 30px;
+      text-align: center;
+      color: #FFFFFF;
+      margin: 0 0 30px;
+    }
+
+    &__text {
+      width: 288px;
+      height: 40px;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      letter-spacing: 1px;
+      color: #FFFFFF;
+      margin:  0 0 20px;
+    }
+
+    &__button {
+      margin: 0;
+    }
+    &__button-text {
+      justify-items: center;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 21px;
+      line-height: 26px;
+      text-align: left;
+      letter-spacing: 0.2px;
+      color: #464451;
+    }
+  }
+
+  .how-work {
+    padding: 70px 0 70px 0;
+    row-gap: 50px;
+    &__arrow-container {
+      display: none;
+    }
+    &__container {
+      grid-template-columns: 245px;
+      padding: 0 87px;
+      justify-content: center;
+      row-gap: 40px;
+    }
+    &__section {
+      justify-items: center;
+    }
+    &__section-head {
+      height: max-content;
+    }
+  }
+  .what-in-box {
+    grid-template-columns: 100%;
+    width: 100%;
+    padding: 50px 12px 50px;
+
+  &__head {
+    display: grid;
+    justify-content: center;
+    margin-top: 125px;
+    margin-bottom: 70px;
+  }
+  &__head-text {
+    width: 275px;
+    height: 40px;
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 39px;
+    color: $default-text-color;
+  }
+  &__container {
+    display: grid;
+    grid-template-columns: 100%;
+    margin-bottom: 70px;
+    z-index: 6;
+    justify-content: center;
+  }
+  &__content {
+    display: grid;
+    grid-template-rows: repeat(2, max-content);
+    row-gap: 0;
+  }
+  &__content-text {
+    display: grid;
+    justify-items: center;
+    align-content: flex-start;
+  }
+  &__content-text:last-child {
+    align-content: flex-start;
+  }
+  &__content-image-container {
+    display: none;
+  }
+  &__content-image {
+    display: none;
+    &_mobile {
+      display: block;
+    }
+  }
+  &__content-head {
+    width: 100%;
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #464451;
+    margin-bottom: 20px;
+  }
+  &__content-text-text {
+    width: 100%;
+    height: 80px;
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    color: #464451;
+  }
+}
 }
 </style>
