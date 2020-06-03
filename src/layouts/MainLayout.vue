@@ -29,9 +29,9 @@
             </div>
             <div class="rout-buttons">
                 <div class="rout-buttons__dilivery">Доставка</div>
-                <div class="rout-buttons__how-work"><a class="router-link" href="#how-work">Как это работает</a></div>
-                <div class="rout-buttons__faq"><a class="router-link" href="#faq">FAQ</a></div>
-                <div class="rout-buttons__tel"><a class="router-link" href="#contacts">Контакты</a></div>
+                <div class="rout-buttons__how-work"><router-link class="router-link" to="/#how-work">Как это работает</router-link></div>
+                <div class="rout-buttons__faq"><router-link class="router-link" to="/#faq">FAQ</router-link></div>
+                <div class="rout-buttons__tel"><router-link class="router-link" to="/#contacts">Контакты</router-link></div>
                 <div class="rout-buttons__auth" v-if="true">
                     <button class="rout-buttons__auth-button">
                         <a  @click="loginModal = true">Войти</a>
