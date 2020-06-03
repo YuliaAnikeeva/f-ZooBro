@@ -45,7 +45,7 @@
     },
     and(minLength(min), maxLength(max))
   )
-const token="XDzruQmInasahFPeEkUKkQ01J0yXfvpR_1590907968"
+const token='QW1zI70JLmMup70h3N_zMQg-QynuC2Je_1591178084'
 
   export default {
     name: 'ChangePassword',
@@ -75,6 +75,8 @@ const token="XDzruQmInasahFPeEkUKkQ01J0yXfvpR_1590907968"
         }
         if (!this.$v.$invalid) {
           const { password } = this
+          console.log(token)
+          console.log(password)
           this.disabled = true
           const rez = await this.$store.dispatch('user/newPassword', {
             password, token})
@@ -87,10 +89,7 @@ const token="XDzruQmInasahFPeEkUKkQ01J0yXfvpR_1590907968"
         }
       },
      
-// toggleLogin2 () {
-//         this.toggleRegisterModal()
-//         this.toggleLoginModal()
-//       },
+
   }
     }
   
