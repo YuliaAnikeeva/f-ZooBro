@@ -45,11 +45,10 @@
     },
     and(minLength(min), maxLength(max))
   )
-// const token="ZNfV8XpF1ByXrY7F34xUoDSALpbBqlWN_1591186287"
 
   export default {
     name: 'ChangePassword',
-    // props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal','toggleChangePasswordModal'],
+    props: ['toggleLoginModal', 'toggleChangePasswordModal'],
     components: { Loader },
     data () {
       return {
@@ -80,12 +79,12 @@
           this.disabled = true
           const rez = await this.$store.dispatch('user/newPassword', {password, token})
           if (rez) {
-            this.toggleChangePasswordModal()
-            this.toggleLoginModal()
+            
+            this.toggleChangePasswordModal();
+            this.toggleLoginModal();
           }
-
-          this.disabled = false
         }
+         this.disabled = false
       },
      
 
