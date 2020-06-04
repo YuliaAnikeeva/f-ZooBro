@@ -3,7 +3,7 @@
         <div :class="{ 'field--error wobble-error': $v.price_id.$error }" class="errors subscription__errors">
             <div class="error" v-if="$v.price_id.$dirty && !$v.price_id.required">Выберите план</div>
         </div>
-        <div class="subscription__box">
+        <Slider class="subscription__box">
             <div class="subscription-card" :class="{choosen: price_id == '1'}" @click="price_id = '1'">
                 <div class="subscription-card__icon">
                     <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill:currentColor">
@@ -63,17 +63,21 @@
                     <div>Оплачивается единовременно</div>
                 </div>
             </div>
-        </div>
+        </Slider>
         <h3 class="charity">5% от суммы заказа отправляем на благотворительность</h3>
     </div>
 </template>
 
 <script>
   import { required } from 'vuelidate/lib/validators'
+  import Slider from './Slider'
 
   export default {
     name: 'Step1',
     props: ['order'],
+    components: {
+      Slider,
+    },
     computed: {
       price_id: {
         get () {
@@ -108,14 +112,16 @@
         }
 
         &__box {
-            box-sizing: border-box;
-            display: grid;
-            grid-template-columns: repeat(3, 250px);
-            grid-gap: 85px;
-            margin: 0 5px;
+            height: auto;
+
+            /deep/ .hooper-slide {
+              height: auto;
+            }
         }
 
         &-card {
+            height: 100%;
+            margin: 0 25px;
             box-sizing: border-box;
             transition: 0.3s linear all;
             border: 2px solid #2289b5;
@@ -192,7 +198,6 @@
             }
 
             &:hover {
-                // border-color: #ffcc01;
                 box-shadow: 0 3px 5px rgba(#2289B5,.6), inset 0 3px 5px rgba(#2289B5,.6);
             }
         }
@@ -216,8 +221,51 @@
     }
 
 
-@media (max-width: 425px) {
+@media (max-width: 414px) {
+    .subscription {
+        &-card {
+            box-sizing: border-box;
+            padding: 14px 5px;
+            min-width: 200px;
+            max-width: 200px;
 
+            &__icon {
+              margin: 0;
+              margin-bottom: 10px;
+            }
+
+            &__title {
+              font-size: 14px;
+              margin: 10px 0;
+            }
+
+            &__discount {
+              font-size: 12px;
+              line-height: 20px;
+              min-height: 20px;
+              margin: 0;
+              margin-bottom: 5px;
+            }
+
+            &__delivery {
+              font-size: 10px;
+              line-height: 14px;
+              margin: 0;
+            }
+
+            &__box-price {
+              font-size: 12px;
+              line-height: 20px;
+              margin: 20px 0;
+            }
+
+            &__info {
+                & > * {
+                    margin: 7px 0;
+                }
+            }
+
+        }
+    }
 }
-
 </style>
