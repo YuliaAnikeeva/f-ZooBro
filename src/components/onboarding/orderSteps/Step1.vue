@@ -19,6 +19,7 @@
                 </div>
                 <h2 class="subscription-card__title">Разовая покупка</h2>
                 <div class="subscription-card__sub-discount"></div>
+                <div class="subscription-card__delivery"></div>
                 <div class="subscription-card__box-price">Стоимость коробочки<br>1500 рублей</div>
                 <div class="subscription-card__info">
                     <div>Оплата при получении</div>
@@ -36,11 +37,12 @@
                     </svg>
                 </div>
                 <h2 class="subscription-card__title">Подписка на 6 месяцев </h2>
-                <div class="subscription-card__sub-discount">Единовременная оплата со <b>скидкой 15%</b></div>
+                <div class="subscription-card__sub-discount"><b>Скидка 15%</b></div>
+                <div class="subscription-card__delivery">Доставка ежемесячно</div>
                 <div class="subscription-card__box-price">Стоимость коробочки<br>1300 рублей</div>
                 <div class="subscription-card__info">
                     <div>Стоимость подписки 7800 рублей</div>
-                    <div>Доставка ежемесячно</div>
+                    <div>Оплачивается единовременно</div>
                 </div>
             </div>
 
@@ -53,11 +55,12 @@
                     </svg>
                 </div>
                 <h2 class="subscription-card__title">Подписка на 3 месяца</h2>
-                <div class="subscription-card__sub-discount">Единовременная оплата со <b>скидкой 10%</b></div>
+                <div class="subscription-card__sub-discount"><b>Скидка 10%</b></div>
+                <div class="subscription-card__delivery">Доставка ежемесячно</div>
                 <div class="subscription-card__box-price">Стоимость коробочки<br>1400 рублей</div>
                 <div class="subscription-card__info">
                     <div>Стоимость подписки 4200 рублей</div>
-                    <div>Доставка ежемесячно</div>
+                    <div>Оплачивается единовременно</div>
                 </div>
             </div>
         </div>
@@ -105,8 +108,9 @@
         }
 
         &__box {
+            box-sizing: border-box;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(251px, 1fr));
+            grid-template-columns: repeat(3, 250px);
             grid-gap: 85px;
             margin: 0 5px;
         }
@@ -119,8 +123,8 @@
             text-align: center;
             min-width: 251px;
             cursor: pointer;
-            padding: 20px 10px;
-            
+            padding: 20px 5px;
+
             font-family: Montserrat;
             color: #464451;
 
@@ -134,7 +138,7 @@
                 align-items: flex-end;
                 justify-content: center;
                 color: #2289b5;
-                margin-bottom: 10px;
+                margin-bottom: 25px;
             }
 
             &__title {
@@ -143,8 +147,6 @@
                 font-weight: 600;
                 font-size: 18px;
                 line-height: 22px;
-
-                margin: 15px 0;
             }
 
             &__sub-discount {
@@ -152,7 +154,15 @@
                 font-weight: 500;
                 font-size: 12px;
                 line-height: 20px;
-                min-height: 40px;
+                min-height: 20px;
+                margin: 10px 0;
+            }
+
+            &__delivery {
+                font-size: 12px;
+                line-height: 14px;
+                font-weight: 600;
+                min-height: 14px;
             }
 
             &__box-price {
@@ -204,4 +214,10 @@
             }
         }
     }
+
+
+@media (max-width: 425px) {
+
+}
+
 </style>
