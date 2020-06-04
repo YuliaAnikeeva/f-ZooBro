@@ -74,7 +74,7 @@
       </div>
       <div class="what-in-box">
         <div class="block__head">
-          <h4 class="block__head-text">Внутри коробки ты найдешь</h4>
+          <h4 class="block__head-text block__head-text_white">Внутри коробки ты найдешь</h4>
         </div>
         <div class="what-in-box__container">
           <div class="what-in-box__content">
@@ -167,9 +167,21 @@
               <img class="social-mission__image_two" src="../assets/social-dogs-2.png" alt="">
               <img class="social-mission__image_two" src="../assets/social-dogs-3.png" alt="">
             </div>
+            <carousel class="social-mission__image-carousel" :loop="true" :autoplayTimeout="5000" :navigateTo="0" :autoplay="true" :per-page="1" :mouse-drag="false" >
+              <slide>
+                <img class="social-mission__image_one" src="../assets/social-dogs-1.png" alt="">
+              </slide>
+              <slide>
+                <img class="social-mission__image_two" src="../assets/social-dogs-2.png" alt="">
+              </slide>
+              <slide>
+                <img class="social-mission__image_two" src="../assets/social-dogs-3.png" alt="">
+              </slide>
+            </carousel>
           </div>
         </div>
       </div>
+  
       <div class="doubt">
         <div class="block__head">
           <h4 class="block__head-text">Еще сомневаешься?</h4>
@@ -183,15 +195,13 @@
             <img class="doubt__image" src="../assets/doubt_image_5.png" alt="">
           </div>
           <p class="doubt__text">
-            Еще сомневаешься, подходит тебе это или нет? <br>
-            Попробуй стартовый набор за 3 клика. <br>
-            Уверяем, твой хвост будет вилять как пропеллер, а хвост никогда не обманывает <br>
+            Закажи коробочку за 2 минуты, введя минимум данных
           </p>
           <div class="order-button">
             <div class="order-button__container">
               <router-link class="order-button__text" to="/order">
                 <div class="how-work__button">
-                  <span class="how-work__button-text">Заказать</span>
+                  <span class="how-work__button-text">Быстрый заказ</span>
                   <img class="paw paw_25" src="../assets/paw.svg" alt="">
                 </div>
               </router-link>
@@ -212,7 +222,7 @@
             </div>
           </div>
           <div class="faq__answer" :class="{faq__answer_collapse: answerFirst}">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, delectus porro amet ipsam veniam debitis!
+            Да, доставка бесплатная для Москвы в пределах МКАД, а также в Северном и Южном Бутово. В другие районы, которые не вошли в этот список, доставка по согласованию с менеджером.
           </div>
           <div class="faq__question" @click="answerSecond = !answerSecond">
             <span class="faq__question-text">Моей собаке это точно понравится?</span>
@@ -221,7 +231,8 @@
             </div>
           </div>
             <div class="faq__answer" :class="{faq__answer_collapse: answerSecond}">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero consequatur fugit quis voluptate tempora cum.
+              Мы гарантируем, что содержимое коробочки обязательно понравится вашему четвероногому другу, это подтверждается не только нашими собственными собаками, но и нашими любимыми покупателями.
+              Если не понравится - звоните.
             </div>
           <div class="faq__question" @click="answerThird = !answerThird">
             <span class="faq__question-text">А это подходит разным породам?</span>
@@ -230,7 +241,7 @@
             </div>
           </div>
           <div class="faq__answer" :class="{faq__answer_collapse: answerThird}">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus mollitia deserunt magnam ea excepturi? Sit?
+            Содержимое коробочки продумано так, что это подойдет как мелким породам, например, джек рассел терьер, так и крупным породам типа овчарки.
           </div>
           <div class="faq__question" @click="answerFourth = !answerFourth">
             <span class="faq__question-text">Когда оплачивать покупку?</span>
@@ -239,7 +250,7 @@
             </div>
           </div>
           <div class="faq__answer" :class="{faq__answer_collapse: answerFourth}">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas officiis facilis nam vitae odit facere?
+            Вы оплачиваете коробочку только после того, как получили её от курьера. Вы ничем не рискуете.
           </div>
           <div class="faq_plus-minus"></div>
         </div>
@@ -821,6 +832,9 @@ main {
     column-gap: 10px;
     height: 340px;
   }
+  &__image-carousel {
+    display: none;
+  }
   &__image {
     display: grid;
 
@@ -931,6 +945,8 @@ main {
     height: 100%;
     opacity: 1;
     transition: height 300ms ease-out, opacity 300ms ease-out;
+    text-align: justify;
+    padding: 0 10px;
     &_collapse {
       opacity: 0;
       height: 0;
@@ -1094,7 +1110,20 @@ main {
 @media screen and (max-width: 425px) {
   .block {
     &__head {
-      margin-bottom: 0;
+      margin-bottom: 50px;
+    }
+    &__head-text {
+      width: max-content;
+      height: 27px;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 27px;
+
+      &_white {
+        color: #fff;
+      }
     }
   }
 
@@ -1195,78 +1224,261 @@ main {
       height: max-content;
     }
   }
+
   .what-in-box {
     grid-template-columns: 100%;
     width: 100%;
     padding: 50px 12px 50px;
 
-  &__head {
-    display: grid;
-    justify-content: center;
-    margin-top: 125px;
-    margin-bottom: 70px;
-  }
-  &__head-text {
-    width: 275px;
-    height: 40px;
-    font-family: Montserrat, sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 32px;
-    line-height: 39px;
-    color: $default-text-color;
-  }
-  &__container {
-    display: grid;
-    grid-template-columns: 100%;
-    margin-bottom: 70px;
-    z-index: 6;
-    justify-content: center;
-  }
-  &__content {
-    display: grid;
-    grid-template-rows: repeat(2, max-content);
-    row-gap: 0;
-  }
-  &__content-text {
-    display: grid;
-    justify-items: center;
-    align-content: flex-start;
-  }
-  &__content-text:last-child {
-    align-content: flex-start;
-  }
-  &__content-image-container {
-    display: none;
-  }
-  &__content-image {
-    display: none;
-    &_mobile {
-      display: block;
+    &__container {
+      display: grid;
+      grid-template-columns: 100%;
+      margin-bottom: 70px;
+      z-index: 6;
+      justify-content: center;
+      row-gap: 40px;
+    }
+    &__content {
+      row-gap: 40px;
+    }
+    &__content-text {
+      display: grid;
+      justify-items: center;
+      align-content: flex-start;
+    }
+    &__content-text:last-child {
+      align-content: flex-start;
+    }
+    &__content-image-container {
+      display: none;
+    }
+    &__content-image {
+      display: none;
+      &_mobile {
+        margin: 20px 0;
+        display: block;
+      }
+    }
+    &__content-head {
+      width: 100%;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    &__content-text-text {
+      width: 100%;
+      height: 80px;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      color: #fff;
     }
   }
-  &__content-head {
+
+  .how-use {
+    padding: 70px 50px;
     width: 100%;
-    font-family: Montserrat, sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 24px;
-    text-align: center;
-    color: #464451;
-    margin-bottom: 20px;
+
+    &__head {
+    display: grid;
+    justify-content: center;
+    margin-bottom: 50px;
+    }
+    &__head-text {
+      width: max-content;
+      height: 27px;
+      font-size: 22px;
+      line-height: 27px;
+      color: $default-text-color;
+    }
+    &__container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 100%;
+      column-gap: 0;
+      row-gap: 40px;
+    }
+    &__content {
+      display: grid;
+      justify-items: center;
+      row-gap: 20px;
+      &:first-child  {
+        .how-use__content-text {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &__content-image {
+      width: max-content;
+    }
+    &__content-text {
+      width: 100%;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      color: #464451;
+
+    }
+    &__content-arrow {
+      display: none;
+    }
   }
-  &__content-text-text {
+
+  .social-mission {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 100%;
+    padding: 50px 0;
+    background: linear-gradient(176.37deg, #157DA9 12.91%, rgba(50, 157, 202, 0.82) 58.13%, #1489BB 92.45%);
+    box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
+    &__container {
+      display: grid;
+      grid-template-columns: 100%;
+      justify-content: center;
+      column-gap: 60px;
+      z-index: 6;
+    }
+    &__content {
+      display: grid;
+      grid-row: 2/2;
+      height: 100%;
+      width: 100%;
+      align-content: center;
+      text-align: center;
+      padding: 0 12px;
+
+    }
+    &__text-content {
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 30px;
+      color: #FFFFFF;
+      margin: 0;
+    }
+
+    &__content-image {
+      display: grid;
+      grid-template-columns: 100%;
+      column-gap: 0;
+      height: max-content;
+    }
+    &__image-carousel {
+      display: block;
+    }
+    &__image {
+      display: none;
+
+      &_one {
+        width: 100%;
+      }
+      &_two {
+        width: 100%;
+      }
+    }
+  }
+
+  .doubt {
+    &__container {
     width: 100%;
-    height: 80px;
-    font-family: Montserrat, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 20px;
-    text-align: center;
-    color: #464451;
+    }
+    &__image-container {
+      grid-template-columns: 40% 60% 40%;
+    }
+    &__image {
+
+      &:first-child {
+        display: none;
+      }
+      &:last-child {
+        display: none;
+      }
+      &:nth-child(2) {
+        opacity: 0.5;
+      }
+      &:nth-child(4) {
+        opacity: 0.5;
+      }
+    }
+    &__text {
+      padding: 18px;
+      width: 100%;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 22px;
+    }
   }
-}
+
+  .faq {
+    padding: 80px 12px 0;
+    grid-template-rows: 3fr 241px;
+
+    &__image {
+     width: 100%;
+     justify-self: center;
+     height: 172px;
+    }
+    &__container {
+      border-radius: 40px;
+      grid-template-columns: 100%;
+      width: 100%;
+      padding: 50px 10px;
+    }
+    &__head {
+      
+    }
+    &__question {
+      padding: inherit 15px;
+      width: 100%;
+    }
+    &__answer {
+    
+      &_collapse {
+      
+      }
+    }
+  }
+
+  .footer {
+    grid-template-columns: 100%;
+    &__container {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 35px;
+    }
+    &__contacts {
+      grid-row: 1/1;
+      display: grid;
+      grid-template-rows: repeat(2, max-content);
+      text-align: left;
+      justify-self: center;
+      row-gap: 10px;
+    }
+    &__contacts-row {
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      color: #FFFFFF;
+
+    }
+    &__image {
+      display: none;
+    }
+  }
 }
 </style>
