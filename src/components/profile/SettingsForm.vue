@@ -180,6 +180,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/styles/_forms.scss";
+
 form {
   display: grid;
   grid-template-areas:
@@ -262,7 +264,7 @@ button {
   font-weight: 600;
   font-size: 21px;
   line-height: 26px;
-  padding: 15px 45px;
+  padding: 15px;
   margin-top: 40px;
   &:hover {
     cursor: pointer;
@@ -284,5 +286,30 @@ button {
   font-size: 12px;
   line-height: 15px;
   letter-spacing: 0.3px;
+}
+
+@media (max-width: 414px) {
+  form {
+    display: grid;
+    grid-template-areas:
+      "email . . ."
+      "password . . ."
+      "name . . ."
+      "phone . . ."
+      "address . . ."
+      "btn_save btn_save btn_back btn_back";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+
+    .email,
+    .pass,
+    .name,
+    .phone,
+    .address {
+      grid-column-end: span 3;
+    }
+  }
 }
 </style>

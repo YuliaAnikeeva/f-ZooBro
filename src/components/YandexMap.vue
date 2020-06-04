@@ -7,7 +7,7 @@
     </head>
     <body>
 
-
+    <h1> Зона покрытия доставки </h1>
     <div id="map"></div>
 
     <div id="mapStatic">
@@ -25,6 +25,7 @@
     </div>
 
     <div id="header">
+      <p>Введи адрес или отметь его на карте</p>
         <div class="form-box">
             <input type="text" id="suggest" class="input" placeholder="Адрес доставки">
             <button type="submit" id="button">Проверить адрес</button>
@@ -61,18 +62,15 @@
     },
     mounted () {
       ymaps.ready(init)
-
       function init () {
         // Подключаем поисковые подсказки к полю ввода.
         var suggestView = new ymaps.SuggestView('suggest'),
           map,
           placemark
-
         // При клике по кнопке запускаем верификацию введёных данных.
         $('#button').bind('click', function (e) {
           geocode()
         })
-
         function geocode () {
           // Забираем запрос из поля ввода.
           var request = $('#suggest').val()
@@ -80,7 +78,6 @@
           ymaps.geocode(request).then(function (res) {
             var obj = res.geoObjects.get(0),
               error, hint
-
             if (obj) {
               switch (obj.properties.get('metaDataProperty.GeocoderMetaData.precision')) {
                 case 'exact':
@@ -104,12 +101,10 @@
               error = 'Адрес не найден'
               hint = 'Уточните адрес'
             }
-
             if (obj.properties.get('metaDataProperty.GeocoderMetaData.AddressDetails.Country.AdministrativeArea.AdministrativeAreaName') !== 'Москва') {
               error = 'За пределами зоны доставки'
               hint = 'доставка только по Москве'
             }
-
             // Если геокодер возвращает пустой массив или неточный результат, то показываем ошибку.
             if (error) {
               showError(error)
@@ -122,15 +117,11 @@
             console.log(e)
           })
         }
-
         function showResult (obj) {
-
           console.log('все хорошо', obj)
-
           // Удаляем сообщение об ошибке, если найденный адрес совпадает с поисковым запросом.
           $('#suggest').removeClass('input_error')
           $('#notice').css('display', 'none')
-
           var mapContainer = $('#map'),
             bounds = obj.properties.get('boundedBy'),
             // Рассчитываем видимую область для текущего положения пользователя.
@@ -139,7 +130,8 @@
               [mapContainer.width(), mapContainer.height()]
             ),
             // Сохраняем полный адрес для сообщения под картой.
-            address = [obj.getCountry(), obj.getAddressLine()].join(', '),
+            //address = [obj.getCountry(), obj.getAddressLine()].join(', '),
+            address = [obj.getAddressLine()].join(', '),
             // Сохраняем укороченный адрес для подписи метки.
             shortAddress = [obj.getThoroughfare(), obj.getPremiseNumber(), obj.getPremise()].join(' ')
           // Убираем контролы с карты.
@@ -149,16 +141,14 @@
           // Выводим сообщение под картой.
           showMessage('')
           showAddress(address)
-
+          console.log('address', address)
           const cont = document.querySelector('#map')
           cont.classList.add('dblock')
           cont.classList.remove('dnone')
-
           const btn = document.querySelector('#btn-adr')
           btn.classList.add('bblock')
           btn.classList.remove('bnone')
         }
-
         function showError (message) {
           $('#notice').text(message)
           $('#suggest').addClass('input_error')
@@ -167,17 +157,14 @@
           if (map) {
             map.destroy()
             map = null
-
             const cont = document.querySelector('#map')
             cont.classList.add('dnone')
             cont.classList.remove('dblock')
-
             const btn = document.querySelector('#btn-adr')
             btn.classList.add('bnone')
             btn.classList.remove('bblock')
           }
         }
-
         function createMap (state, caption) {
           // Если карта еще не была создана, то создадим ее и добавим метку с адресом.
           if (!map) {
@@ -200,11 +187,9 @@
             })
           }
         }
-
         function showMessage (message) {
           $('#message').text(message)
         }
-
         function showAddress (address = null) {
           if (address === null) {
             $('#address').text('')
@@ -212,7 +197,6 @@
             const adr = document.querySelector('#address')
             adr.innerHTML = address
           }
-
         }
       }
     },
@@ -221,7 +205,6 @@
 
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat');
-
     html, body {
         position: relative;
         width: 100%;
@@ -233,14 +216,28 @@
         overflow: hidden;
     }
 
+    h1 {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    p {
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 0.001em;
+      color: #464451;
+    }
+
     #footer {
         margin-top: 14px;
         padding: 12px;
     }
-
     #map {
         height: 300px;
-        margin: 0px 12px 18px 12px;
+        margin: 55px 12px 18px 12px;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -248,10 +245,9 @@
         right: 0;
         z-index: 100;
     }
-
     #mapStatic {
         height: 300px;
-        margin: 0px 12px 18px 12px;
+        margin: 55px 12px 18px 12px;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -259,11 +255,9 @@
         right: 0;
         z-index: 50;
     }
-
     #header {
-        margin: 312px 10px 12px 12px;
+        margin: 412px 10px 12px 12px;
     }
-
     .input123 {
         height: 18px;
         margin-right: 10px;
@@ -274,19 +268,16 @@
         box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0);
         transition: .17s linear;
     }
-
     .input:focus {
         outline: none;
         border: 1px solid #fdd734;
         box-shadow: 0 0 1px 1px #fdd734;
     }
-
     .input_error, .input_error:focus {
         outline: none;
         border: 1px solid #f33;
         box-shadow: 0 0 1px 1px #f33;
     }
-
     #notice {
         position: absolute;
         left: 22px;
@@ -295,32 +286,27 @@
         color: #f33;
         display: none;
     }
-
     .dnone {
         height: 0 !important;
     }
-
     .dblock {
         height: 300px !important;
     }
-
     .bnone {
         opacity: 0;
     }
-
     .bblock {
         opacity: 1;
     }
-
     .form-box {
         display: flex;
         justify-content: space-between;
+        max-width: 700px;
         font-family: Montserrat, serif;
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
     }
-
     .form-box input {
         line-height: 60px;
         height: 60px;
@@ -331,7 +317,6 @@
         border-radius: 10px 0px 0px 10px;
         border: 1px solid rgba(0, 0, 0, 0.15);
     }
-
     .form-box button {
         line-height: 60px;
         height: 60px;
@@ -347,11 +332,9 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
         border-radius: 0px 10px 10px 0px;
     }
-
     .form-box button:hover {
         background: #2289B5;
     }
-
     .form-box button:focus {
         outline-color: transparent;
     }

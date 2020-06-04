@@ -95,7 +95,7 @@
                             <div class="input-date">
                                 <!-- <input type="date" class="input__control input__control_type_datetime"
                                        v-model="date_delivery"> -->
-                                       <date-picker v-model="date_delivery" valueType="format" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ" :disabled-date="notBeforeToday"></date-picker>
+                                       <date-picker v-model="date_delivery" valueType="format" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ" :disabled-date="notBeforeToday" :lang="lang"></date-picker>
                                 <date-picker v-model="time_delivery" valueType="format" class="date-picker-time" format="HH:mm" value-type="format" placeholder="ЧЧ.ММ"  :minute-step="30" type="time"  :disabled-time="notBeforeTime" :default-value="new Date().setHours(9, 0, 0)"></date-picker>
                             </div>
                             <!-- <div class="input input_type_time">
@@ -131,6 +131,7 @@
   import YandexMap from '../../YandexMap'
     import DatePicker from 'vue2-datepicker';
   import 'vue2-datepicker/index.css';
+  import 'vue2-datepicker/locale/ru';
 
   const today = new Date();
   const tomorrow = new Date();
@@ -167,6 +168,12 @@ today.setHours(0, 0, 0, 0);
     },
     data: () => ({
       showMap: false,
+      lang: {
+          formatLocale: {
+            firstDayOfWeek: 1,
+          },
+          monthBeforeYear: true,
+        },
     }),
     computed: {
       ...(() => {
