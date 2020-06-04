@@ -1,37 +1,41 @@
 <template>
     <div>
 
-        <div id="nav">
+        <!-- <div id="nav">
             <router-link to="/">Home</router-link>
-            |
+            | -->
             <!--<router-link to="/login">login</router-link>-->
-            <a class="nav-link" @click="loginModal = true">login</a>
-            |
+            <!-- <a class="nav-link" @click="loginModal = true">login</a> -->
+            <!-- | -->
             <!--<router-link to="/recovery-password">recovery-password</router-link>-->
-            <a class="nav-link" @click="recoveryPasswordModal = true">recovery-password</a>
-            |
-            <router-link to="/profile">profile</router-link>
-            |
-            <router-link to="/admin">admin</router-link>
-            |
-            <router-link to="/order">order</router-link>
-            |
+            <!-- <a class="nav-link" @click="recoveryPasswordModal = true">recovery-password</a> -->
+            <!-- | -->
+            <!-- <router-link to="/profile">profile</router-link> -->
+            <!-- | -->
+            <!-- <router-link to="/admin">admin</router-link> -->
+            <!-- | -->
+            <!-- <router-link to="/order">order</router-link> -->
+            <!-- | -->
             <!--<router-link to="/registration">registration</router-link>-->
-            <a class="nav-link" @click="registerModal = true">registration</a>
+            <!-- <a class="nav-link" @click="registerModal = true">registration</a>
             |
             <a class="nav-link" @click="registrationSuccessModal = true">RegistrationSuccess</a>
-            |
+
+        </div> -->
+
+      <!--      |
             <a class="nav-link" @click="changePasswordModal = true">ChangePassword</a>
-        </div>
+        </div> -->
+
         <nav class="nav-menu">
             <div class="logo">
                 <router-link class="router-link" to="/"><img src="../assets/logo-zoobro.svg" alt=""></router-link>
             </div>
             <div class="rout-buttons">
                 <div class="rout-buttons__dilivery">Доставка</div>
-                <div class="rout-buttons__how-work"><a class="router-link" href="#how-work">Как это работает</a></div>
-                <div class="rout-buttons__faq"><a class="router-link" href="#faq">FAQ</a></div>
-                <div class="rout-buttons__tel"><a class="router-link" href="#contacts">Контакты</a></div>
+                <div class="rout-buttons__how-work"><router-link class="router-link" to="/#how-work">Как это работает</router-link></div>
+                <div class="rout-buttons__faq"><router-link class="router-link" to="/#faq">FAQ</router-link></div>
+                <div class="rout-buttons__tel"><router-link class="router-link" to="/#contacts">Контакты</router-link></div>
                 <div class="rout-buttons__auth" v-if="true">
                     <button class="rout-buttons__auth-button">
                         <a  @click="loginModal = true">Войти</a>
