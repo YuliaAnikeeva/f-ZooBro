@@ -53,7 +53,7 @@
         <template>
             <vue-modaltor
                     :visible="loginModal"
-                    :resize-width='{1920:"440px",1440:"440px", 414:"390px"}'
+                    :resize-width='{1920:"440px",1440:"440px", 414:"390px", 375:"355px", 360:"340px"}'
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="loginModal = false">
@@ -73,7 +73,7 @@
 
             <vue-modaltor
                     :visible="registerModal"
-                    :resize-width='{1920:"440px",1440:"440px", 414:"390px"}'
+                    :resize-width='{1920:"440px",1440:"440px", 414:"390px", 375:"355px", 360:"340px"}'
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="registerModal = false">
@@ -94,7 +94,7 @@
             <vue-modaltor
                     :visible="recoveryPasswordModal"
 
-                    :resize-width='{1920:"440px",1440:"440px", 414:"390px"}'
+                    :resize-width='{1920:"440px",1440:"440px", 414:"390px", 375:"355px", 360:"340px"}'
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="recoveryPasswordModal = false">
@@ -115,7 +115,7 @@
             </vue-modaltor>
             <vue-modaltor
                     :visible="registrationSuccessModal"
-                    :resize-width='{1920:"440px", 1440:"440px", 414:"390px"}'
+                    :resize-width='{1920:"440px", 1440:"440px", 414:"390px", 375:"355px", 360:"340px"}'
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="registrationSuccessModal = false">
@@ -134,7 +134,7 @@
             </vue-modaltor>
             <vue-modaltor
                     :visible="changePasswordModal"
-                    :resize-width='{1920:"440px", 1440:"440px", 414:"390px"}'
+                    :resize-width='{1920:"440px", 1440:"440px", 414:"390px", 375:"355px", 360:"340px"}'
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="changePasswordModal = false">
