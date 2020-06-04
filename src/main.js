@@ -18,7 +18,7 @@ Vue.use(VueLidate)
 Vue.use(VueTheMask)
 Vue.use(VueModalTor);
 Vue.use(Toastify);
-Vuew.use(VueCarousel);
+Vue.use(VueCarousel);
 
 
 new Vue({
