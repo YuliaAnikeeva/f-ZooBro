@@ -163,4 +163,51 @@
         background-color: rgba(#ffcc01, 0.2);
       }
     }
+
+@media (max-width: 500px) {
+  .progressbar {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    .step {
+      display: contents;
+
+      &_hidden {
+        display: none;
+      }
+
+      &__label {
+        &:first-child {
+          align-self: flex-end;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 414px) {
+  .progressbar {
+    .step {
+      &__button {
+        width: 20px;
+        height: 20px;
+
+        &::after {
+          height: 10px;
+          width: 10px;
+        }
+      }
+      &__label {
+        font-size: 11px;
+        line-height: 13px;
+
+        &:first-child {
+          align-self: flex-end;
+        }
+      }
+    }
+  }
+}
 </style>
