@@ -109,10 +109,10 @@
         this.disabled = false
        
       },
-      //  toggleLogin () {
-      //   this.toggleRegisterModal()
-      //   this.toggleLoginModal()
-      // },
+       toggleLogin () {
+        this.toggleRegisterModal()
+        this.toggleLoginModal()
+      },
 
 
     }
