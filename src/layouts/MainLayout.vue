@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <div id="nav">
+        <!-- <div id="nav">
             <router-link to="/">Home</router-link>
             |
             <router-link to="/login">login</router-link>
@@ -22,10 +22,23 @@
             <a class="nav-link" @click="registrationSuccessModal = true">RegistrationSuccess</a>
             |
             <a class="nav-link" @click="changePasswordModal = true">ChangePassword</a>
-        </div>
+        </div> -->
         <nav class="nav-menu">
+            <div class="menu-open__container">
+              <div class="nav-button" :class="{'nav-button-active': activeMenu}" @click="toggleMenuOpen">
+                <i></i>
+                <i></i>
+                <i></i>
+              </div>
+              <div class="menu-open__menu-collapsed" v-show="activeMenu">
+                <div class="rout-buttons__dilivery rout-buttons__dilivery_collapsed">Доставка</div>
+                <div class="rout-buttons__how-work rout-buttons__how-work_collapsed"><router-link class="router-link" to="/#how-work">Как это работает</router-link></div>
+                <div class="rout-buttons__faq rout-buttons__faq_collapsed"><router-link class="router-link" to="/#faq">FAQ</router-link></div>
+                <div class="rout-buttons__tel rout-buttons__tel_collapsed"><router-link class="router-link" to="/#contacts">+7 (925) 112-08-12</router-link></div>
+              </div>
+            </div>
             <div class="logo">
-                <router-link class="router-link" to="/"><img src="../assets/logo-zoobro.svg" alt=""></router-link>
+                <router-link class="router-link" to="/"></router-link>
             </div>
             <div class="rout-buttons">
                 <div class="rout-buttons__dilivery">Доставка</div>
@@ -38,8 +51,8 @@
                     </button>
                 </div>
                 <div class="rout-buttons__profile" v-if="false">
-                    <button>
-                        <router-link class="router-link" to="/profile">profile</router-link>
+                    <button class="rout-buttons__profile-button " type="button">
+                        <router-link class="router-link" to="/profile"><img src="../assets/profile-icon.svg" alt=""></router-link>
                     </button>
                 </div>
 
@@ -174,6 +187,7 @@
       recoveryPasswordModal: false,
       registrationSuccessModal: false,
       changePasswordModal:false,
+      activeMenu: false,
     }),
     computed: {
       ...mapGetters([
@@ -198,6 +212,9 @@
       toggleChangePasswordModal(){
         this.changePasswordModal = !this.changePasswordModal
       },
+      toggleMenuOpen() {
+        this.activeMenu = !this.activeMenu;
+      }
     },
     watch: {
       snackbarObj: (newMsg, oldMsg) => {
@@ -231,85 +248,249 @@
 </script>
 
 <style lang="scss">
-    .modal-vue-wrapper-show.modal-fade, .modal-vue-wrapper-show.modal-scale{
-
-        z-index: 9999;
- border-radius: 20px;
-}
-.modal-vue-panel.modal-fade{
-  border-radius: 20px;
-}
-    .modal-vue-panel{
-        border-radius: 20px;
-
+  .menu-open {
+    &__container {
+      display: none;
     }
-
-    .nav-link{
-       text-decoration: none;
-        font-family: Montserrat, serif;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 17px;
-        color: #FFFFFF;
-        cursor: pointer;
+  }
+  .modal-vue-wrapper-show.modal-fade, .modal-vue-wrapper-show.modal-scale{
+    z-index: 9999;
+    border-radius: 20px;
     }
-    .router-link {
-        text-decoration: none;
-        font-family: Montserrat, serif;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 17px;
-        color: #FFFFFF;
+  .modal-vue-panel.modal-fade{
+    border-radius: 20px;
+  }
+  .modal-vue-panel{
+    border-radius: 20px;
+  }
 
+  .nav-link{
+    text-decoration: none;
+    font-family: Montserrat, serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+    cursor: pointer;
+  }
+  .router-link {
+    text-decoration: none;
+    font-family: Montserrat, serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+
+  }
+  .nav-menu {
+    width: 100%;
+    height: 65px;
+    background: #464451;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: space-around;
+    justify-items: center;
+  }
+  .logo {
+      width: 105px;
+      height: 30px;
+      align-self: center;
+      display: grid;
+      margin: 0;
+      color: #fff;
+      align-items: center;
+      background: url('../assets/logo-zoobro.svg');
+      background-size: contain;
+
+  }
+
+  .rout-buttons {
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(5, max-content);
+    grid-column-gap: 30px;
+    align-items: center;
+    padding-right: 240px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+
+    &__auth-button {
+      width: 100px;
+      height: 35px;
+      background: #464451;
+      border: 1px solid #2289B5;
+      box-sizing: border-box;
+      border-radius: 5px;
     }
-    .nav-menu {
-        width: 100%;
-        height: 65px;
-        background: #464451;
+    &__how-work {
+      display: block;
+      text-decoration: none;
+      color: #fff;
+    }
+    &__profile-button{
+      background: #464451;
+      border: none;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    .rout-buttons {
+      padding-right: 100px;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .logo {
+      width: 93px;
+      height: 27px;
+      background: url('../assets/logo-zoobro.svg');
+      background-size: contain;
+    }
+    .rout-buttons {
+      padding: 12px;
+      grid-template-columns: max-content;
+      &__dilivery {
+        &_collapsed {
+          display: block;
+          font-family: Montserrat;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 25px;
+          text-align: left;
+          color: #fff;
+        }
+        display:none;
+      }
+      &__how-work {
+        &_collapsed {
+          text-decoration: none;
+          color: #fff;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 25px;
+          text-align: left;
+          display: block;
+          display: block;
+        }
+        display:none;
+      }
+      &__faq {
+        &_collapsed {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 25px;
+          text-align: left;
+          color: #fff;
+          display: block;
+          text-decoration: none;
+        }
+        display:none;
+      }
+      &__tel {
+        &_collapsed {
+          background: #464451;
+          border: none;
+          display: block;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 25px;
+          text-align: left;
+          color: #fff;
+          text-decoration: none;
+          margin-top: 30px;
+        }
+        display:none;
+      }
+      &__auth-button {
+        width: 60px;
+      }
+    }
+    .menu-open {
+      &__container {
+        position: relative;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        justify-content: space-around;
-        justify-items: center;
+        align-items: center;
+        justify-items: left;
+      }
 
-        .logo {
-            align-self: center;
-            display: grid;
-            margin: 0;
-            color: #fff;
-            align-items: center;
-
-        }
-
-        .rout-buttons {
-            color: #fff;
-            display: grid;
-            grid-template-columns: repeat(5, max-content);
-            grid-column-gap: 30px;
-            align-items: center;
-            padding-right: 240px;
-            font-family: Montserrat;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 25px;
-            text-align: center;
-
-            &__auth-button {
-                width: 100px;
-                height: 35px;
-                background: #464451;
-                border: 1px solid #2289B5;
-                box-sizing: border-box;
-                border-radius: 5px;
-            }
-            &__how-work {
-              display: block;
-              text-decoration: none;
-              color: #fff;
-            }
-        }
-
+      &__menu-collapsed {
+        text-align: left;
+        position: absolute;
+        top: 64px;
+        display: grid;
+        width: 222px;
+        height: 220px;
+        grid-template-rows: repeat(4, max-content);
+        row-gap: 10px;
+        background-color: #464451;
+        z-index: 1000;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.5);
+        padding: 30px 20px;
+      }
     }
+    .nav-menu {
+      grid-template-columns:repeat(3, max-content);
+      justify-content: space-between;
+    }
+    .nav-button{
+      width:44px;
+      height:44px;
+      display:block;
+      position:relative;
+      z-index:3;
+      cursor:pointer;
+      transition: background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      background:#464451;
+
+      i{
+        width:20px;
+        height:2px;
+        display:block;
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin-left:-10px;
+        margin-top:-1px;
+        transition:transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+        background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), visibility 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        background:#FFF;
+
+        &:first-child{
+          margin-top:-7px;
+          transform-origin:0 50%;
+        }
+        &:last-child{
+          margin-top:5px;
+          transform-origin:100% 50%;
+        }
+      }
+    }
+    .nav-button-active {
+        transition-duration:0.5s;
+        i{
+          transform:rotate(-45deg);
+          background: #fff;
+
+          &:first-child{
+            visibility:hidden;
+            transform:translate3d(3px, -1px, 0) rotate(45deg);
+          }
+          &:last-child{
+            transform:translate3d(-3px, 1px, 0) rotate(45deg);
+          }
+        }
+      }
+  }
+
 </style>
