@@ -244,11 +244,6 @@
 
     }
 
-// .modal-vue---close-icon {
-  
-//   background-image: url(~@/assets/closeicon.svg);
-//   background-repeat: no-repeat;
-// }
     .nav-link{
        text-decoration: none;
         font-family: Montserrat, serif;
