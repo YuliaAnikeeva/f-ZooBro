@@ -5,15 +5,17 @@ import 'hooper/dist/hooper.css';
 export default {
   name: "Slider",
   data () {
-    console.log(new Date())
     return {
         options:{
           itemsToShow: 1.5,
           centerMode: true,
+          initialSlide: 1,
+          shortDrag: false,
           breakpoints: {
             900: {
               itemsToShow: 3,
-              trimWhiteSpace: true
+              trimWhiteSpace: true,
+              initialSlide: 0,
             },
             768: {
               itemsToShow: 2.5,

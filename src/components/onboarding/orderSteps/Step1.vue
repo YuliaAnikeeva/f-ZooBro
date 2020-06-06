@@ -106,9 +106,10 @@
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-around;
+        // margin-top: 40px;
 
         &__errors {
-            padding-bottom: 15px;
+            // padding-bottom: 15px;
         }
 
         &__box {
@@ -220,10 +221,26 @@
         }
     }
 
+@media (max-width: 768px) {
+    .subscription {
+        &__box /deep/ .hooper-track  {
+            > :nth-child(1) {
+              order: 2;
+            }
+            > :nth-child(2) {
+              order: 3;
+            }
+            > :nth-child(3) {
+              order: 1;
+            }
+        }
+    }
+}
 
 @media (max-width: 414px) {
     .subscription {
         &-card {
+            margin: 0 10px;
             box-sizing: border-box;
             padding: 14px 5px;
             min-width: 200px;
@@ -237,9 +254,10 @@
             &__title {
               font-size: 14px;
               margin: 10px 0;
+              line-height: 17px;
             }
 
-            &__discount {
+            &__sub-discount {
               font-size: 12px;
               line-height: 20px;
               min-height: 20px;
@@ -256,12 +274,15 @@
             &__box-price {
               font-size: 12px;
               line-height: 20px;
-              margin: 20px 0;
+              margin: 16px 0 20px;
+              min-height: 40px;
             }
 
             &__info {
+                font-size: 10px;
+
                 & > * {
-                    margin: 7px 0;
+                    margin: 5px 0;
                 }
             }
 
