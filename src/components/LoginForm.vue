@@ -101,7 +101,7 @@
             password
           })
           if (rez) {
-            this.onSuccess()
+            //this.onSuccess()
             this.$router.push('/profile')
           }
           this.disabled = false

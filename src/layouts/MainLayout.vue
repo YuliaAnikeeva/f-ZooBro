@@ -31,7 +31,7 @@
                 <i></i>
               </div>
               <div class="menu-open__menu-collapsed" v-show="activeMenu">
-                <div class="rout-buttons__dilivery rout-buttons__dilivery_collapsed">Доставка</div>
+                <div @click="showMap = true" class="rout-buttons__dilivery rout-buttons__dilivery_collapsed">Доставка</div>
                 <div class="rout-buttons__how-work rout-buttons__how-work_collapsed"><router-link class="router-link" to="/#how-work">Как это работает</router-link></div>
                 <div class="rout-buttons__faq rout-buttons__faq_collapsed"><router-link class="router-link" to="/#faq">FAQ</router-link></div>
                 <div class="rout-buttons__tel rout-buttons__tel_collapsed"><router-link class="router-link" to="/#contacts">+7 (925) 112-08-12</router-link></div>
@@ -41,7 +41,7 @@
                 <router-link class="router-link" to="/"></router-link>
             </div>
             <div class="rout-buttons">
-                <div class="rout-buttons__dilivery">Доставка</div>
+                <div @click="showMap = true" class="rout-buttons__dilivery">Доставка</div>
                 <div class="rout-buttons__how-work"><router-link class="router-link" to="/#how-work">Как это работает</router-link></div>
                 <div class="rout-buttons__faq"><router-link class="router-link" to="/#faq">FAQ</router-link></div>
                 <div class="rout-buttons__tel"><router-link class="router-link" to="/#contacts">Контакты</router-link></div>
@@ -161,6 +161,16 @@
 </svg>
             </template>
             </vue-modaltor>
+
+            <vue-modaltor
+                    :visible="showMap"
+                    :resize-width='{1920:"940px",940:"90%"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="showMap = false">
+                <LendingYandexMap v-if="showMap"/>
+            </vue-modaltor>
+
         </template>
 
         <main>
@@ -177,10 +187,11 @@
   import RecoveryPasswordForm from '../components/RecoveryPasswordForm'
   import RegistrationSuccess from '../components/RegistrationSuccess'
   import ChangePassword from '../components/ChangePassword'
+  import LendingYandexMap from '../components/LendingYandexMap'
 
   export default {
     name: 'MainLayout',
-    components: { RecoveryPasswordForm, RegistrationForm, LoginForm, RegistrationSuccess, ChangePassword },
+    components: { LendingYandexMap, RecoveryPasswordForm, RegistrationForm, LoginForm, RegistrationSuccess, ChangePassword },
     data: () => ({
       loginModal: false,
       registerModal: false,
@@ -188,6 +199,7 @@
       registrationSuccessModal: false,
       changePasswordModal:false,
       activeMenu: false,
+      showMap: false,
     }),
     computed: {
       ...mapGetters([

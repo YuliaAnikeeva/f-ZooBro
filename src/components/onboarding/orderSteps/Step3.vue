@@ -77,6 +77,7 @@
                                     placeholder="г. Москва ул. Ленина 35 кв.10"
                                     v-model="address"
                                     class="input__control"
+                                    @click="showMap = true"
                             />
                         </div>
                     </div>
@@ -127,9 +128,9 @@
 </template>
 
 <script>
-  import { email, required, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
+  import { email, required, minLength, maxLength } from 'vuelidate/lib/validators'
   import YandexMap from '../../YandexMap'
-    import DatePicker from 'vue2-datepicker';
+  import DatePicker from 'vue2-datepicker';
   import 'vue2-datepicker/index.css';
   import 'vue2-datepicker/locale/ru';
 

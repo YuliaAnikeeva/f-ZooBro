@@ -24,7 +24,7 @@
     </div>
 
     <div id="header">
-      <p>Введи адрес</p>
+        <p>Введи адрес</p>
         <form @submit.prevent class="form-box">
             <input type="text" id="suggest" class="input" placeholder="Адрес доставки">
             <button type="submit" id="button">Проверить адрес</button>
@@ -39,8 +39,8 @@
             <div v-show="false" ref="address" id="address"></div>
 
             <div class="btn-adr">
-                <button id="btn-adr" class="bnone" @click="()=>adr()">
-                    Доставить сюда
+                <button id="btn-adr" class="bnone">
+                    Ура! Ты в зоне доставки!
                 </button>
             </div>
         </div>
@@ -54,7 +54,7 @@
 
 <script>
   export default {
-    name: 'YandexMap',
+    name: 'LendingYandexMap',
     props: ['updateAddress'],
     methods: {
       adr () {
@@ -221,23 +221,23 @@
     }
 
     h1 {
-      text-align: center;
-      margin-bottom: 50px;
+        text-align: center;
+        margin-bottom: 50px;
     }
 
     p {
-      font-family: Montserrat;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 20px;
-      letter-spacing: 0.001em;
-      color: #464451;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0.001em;
+        color: #464451;
     }
 
     #footer {
         margin-top: 14px;
-        //padding: 12px;
+    //padding: 12px;
     }
     #map {
         height: 300px;
@@ -283,7 +283,7 @@
         box-shadow: 0 0 1px 1px #f33;
     }
     #notice {
-        //position: absolute;
+    //position: absolute;
         left: 22px;
         margin: 0px;
         top: 44px;
