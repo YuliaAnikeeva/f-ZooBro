@@ -1,5 +1,5 @@
 <template>
-    <div class="container container_onboarding">
+    <div class="container onboarding">
         <template v-if="step !== 'step-4'">
             <h1 class="title onboarding__title">Оформление заказа</h1>
 
