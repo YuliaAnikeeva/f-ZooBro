@@ -420,7 +420,7 @@
           text-align: left;
           color: #fff;
           text-decoration: none;
-          margin-top: 30pxЁ;
+          margin-top: 30px;
         }
         display:none;
       }
