@@ -289,9 +289,10 @@
     height: 65px;
     background: #464451;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     justify-content: space-around;
     justify-items: center;
+
   }
   .logo {
       width: 105px;
@@ -407,7 +408,7 @@
           text-align: left;
           color: #fff;
           text-decoration: none;
-          margin-top: 30px;
+          margin-top: 30pxЁ;
         }
         display:none;
       }
@@ -440,7 +441,7 @@
       }
     }
     .nav-menu {
-      grid-template-columns:repeat(3, max-content);
+      grid-template-columns:repeat(3, 1fr);
       justify-content: space-between;
     }
     .nav-button{

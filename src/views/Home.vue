@@ -1108,6 +1108,9 @@ main {
 }
 
 @media screen and (max-width: 425px) {
+  html {
+    width: 100vw;
+  }
   .block {
     &__head {
       margin-bottom: 50px;
@@ -1284,7 +1287,7 @@ main {
   }
 
   .how-use {
-    padding: 70px 50px;
+    padding: 70px 20px;
     width: 100%;
 
     &__head {
