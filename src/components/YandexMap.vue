@@ -2,7 +2,6 @@
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Проверка при вводе адреса доставки</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     </head>
     <body>
@@ -25,20 +24,25 @@
     </div>
 
     <div id="header">
-      <p>Введи адрес или отметь его на карте</p>
-        <div class="form-box">
+      <p>Введи адрес</p>
+        <form @submit.prevent class="form-box">
             <input type="text" id="suggest" class="input" placeholder="Адрес доставки">
             <button type="submit" id="button">Проверить адрес</button>
-        </div>
+        </form>
 
-        <p id="notice">Адрес не найден</p>
 
         <div id="footer">
+            <p id="notice">Адрес не найден</p>
             <div id="messageHeader"></div>
             <div id="message"></div>
-            <div ref="address" id="address"></div>
 
-            <button id="btn-adr" class="bnone" @click="()=>adr()">забрать адрес</button>
+            <div v-show="false" ref="address" id="address"></div>
+
+            <div class="btn-adr">
+                <button id="btn-adr" class="bnone" @click="()=>adr()">
+                    Доставить сюда
+                </button>
+            </div>
         </div>
 
     </div>
@@ -233,7 +237,7 @@
 
     #footer {
         margin-top: 14px;
-        padding: 12px;
+        //padding: 12px;
     }
     #map {
         height: 300px;
@@ -256,7 +260,7 @@
         z-index: 50;
     }
     #header {
-        margin: 412px 10px 12px 12px;
+        margin: 350px 10px 12px 12px;
     }
     .input123 {
         height: 18px;
@@ -279,7 +283,7 @@
         box-shadow: 0 0 1px 1px #f33;
     }
     #notice {
-        position: absolute;
+        //position: absolute;
         left: 22px;
         margin: 0px;
         top: 44px;
@@ -294,6 +298,22 @@
     }
     .bnone {
         opacity: 0;
+    }
+    #btn-adr{
+        margin-top: 15px;
+        padding: 15px 50px;
+        background-color: rgba(77, 153, 186, 0.5);
+        border-radius: 10px;
+        font-family: Montserrat, serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 27px;
+        color: #F2F2F2;
+        border: none;
+    }
+    .btn-adr{
+        text-align: center;
     }
     .bblock {
         opacity: 1;
