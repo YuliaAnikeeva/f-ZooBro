@@ -267,7 +267,7 @@
             position: relative;
             width: 100%;
             max-width: 230px;
-            padding: 15px 47px;
+            padding: 15px;
             background-color: #FFCC01;
             border: none;
             border-radius: 10px;
