@@ -301,9 +301,10 @@
     height: 65px;
     background: #464451;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     justify-content: space-around;
     justify-items: center;
+
   }
   .logo {
       width: 105px;
@@ -452,7 +453,7 @@
       }
     }
     .nav-menu {
-      grid-template-columns:repeat(3, max-content);
+      grid-template-columns:repeat(3, 1fr);
       justify-content: space-between;
     }
     .nav-button{
