@@ -62,12 +62,24 @@
           cols="30"
           rows="5"
           v-model="address"
+          @click="showMap = true"
         ></textarea>
         <div class="error" v-if="$v.address.dirty && !$v.address.required">Обязательное поле</div>
       </div>
       <button @click="update" class="form-button__save">Cохранить</button>
       <button @click="back" class="form-button__back">Отмена</button>
     </form>
+
+    <vue-modaltor
+            :visible="showMap"
+            :resize-width='{1920:"940px",940:"90%"}'
+            :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+            :bg-panel="'#fff'"
+            @hide="showMap = false">
+      <YandexMap :updateAddress="updateAddress"/>
+    </vue-modaltor>
+
+
   </div>
 </template>
 
@@ -80,7 +92,9 @@ import {
   numeric,
   sameAs
 } from "vuelidate/lib/validators";
+import YandexMap from '../YandexMap'
 export default {
+  components: { YandexMap },
   props: ["profile", "editStatus"],
   data() {
     return {
@@ -91,7 +105,8 @@ export default {
       address: "",
       pass: "",
       passRepeat: "",
-      oldPass: ""
+      oldPass: "",
+      showMap: false,
     };
   },
   validations: {
@@ -174,7 +189,12 @@ export default {
         event.preventDefault();
       }
       this.$emit("update:editStatus", false);
-    }
+    },
+    updateAddress(address){
+      console.log('address', address)
+      this.address = address
+      this.showMap = false
+    },
   }
 };
 </script>
