@@ -77,6 +77,7 @@
                                     placeholder="г. Москва ул. Ленина 35 кв.10"
                                     v-model="address"
                                     class="input__control"
+                                    @click="showMap = true"
                             />
                         </div>
                     </div>
@@ -92,11 +93,15 @@
                     <label class="form-group__label">Желаемые дата и время доставки</label>
                     <div class="form-group__content">
                         <div class="input-group">
-                            <div class="input-date">
+                            <div class="input input_type_date">
                                 <!-- <input type="date" class="input__control input__control_type_datetime"
                                        v-model="date_delivery"> -->
+
                                        <date-picker v-model="date_delivery" valueType="format" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ" :disabled-date="notBeforeToday" :lang="lang"></date-picker>
+                            </div>
+                            <div class="input input_type_date">
                                 <date-picker v-model="time_delivery" valueType="format" class="date-picker-time" format="HH:mm" value-type="format" placeholder="ЧЧ.ММ"  :minute-step="30" type="time"  :disabled-time="notBeforeTime" :default-value="new Date().setHours(9, 0, 0)"></date-picker>
+                            </div>
                             </div>
                             <!-- <div class="input input_type_time">
                                 <input type="time" class="input__control input__control_type_datetime"
@@ -127,9 +132,9 @@
 </template>
 
 <script>
-  import { email, required, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
+  import { email, required, minLength, maxLength } from 'vuelidate/lib/validators'
   import YandexMap from '../../YandexMap'
-    import DatePicker from 'vue2-datepicker';
+  import DatePicker from 'vue2-datepicker';
   import 'vue2-datepicker/index.css';
   import 'vue2-datepicker/locale/ru';
 
@@ -206,27 +211,20 @@ today.setHours(0, 0, 0, 0);
     },
   }
 </script>
-
-<style>
-.mx-input {
-     border: none;
-            box-shadow: none;
-            -webkit-box-shadow: none;
-}
-</style>
 <style lang="scss" scoped>
     @import "@/assets/styles/_forms.scss";
 
     form {
         display: flex;
         flex-wrap: wrap;
-        padding: 0 5px;
+        justify-content: space-between;
+        padding: 0 12px;
+        color: #464451;
     }
 
     .form_small {
-        width: 690px;
+        max-width: 690px;
         margin: 0 auto;
-        padding: 0;
     }
 
     .form_contact {
@@ -238,166 +236,28 @@ today.setHours(0, 0, 0, 0);
     .form-section {
         display: flex;
         flex-direction: column;
-        flex: 1;
+        flex: 1 0;
         margin-left: 55px;
         &:first-child {
             margin-left: 0;
         }
-        &:first-child {
-
-        }
-    }
-
-    .form-group {
-        font-family: Montserrat, sans-serif;
-        text-align: left;
-
-        &__label {
-            font-size: 12px;
-            line-height: 15px;
-            color: #828282;
-            box-sizing: border-box;
-            display: inline-block;
-            max-width: 400px;
-        }
-
-        &__link {
-            display: block;
-            text-align: right;
-            font-family: Montserrat, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 12px;
-            line-height: 15px;
-            letter-spacing: 0.3px;
-            text-decoration-line: underline;
-            color: #4F4F4F;
-            padding: 5px 0;
-        }
-
-        &__helper {
-            height: 60px;
-            display: flex;
-            justify-content: space-between;
-
-            &_small {
-                height: 50px;
-            }
-        }
-
-        &__errors {
-            color: red;
-            font-family: Montserrat, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 12px;
-            line-height: 15px;
-            letter-spacing: 0.3px;
-
-            & .error {
-                padding: 5px 5px;
-                display: flex;
-            }
-        }
-    }
-
-    .input {
-        font-family: Montserrat, sans-serif;
-        display: inline-flex;
-        align-items: stretch;
-        position: relative;
-        box-sizing: border-box;
-        margin-right: 20px;
-        border-bottom: 1px solid #4f4f4f;
-        font-size: 16px;
-        line-height: 20px;
-        font-weight: 500;
-        padding-top: 5px;
-        min-width: 255px;
-
-        &:last-child {
-            margin-right: 0;
-        }
-
-        &_type_date {
-            min-width: 150px;
-        }
-
-        &_type_time {
-            min-width: 100px;
-        }
-
-        &_type_address {
-            min-width: 325px;
-            width: 100%;
-        }
-
-        &__control {
-            border: none;
-            outline: none;
-            padding: 10px 5px;
-            width: 100%;
-            box-sizing: border-box;
-            line-height: 20px;
-            font: inherit;
-
-            &_type_datetime {
-                padding: 8px 5px;
-                text-transform: uppercase;
-            }
-        }
-
-        &__dropdown {
-            position: absolute;
-            top: 105%;
-            left: 0;
-            right: 0;
-            border-radius: 5px;
-            box-shadow: 0 0 5px 0 rgba(0, 0, 0, .3);
-            background: #fff;
-            z-index: 1;
-            font-size: 16px;
-            line-height: 20px;
-            font-weight: 500;
-
-            &-option {
-                padding: 10px;
-
-                &:hover {
-                    background-color: rgba(#FFCC01, 0.3);
-                }
-            }
-        }
-    }
-
-    .input-group {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .input_date{
-        font-family: Montserrat, sans-serif;
-        display: inline-flex;
-        align-items: stretch;
-        position: relative;
-        box-sizing: border-box;
-        // border-bottom: 1px solid #4f4f4f;
-        font-size: 16px;
-        line-height: 20px;
-        font-weight: 500;
-        padding-top: 5px;
-        // min-width: 255px;
     }
     .date-picker-time{
         max-width: 125px;
         margin-left: 30px;
-        border-bottom: 1px solid #4f4f4f;
-
     }
     .date-picker{
         max-width: 170px;
-        border-bottom: 1px solid #4f4f4f;
-
     }
+
+@media (max-width: 414px) {
+    form {
+      flex-direction: column;
+    }
+    .form-section {
+        margin: 0;
+        padding-right: 65px;
+    }
+}
 
 </style>

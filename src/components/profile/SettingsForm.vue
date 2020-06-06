@@ -62,12 +62,24 @@
           cols="30"
           rows="5"
           v-model="address"
+          @click="showMap = true"
         ></textarea>
         <div class="error" v-if="$v.address.dirty && !$v.address.required">Обязательное поле</div>
       </div>
       <button @click="update" class="form-button__save">Cохранить</button>
       <button @click="back" class="form-button__back">Отмена</button>
     </form>
+
+    <vue-modaltor
+            :visible="showMap"
+            :resize-width='{1920:"940px",940:"90%"}'
+            :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+            :bg-panel="'#fff'"
+            @hide="showMap = false">
+      <YandexMap :updateAddress="updateAddress"/>
+    </vue-modaltor>
+
+
   </div>
 </template>
 
@@ -80,7 +92,9 @@ import {
   numeric,
   sameAs
 } from "vuelidate/lib/validators";
+import YandexMap from '../YandexMap'
 export default {
+  components: { YandexMap },
   props: ["profile", "editStatus"],
   data() {
     return {
@@ -91,7 +105,8 @@ export default {
       address: "",
       pass: "",
       passRepeat: "",
-      oldPass: ""
+      oldPass: "",
+      showMap: false,
     };
   },
   validations: {
@@ -174,12 +189,19 @@ export default {
         event.preventDefault();
       }
       this.$emit("update:editStatus", false);
-    }
+    },
+    updateAddress(address){
+      console.log('address', address)
+      this.address = address
+      this.showMap = false
+    },
   }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/styles/_forms.scss";
+
 form {
   display: grid;
   grid-template-areas:
@@ -262,7 +284,7 @@ button {
   font-weight: 600;
   font-size: 21px;
   line-height: 26px;
-  padding: 15px 45px;
+  padding: 15px;
   margin-top: 40px;
   &:hover {
     cursor: pointer;
@@ -284,5 +306,30 @@ button {
   font-size: 12px;
   line-height: 15px;
   letter-spacing: 0.3px;
+}
+
+@media (max-width: 414px) {
+  form {
+    display: grid;
+    grid-template-areas:
+      "email . . ."
+      "password . . ."
+      "name . . ."
+      "phone . . ."
+      "address . . ."
+      "btn_save btn_save btn_back btn_back";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+
+    .email,
+    .pass,
+    .name,
+    .phone,
+    .address {
+      grid-column-end: span 3;
+    }
+  }
 }
 </style>
