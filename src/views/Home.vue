@@ -286,7 +286,7 @@
     </footer>
     <vue-modaltor
                     :visible="loginModal"
-                    :resize-width='{1920:"440px",1440:"440px", 414:"390px", 375:"355px", 360:"340px"}'
+                    :resize-width='{1920:"440px",1440:"440px", 414:"390px", 375:"355px", 360:"340px", 320:"310px"}'
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="loginModal = false">
@@ -303,7 +303,7 @@
             </vue-modaltor>
    <vue-modaltor
                     :visible="changePasswordModal"
-                    :resize-width='{1920:"440px", 1440:"440px", 414:"390px", 375:"355px", 360:"340px"}'
+                    :resize-width='{1920:"440px", 1440:"440px", 414:"390px", 375:"355px", 360:"340px", 320:"310px"}'
                     :bg-overlay="' rgba(41, 41, 41, 0.4)'"
                     :bg-panel="'#fff'"
                     @hide="changePasswordModal = false">
