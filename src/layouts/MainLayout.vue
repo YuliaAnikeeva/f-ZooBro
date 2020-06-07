@@ -38,7 +38,7 @@
               </div>
             </div>
             <div class="logo">
-                <router-link class="router-link" to="/"></router-link>
+                <router-link class="logo" to="/"></router-link>
             </div>
             <div class="rout-buttons">
                 <div @click="showMap = true" class="rout-buttons__dilivery">Доставка</div>
