@@ -3,11 +3,12 @@
     <h1>Восстановление пароля</h1>
   <div class="form-recovery">
     <!-- <div class="message_block">
-    <div v-if="status=='success'">
-      <p class="message message--success">{{ msg }}</p>
+     
+    <div v-if="status==='success'">
+      <p v-if="status==='success'" class="message message--success">Пароль отправлен на почту</p>
     </div>
     <div v-else>
-      <p v-if="status=='error'" class="message message--error">{{ msg }}</p>
+      <p v-if="status==='error'" class="message message--error">Ошибка</p>
       </div>
       </div> -->
       <form  class="form" @submit.prevent="onSubmit" ref="form">
@@ -23,7 +24,9 @@
           </div>
           </div>
           <input class="button" :class="{ 'button-valid': $v.email.required}" type="submit" value="Далее" :disabled="disabled">
+      <div class="instruction--blue">{{messages}}</div>
       </form>
+       
     </div>
   </div>
 </template>
@@ -36,10 +39,12 @@ import { RECOVERY_REQUEST } from '../store/auth'
 
 export default {
   name: 'RecoveryPasswordForm',
+  props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal', 'toggleChangePasswordModal'],
+
   data () {
     return {
       email: '',
-      messages: [],
+      messages: '',
     }
   },
   computed: {
@@ -62,32 +67,26 @@ export default {
           return
         }
         if(!this.$v.$invalid){
-          this.messages = []
+          this.messages = 'Проверьте почту. Если Вы зарегистрированы, Вам будет отправлено письмо.'
           const {email} = this
           console.log('passwordRecovery')
-          await this.$store.dispatch('passwordRecovery', {email})
-          this.messages = ["Письмо с паролем отправленно на почту"]
-          this.$router.push('/login')
+          await this.$store.dispatch('user/passwordRecovery', {email}) 
         }
+
+        
       }
 
-    // onSubmit: function () {
-    //   this.$v.$touch()
-    //   if (!this.$v.$invalid) {
-    //     this.messages = []
-    //     this.$store.dispatch('auth/'+RECOVERY_REQUEST, this.email)
-    //       .then( () => {
-    //         this.messages = ["Письмо с паролем отправленно на почту"]
-    //         this.$router.push('/login')
-    //       }).catch( (messages) => {
-    //         this.messages = messages
-    //       })
-    //   }
-    // }
+    
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/styles/_forms.scss"
+@import "../assets/styles/_forms.scss";
+
+
+.message_block{
+  
+  text-align: center;
+}
 </style>

@@ -19,26 +19,25 @@ export default {
   props: {
     profile: Object,
   },
-  created() {
-    console.log(this.profile)
-  }
 }
 </script>
 
 <style lang="scss" scoped>
   .settings {
     display: grid;
-    grid-template-areas: 
-    "name name_text photo"
-    "email email_text photo"
-    "pass pass_text photo"
-    "phone phone_text photo"
+    width: 100%;
+    grid-template-areas:
+    "name    name_text    photo"
+    "email   email_text   photo"
+    "pass    pass_text    photo"
+    "phone   phone_text   photo"
     "address address_text photo";
     text-align: left;
     &__label {
       font-size: 12px;
       line-height: 15px;
       color: #8b8a95;
+      align-self: flex-start;
     }
     &__info {
       font-weight: 500;
@@ -55,6 +54,41 @@ export default {
     span {
       display: flex;
       align-items: center;
+    }
+
+    @media (max-width: 1440px) {
+      grid-template-areas:
+      "name    name_text    name_text    photo"
+      "email   email_text   email_text   photo"
+      "pass    pass_text    pass_text    photo"
+      "phone   phone_text   phone_text   photo"
+      "address address_text address_text photo";
+      grid-row-gap: 25px;
+      grid-column-gap: 33px;
+
+      &__info {
+        grid-column-end: span 2;
+      }
+    }
+
+    @media (max-width: 414px) {
+      grid-template-areas:
+      "name    name_text"
+      "email   email_text"
+      "pass    pass_text"
+      "phone   phone_text"
+      "address address_text"
+      ".       photo";
+      grid-row-gap: 25px;
+      grid-column-gap: 33px;
+
+      img {
+        width: 100%;
+      }
+
+      &__info {
+        grid-column-end: span 1;
+      }
     }
   }
 </style>

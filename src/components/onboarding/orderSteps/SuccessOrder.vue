@@ -12,9 +12,9 @@
       <p class="success-order__text">
         Номер заказа: <span class="success-order__text success-order__text_accent">{{String(order.id)}}</span>
       </p>
-      <a href="#" class="success-order__link">Отслеживать заказ</a>
+      <router-link to="/profile" class="success-order__link">Отслеживать заказ</router-link>
     </div>
-    <div class="success-order__reg-info">
+    <div v-if="!isUserLoggedIn" class="success-order__reg-info">
       <p class="success-order__text">Мы также направили на твой E-mail письмо с паролем для входа в личный кабинет</p>
     </div>
     <div class="success-order__cta">
@@ -56,8 +56,11 @@
       order: {
         type: Object,
         required: true,
+      },
+      isUserLoggedIn:{
+        type: Boolean,
       }
-    }
+    },
   }
 </script>
 

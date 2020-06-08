@@ -24,6 +24,7 @@
         <div class="order__images-content">
           <img class="order__images-content_yelow-bone" src="../assets/yelow-bone.svg" alt="">
           <img  class="order__images-content_dog" src="../assets/dog_PNG50331.png" alt="">
+          <img  class="order__images-content_dog-mobile" src="../assets/dog_mobile.png" alt="">
         </div>
       </div>
       <div class="how-work">
@@ -46,7 +47,7 @@
             <div class="how-work__image-container">
               <img src="../assets/how-work-dog-2.png" alt />
             </div>
-            <h5 class="how-work__section-head how-work__sectiontrue_margin-b-20">Договорись о доставке</h5>
+            <h5 class="how-work__section-head">Договорись о доставке</h5>
             <p class="how-work__text">Расскажи как и когда тебе удобнее получить коробочку</p>
           </section>
           <div class="how-work__arrow-container">
@@ -73,16 +74,18 @@
       </div>
       <div class="what-in-box">
         <div class="block__head">
-          <h4 class="block__head-text">Внутри коробки ты найдешь</h4>
+          <h4 class="block__head-text block__head-text_white">Внутри коробки ты найдешь</h4>
         </div>
         <div class="what-in-box__container">
           <div class="what-in-box__content">
             <div class="what-in-box__content-text">
               <h5 class="what-in-box__content-head">Премиальные вкусняшки-лакомства</h5>
+              <img class="what-in-box__content-image_mobile" src="../assets/what-in-box-1.png" alt="">
               <p class="what-in-box__content-text-text">Эту вкуснятину можно получить за выполнение команд или просто так, если хозяин тебя очень сильно любит</p>
             </div>
             <div class="what-in-box__content-text">
               <h5 class="what-in-box__content-head">Жевательные лакомства</h5>
+              <img class="what-in-box__content-image_mobile" src="../assets/what-in-box-2.png" alt="">
               <p class="what-in-box__content-text-text">Это очень полезно пожевать после еды, вместо чистки зубов. С ними у тебя будет сильная челюсть и свежее дыхание - можно чаще целовать хозяина</p>
             </div>
           </div>
@@ -92,10 +95,12 @@
           <div class="what-in-box__content">
             <div class="what-in-box__content-text">
               <h5 class="what-in-box__content-head">Мягкие игрушки</h5>
+              <img class="what-in-box__content-image_mobile" src="../assets/what-in-box-3.png" alt="">
               <p class="what-in-box__content-text-text">Круто пищат или хрустят, когда их жуешь. Они безопасные и долговечные. Их можно порвать и за это ничего не будет</p>
             </div>
             <div class="what-in-box__content-text">
               <h5 class="what-in-box__content-head">Мячик из ворса и резины</h5>
+              <img class="what-in-box__content-image_mobile" src="../assets/what-in-box-4.png" alt="">
               <p class="what-in-box__content-text-text">Это вообще кайф. Его можно ощипать или побегать за ним. Принеси хозяину и тебе обязательно перепадет кусочек лакомства</p>
             </div>
           </div>
@@ -162,9 +167,21 @@
               <img class="social-mission__image_two" src="../assets/social-dogs-2.png" alt="">
               <img class="social-mission__image_two" src="../assets/social-dogs-3.png" alt="">
             </div>
+            <carousel class="social-mission__image-carousel" :loop="true" :autoplayTimeout="5000" :navigateTo="0" :autoplay="true" :per-page="1" :mouse-drag="false" >
+              <slide>
+                <img class="social-mission__image_one" src="../assets/social-dogs-1.png" alt="">
+              </slide>
+              <slide>
+                <img class="social-mission__image_two" src="../assets/social-dogs-2.png" alt="">
+              </slide>
+              <slide>
+                <img class="social-mission__image_two" src="../assets/social-dogs-3.png" alt="">
+              </slide>
+            </carousel>
           </div>
         </div>
       </div>
+  
       <div class="doubt">
         <div class="block__head">
           <h4 class="block__head-text">Еще сомневаешься?</h4>
@@ -178,15 +195,13 @@
             <img class="doubt__image" src="../assets/doubt_image_5.png" alt="">
           </div>
           <p class="doubt__text">
-            Еще сомневаешься, подходит тебе это или нет? <br>
-            Попробуй стартовый набор за 3 клика. <br>
-            Уверяем, твой хвост будет вилять как пропеллер, а хвост никогда не обманывает <br>
+            Закажи коробочку за 2 минуты, введя минимум данных
           </p>
           <div class="order-button">
             <div class="order-button__container">
               <router-link class="order-button__text" to="/order">
                 <div class="how-work__button">
-                  <span class="how-work__button-text">Заказать</span>
+                  <span class="how-work__button-text">Быстрый заказ</span>
                   <img class="paw paw_25" src="../assets/paw.svg" alt="">
                 </div>
               </router-link>
@@ -207,7 +222,7 @@
             </div>
           </div>
           <div class="faq__answer" :class="{faq__answer_collapse: answerFirst}">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, delectus porro amet ipsam veniam debitis!
+            Да, доставка бесплатная для Москвы в пределах МКАД, а также в Северном и Южном Бутово. В другие районы, которые не вошли в этот список, доставка по согласованию с менеджером.
           </div>
           <div class="faq__question" @click="answerSecond = !answerSecond">
             <span class="faq__question-text">Моей собаке это точно понравится?</span>
@@ -216,7 +231,8 @@
             </div>
           </div>
             <div class="faq__answer" :class="{faq__answer_collapse: answerSecond}">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero consequatur fugit quis voluptate tempora cum.
+              Мы гарантируем, что содержимое коробочки обязательно понравится вашему четвероногому другу, это подтверждается не только нашими собственными собаками, но и нашими любимыми покупателями.
+              Если не понравится - звоните.
             </div>
           <div class="faq__question" @click="answerThird = !answerThird">
             <span class="faq__question-text">А это подходит разным породам?</span>
@@ -225,7 +241,7 @@
             </div>
           </div>
           <div class="faq__answer" :class="{faq__answer_collapse: answerThird}">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus mollitia deserunt magnam ea excepturi? Sit?
+            Содержимое коробочки продумано так, что это подойдет как мелким породам, например, джек рассел терьер, так и крупным породам типа овчарки.
           </div>
           <div class="faq__question" @click="answerFourth = !answerFourth">
             <span class="faq__question-text">Когда оплачивать покупку?</span>
@@ -234,7 +250,7 @@
             </div>
           </div>
           <div class="faq__answer" :class="{faq__answer_collapse: answerFourth}">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas officiis facilis nam vitae odit facere?
+            Вы оплачиваете коробочку только после того, как получили её от курьера. Вы ничем не рискуете.
           </div>
           <div class="faq_plus-minus"></div>
         </div>
@@ -244,13 +260,13 @@
     <footer class="footer">
       <div class="footer__container">
         <div class="social-icons">
-          <a class="social-icons__element" href="">
+          <a class="social-icons__element" href="https://instagram.com/zoobro.ru" target="_blank">
             <img src="../assets/instagram.svg" alt="">
           </a>
-          <a class="social-icons__element" href="">
+          <a class="social-icons__element" href="https://vk.com/zoobro" target="_blank">
             <img src="../assets/vk.svg" alt="">
           </a>
-          <a class="social-icons__element" href="">
+          <a class="social-icons__element" href="https://vm.tiktok.com/EE6cxM/" target="_blank">
             <img src="../assets/tiktok.svg" alt="">
           </a>
         </div>
@@ -268,10 +284,49 @@
         <img src="../assets/footer_pows.svg" alt="">
       </div>
     </footer>
+    <vue-modaltor
+                    :visible="loginModal"
+                    :resize-width='{1920:"440px",1440:"440px", 414:"390px", 375:"355px", 360:"340px", 320:"310px"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="loginModal = false">
+                <LoginForm
+                        
+                        :toggleLoginModal="toggleLoginModal"
+                      
+                />
+                 <template slot="close-icon">
+                       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0.376577 0.376577C0.87868 -0.125526 1.69275 -0.125526 2.19485 0.376577L9 7.18173L15.8051 0.376577C16.3073 -0.125526 17.1213 -0.125526 17.6234 0.376577C18.1255 0.87868 18.1255 1.69275 17.6234 2.19485L10.8183 9L17.6234 15.8051C18.1255 16.3073 18.1255 17.1213 17.6234 17.6234C17.1213 18.1255 16.3073 18.1255 15.8051 17.6234L9 10.8183L2.19485 17.6234C1.69275 18.1255 0.87868 18.1255 0.376577 17.6234C-0.125526 17.1213 -0.125526 16.3073 0.376577 15.8051L7.18173 9L0.376577 2.19485C-0.125526 1.69275 -0.125526 0.87868 0.376577 0.376577Z" fill="#949595"/>
+</svg>
+            </template>
+            </vue-modaltor>
+   <vue-modaltor
+                    :visible="changePasswordModal"
+                    :resize-width='{1920:"440px", 1440:"440px", 414:"390px", 375:"355px", 360:"340px", 320:"310px"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="changePasswordModal = false">
+                <ChangePassword
+                        :toggleLoginModal="toggleLoginModal"
+                        :toggleChangePasswordModal="toggleChangePasswordModal"                />
+                <template slot="close-icon">
+                       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0.376577 0.376577C0.87868 -0.125526 1.69275 -0.125526 2.19485 0.376577L9 7.18173L15.8051 0.376577C16.3073 -0.125526 17.1213 -0.125526 17.6234 0.376577C18.1255 0.87868 18.1255 1.69275 17.6234 2.19485L10.8183 9L17.6234 15.8051C18.1255 16.3073 18.1255 17.1213 17.6234 17.6234C17.1213 18.1255 16.3073 18.1255 15.8051 17.6234L9 10.8183L2.19485 17.6234C1.69275 18.1255 0.87868 18.1255 0.376577 17.6234C-0.125526 17.1213 -0.125526 16.3073 0.376577 15.8051L7.18173 9L0.376577 2.19485C-0.125526 1.69275 -0.125526 0.87868 0.376577 0.376577Z" fill="#949595"/>
+</svg>
+            </template>
+            </vue-modaltor>
   </div>
+  
+        
 </template>
 
+
 <script>
+import ChangePassword from '../components/ChangePassword'
+import LoginForm from '../components/LoginForm'
+
+
 export default {
   name: 'Home',
   metaInfo: {
@@ -281,9 +336,29 @@ export default {
     answerFirst: true,
     answerSecond: true,
     answerThird: true,
-    answerFourth: true
+    answerFourth: true,
+    changePasswordModal:false,
+    loginModal:false,
   }),
-  components: {}
+  components: {ChangePassword, LoginForm},
+  mounted() {
+    const url = this.$route.query
+    if (url['reset-password']){
+      //ToDo использовать для работы с формой восстановления пароля
+      this.changePasswordModal=true
+      const resetPassword = url['reset-password']
+      console.log(`есть токен, нужно показать форму для смены пароля.  resetPassword = ${resetPassword}`)
+    }
+  },
+  methods:{
+    toggleChangePasswordModal(){
+        this.changePasswordModal = !this.changePasswordModal
+      },
+       toggleLoginModal(){
+        this.loginModal = !this.loginModal
+      },
+  }
+
 }
 </script>
 
@@ -309,38 +384,37 @@ main {
   }
 
   .bg-content {
-  position: fixed;
-  z-index: 5;
-  &__paw {
-    left: 93vw;
-    top:10vw;
-  }
-  &__box {
-    left: 30vw;
-    top: 75vh;
-  }
+    position: fixed;
+    z-index: 5;
+    &__paw {
+      left: 93vw;
+      top:10vw;
+    }
+    &__box {
+      left: 30vw;
+      top: 75vh;
+    }
 
-  &__ball {
-    left: 0;
-    top: 20vh;
+    &__ball {
+      left: 0;
+      top: 20vh;
+    }
+    &__big-bone {
+      top: 40vh;
+      left: 85vw;
+    }
+    &__small-bone {
+      left: 35vw;
+      top: 65vh;
+    }
+    &__paws {
+      left: 30vw;
+    }
+    &__big-box {
+      left: 0;
+      top: 70vh
+    }
   }
-  &__big-bone {
-    top: 40vh;
-    left: 85vw;
-  }
-  &__small-bone {
-    left: 35vw;
-    top: 65vh;
-  }
-  &__paws {
-    left: 30vw;
-  }
-  &__big-box {
-    left: 0;
-    top: 70vh
-  }
-  }
-
   .order-button {
   display: grid;
   justify-content: center;
@@ -484,6 +558,10 @@ main {
       top: 280px;
       z-index: 101;
     }
+    &_dog-mobile {
+      position: absolute;
+      display: none;
+    }
   }
 }
 
@@ -622,6 +700,9 @@ main {
     display: grid;
     background: url('../assets/what-in-box_content.svg') no-repeat;
     background-size: contain;
+    &_mobile {
+      display: none;
+    }
   }
   &__content-head {
     width: 100%;
@@ -751,6 +832,9 @@ main {
     column-gap: 10px;
     height: 340px;
   }
+  &__image-carousel {
+    display: none;
+  }
   &__image {
     display: grid;
 
@@ -845,7 +929,6 @@ main {
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
-    line-height: 22px;
     color: #FFFFFF;
     padding: 12px 20px;
     text-align: left;
@@ -861,6 +944,8 @@ main {
     height: 100%;
     opacity: 1;
     transition: height 300ms ease-out, opacity 300ms ease-out;
+    text-align: justify;
+    padding: 0 10px;
     &_collapse {
       opacity: 0;
       height: 0;
@@ -949,10 +1034,6 @@ main {
 @media screen and (max-width: 1440px) {
 
   .order {
-  width: 100%;
-  grid-template-columns: 1fr 1fr;
-  background: linear-gradient(163.79deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
-
     &__container {
       padding-top: 161px;
       padding-left: 172px;
@@ -974,9 +1055,7 @@ main {
       }
     }
   }
-  .how-work {
-
-  }
+  
   .what-in-box {
     &__container {
     display: grid;
@@ -1023,6 +1102,389 @@ main {
       &_two {
         height: 100%;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  html {
+    width: 100vw;
+  }
+  .block {
+    &__head {
+      margin-bottom: 50px;
+    }
+    &__head-text {
+      width: max-content;
+      height: 27px;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 27px;
+
+      &_white {
+        color: #fff;
+      }
+    }
+  }
+
+  .order {
+    grid-template-columns: 425px;
+    justify-items: center;
+    height: 615px;
+    &__container {
+      grid-row: 2/2;
+      padding: 330px 12px 0;
+      width: 100%;
+      text-align: center;
+      justify-items: center;
+    }
+    &__text {
+      width: 390px;
+    }
+
+    &__images-content {
+      grid-row: 0/1;
+      &_yelow-bone {
+        width: calc(460px + 1%);
+        top: -25px;
+        left: 80px;
+
+      }
+      &_dog {
+        display: none;
+      }
+      &_dog-mobile {
+        display: block;
+        width: calc(379px + 1%);
+        top: 30px;
+        left: 60px;
+        z-index: 101;
+      }
+    }
+
+    &__head {
+      width: 390px;
+      height: 90px;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 30px;
+      text-align: center;
+      color: #FFFFFF;
+      margin: 0 0 30px;
+    }
+
+    &__text {
+      width: 288px;
+      height: 40px;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      letter-spacing: 1px;
+      color: #FFFFFF;
+      margin:  0 0 20px;
+    }
+
+    &__button {
+      margin: 0;
+    }
+    &__button-text {
+      justify-items: center;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 21px;
+      line-height: 26px;
+      text-align: left;
+      letter-spacing: 0.2px;
+      color: #464451;
+    }
+  }
+
+  .how-work {
+    padding: 70px 0 70px 0;
+    row-gap: 50px;
+    &__arrow-container {
+      display: none;
+    }
+    &__container {
+      grid-template-columns: 245px;
+      padding: 0 87px;
+      justify-content: center;
+      row-gap: 40px;
+    }
+    &__section {
+      justify-items: center;
+    }
+    &__section-head {
+      height: max-content;
+    }
+  }
+
+  .what-in-box {
+    grid-template-columns: 100%;
+    width: 100%;
+    padding: 50px 12px 50px;
+
+    &__container {
+      display: grid;
+      grid-template-columns: 100%;
+      margin-bottom: 70px;
+      z-index: 6;
+      justify-content: center;
+      row-gap: 40px;
+    }
+    &__content {
+      row-gap: 40px;
+    }
+    &__content-text {
+      display: grid;
+      justify-items: center;
+      align-content: flex-start;
+    }
+    &__content-text:last-child {
+      align-content: flex-start;
+    }
+    &__content-image-container {
+      display: none;
+    }
+    &__content-image {
+      display: none;
+      &_mobile {
+        margin: 20px 0;
+        display: block;
+      }
+    }
+    &__content-head {
+      width: 100%;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    &__content-text-text {
+      width: 100%;
+      height: 80px;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      color: #fff;
+    }
+  }
+
+  .how-use {
+    padding: 70px 0;
+    width: 100%;
+    grid-template-columns: calc(100% - 40px);
+
+    &__head {
+    display: grid;
+    justify-content: center;
+    margin-bottom: 50px;
+    }
+    &__head-text {
+      width: max-content;
+      height: 27px;
+      font-size: 22px;
+      line-height: 27px;
+      color: $default-text-color;
+    }
+    &__container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 100%;
+      column-gap: 0;
+      row-gap: 40px;
+    }
+    &__content {
+      display: grid;
+      justify-items: center;
+      row-gap: 20px;
+      &:first-child  {
+        .how-use__content-text {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &__content-image {
+      width: max-content;
+    }
+    &__content-text {
+      width: 100%;
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      color: #464451;
+
+    }
+    &__content-arrow {
+      display: none;
+    }
+  }
+
+  .social-mission {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 100%;
+    padding: 50px 0;
+    background: linear-gradient(176.37deg, #157DA9 12.91%, rgba(50, 157, 202, 0.82) 58.13%, #1489BB 92.45%);
+    box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
+    &__container {
+      display: grid;
+      grid-template-columns: 100%;
+      justify-content: center;
+      column-gap: 60px;
+      z-index: 6;
+    }
+    &__content {
+      display: grid;
+      grid-row: 2/2;
+      height: 100%;
+      width: 100%;
+      align-content: center;
+      text-align: center;
+      padding: 0 12px;
+
+    }
+    &__text-content {
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 30px;
+      color: #FFFFFF;
+      margin: 0;
+    }
+
+    &__content-image {
+      display: grid;
+      grid-template-columns: 100%;
+      column-gap: 0;
+      height: max-content;
+    }
+    &__image-carousel {
+      display: block;
+    }
+    &__image {
+      display: none;
+
+      &_one {
+        width: 100%;
+      }
+      &_two {
+        width: 100%;
+      }
+    }
+  }
+
+  .doubt {
+    &__container {
+    width: 100%;
+    }
+    &__image-container {
+      grid-template-columns: 40% 60% 40%;
+    }
+    &__image {
+
+      &:first-child {
+        display: none;
+      }
+      &:last-child {
+        display: none;
+      }
+      &:nth-child(2) {
+        opacity: 0.5;
+      }
+      &:nth-child(4) {
+        opacity: 0.5;
+      }
+    }
+    &__text {
+      padding: 18px;
+      width: 100%;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+
+  .faq {
+    padding: 80px 0 0;
+    grid-template-rows: 3fr 241px;
+    grid-template-columns: calc( 100% - 24px);
+    justify-content: center;
+
+    &__image {
+     width: 100%;
+     justify-self: center;
+     height: 172px;
+    }
+    &__container {
+      border-radius: 40px;
+      grid-template-columns: 100%;
+      justify-content: center;
+      width: 100%;
+      padding: 50px 10px;
+    }
+    &__head {
+      
+    }
+    &__question {
+      padding: 12px 15px;
+      width: calc(100% - 30px);
+      justify-self: center;
+    }
+    &__answer {
+    
+      &_collapse {
+      
+      }
+    }
+  }
+
+  .footer {
+    grid-template-columns: 100%;
+    &__container {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 35px;
+    }
+    &__contacts {
+      grid-row: 1/1;
+      display: grid;
+      grid-template-rows: repeat(2, max-content);
+      text-align: left;
+      justify-self: center;
+      row-gap: 10px;
+    }
+    &__contacts-row {
+      font-family: Montserrat, sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 17px;
+      color: #FFFFFF;
+
+    }
+    &__image {
+      display: none;
     }
   }
 }

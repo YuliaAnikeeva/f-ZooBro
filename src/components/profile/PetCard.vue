@@ -41,7 +41,7 @@
         />
       </svg>
     </button>
-    <div v-else class="card__button-create">
+    <div v-else class="card__button-create" @click="$emit('add:pet')">
       <div>
         <svg width="60" height="60" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="26" y="11" width="8" height="32" fill="white"/>
@@ -79,7 +79,8 @@ export default {
       this.$router.push('order')
     },
     changeData() {
-      alert('Функция дорабатывается')
+      // alert('Функция дорабатывается:')
+      this.$emit("focus:pet", this.pet)
     }
   },
   computed: {
@@ -130,6 +131,9 @@ export default {
 <style lang="scss" scoped>
 .card {
   display: grid;
+  width: 100%;
+  min-width: 320px;
+  box-sizing: border-box;
   grid-template-areas:
     "avatar name"
     "breed breed_text"
