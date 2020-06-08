@@ -254,6 +254,23 @@ today.setHours(0, 0, 0, 0);
     form {
       flex-direction: column;
     }
+
+    @media (max-width: 414px) {
+        .form_contact {
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+        }
+
+        .form-section {
+        margin: 0;
+        }
+
+        .form-group__content {
+            width: 315px;
+        }
+    }
+
     .form-section {
         margin: 0;
         padding-right: 65px;
