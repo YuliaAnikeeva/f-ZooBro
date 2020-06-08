@@ -685,4 +685,19 @@
         max-width: 280px;
     }
 
+    @media (max-width: 414px) {
+
+        form {
+            margin-left: 20px;
+        }    
+
+        .form-section {
+            margin-left: 0;
+        }
+
+        .radio-group__list {
+            margin-right: 20px;
+        }
+    }
+
 </style>

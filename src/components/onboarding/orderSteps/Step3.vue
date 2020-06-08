@@ -347,4 +347,20 @@
         display: flex;
         justify-content: space-between;
     }
+
+    @media (max-width: 414px) {
+        .form_contact {
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+        }
+
+        .form-section {
+        margin: 0;
+        }
+
+        .form-group__content {
+            width: 315px;
+        }
+    }
 </style>
