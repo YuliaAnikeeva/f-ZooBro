@@ -198,7 +198,6 @@
     },
     methods:{
       updateAddress(address){
-        // console.log('address', address)
         this.address = address
         this.showMap = false
       },

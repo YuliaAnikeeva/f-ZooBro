@@ -58,9 +58,7 @@
     props: ['updateAddress'],
     methods: {
       adr () {
-        // console.log('adr')
         const adr = this.$refs.address.textContent
-        // console.log(adr)
         this.updateAddress(adr)
       },
     },
@@ -122,7 +120,6 @@
           })
         }
         function showResult (obj) {
-          // console.log('все хорошо', obj)
           // Удаляем сообщение об ошибке, если найденный адрес совпадает с поисковым запросом.
           $('#suggest').removeClass('input_error')
           $('#notice').css('display', 'none')
@@ -134,7 +131,6 @@
               [mapContainer.width(), mapContainer.height()]
             ),
             // Сохраняем полный адрес для сообщения под картой.
-            //address = [obj.getCountry(), obj.getAddressLine()].join(', '),
             address = [obj.getAddressLine()].join(', '),
             // Сохраняем укороченный адрес для подписи метки.
             shortAddress = [obj.getThoroughfare(), obj.getPremiseNumber(), obj.getPremise()].join(' ')
@@ -145,7 +141,6 @@
           // Выводим сообщение под картой.
           showMessage('')
           showAddress(address)
-          // console.log('address', address)
           const cont = document.querySelector('#map')
           cont.classList.add('dblock')
           cont.classList.remove('dnone')

@@ -19,7 +19,6 @@ const order = {
         ...rootGetters.userToken && {token : rootGetters.userToken}
       })
       .then(json => {
-        // console.log('fetchOrdersList', json)
         if (json.status) {
           const { data } = json
           commit('setOrdersList', data.orders)
@@ -33,7 +32,7 @@ const order = {
         }
       })
       .catch(error => {
-        // console.error('Ошибка получения списка заказов', error)
+        console.error('Ошибка получения списка заказов', error)
         commit('clearSnackbar', null, { root: true })
         commit('setSnackbarMsg', 'Ошибка получения списка заказов', { root: true })
         commit('setSnackbarType', 'error', { root: true })
@@ -47,7 +46,6 @@ const order = {
         ...rootGetters.userToken && {token : rootGetters.userToken}
       }, payload)
       .then(({status, payload}) => {
-        // console.log('createOrder', {status, payload})
         if (status) {
           return payload
         } else {
@@ -58,7 +56,7 @@ const order = {
         }
       })
       .catch(error => {
-        // console.error('Ошибка создания заказа', error)
+        console.error('Ошибка создания заказа', error)
         commit('clearSnackbar', null, { root: true })
         commit('setSnackbarMsg', 'Не удалось отправить заказ', { root: true })
         commit('setSnackbarType', 'error', { root: true })

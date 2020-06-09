@@ -53,11 +53,10 @@ export default {
             if (json.status === 1) {
               const { data } = json
               commit('setUserInfo', data)
-              // console.log('fetchUserInfo', data)
               return true
             } else {
               const { message } = json
-              // console.error(message)
+              console.error(message)
               commit('clearSnackbar')
               commit('setSnackbarMsg', message)
               commit('setSnackbarType', 'error')
@@ -67,7 +66,7 @@ export default {
         )
         .catch(
           error => {
-            // console.error('Ошибка получения пользовательских данных', error)
+            console.error('Ошибка получения пользовательских данных', error)
             commit('clearSnackbar', null, { root: true })
             commit('setSnackbarMsg', 'Не удалось получить данные', { root: true })
             commit('setSnackbarType', 'error', { root: true })
@@ -96,12 +95,10 @@ export default {
           json => {
             if (json.status === 1) {
               const { data } = json
-              // обновить локальные данные если усе успешно
-              // console.log('userUpdate', data)
               return true
             } else {
               const { message } = json
-              // console.error(message)
+              console.error(message)
               commit('clearSnackbar')
               commit('setSnackbarMsg', message)
               commit('setSnackbarType', 'error')
@@ -111,7 +108,7 @@ export default {
         )
         .catch(
           error => {
-            // console.error('Ошибка обновления пользовательских данных', error)
+            console.error('Ошибка обновления пользовательских данных', error)
             commit('clearSnackbar')
             commit('setSnackbarMsg', 'Не удалось обновить данные')
             commit('setSnackbarType', 'error')
@@ -142,21 +139,21 @@ export default {
               commit('clearSnackbar', null, { root: true })
               commit('setSnackbarMsg', 'Успешная регистрация', { root: true })
               commit('setSnackbarType', 'success', { root: true })
-              // console.log('Успешная регситрация', data)
+
               return true
             } else {
               const { message } = json
               commit('clearSnackbar', null, { root: true })
               commit('setSnackbarMsg', json.message, { root: true })
               commit('setSnackbarType', 'error', { root: true })
-              // console.error(message)
+              console.error(message)
               return false
             }
           }
         )
         .catch(
           error => {
-            // console.error('Ошибка регистрации пользователя', error)
+            console.error('Ошибка регистрации пользователя', error)
             commit('clearSnackbar', null, { root: true })
             commit('setSnackbarMsg', 'Что-то пошло не так...', { root: true })
             commit('setSnackbarType', 'error', { root: true })
@@ -185,8 +182,6 @@ export default {
           json => {
             if (json.status === 1) {
               const { data } = json
-              // обновить локальные данные если усе успешно
-              // console.log('passwordRecovery', data)
               commit('clearSnackbar', null, { root: true })
               commit('setSnackbarMsg', 'Пароль отправлен на почту', { root: true })
               commit('setSnackbarType', 'success', { root: true }) 
@@ -230,12 +225,9 @@ export default {
           json => {
             if (json.status === 1) {
               const {  password, token } = json
-              // обновить локальные данные если усе успешно
-              // commit('setUserHeader', data)
               commit('clearSnackbar', null, { root: true })
               commit('setSnackbarMsg', 'Новый пароль сохранен', { root: true })
               commit('setSnackbarType', 'success', { root: true }) 
-              // console.log('newPassword', password)
               return true
             } else {
               const { message } = json

@@ -96,7 +96,6 @@
         }
         if(!this.$v.$invalid){
           const {email, password} = this
-          // console.log('userRegister')
           const rez = await this.$store.dispatch('user/userRegister', {email, password})
           if (rez){
             this.onSuccess();

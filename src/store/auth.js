@@ -42,21 +42,20 @@ export default {
               commit('clearSnackbar')
               commit('setSnackbarMsg', 'Успешная авторизация')
               commit('setSnackbarType', 'success')
-              // console.log('Успешная авторизация', data)
               return true
             } else {
               const { message } = json
               commit('clearSnackbar')
               commit('setSnackbarMsg', json.message)
               commit('setSnackbarType', 'error')
-              // console.error(message)
+              console.error(message)
               return false
             }
           }
         )
         .catch(
           error => {
-            // console.error('Ошибка авторизации', error)
+            console.error('Ошибка авторизации', error)
             commit('clearSnackbar')
             commit('setSnackbarMsg', 'Ошибка авторизации')
             commit('setSnackbarType', 'error')
@@ -65,7 +64,6 @@ export default {
         )
     },
     autoLoginUser ({ commit }, payload) {
-      // console.log('==================== autoLoginUser ====================')
       commit('setUser', payload)
       localStorage.setItem('userToken', payload)
     },

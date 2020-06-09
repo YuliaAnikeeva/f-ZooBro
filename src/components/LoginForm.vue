@@ -93,7 +93,6 @@
         }
         if (!this.$v.$invalid) {
           const { email, password } = this
-          // console.log('loginUser')
 
           this.disabled = true
           const rez = await this.$store.dispatch('loginUser', {

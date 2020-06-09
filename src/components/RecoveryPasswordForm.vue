@@ -60,7 +60,6 @@ export default {
         if(!this.$v.$invalid){
           this.messages = 'Проверьте почту. Если Вы зарегистрированы, Вам будет отправлено письмо.'
           const {email} = this
-          // console.log('passwordRecovery')
           await this.$store.dispatch('user/passwordRecovery', {email}) 
         }
 
