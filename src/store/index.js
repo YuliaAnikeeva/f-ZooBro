@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import admin from './admin'
 import auth from './auth'
 import order from './order'
 import toastify from './toastify'
@@ -92,6 +91,6 @@ export default new Vuex.Store({
     },
   },
   modules: {
-    admin, auth, order, toastify, user, pet, infoSnackbar,
+    auth, order, toastify, user, pet, infoSnackbar,
   }
 })

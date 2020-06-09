@@ -20,12 +20,6 @@ const routes = [
     meta: { layout: 'main' },
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import( '../views/Login.vue'),
-    meta: { layout: 'main' },
-  },
-  {
     path: '/recovery-password',
     name: 'RecoveryPassword',
     component: () => import( '../views/RecoveryPassword.vue'),
@@ -50,12 +44,7 @@ const routes = [
     component: () => import( '../views/OrderFast.vue'),
     meta: { layout: 'main' },
   },
-  {
-    path: '/registration',
-    name: 'Registration',
-    component: () => import( '../views/Registration.vue'),
-    meta: { layout: 'main' },
-  },
+
   {
     path: '*',
     name: 'InvalidPage',
