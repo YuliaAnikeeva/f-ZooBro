@@ -93,7 +93,7 @@
             <button class="onboarding-button" @click="submitHandler" :disabled="loading">
                 <div class="onboarding-button__inner">
                     <span class="onboarding-button__label">{{ step=='step-3' ? 'Оформить' : 'Вперед' }}</span>
-                    <svg class="onboarding-button__icon" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill:currentColor;height:1em">
+                    <svg class="onboarding-button__icon" v-bind:class="{hide_paw: step === 'step-3'}" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill:currentColor;height:1em">
                         <path d="M15.8942 3.56857C16.7585 1.10565 19.1353 -0.40999 21.224 0.158375C23.2407 0.726741 24.177 3.18966 23.3127 5.58943C22.4484 8.05235 20.0716 9.56799 17.9829 8.99962C15.9662 8.49441 15.0299 6.03149 15.8942 3.56857Z"/>
                         <path d="M27.8504 6.53479C25.9778 6.02958 23.817 7.48207 22.9527 9.81868C22.0884 12.1553 22.8807 14.4919 24.7533 14.9971C26.626 15.5023 28.7867 14.0499 29.651 11.7132C30.5153 9.37662 29.7231 7.04001 27.8504 6.53479Z"/>
                         <path d="M12.0768 9.18785C14.0214 8.68263 14.8137 6.21971 13.8774 3.69364C12.9411 1.16757 10.5642 -0.411225 8.61957 0.0939891C6.6749 0.662355 5.88263 3.12527 6.81895 5.58819C7.8273 8.11427 10.1321 9.75621 12.0768 9.18785Z"/>
@@ -454,6 +454,11 @@
 }
 
 @media (max-width: 414px) {
+
+    .hide_paw {
+    display: none
+    }
+
     .transition-box {
       margin: 25px -12px 0;
     }
