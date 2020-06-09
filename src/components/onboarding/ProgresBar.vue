@@ -1,5 +1,9 @@
 <template>
-  <div class="progressbar">
+  <div class="progressbar"
+    :style="{
+      gridTemplateColumns: `repeat(${steps.length - 1}, 1fr)`
+    }"
+  >
     <template v-for="(step, idx) in steps">
       <label
         :key="step.value"

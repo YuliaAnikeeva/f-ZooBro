@@ -39,6 +39,13 @@ const routes = [
     meta: { layout: 'main' },
   },
   {
+    path: '/fast-order',
+    name: 'OrderFast',
+    component: () => import( '../views/OrderFast.vue'),
+    meta: { layout: 'main' },
+  },
+
+  {
     path: '*',
     name: 'InvalidPage',
     component: () => import('../views/InvalidPage.vue'),
