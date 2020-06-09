@@ -114,6 +114,7 @@
 
         &__box {
             height: auto;
+            outline: none;
 
             /deep/ .hooper-slide {
               height: auto;

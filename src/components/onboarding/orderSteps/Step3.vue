@@ -259,22 +259,28 @@ today.setHours(0, 0, 0, 0);
         .form_contact {
             display: flex;
             flex-direction: column;
-            margin: 20px;
+            // margin: 20px;
         }
 
         .form-section {
         margin: 0;
         }
 
-        .form-group__content {
-            width: 315px;
-        }
+        // .form-group__content {
+            // width: 315px;
+        // }
     }
 
     .form-section {
         margin: 0;
         padding-right: 65px;
     }
+}
+
+@media (max-width: 375px) {
+  form {
+    padding: 0 10px;
+  }
 }
 
 </style>

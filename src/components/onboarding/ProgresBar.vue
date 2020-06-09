@@ -158,14 +158,14 @@
        // border-color: red;
       }
 
-      &:hover &__button:after {
-        content: '';
-        background-color: #ffcc01;
-      }
+      // &:hover &__button:after {
+      //   content: '';
+      //   background-color: #ffcc01;
+      // }
 
-      &:hover {
-        background-color: rgba(#ffcc01, 0.2);
-      }
+      // &:hover {
+      //   background-color: rgba(#ffcc01, 0.2);
+      // }
     }
 
 @media (max-width: 500px) {
