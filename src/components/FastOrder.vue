@@ -91,6 +91,7 @@
     // grid-template-columns: repeat(auto-fit, minmax(251px, 1fr));
     // grid-gap: 50px;
     height: auto;
+    outline: none;
 
     /deep/ .hooper-slide {
       height: auto;
