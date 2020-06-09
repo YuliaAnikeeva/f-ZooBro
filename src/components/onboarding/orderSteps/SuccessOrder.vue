@@ -134,7 +134,6 @@
   &__social {
     &-link {
       display: inline-block;
-      // font-size: 35px;
       color: #FFCC01;
       width: 65px;
       height: 65px;

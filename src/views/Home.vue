@@ -344,10 +344,8 @@ export default {
   mounted() {
     const url = this.$route.query
     if (url['reset-password']){
-      //ToDo использовать для работы с формой восстановления пароля
       this.changePasswordModal=true
       const resetPassword = url['reset-password']
-      console.log(`есть токен, нужно показать форму для смены пароля.  resetPassword = ${resetPassword}`)
     }
   },
   methods:{

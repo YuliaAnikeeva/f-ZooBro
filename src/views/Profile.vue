@@ -125,7 +125,7 @@ export default {
       this.$store.dispatch("pet/createPet", payload).then(() => {
         this.$store.dispatch("pet/fetchPet").then(status => {
           if (status === true) {
-            console.log(this.$store.getters["pet/petList"]);
+            // console.log(this.$store.getters["pet/petList"]);
           }
         });
       });

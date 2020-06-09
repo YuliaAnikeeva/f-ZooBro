@@ -10,7 +10,6 @@ export default {
       localStorage.setItem('userToken', payload)
     },
     setUserHeader (state, payload) {
-      //const Authorization = payload.headers.get('Authorization')
       const Authorization = payload.Authorization
       if (Authorization) {
         state.userToken = Authorization
@@ -43,21 +42,21 @@ export default {
               commit('clearSnackbar')
               commit('setSnackbarMsg', 'Успешная авторизация')
               commit('setSnackbarType', 'success')
-              console.log('Успешная авторизация', data)
+              // console.log('Успешная авторизация', data)
               return true
             } else {
               const { message } = json
               commit('clearSnackbar')
               commit('setSnackbarMsg', json.message)
               commit('setSnackbarType', 'error')
-              console.error(message)
+              // console.error(message)
               return false
             }
           }
         )
         .catch(
           error => {
-            console.error('Ошибка авторизации', error)
+            // console.error('Ошибка авторизации', error)
             commit('clearSnackbar')
             commit('setSnackbarMsg', 'Ошибка авторизации')
             commit('setSnackbarType', 'error')
@@ -66,7 +65,7 @@ export default {
         )
     },
     autoLoginUser ({ commit }, payload) {
-      console.log('==================== autoLoginUser ====================')
+      // console.log('==================== autoLoginUser ====================')
       commit('setUser', payload)
       localStorage.setItem('userToken', payload)
     },

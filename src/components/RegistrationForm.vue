@@ -1,5 +1,4 @@
 <template>
- <!-- <div class="container"> -->
   <div class="border">
     <h1>Регистрация</h1>
   <div class="form-registration">
@@ -47,7 +46,6 @@
 
   </div>
     </div>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -98,7 +96,7 @@
         }
         if(!this.$v.$invalid){
           const {email, password} = this
-          console.log('userRegister')
+          // console.log('userRegister')
           const rez = await this.$store.dispatch('user/userRegister', {email, password})
           if (rez){
             this.onSuccess();
@@ -128,7 +126,6 @@
  background: transparent;
   position: absolute;
   background-repeat: no-repeat;
-  //right: calc(100% - 375px);
   top: 33%;
   border: none;
   padding: 0;

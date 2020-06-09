@@ -94,19 +94,20 @@
                     <div class="form-group__content">
                         <div class="input-group">
                             <div class="input input_type_date">
-                                <!-- <input type="date" class="input__control input__control_type_datetime"
-                                       v-model="date_delivery"> -->
-
-                                       <date-picker v-model="date_delivery" valueType="format" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ" :disabled-date="notBeforeToday" :lang="lang"></date-picker>
+                                    <date-picker 
+                                        v-model="date_delivery" 
+                                        valueType="format" 
+                                        format="DD.MM.YYYY" 
+                                        class="date-picker" 
+                                        placeholder="ДД.ММ.ГГГГ" 
+                                        :disabled-date="notBeforeToday" 
+                                        :lang="lang">
+                                    </date-picker>
                             </div>
                             <div class="input input_type_date">
                                 <date-picker v-model="time_delivery" valueType="format" class="date-picker-time" format="HH:mm" value-type="format" placeholder="ЧЧ.ММ"  :minute-step="30" type="time"  :disabled-time="notBeforeTime" :default-value="new Date().setHours(9, 0, 0)"></date-picker>
                             </div>
                             </div>
-                            <!-- <div class="input input_type_time">
-                                <input type="time" class="input__control input__control_type_datetime"
-                                       v-model="time_delivery">
-                            </div> -->
                         </div>
                     </div>
                     <div class="form-group__helper">
@@ -140,7 +141,7 @@
 
   const today = new Date();
   const tomorrow = new Date();
-today.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
 
   export default {
     name: 'Step3',
@@ -197,7 +198,7 @@ today.setHours(0, 0, 0, 0);
     },
     methods:{
       updateAddress(address){
-        console.log('address', address)
+        // console.log('address', address)
         this.address = address
         this.showMap = false
       },
@@ -250,10 +251,10 @@ today.setHours(0, 0, 0, 0);
         max-width: 170px;
     }
 
-@media (max-width: 414px) {
-    form {
-      flex-direction: column;
-    }
+    @media (max-width: 414px) {
+        form {
+            flex-direction: column;
+        }
 
     @media (max-width: 414px) {
         .form_contact {

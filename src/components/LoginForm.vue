@@ -93,7 +93,7 @@
         }
         if (!this.$v.$invalid) {
           const { email, password } = this
-          console.log('loginUser')
+          // console.log('loginUser')
 
           this.disabled = true
           const rez = await this.$store.dispatch('loginUser', {
@@ -101,7 +101,7 @@
             password
           })
           if (rez) {
-            this.onSuccess()
+            this.toggleLoginModal()
             this.$router.push('/profile')
           }
           this.disabled = false

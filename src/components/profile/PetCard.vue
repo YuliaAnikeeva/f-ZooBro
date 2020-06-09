@@ -79,7 +79,6 @@ export default {
       this.$router.push('order')
     },
     changeData() {
-      // alert('Функция дорабатывается:')
       this.$emit("focus:pet", this.pet)
     }
   },

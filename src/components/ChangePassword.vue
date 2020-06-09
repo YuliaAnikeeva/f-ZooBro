@@ -74,8 +74,8 @@
           const { password } = this
           const url = this.$route.query
           const token=url['reset-password']
-          console.log(token)
-          console.log(password)
+          // console.log(token)
+          // console.log(password)
           this.disabled = true
           const rez = await this.$store.dispatch('user/newPassword', {password, token})
           if (rez) {
@@ -99,7 +99,6 @@
     width: 24px;
   height: 24px;
    background-repeat: no-repeat;
-// background-image: url(../assets/passHide.svg);
 }
 
 .iconPasswordHide{
