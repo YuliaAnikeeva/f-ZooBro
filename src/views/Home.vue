@@ -260,13 +260,13 @@
     <footer class="footer">
       <div class="footer__container">
         <div class="social-icons">
-          <a class="social-icons__element" href="">
+          <a class="social-icons__element" href="https://instagram.com/zoobro.ru" target="_blank">
             <img src="../assets/instagram.svg" alt="">
           </a>
-          <a class="social-icons__element" href="">
+          <a class="social-icons__element" href="https://vk.com/zoobro" target="_blank">
             <img src="../assets/vk.svg" alt="">
           </a>
-          <a class="social-icons__element" href="">
+          <a class="social-icons__element" href="https://vm.tiktok.com/EE6cxM/" target="_blank">
             <img src="../assets/tiktok.svg" alt="">
           </a>
         </div>
@@ -929,7 +929,6 @@ main {
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
-    line-height: 22px;
     color: #FFFFFF;
     padding: 12px 20px;
     text-align: left;
@@ -1287,8 +1286,9 @@ main {
   }
 
   .how-use {
-    padding: 70px 20px;
+    padding: 70px 0;
     width: 100%;
+    grid-template-columns: calc(100% - 40px);
 
     &__head {
     display: grid;
@@ -1426,8 +1426,10 @@ main {
   }
 
   .faq {
-    padding: 80px 12px 0;
+    padding: 80px 0 0;
     grid-template-rows: 3fr 241px;
+    grid-template-columns: calc( 100% - 24px);
+    justify-content: center;
 
     &__image {
      width: 100%;
@@ -1437,6 +1439,7 @@ main {
     &__container {
       border-radius: 40px;
       grid-template-columns: 100%;
+      justify-content: center;
       width: 100%;
       padding: 50px 10px;
     }
@@ -1444,8 +1447,9 @@ main {
       
     }
     &__question {
-      padding: inherit 15px;
-      width: 100%;
+      padding: 12px 15px;
+      width: calc(100% - 30px);
+      justify-self: center;
     }
     &__answer {
     

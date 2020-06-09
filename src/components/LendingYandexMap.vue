@@ -326,6 +326,7 @@
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
+        flex-wrap: wrap;
     }
     .form-box input {
         line-height: 60px;
@@ -357,5 +358,16 @@
     }
     .form-box button:focus {
         outline-color: transparent;
+    }
+    @media(max-width: 502px){
+        .form-box input{
+            border-radius: 10px;
+        }
+        .form-box button{
+            margin-top: 10px;
+            margin-right: auto;
+            margin-left: auto;
+            border-radius: 10px;
+        }
     }
 </style>
