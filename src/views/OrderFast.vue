@@ -20,7 +20,7 @@
                 <!--</div>-->
             <!--</div>-->
             <ProgresBar
-              v-if="step !== 'step-0'"
+              v-show="step !== 'step-0'"
               v-model="step"
               :info="progresbarOrderInfo"
               :steps="[
