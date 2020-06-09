@@ -1,51 +1,77 @@
 <template>
     <div class="fastorder">
-            <h2 class="fastorder__head-title">Выбери размер</h2>
-        <div class="fastorder__box">
-            <div class="fastorder-card" :class="{choosen: val == '1'}" @click="val = '1'">
+            <h2 class="fastorder__head-title">Выбери свой размер</h2>
+        <div :class="{ 'field--error wobble-error': $v.size.$error }" class="errors fastorder__errors">
+            <div class="error" v-if="$v.size.$dirty && !$v.size.required">Выбери размер</div>
+        </div>
+        <Slider class="fastorder__box"
+          :options="sliderOptions"
+        >
+            <div class="fastorder-card" :class="{choosen: size == '1'}" @click="size = '1'">
                 <h2>Маленький</h2>
             <img class="fastorder-card__img-small" src="../assets/small-dog.png" alt="">
-                <span>до 5кг</span>
+                <span>до 10кг</span>
     </div>
-            <div class="fastorder-card" :class="{choosen: val == '2'}" @click="val = '2'">
+            <div class="fastorder-card" :class="{choosen: size == '2'}" @click="size = '2'">
                  <h2>Средний</h2>
             <img class="fastorder-card__img-medium" src="../assets/medium-dog.png" alt="">
-                <span>от 5 до 20кг</span>
+                <span>от 10 до 25кг</span>
     </div>
-        <div class="fastorder-card" :class="{choosen: val == '3'}" @click="val = '3'">
+        <div class="fastorder-card" :class="{choosen: size == '3'}" @click="size = '3'">
 
         <h2>Большой</h2>
             <img class="fastorder-card__img-large" src="../assets/large-dog.png" alt="">
-        <span>от 20кг</span>
+        <span>от 25кг</span>
 
         </div>
-    </div>
-    <h3 class="charity">5% от суммы заказа отправляем на благотворительность</h3>
+    </Slider>
+    <div class="cost">Стоимость 1500 руб</div>
+    <h3 class="charity">Не забывай, 5% от суммы твоего заказа идет на благотворительность</h3>
 </div>
 
 </template>
 
 <script>
   import { required } from 'vuelidate/lib/validators'
+  import Slider from '@/components/onboarding/orderSteps/Slider'
 
   export default {
     name: 'FastOrder',
     props: ['order'],
+    components: { Slider },
     computed: {
-      price_id: {
+      size: {
         get () {
-          return this.order.price_id
+          return this.order.size
         },
         set (val) {
           this.$emit('update:order', {
             ...this.order,
-            price_id: val
+            size: val
           })
         }
       },
+      sliderOptions () {
+        return {
+              itemsToShow: 1.5,
+              centerMode: true,
+              initialSlide: 1,
+              shortDrag: false,
+              breakpoints: {
+                768: {
+                  itemsToShow: 3,
+                  trimWhiteSpace: true,
+                  initialSlide: 0,
+                },
+                375: {
+                  itemsToShow: 2,
+                }
+              }
+        }
+      }
     },
     validations: {
-      price_id: {
+      size: {
         required,
       }
     }
@@ -53,6 +79,7 @@
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/styles/_forms.scss";
 
 .fastorder {
     display: flex;
@@ -60,9 +87,27 @@
     justify-content: space-around;
 
 &__box {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(251px, 1fr));
-    grid-gap: 50px;
+    // display: grid;
+    // grid-template-columns: repeat(auto-fit, minmax(251px, 1fr));
+    // grid-gap: 50px;
+    height: auto;
+    outline: none;
+
+    /deep/ .hooper-slide {
+      height: auto;
+    }
+}
+
+.cost {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+
+  color: #464451;
+  margin-top: 60px;
 }
 
 &-card {
@@ -74,13 +119,19 @@
     border: 2px solid #2289b5;
     border-radius: 25px;
     text-align: center;
-    min-width: 251px;
-    min-height: 333px;
+    max-width: 250px;
+    // min-height: 333px;
     cursor: pointer;
-    padding: 20px;
-    padding-top: 90px;
-    padding-bottom: 90px;
+    padding: 70px 10px 80px;
+    height: 100%;
+    margin: 0 auto;
 
+img {
+    margin-top: auto;
+    padding-bottom: 20px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
 
 svg {
     fill: #2289b5;
@@ -89,37 +140,31 @@ svg {
 h2 {
     line-height: 22px;
     font-size: 18px;
-    margin: 5px 0 38px 0;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 44px;
     }
 
+
 &:hover {
-    border-color: #ffcc01;
-    box-shadow: 0 0 10px 0 rgba(0,0,0, .7);
+    box-shadow: 0 3px 5px rgba(#2289B5,.6), inset 0 3px 5px rgba(#2289B5,.6);
 }
 
 &__img-small {
-    max-width:83px;
-    max-height:70px;
-    margin: auto;
-    padding-bottom: 20px;
+    width:83px;
+    height:70px;
 }
 
 &__img-medium {
-    max-width:120px;
-    max-height:93px;
-    margin: auto;
-    padding-bottom: 20px;
+    width:96px;
+    height:80px;
 }
 
 &__img-large {
-    max-width:119px;
-    max-height:108px;
-    margin: auto;
-    padding-bottom: 20px;
+    width:130px;
+    height:97px;
 }
     }
 
@@ -127,8 +172,8 @@ h2 {
             font-weight: 500;
             font-size: 14px;
             line-height: 24px;
-            margin-bottom: 40px;
-            margin-top: 30px;
+            // margin-bottom: 40px;
+            margin-top: 20px;
         }
 
 .choosen {
@@ -140,5 +185,35 @@ h2 {
     margin-bottom: 50px;
 }
 
+}
+
+@media (max-width: 1440px) {
+  .fastorder {
+    max-width: 730px;
+    margin: 0 auto;
+    &-card {
+      padding: 20px;
+      max-width: 190px;
+    }
+  }
+}
+
+@media (max-width: 414px) {
+  .fastorder {
+    .cost {
+      margin-top: 40px;
+      font-size: 16px;
+    }
+    .charity {
+      margin-top: 10px;
+    }
+    &__head-title {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      color: #464451;
+    }
+  }
 }
 </style>
