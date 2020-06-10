@@ -19,7 +19,6 @@ const order = {
         ...rootGetters.userToken && {token : rootGetters.userToken}
       })
       .then(json => {
-        console.log('fetchOrdersList', json)
         if (json.status) {
           const { data } = json
           commit('setOrdersList', data.orders)
@@ -47,7 +46,6 @@ const order = {
         ...rootGetters.userToken && {token : rootGetters.userToken}
       }, payload)
       .then(({status, payload}) => {
-        console.log('createOrder', {status, payload})
         if (status) {
           return payload
         } else {

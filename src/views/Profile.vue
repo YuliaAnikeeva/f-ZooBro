@@ -86,7 +86,6 @@ export default {
   methods: {
     changeTab(tabName) {
       if (tabName != this.activeTab) {
-        // Для показа лучше так, потом переделать так, чтобы после фетча сразу прогружался нужный ТАБ
 
         switch (tabName) {
           case "settings": {
@@ -125,7 +124,6 @@ export default {
       this.$store.dispatch("pet/createPet", payload).then(() => {
         this.$store.dispatch("pet/fetchPet").then(status => {
           if (status === true) {
-            console.log(this.$store.getters["pet/petList"]);
           }
         });
       });

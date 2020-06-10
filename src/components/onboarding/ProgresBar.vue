@@ -15,7 +15,6 @@
           step_hidden: step.hidden,
           step_error: step.error}"
         >
-          <!--<input type="radio" class="step__control" v-model="val" :value="step.value">-->
           <div class="step__label">{{ step.label }}</div>
           <div class="step__header">
             <div class="step__divider"></div>
@@ -69,7 +68,6 @@
       font-family: Montserrat, sans-serif;
       display: flex;
       font-size: 12px;
-      // margin-bottom: 40px;
       color: #464451;
     }
 
@@ -128,7 +126,6 @@
       &__label {
         text-align: center;
         line-height: 25px;
-        // margin: 10px 0;
       }
 
       &_cur &__divider,
@@ -155,7 +152,7 @@
       }
 
       &_error &__button {
-       // border-color: red;
+      
       }
 
       &:hover &__button:after {
@@ -193,7 +190,7 @@
 
 @media (max-width: 414px) {
   .progressbar {
-    // margin-bottom: 25px;
+   
 
     .step {
       &__button {

@@ -53,7 +53,6 @@ export default {
             if (json.status === 1) {
               const { data } = json
               commit('setUserInfo', data)
-              console.log('fetchUserInfo', data)
               return true
             } else {
               const { message } = json
@@ -96,8 +95,6 @@ export default {
           json => {
             if (json.status === 1) {
               const { data } = json
-              // обновить локальные данные если усе успешно
-              console.log('userUpdate', data)
               return true
             } else {
               const { message } = json
@@ -142,7 +139,7 @@ export default {
               commit('clearSnackbar', null, { root: true })
               commit('setSnackbarMsg', 'Успешная регистрация', { root: true })
               commit('setSnackbarType', 'success', { root: true })
-              console.log('Успешная регситрация', data)
+
               return true
             } else {
               const { message } = json
@@ -185,8 +182,6 @@ export default {
           json => {
             if (json.status === 1) {
               const { data } = json
-              // обновить локальные данные если усе успешно
-              console.log('passwordRecovery', data)
               commit('clearSnackbar', null, { root: true })
               commit('setSnackbarMsg', 'Пароль отправлен на почту', { root: true })
               commit('setSnackbarType', 'success', { root: true }) 
@@ -230,12 +225,9 @@ export default {
           json => {
             if (json.status === 1) {
               const {  password, token } = json
-              // обновить локальные данные если усе успешно
-              // commit('setUserHeader', data)
               commit('clearSnackbar', null, { root: true })
               commit('setSnackbarMsg', 'Новый пароль сохранен', { root: true })
               commit('setSnackbarType', 'success', { root: true }) 
-              console.log('newPassword', password)
               return true
             } else {
               const { message } = json

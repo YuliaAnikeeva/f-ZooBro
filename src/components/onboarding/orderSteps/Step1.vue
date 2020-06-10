@@ -106,10 +106,10 @@
         display: flex;
         flex-flow: column nowrap;
         justify-content: space-around;
-        // margin-top: 40px;
+       
 
         &__errors {
-            // padding-bottom: 15px;
+           
         }
 
         &__box {

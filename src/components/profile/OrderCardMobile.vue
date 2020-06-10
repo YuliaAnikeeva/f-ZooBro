@@ -94,7 +94,6 @@ export default {
   position: relative;
   &::before {
     content: "";
-    // position: absolute;
     display: inline-block;
     left: 0;
     top: 15%;

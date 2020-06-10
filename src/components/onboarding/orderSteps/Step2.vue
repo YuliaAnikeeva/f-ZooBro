@@ -49,10 +49,15 @@
                 <label class="form-group__label">Дата рождения</label>
                 <div class="form-group__content">
                     <div class="input input_type_date">
-                        <!-- <input type="date" class="input__control input__control_type_datetime" v-model="birthday_date"> -->
-                        <date-picker v-model="birthday_date" valueType="format" format="DD.MM.YYYY" class="date-picker" placeholder="ДД.ММ.ГГГГ" :disabled-date="notAfterToday" :lang="lang"></date-picker>
-                        <!-- <date-picker v-model="time2" type="datetime"></date-picker>
-                        <date-picker v-model="time3" range></date-picker> -->
+                        <date-picker 
+                          v-model="birthday_date"  
+                          valueType="format" 
+                          format="DD.MM.YYYY" 
+                          class="date-picker" 
+                          placeholder="ДД.ММ.ГГГГ" 
+                          :disabled-date="notAfterToday" 
+                          :lang="lang">
+                        </date-picker>
                     </div>
                 </div>
                 <div class="form-group__helper">
@@ -94,7 +99,6 @@
             </div>
         </div>
         <div class="form-section">
-
             <div :class="{ 'field--error wobble-error': $v.gender.$error }" class="form-group">
                 <label class="form-group__label">Твой пол</label>
                 <div class="form-group__content">
@@ -212,7 +216,7 @@
   import 'vue2-datepicker/locale/ru';
 
   const today = new Date();
-today.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
 
   export default {
     name: 'Step2',
@@ -360,7 +364,7 @@ today.setHours(0, 0, 0, 0);
         min-width: 255px;
     }
 
-@media (max-width: 414px) {
+    @media (max-width: 414px) {
     .form-section {
       margin: 0;
     }

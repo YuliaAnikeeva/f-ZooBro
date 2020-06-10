@@ -1,28 +1,5 @@
 <template>
     <div>
-
-        <!-- <div id="nav">
-            <router-link to="/">Home</router-link>
-            |
-            <router-link to="/login">login</router-link>
-            <a class="nav-link" @click="loginModal = true">login</a>
-            |
-            <router-link to="/recovery-password">recovery-password</router-link>
-            <a class="nav-link" @click="recoveryPasswordModal = true">recovery-password</a>
-            |
-            <router-link to="/profile">profile</router-link>
-            |
-            <router-link to="/admin">admin</router-link>
-            |
-            <router-link to="/order">order</router-link>
-            |
-            <router-link to="/registration">registration</router-link>
-            <a class="nav-link" @click="registerModal = true">registration</a>
-            |
-            <a class="nav-link" @click="registrationSuccessModal = true">RegistrationSuccess</a>
-            |
-            <a class="nav-link" @click="changePasswordModal = true">ChangePassword</a>
-        </div> -->
         <nav class="nav-menu">
             <div class="menu-open__container">
               <div class="nav-button" :class="{'nav-button-active': activeMenu}" @click="toggleMenuOpen">
@@ -246,7 +223,6 @@
             className: 'demo',
             gravity: 'bottom',
             position: 'right',
-            //backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
             backgroundColor: backgroundColor[type],
             stopOnFocus: true,
             onClick: function () {
