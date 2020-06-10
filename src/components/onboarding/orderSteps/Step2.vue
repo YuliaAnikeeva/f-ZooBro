@@ -347,7 +347,7 @@
     .form_small {
         width: 690px;
         margin: 0 auto;
-        padding: 0;
+        // padding: 0;
     }
 
     .form-section {
@@ -372,17 +372,22 @@
 
     @media (max-width: 414px) {
 
-        form {
-            margin-left: 20px;
-        }    
+        // form {
+            // margin-left: 20px;
+        // }
 
         .form-section {
             margin-left: 0;
         }
 
-        .radio-group__list {
-            margin-right: 20px;
-        }
+        // .radio-group__list {
+            // margin-right: 20px;
+        // }
     }
+@media (max-width: 375px) {
+  form {
+    padding: 0 10px;
+  }
+}
 
 </style>

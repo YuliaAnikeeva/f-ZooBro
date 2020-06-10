@@ -478,4 +478,21 @@
         }
     }
 }
+
+@media (max-width: 375px) {
+    .transition-box {
+        margin: 25px -10px 0;
+    }
+    .onboarding {
+        padding: 0 10px;
+
+        &-button {
+            max-width: 162px;
+
+            &__icon {
+                margin-left: 4px;
+            }
+        }
+    }
+}
 </style>
