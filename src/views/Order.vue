@@ -123,6 +123,11 @@
 
   export default {
     name: 'Order',
+    props: {
+      pet_id: {
+        type: Number,
+      }
+    },
     components: {
       Step1,
       Step2,
