@@ -142,7 +142,7 @@
     data: () => ({
       step: 'step-1',
       steps: ['step-1', 'step-2', 'step-3', 'step-4'],
-      order: {},
+      inputtedOrder: {},
       loading: false,
       enableValidation: true,
     }),
@@ -172,6 +172,41 @@
         isUserLoggedIn () {
             return this.$store.getters["isUserLoggedIn"];
         },
+        defaultOrder () {
+            const pets = this.$store.getters['pet/petList']
+            const {
+              id: pet_id,
+              name: pet_name,
+              size,
+              gender,
+              birthday_date,
+              birthday_years,
+              food_exceptions
+            } = pets.filter( ({id}) => id === this.pet_id )[0] || {}
+
+            const user = this.$store.getters['user/userInfo']
+            const {
+              name: user_name,
+              address,
+              email,
+              phone,
+            } = user
+            return {
+              pet_id, pet_name, size, gender, birthday_date, birthday_years, food_exceptions,
+              user_name, email, phone, address
+            }
+        },
+        order: {
+          get () {
+            return {
+              ...this.defaultOrder,
+              ...this.inputtedOrder
+            }
+          },
+          set (val) {
+            this.inputtedOrder = val
+          }
+        }
     },
     methods: {
       resetOrderHandler() {
@@ -221,14 +256,7 @@
       if (isUserLoggedIn) {
         await this.$store.dispatch("user/fetchUserInfo")
         await this.$store.dispatch("pet/fetchPet")
-        const  user = await this.$store.getters['user/userInfo']
-        const {name, email, phone, address} = user
-        this.order['user_name'] = name
-        this.order['email'] = email
-        this.order['phone'] = phone
-        this.order['address'] = address
       }
-
     }
   }
 </script>
