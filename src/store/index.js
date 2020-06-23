@@ -13,25 +13,17 @@ export default new Vuex.Store({
   state: {},
   mutations: {},
   actions: {
-    snackSuccess({ commit }, payload) {
-      commit("clearSnackbar");
-      commit("setSnackbarMsg", payload);
-      commit("setSnackbarType", "success");
-    },
-    snackError({ commit }, payload) {
-      commit("clearSnackbar");
-      commit("setSnackbarMsg", payload);
-      commit("setSnackbarType", "error");
-    },
-    snackInfo({ commit }, payload) {
-      commit("clearSnackbar");
-      commit("setSnackbarMsg", payload);
-      commit("setSnackbarType", "info");
-    },
-    snackNull({ commit }, payload) {
-      commit("clearSnackbar");
-      commit("setSnackbarMsg", payload);
-      commit("setSnackbarType", "null");
+    setSnack({ commit }, { status, text }) {
+      if (
+        status === "null" ||
+        status === "info" ||
+        status === "error" ||
+        status === "success"
+      ) {
+        commit("clearSnackbar");
+        commit("setSnackbarMsg", text);
+        commit("setSnackbarType", status);
+      }
     }
   },
   getters: {

@@ -25,7 +25,11 @@ const pet = {
       return createFetch(fetchData).then(res => {
         if (res.status) {
           commit("fillList", res.data.pets);
-          dispatch("snackSuccess", "Питомцы загружены", { root: true });
+          dispatch(
+            "setSnack",
+            { status: "success", text: "Питомцы загружены" },
+            { root: true }
+          );
         }
 
         if (!res.status) {
