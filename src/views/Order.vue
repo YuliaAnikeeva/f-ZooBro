@@ -209,7 +209,11 @@
         }
     },
     methods: {
-      resetOrderHandler() {
+      async resetOrderHandler() {
+        if (this.isUserLoggedIn) {
+          await this.$store.dispatch("user/fetchUserInfo")
+          await this.$store.dispatch("pet/fetchPet")
+        }
         this.order = {}
         this.step = this.steps[0]
       },
