@@ -1,5 +1,9 @@
 <template>
-  <div class="progressbar">
+  <div class="progressbar"
+    :style="{
+      gridTemplateColumns: `repeat(${steps.length - 1}, 1fr)`
+    }"
+  >
     <template v-for="(step, idx) in steps">
       <label
         :key="step.value"
@@ -151,14 +155,14 @@
       
       }
 
-      &:hover &__button:after {
-        content: '';
-        background-color: #ffcc01;
-      }
+      // &:hover &__button:after {
+      //   content: '';
+      //   background-color: #ffcc01;
+      // }
 
-      &:hover {
-        background-color: rgba(#ffcc01, 0.2);
-      }
+      // &:hover {
+      //   background-color: rgba(#ffcc01, 0.2);
+      // }
     }
 
 @media (max-width: 500px) {

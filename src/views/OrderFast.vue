@@ -19,7 +19,17 @@
                     <!--</div>-->
                 <!--</div>-->
             <!--</div>-->
-            <ProgresBar v-model="step" :info="progresbarOrderInfo" />
+            <ProgresBar
+              v-show="step !== 'step-0'"
+              v-model="step"
+              :info="progresbarOrderInfo"
+              :steps="[
+                // { value: 'step-1', label: 'Формат заказа' },
+                { value: 'step-0', label: 'Твой размер' },
+                { value: 'step-3', label: 'Данные твоего человека'},
+                { value: 'step-4', label: 'Результат', hidden: true },
+              ]"
+             />
         </template>
 
         <!--<p>-->
@@ -42,18 +52,10 @@
         <!--</div>-->
 
         <div class="transition-box">
-            <div :class="{ abs: step !== 'step-1' }">
+            <div :class="{ abs: step !== 'step-0' }">
                 <transition name="translate">
-                    <div v-if="step === 'step-1'">
-                        <Step1 ref="form" :order.sync="order"/>
-                    </div>
-                </transition>
-            </div>
-
-            <div :class="{ abs: step !== 'step-2' }">
-                <transition name="translate">
-                    <div v-if="step === 'step-2'">
-                        <Step2 ref="form" :order.sync="order"/>
+                    <div v-if="step === 'step-0'">
+                        <FastOrder ref="form" :order.sync="order"/>
                     </div>
                 </transition>
             </div>
@@ -93,14 +95,13 @@
             <button class="onboarding-button" @click="submitHandler" :disabled="loading">
                 <div class="onboarding-button__inner">
                     <span class="onboarding-button__label">{{ step=='step-3' ? 'Оформить' : 'Вперед' }}</span>
-                    <svg class="onboarding-button__icon" v-bind:class="{hide_paw: step === 'step-3'}" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill:currentColor;height:1em">
+                    <svg :class="{hide_paw: step == 'step-3'}" class="onboarding-button__icon" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill:currentColor;height:1em">
                         <path d="M15.8942 3.56857C16.7585 1.10565 19.1353 -0.40999 21.224 0.158375C23.2407 0.726741 24.177 3.18966 23.3127 5.58943C22.4484 8.05235 20.0716 9.56799 17.9829 8.99962C15.9662 8.49441 15.0299 6.03149 15.8942 3.56857Z"/>
                         <path d="M27.8504 6.53479C25.9778 6.02958 23.817 7.48207 22.9527 9.81868C22.0884 12.1553 22.8807 14.4919 24.7533 14.9971C26.626 15.5023 28.7867 14.0499 29.651 11.7132C30.5153 9.37662 29.7231 7.04001 27.8504 6.53479Z"/>
                         <path d="M12.0768 9.18785C14.0214 8.68263 14.8137 6.21971 13.8774 3.69364C12.9411 1.16757 10.5642 -0.411225 8.61957 0.0939891C6.6749 0.662355 5.88263 3.12527 6.81895 5.58819C7.8273 8.11427 10.1321 9.75621 12.0768 9.18785Z"/>
                         <path d="M7.10742 9.81977C6.17109 7.42 3.93832 5.90436 2.06568 6.40957C0.193029 6.91479 -0.527219 9.2514 0.409104 11.588C1.34543 13.9878 3.5782 15.5034 5.45084 14.9982C7.32349 14.493 8.04374 12.1564 7.10742 9.81977Z"/>
                         <path d="M15.174 9.75586H14.7418C14.7418 9.75586 6.81909 10.8926 6.89111 18.9129C6.89111 23.5861 11.2846 21.5652 11.2846 21.5652C11.2846 21.5652 13.1573 19.9233 14.7418 19.9233L15.174 19.8601C16.7585 19.8601 18.6312 21.5021 18.6312 21.5021C18.6312 21.5021 23.0967 23.5861 23.0247 18.8497C23.0967 10.8926 15.174 9.75586 15.174 9.75586Z"/>
                     </svg>
-
                 </div>
             </button>
         </div>
@@ -115,29 +116,29 @@
 <script>
   import { email, required, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
   import ProgresBar from '../components/onboarding/ProgresBar'
-  import Step1 from '../components/onboarding/orderSteps/Step1'
-  import Step2 from '../components/onboarding/orderSteps/Step2'
+  import FastOrder from '../components/FastOrder'
   import Step3 from '../components/onboarding/orderSteps/Step3'
   import SuccessOrder from '../components/onboarding/orderSteps/SuccessOrder'
   import Loader from '../components/Loader'
 
   export default {
-    name: 'Order',
+    name: 'OrderFast',
     components: {
-      Step1,
-      Step2,
+      FastOrder,
       Step3,
       SuccessOrder,
       ProgresBar,
       Loader,
     },
     metaInfo: {
-      title: 'Order',
+      title: 'Быстрый заказ',
     },
     data: () => ({
-      step: 'step-1',
-      steps: ['step-1', 'step-2', 'step-3', 'step-4'],
-      order: {},
+      step: 'step-0',
+      steps: ['step-0', 'step-3', 'step-4'],
+      order: {
+        price_id: '1',
+      },
       loading: false,
       enableValidation: true,
     }),
@@ -160,8 +161,8 @@
         },
         progresbarOrderInfo () {
             return [
-                this.order.price_id && `${this.selectedPricingPlan.title}, ${this.selectedPricingPlan.cost} руб`,
-                this.order.pet_name
+              // this.order.price_id && `${this.selectedPricingPlan.title}, ${this.selectedPricingPlan.cost} руб`,
+              this.order.size && {'1': 'до 10кг', '2': 'от 10 до 25кг', '3': 'от 25кг'}[this.order.size]
             ]
         },
         isUserLoggedIn () {
@@ -170,7 +171,9 @@
     },
     methods: {
       resetOrderHandler() {
-        this.order = {}
+        this.order = {
+          price_id: '1',
+        }
         this.step = this.steps[0]
       },
       onClick (e) {
@@ -229,8 +232,6 @@
 </script>
 
 <style lang="scss" scoped>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
-
     button {
         outline-color: transparent;
     }
@@ -311,6 +312,10 @@
                 margin-left: 17px;
                 font-size: 22px;
                 color: #fff;
+
+                &.hide_paw {
+                  display: none;
+                }
             }
 
             &:hover {
@@ -454,11 +459,6 @@
 }
 
 @media (max-width: 414px) {
-
-    .hide_paw {
-    display: none
-    }
-
     .transition-box {
       margin: 25px -12px 0;
     }
@@ -478,6 +478,7 @@
         }
     }
 }
+
 
 @media (max-width: 375px) {
     .transition-box {

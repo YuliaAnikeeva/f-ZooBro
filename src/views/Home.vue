@@ -199,7 +199,7 @@
           </p>
           <div class="order-button">
             <div class="order-button__container">
-              <router-link class="order-button__text" to="/order">
+              <router-link class="order-button__text" to="/fast-order">
                 <div class="how-work__button">
                   <span class="how-work__button-text">Быстрый заказ</span>
                   <img class="paw paw_25" src="../assets/paw.svg" alt="">
