@@ -1542,5 +1542,32 @@ main {
     background: url('../assets/back-faq-414.svg') no-repeat left bottom;
   }
 
+  @media screen and (max-width: 360px) {
+  .landing-container {
+    background: #fff;
+  }
+  .order{
+    background: url('../assets/back-order-360.svg') no-repeat left bottom, linear-gradient(163.79deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
+  }
+  .how-work{
+    background: url('../assets/back-work-360.svg') no-repeat left bottom;
+  }
+  .what-in-box {
+    background: url('../assets/back-inside-360.svg') no-repeat left bottom, linear-gradient(158.25deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
+  }
+  .how-use{
+    background: url('../assets/back-use-360.svg') no-repeat left top;
+  }
+  .social-mission {
+    background: url('../assets/back-social-360.svg') no-repeat left bottom, linear-gradient(176.37deg, #157DA9 12.91%, rgba(50, 157, 202, 0.82) 58.13%, #1489BB 92.45%);
+  }
+  .doubt{
+    background: url('../assets/back-doubt-360.svg') no-repeat left bottom;
+  }
+  .faq{
+    background: url('../assets/back-faq-360.svg') no-repeat left bottom;
+  }
+  }
+
 }
 </style>
