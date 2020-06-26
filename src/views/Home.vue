@@ -456,8 +456,21 @@ main {
   }
 }
 .landing-container {
-  background: #f6f6fa;
-
+  background: #fff;
+  background-image: url('../assets/back-land-1920.svg');
+  background-position: center 1200px;
+  // animation: animatedBackground 60s linear infinite;
+	// -moz-animation: animatedBackground 60s linear infinite;
+	// -webkit-animation: animatedBackground 60s linear infinite;
+ 	// -o-animation: animatedBackground 60s linear infinite;
+  //  @keyframes animatedBackground {
+  //   0 {
+  //       background-position: 0 0
+  //   }
+  //   100% {
+  //       background-position: -600px 600px /* анимируем свойство background-position */
+  //   }
+  //  }
   &__main {
     display: grid;
     grid-template-columns: 100%;
@@ -477,7 +490,7 @@ main {
   height: 787px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background: linear-gradient(163.79deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
+  background: url('../assets/back-order-1920.svg') no-repeat, linear-gradient(163.79deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
 
   &__container {
     display: grid;
@@ -570,8 +583,8 @@ main {
   grid-template-columns: 100%;
   align-items: center;
   justify-items: center ;
-  background: #fff;
   row-gap: 80px;
+
   &__arrow-container {
     display: grid;
     height: 100%;
@@ -648,7 +661,7 @@ main {
   justify-content: center;
   grid-template-rows: max-content max-content;
   width: 100%;
-  background:linear-gradient(158.25deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
+  background:url('../assets/back-inside-1920.svg') no-repeat bottom, linear-gradient(158.25deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
   box-sizing: border-box;
   padding: 120px 0 93px;
 
@@ -730,9 +743,12 @@ main {
   display: grid;
   width: 100%;
   justify-content: center;
-  background: #fff;
+  // background: #fff;
   z-index: 6;
-
+  // background-image: url('../assets/back-howuse.svg');
+//  background-repeat: no-repeat;
+//    background-position: bottom left;
+// background-size: cover;
   &__head {
   display: grid;
   justify-content: center;
@@ -796,7 +812,7 @@ main {
   justify-content: center;
   grid-template-columns: 100%;
   padding: 120px 0 120px;
-  background: linear-gradient(176.37deg, #157DA9 12.91%, rgba(50, 157, 202, 0.82) 58.13%, #1489BB 92.45%);
+  background: url('../assets/back-social-1920.svg') no-repeat right bottom, linear-gradient(176.37deg, #157DA9 12.91%, rgba(50, 157, 202, 0.82) 58.13%, #1489BB 92.45%);
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
   &__container {
     display: grid;
@@ -849,7 +865,7 @@ main {
   justify-content: center;
   grid-template-rows: max-content max-content;
   width: 100%;
-  background: #fff;
+  // background: #fff;
   box-sizing: border-box;
   padding-top: 150px;
   &__container {
@@ -880,7 +896,7 @@ main {
   }
 }
 .faq {
-  background: #fff;
+  // background: #fff;
   padding: 170px 0 35px 0;
   display: grid;
   grid-template-rows: 3fr 318px;
@@ -956,7 +972,7 @@ main {
     align-items: center;
     justify-items: end;
     padding: 12px 20px;
-    pa
+    
 
     & i {
       position: relative;
@@ -1030,8 +1046,14 @@ main {
 }
 
 @media screen and (max-width: 1440px) {
-
+.landing-container{
+  background-image: url('../assets/back-img-1440.svg');
+  background-position-y: 1200px;
+  background-repeat: no-repeat;
+}
   .order {
+      background: url('../assets/back-head-1440.svg') no-repeat left 77px , linear-gradient(163.79deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
+
     &__container {
       padding-top: 161px;
       padding-left: 172px;
@@ -1055,6 +1077,8 @@ main {
   }
   
   .what-in-box {
+    background: url('../assets/back-inside-1440.svg') no-repeat left bottom, linear-gradient(158.25deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
+
     &__container {
     display: grid;
     grid-template-columns: 314px 471px 314px;
@@ -1075,6 +1099,8 @@ main {
     }
   }
   .social-mission {
+    background: url('../assets/back-social-1440.svg') no-repeat right bottom, linear-gradient(176.37deg, #157DA9 12.91%, rgba(50, 157, 202, 0.82) 58.13%, #1489BB 92.45%);
+
     &__container {
       grid-template-columns: 23% 43.09%;
       justify-items: center;
@@ -1105,6 +1131,8 @@ main {
 }
 
 @media screen and (max-width: 425px) {
+
+
   html {
     width: 100vw;
   }
@@ -1208,6 +1236,8 @@ main {
   .how-work {
     padding: 70px 0 70px 0;
     row-gap: 50px;
+   
+
     &__arrow-container {
       display: none;
     }
@@ -1484,6 +1514,14 @@ main {
     &__image {
       display: none;
     }
+  }
+}
+@media screen and (max-width: 414px) {
+  .landing-container {
+  background: #fff;
+  background-image: url('../assets/back-land-414.svg');
+  // background-position: center bottom;
+  background-repeat: no-repeat;
   }
 }
 </style>
