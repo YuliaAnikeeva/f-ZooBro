@@ -903,7 +903,7 @@ main {
   grid-template-columns: 100%;
 
   &__image {
-    background: url('../assets/faq_dog.png') no-repeat;
+    background: url('../assets/dog_faq.png') no-repeat;
     background-size: contain;
     width: 60%;
     justify-self: right;
@@ -1518,10 +1518,29 @@ main {
 }
 @media screen and (max-width: 414px) {
   .landing-container {
-  background: #fff;
-  background-image: url('../assets/back-land-414.svg');
-  // background-position: center bottom;
-  background-repeat: no-repeat;
+    background: #fff;
   }
+  .order{
+    background: url('../assets/back-order-414.svg') no-repeat left bottom, linear-gradient(163.79deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
+  }
+  .how-work{
+    background: url('../assets/back-work-414.svg') no-repeat left bottom;
+  }
+  .what-in-box {
+    background: url('../assets/back-inside-414.svg') no-repeat left bottom, linear-gradient(158.25deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
+  }
+  .how-use{
+    background: url('../assets/back-use-414.svg') no-repeat left top;
+  }
+  .social-mission {
+    background: url('../assets/back-social-414.svg') no-repeat left bottom, linear-gradient(176.37deg, #157DA9 12.91%, rgba(50, 157, 202, 0.82) 58.13%, #1489BB 92.45%);
+  }
+  .doubt{
+    background: url('../assets/back-doubt-414.svg') no-repeat left bottom;
+  }
+  .faq{
+    background: url('../assets/back-faq-414.svg') no-repeat left bottom;
+  }
+
 }
 </style>
