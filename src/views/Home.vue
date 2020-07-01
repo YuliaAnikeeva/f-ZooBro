@@ -1156,7 +1156,7 @@ main {
   }
 
   .order {
-    grid-template-columns: 425px;
+    grid-template-columns: 100%;
     justify-items: center;
     height: 615px;
     &__container {
@@ -1167,7 +1167,7 @@ main {
       justify-items: center;
     }
     &__text {
-      width: 390px;
+      width: 288px;
     }
 
     &__images-content {
@@ -1191,7 +1191,7 @@ main {
     }
 
     &__head {
-      width: 390px;
+      width: calc(100% - 20px);
       height: 90px;
       font-family: Montserrat;
       font-style: normal;
@@ -1548,6 +1548,9 @@ main {
   }
   .order{
     background: url('../assets/back-order-360.svg') no-repeat left bottom, linear-gradient(163.79deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
+   &__head {
+      width: 340px;
+      }
   }
   .how-work{
     background: url('../assets/back-work-360.svg') no-repeat left bottom;
