@@ -76,7 +76,12 @@ export default {
       });
     },
     makeOrder() {
-      this.$router.push('order')
+      this.$router.push({
+        path: 'order',
+        query: {
+          pet_id: this.pet.id
+        }
+      })
     },
     changeData() {
       this.$emit("focus:pet", this.pet)

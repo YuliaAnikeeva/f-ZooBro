@@ -36,7 +36,10 @@ const routes = [
     path: '/order',
     name: 'Order',
     component: () => import( '../views/Order.vue'),
-    meta: { layout: 'main' },
+    props: (route) => ({
+      pet_id: parseInt(route.query.pet_id)
+    }),
+    meta: { layout: 'main'},
   },
   {
     path: '/fast-order',
