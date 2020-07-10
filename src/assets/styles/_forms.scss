@@ -598,6 +598,15 @@ color: rgba(70, 68, 81, 0.5);
     
     margin-top: 17px;
 
+
+    &[disabled] {
+        .radio__button {
+            border: 2px solid rgba(34, 137, 181, 0.5);
+            color: #828282;
+            cursor: no-drop;
+        }
+    }
+
     &__list {
         display: flex;
     }

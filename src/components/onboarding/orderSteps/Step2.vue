@@ -45,44 +45,42 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" :class="{ 'field--error wobble-error': $v.birthday_years.$error }">
                 <label class="form-group__label">Дата рождения</label>
                 <div class="form-group__content">
-                    <div class="input input_type_date">
-                        <date-picker
-                          v-model="birthday_date"
-                          valueType="format"
-                          format="DD.MM.YYYY"
-                          class="date-picker"
-                          placeholder="ДД.ММ.ГГГГ"
-                          :disabled-date="notAfterToday"
-                          :lang="lang">
-                        </date-picker>
-                    </div>
+                  <div class="input input_type_date">
+                      <date-picker
+                        v-model="birthday_date"
+                        valueType="format"
+                        format="DD.MM.YYYY"
+                        class="date-picker"
+                        placeholder="ДД.ММ.ГГГГ"
+                        :disabled-date="notAfterToday"
+                        :lang="lang">
+                      </date-picker>
+                  </div>
                 </div>
                 <div class="form-group__helper">
-                    <div class="form-group__errors"></div>
+                  <div class="form-group__errors"></div>
                 </div>
-            </div>
-            <div class="form-group">
                 <label class="form-group__label">Если ты не помнишь дату своего рождения, выбери примерный возраст</label>
                 <div class="form-group__content">
-                    <div class="radio-group radio-group_dog-years">
+                    <div class="radio-group radio-group_dog-years" :disabled="!!birthday_date">
                         <div class="radio-group__list">
                             <label class="radio radio_big">
-                                <input type="radio" class="radio__control" value="0-1" v-model="birthday_years"/>
+                                <input :disabled="!!birthday_date" type="radio" class="radio__control" value="0-1" v-model="birthday_years"/>
                                 <div class="radio__button">
                                   <span class="radio__button-label radio__button-label_sub">до 1 года</span>
                                 </div>
                             </label>
                             <label class="radio radio_big">
-                                <input type="radio" class="radio__control" value="1-5" v-model="birthday_years"/>
+                                <input :disabled="!!birthday_date" type="radio" class="radio__control" value="1-5" v-model="birthday_years"/>
                                 <div class="radio__button">
                                   <span class="radio__button-label radio__button-label_sub">1-5 лет</span>
                                 </div>
                             </label>
                             <label class="radio radio_big">
-                                <input type="radio" class="radio__control" value="5+" v-model="birthday_years"/>
+                                <input :disabled="!!birthday_date" type="radio" class="radio__control" value="5+" v-model="birthday_years"/>
                                 <div class="radio__button">
                                   <span class="radio__button-label radio__button-label_sub">старше 5 лет</span>
                                 </div>
@@ -91,10 +89,9 @@
                     </div>
                 </div>
                 <div class="form-group__helper">
-                    <div class="form-group__errors">
-                        <div class="error" v-if="$v.birthday_years.$dirty && !$v.birthday_years.required">Укажи дату рождения или примерный возраст</div>
-                    </div>
-                    </div>
+                  <div class="form-group__errors">
+                      <div class="error" v-if="$v.birthday_years.$dirty && !$v.birthday_years.required">Укажи дату рождения или примерный возраст</div>
+                  </div>
                 </div>
             </div>
         </div>
@@ -261,7 +258,7 @@
     computed: {
       ...(() => {
         let o = {}
-        let f = ['pet_name', 'gender', 'size', 'breed', 'birthday_date', 'birthday_years', 'food_exceptions', 'pet_id']
+        let f = ['pet_name', 'gender', 'size', 'breed', 'birthday_years', 'food_exceptions', 'pet_id']
         f.forEach(n => o[[n]] = {
           get () {
             return this.order[n]
@@ -275,6 +272,18 @@
         })
         return o
       })(),
+      birthday_date: {
+        get() {
+          return this.order.birthday_date
+        },
+        set(val) {
+          this.$emit('update:order', {
+            ...this.order,
+            birthday_date: val,
+            birthday_years: null
+          })
+        }
+      },
       brandsDog () {
         const dogs = [
           'Метис', 'Двортерьер', 'Австралийская овчарка (Аусси)', 'Акита-ину', 'Алабай (Среднеазиатская овчарка)', 'Аляскинский кли-кай', 'Аляскинский маламут', 'Американская акита', 'Американский булли', 'Американский бульдог', 'Американский кокер-спаниель', 'Американский стаффордширский терьер', 'Английский бульдог', 'Английский кокер-спаниель', 'Английский мастиф', 'Английский сеттер', 'Аргентинский дог', 'Афганская борзая', 'Аффенпинчер', 'Басенджи', 'Бассет-хаунд', 'Бедлингтон-терьер', 'Белая швейцарская овчарка', 'Бельгийская овчарка', 'Бельгийский гриффон', 'Бернский зенненхунд', 'Бигль', 'Бишон фризе', 'Бладхаунд', 'Бобтейл', 'Боксер', 'Бордер-колли', 'Бордер-терьер', 'Бордоский дог', 'Босерон', 'Бостон-терьер', 'Бриар', 'Брюссельский гриффон', 'Бульмастиф', 'Бультерьер', 'Бурбуль', 'Веймаранер', 'Вельш-корги кардиган', 'Вельш-корги пемброк', 'Вельштерьер', 'Венгерская выжла', 'Вест-хайленд-уайт-терьер', 'Восточноевропейская овчарка', 'Грейхаунд', 'Далматин', 'Джек-рассел-терьер', 'Доберман', 'Дратхаар', 'Западно-сибирская лайка', 'Золотистый ретривер', 'Ирландский волкодав', 'Ирландский сеттер', 'Ирландский терьер', 'Испанский мастиф', 'Йоркширский терьер', 'Ка-де-бо', 'Кавалер-кинг-чарльз-спаниель', 'Кавказская овчарка', 'Канарский дог', 'Кане-корсо', 'Карело-финская лайка', 'Кеесхонд', 'Керн-терьер', 'Китайская хохлатая собака', 'Ксолоитцкуинтли', 'Курцхаар', 'Лабрадор-ретривер', 'Левретка', 'Леонбергер', 'Лхаса апсо', 'Мальтийская болонка', 'Мальтипу', 'Маремма-абруццкая овчарка', 'Миттельшнауцер', 'Мопс', 'Московская сторожевая собака', 'Неаполитанский мастиф', 'Немецкая овчарка', 'Немецкий дог', 'Немецкий ягдтерьер', 'Норвич-терьер', 'Ньюфаундленд', 'Папильон', 'Парсон-рассел-терьер', 'Пекинес', 'Пиренейская горная собака', 'Питбуль', 'Померанский шпиц', 'Помски', 'Пражский крысарик', 'Пти-брабансон', 'Пудель', 'Ризеншнауцер', 'Родезийский риджбек', 'Ротвейлер', 'Русская гончая', 'Русская пегая гончая', 'Русская псовая борзая', 'Русский охотничий спаниель', 'Русский той-терьер', 'Русский черный терьер', 'Салюки', 'Самоедская собака', 'Сенбернар', 'Сиба-ину', 'Сибирский хаски', 'Скотч-терьер', 'Стаффордширский бультерьер', 'Тайский риджбек', 'Такса', 'Тибетский мастиф', 'Тоса-ину', 'Уиппет', 'Фараонова собака', 'Фокстерьер', 'Французский бульдог', 'Цвергпинчер', 'Цвергшнауцер', 'Чау-чау', 'Чихуахуа', 'Шарпей', 'Шелти', 'Ши-тцу', 'Шипперке', 'Шотландская овчарка (колли)', 'Энтлебухер зенненхунд', 'Эрдельтерьер', 'Эстонская гончая', 'Японский хин', 'Японский шпиц',
