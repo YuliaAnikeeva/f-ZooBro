@@ -49,13 +49,13 @@
                 <label class="form-group__label">Дата рождения</label>
                 <div class="form-group__content">
                     <div class="input input_type_date">
-                        <date-picker 
-                          v-model="birthday_date"  
-                          valueType="format" 
-                          format="DD.MM.YYYY" 
-                          class="date-picker" 
-                          placeholder="ДД.ММ.ГГГГ" 
-                          :disabled-date="notAfterToday" 
+                        <date-picker
+                          v-model="birthday_date"
+                          valueType="format"
+                          format="DD.MM.YYYY"
+                          class="date-picker"
+                          placeholder="ДД.ММ.ГГГГ"
+                          :disabled-date="notAfterToday"
                           :lang="lang">
                         </date-picker>
                     </div>
@@ -173,7 +173,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" :class="{ 'field--error wobble-error': $v.food_exceptions && $v.food_exceptions.$error }">
                 <label class="form-group__label">Аллергия</label>
                 <div class="form-group__content">
                     <div class="radio-group">
@@ -202,7 +202,9 @@
                           </textarea>
                 </div>
                 <div class="form-group__helper">
-                    <div class="form-group__errors"></div>
+                    <div class="form-group__errors">
+                        <div class="error" v-if="$v.food_exceptions && $v.food_exceptions.$dirty && !$v.food_exceptions.required">Укажи, на что у тебя аллергия</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -237,20 +239,25 @@
             required: requiredIf(function() {
                 return !this.birthday_date;
             })
-
+        },
+        ...this.hasAllergy && {
+          food_exceptions: {
+            required
+          }
         }
       }
     },
-    data: () => ({
-      hasAllergy: false,
+    data() {
+      return {
+      hasAllergy: !!this.order.food_exceptions,
        lang: {
           formatLocale: {
             firstDayOfWeek: 1,
           },
           monthBeforeYear: true,
         },
-    }),
-
+      }
+    },
     computed: {
       ...(() => {
         let o = {}
@@ -298,6 +305,16 @@
           return []
         }
       },
+    },
+    watch: {
+      hasAllergy(val) {
+        if (!val){
+          this.$emit('update:order', {
+            ...this.order,
+            food_exceptions: null
+          })
+        }
+      }
     },
     methods: {
       updatePet (pet_id) {
