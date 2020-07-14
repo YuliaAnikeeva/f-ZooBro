@@ -238,8 +238,8 @@ export default {
     grid-area: header;
     margin-top: 85px;
     font-weight: 600;
-    font-size: 36px;
-    line-height: 44px;
+    font-size: 24px;
+    line-height: 29px;
     color: #464451;
   }
   &-pets,
