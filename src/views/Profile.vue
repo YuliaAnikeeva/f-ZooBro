@@ -148,6 +148,7 @@ export default {
       return this.$store.getters["order/getOrdersList"].reverse();
     },
     petsList() {
+      return this.$store.getters["pet/petList"];
     }
   },
   beforeMount() {
