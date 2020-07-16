@@ -498,6 +498,7 @@
 
     .transition-box {
       margin: 25px -12px 0;
+      padding: 0 8px;
     }
     .onboarding {
         &-button {
@@ -519,6 +520,7 @@
 @media (max-width: 375px) {
     .transition-box {
         margin: 25px -10px 0;
+        padding: 0;
     }
     .onboarding {
         padding: 0 10px;

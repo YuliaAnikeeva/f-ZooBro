@@ -396,6 +396,19 @@
     }
 }
 
+
+@media (min-width: 414px) and (max-width: 720px) {
+  form {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .form-section {
+    margin-left: 0;
+  }
+}
+
     @media (max-width: 414px) {
 
         // form {
