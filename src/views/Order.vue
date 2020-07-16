@@ -331,7 +331,8 @@
                 }
 
                 &:active {
-                    background-color: lighten(#2289B5, 40);
+                    background-color: #2289B5;
+                    color: #fff;
                     box-shadow: none;
                 }
             }
