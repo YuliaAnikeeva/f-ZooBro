@@ -2,7 +2,7 @@
     <div class="container onboarding">
         <template v-if="!isSuccessStep">
             <h1 class="title onboarding__title">Оформление заказа</h1>
-            <ProgresBar :currentStepIndex="currentStepIndex" :steps="steps" @select="goto" />
+            <ProgresBar v-if="!fast" :currentStepIndex="currentStepIndex" :steps="steps" @select="goto" />
         </template>
 
         <div class="transition-box">
@@ -51,6 +51,7 @@
 <script>
   import { email, required, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
   import ProgresBar from '../components/onboarding/ProgresBar'
+  import FastOrder from '../components/FastOrder'
   import Step1 from '../components/onboarding/orderSteps/Step1'
   import Step2 from '../components/onboarding/orderSteps/Step2'
   import Step3 from '../components/onboarding/orderSteps/Step3'
@@ -58,6 +59,11 @@
   import Loader from '../components/Loader'
 
   const stepsEntities = {
+    'step-0': {
+      id: 'step-0',
+      label: 'Выбери свой размер',
+      component: 'FastOrder',
+    },
     'step-1': {
       id: 'step-1',
       label: 'Формат заказа',
@@ -86,12 +92,17 @@
     props: {
       pet_id: {
         type: Number,
+      },
+      fast: {
+        type: Boolean,
+        default: false,
       }
     },
     components: {
       Step1,
       Step2,
       Step3,
+      FastOrder,
       SuccessOrder,
       ProgresBar,
       Loader,
@@ -129,7 +140,7 @@
           }
         },
         stepsIds () {
-          return ['step-1', 'step-2', 'step-3', 'step-4']
+          return this.fast ? ['step-0', 'step-3', 'step-4'] : ['step-1', 'step-2', 'step-3', 'step-4']
         },
         steps () {
           return this.stepsIds.map( stepId => ({
@@ -172,7 +183,9 @@
               email,
               phone,
             } = user
+            const price_id = this.fast ? '1' : null
             return {
+              price_id,
               pet_id, pet_name, size, gender, birthday_date, birthday_years, food_exceptions,
               user_name, email, phone, address
             }
