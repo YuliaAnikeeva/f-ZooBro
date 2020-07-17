@@ -51,7 +51,7 @@
                   <div class="input input_type_date">
                       <date-picker
                         v-model="birthday_date"
-                        valueType="format"
+                        valueType="YYYY-MM-DD"
                         format="DD.MM.YYYY"
                         class="date-picker"
                         placeholder="ДД.ММ.ГГГГ"
