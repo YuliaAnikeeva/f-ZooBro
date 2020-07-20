@@ -44,7 +44,10 @@ const routes = [
   {
     path: '/fast-order',
     name: 'OrderFast',
-    component: () => import( '../views/OrderFast.vue'),
+    component: () => import( '../views/Order.vue'),
+    props: (route) => ({
+      fast: true,
+    }),
     meta: { layout: 'main' },
   },
 

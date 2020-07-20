@@ -6,12 +6,13 @@
   >
     <template v-for="(step, idx) in steps">
       <label
+        @click="$emit('select', idx)"
         :key="step.value"
         class="step"
         :class="{
-          step_cur: idx === currentIndex,
-          step_prev: idx < currentIndex,
-          step_next: idx > currentIndex,
+          step_cur: idx === currentStepIndex,
+          step_prev: idx < currentStepIndex,
+          step_next: idx > currentStepIndex,
           step_hidden: step.hidden,
           step_error: step.error}"
         >
@@ -20,7 +21,7 @@
             <div class="step__divider"></div>
             <div class="step__button"></div>
           </div>
-          <div class="step__label">{{ info[idx] }}</div>
+          <div class="step__label">{{ step.info }}</div>
       </label>
     </template>
   </div>
@@ -39,23 +40,12 @@
           { value: 'step-4', label: 'Результат', hidden: true },
         ]
       },
-      info: {
-        type: Array,
-      },
-      value: {
-        type: String,
-        default: 'step-2'
+      currentStepIndex: {
+        type: Number,
+        default: 0
       }
     },
     computed: {
-      val: {
-        get () {
-          return this.value
-        },
-        set (val) {
-          this.$emit('input', val)
-        }
-      },
       currentIndex() {
         return this.steps.findIndex( step => step.value === this.value )
       },
@@ -152,7 +142,7 @@
       }
 
       &_error &__button {
-      
+
       }
 
       // &:hover &__button:after {
@@ -190,7 +180,6 @@
 
 @media (max-width: 414px) {
   .progressbar {
-   
 
     .step {
       &__button {
