@@ -21,7 +21,7 @@
                 <div @click="showMap = true" class="rout-buttons__dilivery">Доставка</div>
                 <div class="rout-buttons__how-work"><router-link class="router-link" to="/#how-work">Как это работает</router-link></div>
                 <div class="rout-buttons__faq"><router-link class="router-link" to="/#faq">FAQ</router-link></div>
-                <div class="rout-buttons__tel"><router-link class="router-link" to="/#contacts">Контакты</router-link></div>
+                <div class="rout-buttons__tel"><router-link class="router-link" to="/#contacts">Контакты</router-link></div>   
                 <div class="rout-buttons__auth" v-if="true">
                     <button class="rout-buttons__auth-button">
                         <a  @click="loginModal = true">Войти</a>
@@ -111,6 +111,7 @@
                         :toggleRegisterModal="toggleRegisterModal"
                         :toggleRegistrationSuccessModal="toggleRegistrationSuccessModal"
                         :toggleRecoveryPasswordModal="toggleRecoveryPasswordModal"
+                        :toggleNewPasswordModal="toggleNewPasswordModal"
                 />
                 <template slot="close-icon">
                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -132,6 +133,24 @@
                         :toggleRecoveryPasswordModal="toggleRecoveryPasswordModal"
                         :toggleChangePasswordModal="toggleChangePasswordModal"
                 />
+                <template slot="close-icon">
+                       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0.376577 0.376577C0.87868 -0.125526 1.69275 -0.125526 2.19485 0.376577L9 7.18173L15.8051 0.376577C16.3073 -0.125526 17.1213 -0.125526 17.6234 0.376577C18.1255 0.87868 18.1255 1.69275 17.6234 2.19485L10.8183 9L17.6234 15.8051C18.1255 16.3073 18.1255 17.1213 17.6234 17.6234C17.1213 18.1255 16.3073 18.1255 15.8051 17.6234L9 10.8183L2.19485 17.6234C1.69275 18.1255 0.87868 18.1255 0.376577 17.6234C-0.125526 17.1213 -0.125526 16.3073 0.376577 15.8051L7.18173 9L0.376577 2.19485C-0.125526 1.69275 -0.125526 0.87868 0.376577 0.376577Z" fill="#949595"/>
+</svg>
+            </template>
+            </vue-modaltor>
+
+               <vue-modaltor
+                    :visible="newPasswordModal"
+                    :resize-width='{1920:"440px", 1440:"440px", 414:"390px", 375:"355px", 360:"340px", 320:"310px"}'
+                    :bg-overlay="' rgba(41, 41, 41, 0.4)'"
+                    :bg-panel="'#fff'"
+                    @hide="newPasswordModal = false">
+                <NewPassword
+                        :toggleLoginModal="toggleLoginModal"
+                        :toggleNewPasswordModal="toggleNewPasswordModal"
+                        :toggleChangePasswordModal="toggleChangePasswordModal" 
+                                       />
                 <template slot="close-icon">
                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M0.376577 0.376577C0.87868 -0.125526 1.69275 -0.125526 2.19485 0.376577L9 7.18173L15.8051 0.376577C16.3073 -0.125526 17.1213 -0.125526 17.6234 0.376577C18.1255 0.87868 18.1255 1.69275 17.6234 2.19485L10.8183 9L17.6234 15.8051C18.1255 16.3073 18.1255 17.1213 17.6234 17.6234C17.1213 18.1255 16.3073 18.1255 15.8051 17.6234L9 10.8183L2.19485 17.6234C1.69275 18.1255 0.87868 18.1255 0.376577 17.6234C-0.125526 17.1213 -0.125526 16.3073 0.376577 15.8051L7.18173 9L0.376577 2.19485C-0.125526 1.69275 -0.125526 0.87868 0.376577 0.376577Z" fill="#949595"/>
@@ -164,17 +183,19 @@
   import RecoveryPasswordForm from '../components/RecoveryPasswordForm'
   import RegistrationSuccess from '../components/RegistrationSuccess'
   import ChangePassword from '../components/ChangePassword'
+  import NewPassword from '../components/NewPassword'
   import LendingYandexMap from '../components/LendingYandexMap'
 
   export default {
     name: 'MainLayout',
-    components: { LendingYandexMap, RecoveryPasswordForm, RegistrationForm, LoginForm, RegistrationSuccess, ChangePassword },
+    components: { LendingYandexMap, RecoveryPasswordForm, RegistrationForm, LoginForm, RegistrationSuccess, ChangePassword, NewPassword },
     data: () => ({
       loginModal: false,
       registerModal: false,
       recoveryPasswordModal: false,
       registrationSuccessModal: false,
       changePasswordModal:false,
+      newPasswordModal:false,
       activeMenu: false,
       showMap: false,
     }),
@@ -200,6 +221,9 @@
       },
       toggleChangePasswordModal(){
         this.changePasswordModal = !this.changePasswordModal
+      },
+      toggleNewPasswordModal(){
+        this.newPasswordModal = !this.newPasswordModal
       },
       toggleMenuOpen() {
         this.activeMenu = !this.activeMenu;

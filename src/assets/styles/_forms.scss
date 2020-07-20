@@ -75,6 +75,18 @@ text-align: center;
     margin-top: 20px;
     margin-bottom: 35px;
 }
+.link_newpass{
+    width: 65%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #464451;
+    color: #464451;
+    align-self: center;
+}
 .button {
     margin-top: 20px;
     padding: 15px 90px;
@@ -200,6 +212,10 @@ border-radius: 10px;
 
 
 .input-block {
+    position: relative;
+}
+.input-block-pass{
+    margin-bottom: 20px;
     position: relative;
 }
 .group-field{

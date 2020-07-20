@@ -5,6 +5,9 @@
 <div class="round"></div>
 <div class="button-link1" @click="toMain">На главную</div>
 <div class="button-link2" @click="toProfile">Личный кабинет</div>
+<p class="link_newpass"> Вы можете <a class="link_reg" @click="()=>{toNewPasswordModal()}"> сменить пароль </a> сейчас 
+или позже в личном кабинете </p>
+
 
 </div>
 </div>
@@ -15,7 +18,7 @@
 
 export default {
   name: 'RegistrationSuccess',
-    props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal'],
+    props: ['onSuccess', 'toggleLoginModal', 'toggleRegisterModal', 'toggleRegistrationSuccessModal', 'toggleRecoveryPasswordModal', 'toggleNewPasswordModal'],
   methods: {
 toProfile(){
   this.toggleRegistrationSuccessModal();
@@ -24,6 +27,11 @@ toProfile(){
 toMain(){
   this.toggleRegistrationSuccessModal();
   this.$router.push('/')
+},
+toNewPasswordModal(){
+  this.toggleRegistrationSuccessModal();
+  this.toggleNewPasswordModal();
+
 },
   }
 }
