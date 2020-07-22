@@ -147,7 +147,7 @@
       </div>
       <div class="social-mission">
         <div class="block__head">
-          <h4 class="block__head-text">Социальная миссия</h4>
+          <h4 class="block__head-text block__head-text_white">Социальная миссия</h4>
         </div>
         <div class="social-mission__container">
           <div class="social-mission__content">
@@ -489,6 +489,10 @@ main {
     font-size: 32px;
     line-height: 39px;
     color: $default-text-color;
+
+    &_white {
+      color: #fff;
+    }
   }
 }
 .landing-container {
@@ -699,6 +703,7 @@ main {
   background:url('../assets/back-inside-1920.svg') no-repeat bottom, linear-gradient(158.25deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
   box-sizing: border-box;
   padding: 120px 0 93px;
+  color: #fff;
 
   &__head {
     display: grid;
@@ -714,7 +719,6 @@ main {
     font-weight: 600;
     font-size: 32px;
     line-height: 39px;
-    color: $default-text-color;
   }
   &__container {
     display: grid;
@@ -758,7 +762,6 @@ main {
     font-size: 20px;
     line-height: 24px;
     text-align: center;
-    color: #464451;
     margin-bottom: 20px;
   }
   &__content-text-text {
@@ -770,7 +773,6 @@ main {
     font-size: 16px;
     line-height: 20px;
     text-align: center;
-    color: #464451;
   }
 }
 .how-use {
