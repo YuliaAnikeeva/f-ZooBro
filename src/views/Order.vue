@@ -171,6 +171,7 @@
               name: pet_name,
               size,
               gender,
+              breed,
               birthday_date,
               birthday_years,
               food_exceptions
@@ -186,7 +187,7 @@
             const price_id = this.fast ? '1' : null
             return {
               price_id,
-              pet_id, pet_name, size, gender, birthday_date, birthday_years, food_exceptions,
+              pet_id, pet_name, size, gender, breed, birthday_date, birthday_years, food_exceptions,
               user_name, email, phone, address
             }
         },
