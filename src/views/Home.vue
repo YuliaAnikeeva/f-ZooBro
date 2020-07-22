@@ -181,7 +181,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="doubt">
         <div class="block__head">
           <h4 class="block__head-text">Еще сомневаешься?</h4>
@@ -291,9 +291,9 @@
                     :bg-panel="'#fff'"
                     @hide="loginModal = false">
                 <LoginForm
-                        
+
                         :toggleLoginModal="toggleLoginModal"
-                      
+
                 />
                  <template slot="close-icon">
                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -343,7 +343,7 @@
                         :toggleLoginModal="toggleLoginModal"
                         :toggleNewPasswordModal="toggleNewPasswordModal"
                         :toggleRegistrationSuccessModal="toggleRegistrationSuccessModal"
-                        
+
                 />
                 <template slot="close-icon">
                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -352,8 +352,8 @@
             </template>
             </vue-modaltor>
   </div>
-  
-        
+
+
 </template>
 
 
@@ -1018,7 +1018,7 @@ main {
     align-items: center;
     justify-items: end;
     padding: 12px 20px;
-    
+
 
     & i {
       position: relative;
@@ -1121,7 +1121,7 @@ main {
       }
     }
   }
-  
+
   .what-in-box {
     background: url('../assets/back-inside-1440.svg') no-repeat left bottom, linear-gradient(158.25deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
 
@@ -1282,7 +1282,7 @@ main {
   .how-work {
     padding: 70px 0 70px 0;
     row-gap: 50px;
-   
+
 
     &__arrow-container {
       display: none;
@@ -1518,7 +1518,7 @@ main {
       padding: 50px 10px;
     }
     &__head {
-      
+
     }
     &__question {
       padding: 12px 15px;
@@ -1526,9 +1526,9 @@ main {
       justify-self: center;
     }
     &__answer {
-    
+
       &_collapse {
-      
+
       }
     }
   }
