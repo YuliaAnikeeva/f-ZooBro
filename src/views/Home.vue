@@ -263,10 +263,10 @@
         </div>
         <div class="footer__contacts">
           <div class="footer__contacts-row">
-            Phone: +7 (925)-112-08-12
+            Phone: <a href="tel:+79251120812">+7 (925)-112-08-12</a>
           </div>
           <div class="footer__contacts-row">
-            E-mail: hello_bro@zoobro.ru
+            E-mail: <a href="mailto:hello_bro@zoobro.ru">hello_bro@zoobro.ru</a>
           </div>
         </div>
       </div>
@@ -1064,6 +1064,11 @@ main {
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
+
+    a {
+      font: inherit;
+      color: inherit;
+    }
 
   }
   &__image {
