@@ -235,21 +235,12 @@
               Если не понравится - звоните.
             </div>
           <div class="faq__question" @click="answerThird = !answerThird">
-            <span class="faq__question-text">А это подходит разным породам?</span>
+            <span class="faq__question-text">Когда оплачивать покупку?</span>
             <div class="faq__plus-minus">
               <i :class="{rotate: !answerThird}"></i>
             </div>
           </div>
           <div class="faq__answer" :class="{faq__answer_collapse: answerThird}">
-            Содержимое коробочки продумано так, что это подойдет как мелким породам, например, джек рассел терьер, так и крупным породам типа овчарки.
-          </div>
-          <div class="faq__question" @click="answerFourth = !answerFourth">
-            <span class="faq__question-text">Когда оплачивать покупку?</span>
-            <div class="faq__plus-minus">
-              <i :class="{rotate: !answerFourth}"></i>
-            </div>
-          </div>
-          <div class="faq__answer" :class="{faq__answer_collapse: answerFourth}">
             Вы оплачиваете коробочку только после того, как получили её от курьера. Вы ничем не рискуете.
           </div>
           <div class="faq_plus-minus"></div>
@@ -373,7 +364,6 @@ export default {
     answerFirst: true,
     answerSecond: true,
     answerThird: true,
-    answerFourth: true,
     changePasswordModal:false,
     loginModal:false,
     registrationSuccessModal: false,
@@ -960,7 +950,7 @@ main {
     border-radius: 80px;
     padding: 100px  0 100px;
     display: grid;
-    grid-template-rows: 4em repeat(4, 1fr max-content);
+    grid-template-rows: 4em repeat(3, 1fr max-content);
     grid-template-columns: 70%;
     row-gap: .8em;
     z-index: 6;
