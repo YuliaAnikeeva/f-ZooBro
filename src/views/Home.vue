@@ -1134,6 +1134,9 @@ main {
       width: 712.18px;
       height: 652.26px;
     }
+    &__content-text-text {
+      margin: 0;
+    }
   }
   .how-use {
     &__container {
