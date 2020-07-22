@@ -580,7 +580,6 @@ main {
     border-radius: 15px;
     justify-content: center;
     align-items: center;
-    margin: 0 506px 0 0;
     padding: 16px 18px 17px 62px;
     cursor: pointer;
   }
