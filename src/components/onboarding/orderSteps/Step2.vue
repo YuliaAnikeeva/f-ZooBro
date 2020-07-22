@@ -3,7 +3,7 @@
         <div class="form-section">
 
             <div :class="{ 'field--error wobble-error': $v.pet_name.$error }" class="form-group">
-                <label class="form-group__label">Твое имя</label>
+                <label class="form-group__label">Твоя кличка</label>
                 <div class="form-group__content">
                     <div class="input">
                         <input type="text" class="input__control" v-model="pet_name"/>
