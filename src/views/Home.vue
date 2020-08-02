@@ -167,17 +167,18 @@
               <img class="social-mission__image_two" src="../assets/social-dogs-2.png" alt="">
               <img class="social-mission__image_two" src="../assets/social-dogs-3.png" alt="">
             </div>
-            <carousel class="social-mission__image-carousel" :loop="true" :autoplayTimeout="5000" :navigateTo="0" :autoplay="true" :per-page="1" :mouse-drag="false" >
-              <slide>
+            <Swiper class="social-mission__image-carousel" :options="socialMissionSliderOptions">
+              <SwiperSlide>
                 <img class="social-mission__image_one" src="../assets/social-dogs-1.png" alt="">
-              </slide>
-              <slide>
+              </SwiperSlide>
+              <SwiperSlide>
                 <img class="social-mission__image_two" src="../assets/social-dogs-2.png" alt="">
-              </slide>
-              <slide>
+              </SwiperSlide>
+              <SwiperSlide>
                 <img class="social-mission__image_two" src="../assets/social-dogs-3.png" alt="">
-              </slide>
-            </carousel>
+              </SwiperSlide>
+              <div class="swiper-pagination" slot="pagination"></div>
+            </Swiper>
           </div>
         </div>
       </div>
@@ -382,6 +383,16 @@ export default {
     loginModal:false,
     registrationSuccessModal: false,
     newPasswordModal:false,
+    socialMissionSliderOptions: {
+      autoplay: {
+        delay: 5000,
+      },
+      slidesPerView: 1,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      }
+    },
     doubtSliderOptions: {
       grabCursor: true,
       centeredSlides: true,
@@ -396,7 +407,7 @@ export default {
         scale: 0.8,
         space: 20,
       },
-    }
+    },
   }),
   components: {ChangePassword, LoginForm, NewPassword, RegistrationSuccess, Swiper, SwiperSlide},
   mounted() {
@@ -913,6 +924,26 @@ main {
   }
   &__image-carousel {
     display: none;
+    overflow: hidden;
+    width: 100%;
+
+    /deep/ .swiper-pagination {
+      position: static;
+      padding: 15px 0 20px;
+      font-size: 15px;
+      line-height: 1em;
+    }
+
+    /deep/ .swiper-pagination-bullet {
+      width: 1em;
+      height: 1em;
+      background: #fff;
+      opacity: 0.5;
+      margin: 0 12.5px;
+    }
+    /deep/ .swiper-pagination-bullet-active {
+      opacity: 1;
+    }
   }
   &__image {
     display: grid;
