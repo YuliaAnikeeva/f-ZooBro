@@ -188,11 +188,23 @@
         </div>
         <div class="doubt__container">
           <div class="doubt__image-container">
-            <img class="doubt__image" src="../assets/doubt_image_1.png" alt="">
-            <img class="doubt__image" src="../assets/doubt_image_2.png" alt="">
-            <img class="doubt__image" src="../assets/doubt_image_3.png" alt="">
-            <img class="doubt__image" src="../assets/doubt_image_4.png" alt="">
-            <img class="doubt__image" src="../assets/doubt_image_5.png" alt="">
+            <Swiper class="doubt__slider" :options="doubtSliderOptions">
+              <SwiperSlide class="doubt__slide">
+                <img class="doubt__image" src="../assets/doubt_image_1.png" alt="">
+              </SwiperSlide>
+              <SwiperSlide class="doubt__slide">
+                <img class="doubt__image" src="../assets/doubt_image_2.png" alt="">
+              </SwiperSlide>
+              <SwiperSlide class="doubt__slide">
+                <img class="doubt__image" src="../assets/doubt_image_3.png" alt="">
+              </SwiperSlide>
+              <SwiperSlide class="doubt__slide">
+                <img class="doubt__image" src="../assets/doubt_image_4.png" alt="">
+              </SwiperSlide>
+              <SwiperSlide class="doubt__slide">
+                <img class="doubt__image" src="../assets/doubt_image_5.png" alt="">
+              </SwiperSlide>
+            </Swiper>
           </div>
           <p class="doubt__text">
             Закажи коробочку за 2 минуты, введя минимум данных
@@ -354,6 +366,8 @@ import LoginForm from '../components/LoginForm'
 import NewPassword from '../components/NewPassword'
 import RegistrationSuccess from '../components/RegistrationSuccess'
 
+import '../swiperZoomEffect'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 
 export default {
   name: 'Home',
@@ -368,9 +382,23 @@ export default {
     loginModal:false,
     registrationSuccessModal: false,
     newPasswordModal:false,
-
+    doubtSliderOptions: {
+      grabCursor: true,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+      },
+      slidesPerView: 'auto',
+      speed: 1000,
+      effect: 'zoom',
+      // spaceBetween: 20,
+      zoomEffect: {
+        scale: 0.8,
+        space: 20,
+      },
+    }
   }),
-  components: {ChangePassword, LoginForm, NewPassword, RegistrationSuccess},
+  components: {ChangePassword, LoginForm, NewPassword, RegistrationSuccess, Swiper, SwiperSlide},
   mounted() {
     const url = this.$route.query
     if (url['reset-password']){
@@ -911,18 +939,23 @@ main {
     z-index: 6;
   }
   &__image-container {
-    display: grid;
-    grid-template-columns: 12% 20% 30% 20% 12%;
-    column-gap: 5px;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+  }
+  &__slider {
+    height: 341px;
+  }
+  &__slide {
+    width: 500px;
+    transition: opacity, transform;
   }
   &__image {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   &__text {
     margin: 80px auto 60px auto;
-    width: 40%;
+    // width: 40%;
     font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -1171,6 +1204,14 @@ main {
       &_two {
         height: 100%;
       }
+    }
+  }
+  .doubt {
+    &__slider {
+      height: 250px;
+    }
+    &__slide {
+      width: 366px;
     }
   }
 }
@@ -1471,27 +1512,14 @@ main {
     &__container {
     width: 100%;
     }
-    &__image-container {
-      grid-template-columns: 40% 60% 40%;
+    &__slider {
+      height: 166px;
     }
-    &__image {
-
-      &:first-child {
-        display: none;
-      }
-      &:last-child {
-        display: none;
-      }
-      &:nth-child(2) {
-        opacity: 0.5;
-      }
-      &:nth-child(4) {
-        opacity: 0.5;
-      }
+    &__slide {
+      width: 243px;
     }
     &__text {
       padding: 18px;
-      width: 100%;
       font-weight: 500;
       font-size: 16px;
       line-height: 22px;
