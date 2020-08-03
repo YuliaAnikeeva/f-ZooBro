@@ -36,12 +36,18 @@ const routes = [
     path: '/order',
     name: 'Order',
     component: () => import( '../views/Order.vue'),
-    meta: { layout: 'main' },
+    props: (route) => ({
+      pet_id: parseInt(route.query.pet_id)
+    }),
+    meta: { layout: 'main'},
   },
   {
     path: '/fast-order',
     name: 'OrderFast',
-    component: () => import( '../views/OrderFast.vue'),
+    component: () => import( '../views/Order.vue'),
+    props: (route) => ({
+      fast: true,
+    }),
     meta: { layout: 'main' },
   },
 

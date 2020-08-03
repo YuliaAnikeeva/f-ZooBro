@@ -344,12 +344,15 @@
         font-size: 16px;
         border: none;
         color: #fff;
-        background: rgba(34, 137, 181, 0.5);
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-        border-radius: 0px 10px 10px 0px;
+        background: #2289B5;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
     }
     .form-box button:hover {
-        background: #2289B5;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    }
+    .form-box button:active {
+        box-shadow: none;
     }
     .form-box button:focus {
         outline-color: transparent;

@@ -13,7 +13,7 @@
 
     <div v-if="activeTab == 'pets' && pets.length > 0 && !petEditor" id="profile-pets">
       <Loader v-if="pets.length ==  0" />
-      <PetCard v-for="(pet, index) in pets" :key="index" :pet="pet" @focus:pet="onFocusPet" />
+      <PetCard v-for="(pet, index) in petsList" :key="index" :pet="pet" @focus:pet="onFocusPet" />
       <PetCard :pet="emptyPet" @add:pet="onAddPet" />
     </div>
 
@@ -74,7 +74,6 @@ export default {
   data() {
     return {
       pets: [],
-      orders: [3, 5, 7, 12, 44],
       disabled: true,
       activeTab: "pets",
       loader: false,
@@ -112,22 +111,6 @@ export default {
         }, 1000);
       }
     },
-    createDefaultPet() {
-      const payload = {
-        name: "Johnny",
-        gender: "f",
-        size: "3",
-        breed: "Default dog",
-        birthday_years: "1-3",
-        food_exceptions: ""
-      };
-      this.$store.dispatch("pet/createPet", payload).then(() => {
-        this.$store.dispatch("pet/fetchPet").then(status => {
-          if (status === true) {
-          }
-        });
-      });
-    },
     fetchPets() {
       this.$store.dispatch("pet/fetchPet").then(status => {
         if (status === true) {
@@ -163,13 +146,14 @@ export default {
     },
     ordersList() {
       return this.$store.getters["order/getOrdersList"].reverse();
+    },
+    petsList() {
+      return this.$store.getters["pet/petList"];
     }
   },
   beforeMount() {
-    if (this.pets.length == 0) {
-      this.fetchPets();
-    }
-  }
+    this.fetchPets();
+  },
 };
 </script>
 
@@ -238,8 +222,8 @@ export default {
     grid-area: header;
     margin-top: 85px;
     font-weight: 600;
-    font-size: 36px;
-    line-height: 44px;
+    font-size: 24px;
+    line-height: 29px;
     color: #464451;
   }
   &-pets,

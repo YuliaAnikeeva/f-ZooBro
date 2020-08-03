@@ -62,21 +62,13 @@ export default {
     };
   },
   methods: {
-    updatePet() {
-      const payload = {
-        id: this.pet.id,
-        gender: this.pet.gender == "m" ? "f" : "m"
-      };
-      this.$store.dispatch("pet/updatePet", payload).then(() => {
-        this.$store.dispatch("pet/fetchPet").then(status => {
-          if (status === true) {
-            location.reload();
-          }
-        });
-      });
-    },
     makeOrder() {
-      this.$router.push('order')
+      this.$router.push({
+        path: 'order',
+        query: {
+          pet_id: this.pet.id
+        }
+      })
     },
     changeData() {
       this.$emit("focus:pet", this.pet)
@@ -224,8 +216,6 @@ export default {
     position: relative;
     outline: none;
     border: 0;
-    margin-left: 17px;
-    margin-right: 17px;
     transition: 0.2s linear all;
     svg {
       position: absolute;

@@ -1,89 +1,25 @@
 <template>
     <div class="container onboarding">
-        <template v-if="step !== 'step-4'">
+        <template v-if="!isSuccessStep">
             <h1 class="title onboarding__title">Оформление заказа</h1>
-
-            <!--<div class="order-info" :class="{ 'order-info_invisible': step == 'step-1' }">-->
-                <!--<div class="order-info__box">-->
-                    <!--<img src="@/assets/box.png" alt="">-->
-                <!--</div>-->
-                <!--<div class="order-info__pricing-plan">-->
-                    <!--{{ selectedPricingPlan.title }}-->
-                <!--</div>-->
-                <!--<div class="order-info__cost">-->
-                    <!--<div class="order-info__cost-value">{{selectedPricingPlan.cost}}</div>-->
-                    <!--<div class="order-info__cost-currency">-->
-                        <!--<svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">-->
-                            <!--<path d="M1.22708 15.1361H4.09076V17.591C4.09076 17.7104 4.12898 17.8082 4.20586 17.8846C4.28254 17.9615 4.38056 18 4.49997 18H6.6348C6.74559 18 6.84146 17.9615 6.92244 17.8846C7.00342 17.8082 7.04379 17.7104 7.04379 17.591V15.1361H13.4997C13.6189 15.1361 13.717 15.0981 13.7938 15.0212C13.8707 14.9444 13.9089 14.8465 13.9089 14.7271V13.0906C13.9089 12.9719 13.8707 12.8734 13.7938 12.797C13.7172 12.7201 13.6189 12.6816 13.4997 12.6816H7.04358V11.173H11.3902C13.0946 11.173 14.4857 10.6537 15.5642 9.61345C16.6422 8.57434 17.1814 7.23205 17.1814 5.58651C17.1814 3.94208 16.6422 2.59975 15.5642 1.55958C14.486 0.520423 13.0946 0 11.3902 0H4.49975C4.38031 0 4.2825 0.0384257 4.20565 0.114889C4.12898 0.191776 4.09055 0.290222 4.09055 0.408992V8.45038H1.22708C1.10767 8.45038 1.00982 8.49078 0.932972 8.57172C0.856332 8.6527 0.817871 8.74857 0.817871 8.85933V10.764C0.817871 10.8834 0.856085 10.9813 0.932972 11.0581C1.00986 11.135 1.10746 11.173 1.22708 11.173H4.09076V12.6816H1.22708C1.10767 12.6816 1.00982 12.72 0.932972 12.797C0.856332 12.8734 0.817871 12.9717 0.817871 13.0906V14.727C0.817871 14.8465 0.856085 14.9443 0.932972 15.0212C1.00982 15.0981 1.10763 15.1361 1.22708 15.1361ZM7.04358 2.72329H11.1345C12.0378 2.72329 12.7664 2.9874 13.3205 3.5158C13.8744 4.04423 14.1515 4.7348 14.1515 5.58673C14.1515 6.43908 13.8744 7.12986 13.3205 7.65766C12.7664 8.18651 12.0378 8.45063 11.1345 8.45063H7.04358V2.72329Z" fill="#464451"/>-->
-                        <!--</svg>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <ProgresBar v-model="step" :info="progresbarOrderInfo" />
+            <ProgresBar v-if="!fast" :currentStepIndex="currentStepIndex" :steps="steps" @select="goto" />
         </template>
 
-        <!--<p>-->
-        <!--<span>{{step}}</span> из <span>{{steps.length}}</span>-->
-        <!--</p>-->
-
-        <!--<div>-->
-        <!--<button @click="()=>updateE(-1)"> -</button>-->
-        <!--<button @click="()=>updateE(1)"> +</button>-->
-        <!--</div>-->
-
-        <!--<div>-->
-        <!--<br>-->
-        <!--<label>-->
-        <!--<input type="checkbox" v-model="enableValidation">-->
-        <!--Validation: {{ enableValidation }}-->
-        <!--</label>-->
-        <!--<br>-->
-        <!--<br>-->
-        <!--</div>-->
-
         <div class="transition-box">
-            <div :class="{ abs: step !== 'step-1' }">
-                <transition name="translate">
-                    <div v-if="step === 'step-1'">
-                        <Step1 ref="form" :order.sync="order"/>
-                    </div>
-                </transition>
-            </div>
-
-            <div :class="{ abs: step !== 'step-2' }">
-                <transition name="translate">
-                    <div v-if="step === 'step-2'">
-                        <Step2 ref="form" :order.sync="order"/>
-                    </div>
-                </transition>
-            </div>
-
-            <div :class="{ abs: step !== 'step-3' }">
-                <transition name="translate">
-                    <div v-if="step === 'step-3'">
-
-                        <template v-if="loading">
-                            <div class="overlay">
-                                <Loader/>
-                            </div>
-                        </template>
-                        <Step3 ref="form" :order.sync="order"/>
-                    </div>
-                </transition>
-            </div>
-
-            <div :class="{ abs: step !== 'step-4' }">
-                <transition name="translate">
-                    <div v-if="step === 'step-4'">
-                        <SuccessOrder :order="order" :isUserLoggedIn="isUserLoggedIn" @new="resetOrderHandler" />
-                    </div>
-                </transition>
-            </div>
+            <transition name="translate">
+                <SuccessOrder v-if="isSuccessStep" :order="order" :isUserLoggedIn="isUserLoggedIn" @new="resetOrderHandler" />
+                <component v-else :is="currentStep.component" ref="form" :order.sync="order" />
+            </transition>
+            <template v-if="loading">
+                <div class="overlay">
+                    <Loader/>
+                </div>
+            </template>
         </div>
 
-        <div  v-if="step !== 'step-4'" class="onboarding-buttons">
+        <div  v-if="!isSuccessStep" class="onboarding-buttons">
 
-            <div v-if="step === 'step-1'"></div>
+            <div v-if="isFirstStep"></div>
             <button v-else class="onboarding-button onboarding-button_secondary" @click="()=>updateE(-1)" :disabled="loading">
                 <div class="onboarding-button__inner">
                     <span class="onboarding-button__label">Назад</span>
@@ -92,8 +28,8 @@
 
             <button class="onboarding-button" @click="submitHandler" :disabled="loading">
                 <div class="onboarding-button__inner">
-                    <span class="onboarding-button__label">{{ step=='step-3' ? 'Оформить' : 'Вперед' }}</span>
-                    <svg class="onboarding-button__icon" v-bind:class="{hide_paw: step === 'step-3'}" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill:currentColor;height:1em">
+                    <span class="onboarding-button__label">{{ isLastStep ? 'Оформить' : 'Вперед' }}</span>
+                    <svg class="onboarding-button__icon" v-bind:class="{hide_paw: isLastStep}" viewBox="0 0 30 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill:currentColor;height:1em">
                         <path d="M15.8942 3.56857C16.7585 1.10565 19.1353 -0.40999 21.224 0.158375C23.2407 0.726741 24.177 3.18966 23.3127 5.58943C22.4484 8.05235 20.0716 9.56799 17.9829 8.99962C15.9662 8.49441 15.0299 6.03149 15.8942 3.56857Z"/>
                         <path d="M27.8504 6.53479C25.9778 6.02958 23.817 7.48207 22.9527 9.81868C22.0884 12.1553 22.8807 14.4919 24.7533 14.9971C26.626 15.5023 28.7867 14.0499 29.651 11.7132C30.5153 9.37662 29.7231 7.04001 27.8504 6.53479Z"/>
                         <path d="M12.0768 9.18785C14.0214 8.68263 14.8137 6.21971 13.8774 3.69364C12.9411 1.16757 10.5642 -0.411225 8.61957 0.0939891C6.6749 0.662355 5.88263 3.12527 6.81895 5.58819C7.8273 8.11427 10.1321 9.75621 12.0768 9.18785Z"/>
@@ -105,7 +41,7 @@
             </button>
         </div>
 
-        <div class="terms" v-if="step == 'step-3'">
+        <div class="terms" v-if="isLastStep">
             Оформляя заказ, Вы соглашаетесь на обработку персональных данных
         </div>
 
@@ -115,18 +51,58 @@
 <script>
   import { email, required, minLength, maxLength, numeric } from 'vuelidate/lib/validators'
   import ProgresBar from '../components/onboarding/ProgresBar'
+  import FastOrder from '../components/FastOrder'
   import Step1 from '../components/onboarding/orderSteps/Step1'
   import Step2 from '../components/onboarding/orderSteps/Step2'
   import Step3 from '../components/onboarding/orderSteps/Step3'
   import SuccessOrder from '../components/onboarding/orderSteps/SuccessOrder'
   import Loader from '../components/Loader'
 
+  const stepsEntities = {
+    'step-0': {
+      id: 'step-0',
+      label: 'Выбери свой размер',
+      component: 'FastOrder',
+    },
+    'step-1': {
+      id: 'step-1',
+      label: 'Формат заказа',
+      component: 'Step1',
+    },
+    'step-2': {
+      id: 'step-2',
+      label: 'Твои данные',
+      component: 'Step2',
+    },
+    'step-3': {
+      id: 'step-3',
+      label: 'Данные твоего человека',
+      component: 'Step3',
+    },
+    'step-4': {
+      id: 'step-4',
+      label: 'Результат',
+      component: 'SuccessOrder',
+      hidden: true,
+    },
+  }
+
   export default {
     name: 'Order',
+    props: {
+      pet_id: {
+        type: Number,
+      },
+      fast: {
+        type: Boolean,
+        default: false,
+      }
+    },
     components: {
       Step1,
       Step2,
       Step3,
+      FastOrder,
       SuccessOrder,
       ProgresBar,
       Loader,
@@ -135,11 +111,10 @@
       title: 'Order',
     },
     data: () => ({
-      step: 'step-1',
-      steps: ['step-1', 'step-2', 'step-3', 'step-4'],
-      order: {},
+      currentStepIndex: 0,
+      inputtedOrder: {},
       loading: false,
-      enableValidation: true,
+      stepsValid: {}
     }),
     computed: {
         selectedPricingPlan () {
@@ -158,41 +133,112 @@
                 }
             }[this.order.price_id] || {}
         },
-        progresbarOrderInfo () {
-            return [
-                this.order.price_id && `${this.selectedPricingPlan.title}, ${this.selectedPricingPlan.cost} руб`,
-                this.order.pet_name
-            ]
+        stepsInfo () {
+          return {
+            'step-1': this.order.price_id && `${this.selectedPricingPlan.title}, ${this.selectedPricingPlan.cost} руб`,
+            'step-2': this.order.pet_name
+          }
+        },
+        stepsIds () {
+          return this.fast ? ['step-0', 'step-3', 'step-4'] : ['step-1', 'step-2', 'step-3', 'step-4']
+        },
+        steps () {
+          return this.stepsIds.map( stepId => ({
+            ...stepsEntities[stepId],
+            valid: this.stepsValid[stepId],
+            info: this.stepsInfo[stepId],
+          }))
+        },
+        currentStep() {
+          return this.steps[this.currentStepIndex]
+        },
+        isLastStep() {
+          return this.currentStepIndex === this.steps.length - 2
+        },
+        isFirstStep() {
+          return this.currentStepIndex <= 0
+        },
+        isSuccessStep() {
+          return this.currentStepIndex === this.steps.length - 1
         },
         isUserLoggedIn () {
             return this.$store.getters["isUserLoggedIn"];
         },
+        defaultOrder () {
+            const pets = this.$store.getters['pet/petList']
+            const {
+              id: pet_id,
+              name: pet_name,
+              size,
+              gender,
+              birthday_date,
+              birthday_years,
+              food_exceptions
+            } = pets.filter( ({id}) => id === this.pet_id )[0] || {}
+
+            const user = this.$store.getters['user/userInfo']
+            const {
+              name: user_name,
+              address,
+              email,
+              phone,
+            } = user
+            const price_id = this.fast ? '1' : null
+            return {
+              price_id,
+              pet_id, pet_name, size, gender, birthday_date, birthday_years, food_exceptions,
+              user_name, email, phone, address
+            }
+        },
+        order: {
+          get () {
+            return {
+              ...this.defaultOrder,
+              ...this.inputtedOrder
+            }
+          },
+          set (val) {
+            this.inputtedOrder = val
+          }
+        }
     },
     methods: {
-      resetOrderHandler() {
+      async resetOrderHandler() {
+        if (this.isUserLoggedIn) {
+          await this.$store.dispatch("user/fetchUserInfo")
+          await this.$store.dispatch("pet/fetchPet")
+        }
         this.order = {}
-        this.step = this.steps[0]
-      },
-      onClick (e) {
-        this.coords = e.get('coords')
+        this.currentStepIndex = 0
       },
       updateE (val = 1) {
-        const idx = this.steps.indexOf(this.step)
-        const len = this.steps.length
-        if (idx !== -1 && idx + val <= len - 1 && idx + val >= 0) {
-          this.step = this.steps[idx + val]
-        }
+        this.currentStepIndex += val
       },
-      submitHandler () {
-        if (this.loading) return
+      validateCurrentStep () {
         const v = this.$refs.form && this.$refs.form.$v
-        if (this.enableValidation && v) {
+        if (v) {
           v.$touch()
           if (v.$invalid) {
+            this.stepsValid[this.currentStep.id] = false
+            return false
+          }
+        }
+        this.stepsValid[this.currentStep.id] = true
+        return true
+      },
+      goto (idx) {
+        this.validateCurrentStep()
+        if (idx > this.currentStepIndex) {
+          if (!this.stepsValid[this.stepsIds[idx-1]]) {
+            this.goto(idx-1)
             return
           }
         }
-        if (this.step === 'step-3') {
+        this.currentStepIndex = idx
+      },
+      submitHandler () {
+        if (this.loading || !this.validateCurrentStep()) return
+        if (this.isLastStep) {
           this.loading = true
           this.$store.dispatch('order/createOrder', this.order)
             .then(resp => {
@@ -216,14 +262,7 @@
       if (isUserLoggedIn) {
         await this.$store.dispatch("user/fetchUserInfo")
         await this.$store.dispatch("pet/fetchPet")
-        const  user = await this.$store.getters['user/userInfo']
-        const {name, email, phone, address} = user
-        this.order['user_name'] = name
-        this.order['email'] = email
-        this.order['phone'] = phone
-        this.order['address'] = address
       }
-
     }
   }
 </script>
@@ -294,7 +333,8 @@
                 }
 
                 &:active {
-                    background-color: lighten(#2289B5, 40);
+                    background-color: #2289B5;
+                    color: #fff;
                     box-shadow: none;
                 }
             }
@@ -371,13 +411,10 @@
     }
 
     .translate-leave-active {
-        transform: translateX(-31px);
-    }
-
-    .abs {
         position: absolute;
         right: 0;
         left: 0;
+        transform: translateX(-31px);
     }
 
     .title{
@@ -461,6 +498,7 @@
 
     .transition-box {
       margin: 25px -12px 0;
+      padding: 0 8px;
     }
     .onboarding {
         &-button {
@@ -482,6 +520,7 @@
 @media (max-width: 375px) {
     .transition-box {
         margin: 25px -10px 0;
+        padding: 0;
     }
     .onboarding {
         padding: 0 10px;
