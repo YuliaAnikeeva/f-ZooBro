@@ -2,35 +2,39 @@
   <div id="profile">
     <div id="profile-header">
       <h2>Личный кабинет</h2>
+      <pre style="display: none">
+        {{hashUrl}}
+      </pre>
+
     </div>
     <div id="profile-nav">
       <ul id="profile-nav-tabs">
-        <li v-on:click="changeTab('pets')" class="active-tab" id="pets">Питомцы</li>
-        <li v-on:click="changeTab('settings')" id="settings">Хозяин</li>
-        <li v-on:click="changeTab('orders')" id="orders">Заказы</li>
+        <router-link tag="li" to="#pets">Питомцы</router-link>
+        <router-link tag="li" to="#settings">Хозяин</router-link>
+        <router-link tag="li" to="#orders">Заказы</router-link>
       </ul>
     </div>
 
-    <div v-if="activeTab == 'pets' && pets.length > 0 && !petEditor" id="profile-pets">
-      <Loader v-if="pets.length ==  0" />
+    <div v-if="activeTab === 'pets' && pets.length > 0 && !petEditor" id="profile-pets">
+      <Loader v-if="pets.length ===  0" />
       <PetCard v-for="(pet, index) in petsList" :key="index" :pet="pet" @focus:pet="onFocusPet" />
       <PetCard :pet="emptyPet" @add:pet="onAddPet" />
     </div>
 
     <PetForm
-      v-if="activeTab == 'pets' && petEditor"
+      v-if="activeTab === 'pets' && petEditor"
       :pet="petTemp"
       @save="petEditor = false"
       @close="petEditor = false"
       />
 
-    <div v-if="activeTab == 'settings'" id="profile-settings">
+    <div v-if="activeTab === 'settings'" id="profile-settings">
       <SettingsCard v-if="!profileEditor" :profile="profileData" />
       <SettingsForm v-else :profile="profileData"  :editStatus.sync="profileEditor"/>
       <button v-if="!profileEditor" @click="editProfile()">Изменить</button>
     </div>
 
-    <div v-if="activeTab == 'orders'" id="profile-orders">
+    <div v-if="activeTab === 'orders'" id="profile-orders">
       <table class="profile-orders__table">
         <thead>
           <tr>
@@ -57,15 +61,15 @@
 </template>
 
 <script>
-import PetCard from "@/components/profile/PetCard";
-import OrderCard from "@/components/profile/OrderCard";
-import SettingsCard from "@/components/profile/SettingsCard";
-import SettingsForm from "@/components/profile/SettingsForm";
-import Loader from "@/components/Loader";
-import PetForm from "@/components/profile/PetForm";
-import OrderCardMobile from "@/components/profile/OrderCardMobile";
+  import PetCard from '@/components/profile/PetCard'
+  import OrderCard from '@/components/profile/OrderCard'
+  import SettingsCard from '@/components/profile/SettingsCard'
+  import SettingsForm from '@/components/profile/SettingsForm'
+  import Loader from '@/components/Loader'
+  import PetForm from '@/components/profile/PetForm'
+  import OrderCardMobile from '@/components/profile/OrderCardMobile'
 
-export default {
+  export default {
   name: "Profile",
   metaInfo: {
     title: "Profile"
@@ -83,34 +87,6 @@ export default {
     };
   },
   methods: {
-    changeTab(tabName) {
-      if (tabName != this.activeTab) {
-
-        switch (tabName) {
-          case "settings": {
-            this.$store.dispatch("user/fetchUserInfo");
-            break;
-          }
-          case "orders": {
-            this.$store.dispatch("order/fetchOrdersList");
-            break;
-          }
-        }
-
-        document
-          .querySelector(`#${this.activeTab}`)
-          .classList.remove("active-tab");
-
-        this.activeTab = false;
-        this.loader = true;
-
-        setTimeout(() => {
-          this.activeTab = tabName;
-          document.querySelector(`#${tabName}`).classList.add("active-tab");
-          this.loader = false;
-        }, 1000);
-      }
-    },
     fetchPets() {
       this.$store.dispatch("pet/fetchPet").then(status => {
         if (status === true) {
@@ -132,14 +108,13 @@ export default {
   },
   computed: {
     emptyPet() {
-      const empty = {
+      return {
         empty: true,
         name: "Кличка",
         breed: "",
         gender: "",
         food_exceptions: ""
       };
-      return empty;
     },
     profileData() {
       return this.$store.getters["user/userInfo"];
@@ -149,7 +124,29 @@ export default {
     },
     petsList() {
       return this.$store.getters["pet/petList"];
-    }
+    },
+    async hashUrl () {
+      const url = this.$route.hash
+      if (url.length > 0) {
+        this.activeTab = url.slice(1)
+
+        if (this.activeTab === 'pets' || this.activeTab === '') {
+          this.loader = true
+          await this.$store.dispatch('pet/petList')
+          this.loader = false
+        } else if (this.activeTab === 'settings') {
+          this.loader = true
+          await this.$store.dispatch('user/fetchUserInfo')
+          this.loader = false
+        } else if (this.activeTab === 'orders') {
+          this.loader = true
+          await this.$store.dispatch('order/fetchOrdersList')
+          this.loader = false
+        }
+      }
+
+      return url
+    },
   },
   beforeMount() {
     this.fetchPets();
@@ -321,7 +318,7 @@ textarea {
   text-align: center;
 }
 
-.active-tab {
+.active-tab, .router-link-active {
   background-color: #2289b5;
   color: white;
 }
