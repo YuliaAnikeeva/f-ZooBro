@@ -22,12 +22,12 @@
                 <div class="rout-buttons__how-work"><router-link class="router-link" to="/#how-work">Как это работает</router-link></div>
                 <div class="rout-buttons__faq"><router-link class="router-link" to="/#faq">FAQ</router-link></div>
                 <div class="rout-buttons__tel"><router-link class="router-link" to="/#contacts">Контакты</router-link></div>   
-                <div class="rout-buttons__auth" v-if="true">
+                <div class="rout-buttons__auth" v-if="!token">
                     <button class="rout-buttons__auth-button">
                         <a  @click="loginModal = true">Войти</a>
                     </button>
                 </div>
-                <div class="rout-buttons__profile" v-if="false">
+                <div class="rout-buttons__profile" v-if="token">
                     <button class="rout-buttons__profile-button " type="button">
                         <router-link class="router-link" to="/profile"><img src="../assets/profile-icon.svg" alt=""></router-link>
                     </button>
@@ -204,6 +204,7 @@
         'snackbarType',
         'snackbarMsg',
         'snackbarObj',
+        'token',
       ]),
     },
     methods:{
