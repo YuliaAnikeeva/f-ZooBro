@@ -25,11 +25,6 @@ const pet = {
       return createFetch(fetchData).then(res => {
         if (res.status) {
           commit("fillList", res.data.pets);
-          dispatch(
-            "setSnack",
-            { status: "info", text: "Питомцы загружены" },
-            { root: true }
-          );
         }
 
         if (!res.status) {
@@ -74,11 +69,6 @@ const pet = {
       };
 
       return createFetch(fetchData, payload).then(res => {
-        dispatch(
-          "setSnack",
-          { status: "success", text: "Данные питомца обновлены" },
-          { root: true }
-        );
         return res.status;
       });
     }

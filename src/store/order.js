@@ -48,7 +48,7 @@ const order = {
       .then(({status, payload}) => {
         if (status) {
           return payload
-        } else {
+        } else {    
           commit('clearSnackbar', null , { root: true })
           commit('setSnackbarMsg', payload, { root: true })
           commit('setSnackbarType', 'error', { root: true })
