@@ -305,7 +305,8 @@
     grid-template-columns: 1fr 1fr;
     justify-content: space-around;
     justify-items: center;
-
+    position: fixed;
+    z-index: 999;
   }
   .logo {
       width: 105px;
@@ -318,6 +319,10 @@
       background: url('../assets/logo-zoobro.svg');
       background-size: contain;
 
+  }
+
+  main {
+    padding-top: 65px;
   }
 
   .rout-buttons {

@@ -7,7 +7,7 @@
     <img class="bg-content bg-content__small-bone" src="../assets/small_bone_bg.svg" alt="">
     <img class="bg-content bg-content__paws" src="../assets/paws_bg.svg" alt="">
     <img class="bg-content bg-content__big-box" src="../assets/big-box_bg.svg" alt=""> -->
-    <main class="landing-container__main">
+    <div class="landing-container__main">
       <div class="order">
         <section class="order__container">
           <h1 class="order__head">Любовь и забота хозяина в одной коробочке специально для тебя</h1>
@@ -260,7 +260,7 @@
         </div>
         <div class="faq__image"></div>
       </div>
-    </main>
+    </div>
     <footer class="footer">
       <div class="footer__container">
         <div class="social-icons">
@@ -538,18 +538,6 @@ main {
   background: #fff;
   background-image: url('../assets/back-land-1920.svg');
   background-position: center 1200px;
-  // animation: animatedBackground 60s linear infinite;
-	// -moz-animation: animatedBackground 60s linear infinite;
-	// -webkit-animation: animatedBackground 60s linear infinite;
- 	// -o-animation: animatedBackground 60s linear infinite;
-  //  @keyframes animatedBackground {
-  //   0 {
-  //       background-position: 0 0
-  //   }
-  //   100% {
-  //       background-position: -600px 600px /* анимируем свойство background-position */
-  //   }
-  //  }
   &__main {
     display: grid;
     grid-template-columns: 100%;
@@ -561,9 +549,6 @@ main {
     display: block;
   }
 }
-.main {
-}
-
 .order {
   width: 100%;
   height: 787px;
