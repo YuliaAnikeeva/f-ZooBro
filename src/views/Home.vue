@@ -15,7 +15,7 @@
             Лучше и полезнее, чем обувь хозяина
           </p>
           <router-link class="order-button__text" to="/order">
-            <div class="order__button">
+            <div class="order__button" @click="$emit('toggle')">
               <span class="order__button-text">Заказать</span>
               <img class="paw paw_25" src="../assets/paw.svg" alt="">
             </div>
@@ -64,7 +64,7 @@
         <div class="order-button">
           <div class="order-button__container">
             <router-link class="order-button__text" to="/order">
-              <div class="how-work__button">
+              <div class="how-work__button" @click="$emit('toggle')">
                 <span class="how-work__button-text">Заказать</span>
                 <img class="paw paw_25" src="../assets/paw.svg" alt="">
               </div>
@@ -108,7 +108,7 @@
         <div class="order-button">
           <div class="order-button__container">
             <router-link class="order-button__text" to="/order">
-              <div class="how-work__button">
+              <div class="how-work__button" @click="$emit('toggle')">
                 <span class="how-work__button-text">Заказать</span>
                 <img class="paw paw_25" src="../assets/paw.svg" alt="">
               </div>
@@ -213,7 +213,7 @@
           <div class="order-button">
             <div class="order-button__container">
               <router-link class="order-button__text" to="/fast-order">
-                <div class="how-work__button">
+                <div class="how-work__button" @click="$emit('toggle')">
                   <span class="how-work__button-text">Быстрый заказ</span>
                   <img class="paw paw_25" src="../assets/paw.svg" alt="">
                 </div>

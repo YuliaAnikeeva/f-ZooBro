@@ -170,7 +170,7 @@
         </template>
 
         <main>
-            <router-view/>
+            <router-view @toggle="disableMenuFromView"/>
         </main>
     </div>
 </template>
@@ -227,7 +227,11 @@
         this.newPasswordModal = !this.newPasswordModal
       },
       toggleMenuOpen() {
+        console.log(this.activeMenu)
         this.activeMenu = !this.activeMenu;
+      },
+      disableMenuFromView() {
+        this.activeMenu = false;
       }
     },
     watch: {
