@@ -147,7 +147,7 @@
       </div>
       <div class="social-mission">
         <div class="block__head">
-          <h4 class="block__head-text">Социальная миссия</h4>
+          <h4 class="block__head-text block__head-text_white">Социальная миссия</h4>
         </div>
         <div class="social-mission__container">
           <div class="social-mission__content">
@@ -167,32 +167,45 @@
               <img class="social-mission__image_two" src="../assets/social-dogs-2.png" alt="">
               <img class="social-mission__image_two" src="../assets/social-dogs-3.png" alt="">
             </div>
-            <carousel class="social-mission__image-carousel" :loop="true" :autoplayTimeout="5000" :navigateTo="0" :autoplay="true" :per-page="1" :mouse-drag="false" >
-              <slide>
+            <Swiper class="social-mission__image-carousel" :options="socialMissionSliderOptions">
+              <SwiperSlide>
                 <img class="social-mission__image_one" src="../assets/social-dogs-1.png" alt="">
-              </slide>
-              <slide>
+              </SwiperSlide>
+              <SwiperSlide>
                 <img class="social-mission__image_two" src="../assets/social-dogs-2.png" alt="">
-              </slide>
-              <slide>
+              </SwiperSlide>
+              <SwiperSlide>
                 <img class="social-mission__image_two" src="../assets/social-dogs-3.png" alt="">
-              </slide>
-            </carousel>
+              </SwiperSlide>
+              <div class="swiper-pagination" slot="pagination"></div>
+            </Swiper>
           </div>
         </div>
       </div>
-  
+
       <div class="doubt">
         <div class="block__head">
           <h4 class="block__head-text">Еще сомневаешься?</h4>
         </div>
         <div class="doubt__container">
           <div class="doubt__image-container">
-            <img class="doubt__image" src="../assets/doubt_image_1.png" alt="">
-            <img class="doubt__image" src="../assets/doubt_image_2.png" alt="">
-            <img class="doubt__image" src="../assets/doubt_image_3.png" alt="">
-            <img class="doubt__image" src="../assets/doubt_image_4.png" alt="">
-            <img class="doubt__image" src="../assets/doubt_image_5.png" alt="">
+            <Swiper class="doubt__slider" :options="doubtSliderOptions">
+              <SwiperSlide class="doubt__slide">
+                <img class="doubt__image" src="../assets/doubt_image_1.png" alt="">
+              </SwiperSlide>
+              <SwiperSlide class="doubt__slide">
+                <img class="doubt__image" src="../assets/doubt_image_2.png" alt="">
+              </SwiperSlide>
+              <SwiperSlide class="doubt__slide">
+                <img class="doubt__image" src="../assets/doubt_image_3.png" alt="">
+              </SwiperSlide>
+              <SwiperSlide class="doubt__slide">
+                <img class="doubt__image" src="../assets/doubt_image_4.png" alt="">
+              </SwiperSlide>
+              <SwiperSlide class="doubt__slide">
+                <img class="doubt__image" src="../assets/doubt_image_5.png" alt="">
+              </SwiperSlide>
+            </Swiper>
           </div>
           <p class="doubt__text">
             Закажи коробочку за 2 минуты, введя минимум данных
@@ -235,21 +248,12 @@
               Если не понравится - звоните.
             </div>
           <div class="faq__question" @click="answerThird = !answerThird">
-            <span class="faq__question-text">А это подходит разным породам?</span>
+            <span class="faq__question-text">Когда оплачивать покупку?</span>
             <div class="faq__plus-minus">
               <i :class="{rotate: !answerThird}"></i>
             </div>
           </div>
           <div class="faq__answer" :class="{faq__answer_collapse: answerThird}">
-            Содержимое коробочки продумано так, что это подойдет как мелким породам, например, джек рассел терьер, так и крупным породам типа овчарки.
-          </div>
-          <div class="faq__question" @click="answerFourth = !answerFourth">
-            <span class="faq__question-text">Когда оплачивать покупку?</span>
-            <div class="faq__plus-minus">
-              <i :class="{rotate: !answerFourth}"></i>
-            </div>
-          </div>
-          <div class="faq__answer" :class="{faq__answer_collapse: answerFourth}">
             Вы оплачиваете коробочку только после того, как получили её от курьера. Вы ничем не рискуете.
           </div>
           <div class="faq_plus-minus"></div>
@@ -272,10 +276,10 @@
         </div>
         <div class="footer__contacts">
           <div class="footer__contacts-row">
-            Phone: +7 (925)-112-08-12
+            Phone: <a href="tel:+79251120812">+7 (925)-112-08-12</a>
           </div>
           <div class="footer__contacts-row">
-            E-mail: hello_bro@zoobro.ru
+            E-mail: <a href="mailto:hello_bro@zoobro.ru">hello_bro@zoobro.ru</a>
           </div>
         </div>
       </div>
@@ -291,9 +295,9 @@
                     :bg-panel="'#fff'"
                     @hide="loginModal = false">
                 <LoginForm
-                        
+
                         :toggleLoginModal="toggleLoginModal"
-                      
+
                 />
                  <template slot="close-icon">
                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -343,7 +347,7 @@
                         :toggleLoginModal="toggleLoginModal"
                         :toggleNewPasswordModal="toggleNewPasswordModal"
                         :toggleRegistrationSuccessModal="toggleRegistrationSuccessModal"
-                        
+
                 />
                 <template slot="close-icon">
                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -352,8 +356,8 @@
             </template>
             </vue-modaltor>
   </div>
-  
-        
+
+
 </template>
 
 
@@ -363,6 +367,8 @@ import LoginForm from '../components/LoginForm'
 import NewPassword from '../components/NewPassword'
 import RegistrationSuccess from '../components/RegistrationSuccess'
 
+import '../swiperZoomEffect'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 
 export default {
   name: 'Home',
@@ -373,14 +379,37 @@ export default {
     answerFirst: true,
     answerSecond: true,
     answerThird: true,
-    answerFourth: true,
     changePasswordModal:false,
     loginModal:false,
     registrationSuccessModal: false,
     newPasswordModal:false,
-
+    socialMissionSliderOptions: {
+      autoplay: {
+        delay: 5000,
+      },
+      slidesPerView: 1,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      }
+    },
+    doubtSliderOptions: {
+      grabCursor: true,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+      },
+      slidesPerView: 'auto',
+      speed: 1000,
+      effect: 'zoom',
+      // spaceBetween: 20,
+      zoomEffect: {
+        scale: 0.8,
+        space: 20,
+      },
+    },
   }),
-  components: {ChangePassword, LoginForm, NewPassword, RegistrationSuccess},
+  components: {ChangePassword, LoginForm, NewPassword, RegistrationSuccess, Swiper, SwiperSlide},
   mounted() {
     const url = this.$route.query
     if (url['reset-password']){
@@ -499,6 +528,10 @@ main {
     font-size: 32px;
     line-height: 39px;
     color: $default-text-color;
+
+    &_white {
+      color: #fff;
+    }
   }
 }
 .landing-container {
@@ -580,7 +613,6 @@ main {
     border-radius: 15px;
     justify-content: center;
     align-items: center;
-    margin: 0 506px 0 0;
     padding: 16px 18px 17px 62px;
     cursor: pointer;
   }
@@ -710,6 +742,7 @@ main {
   background:url('../assets/back-inside-1920.svg') no-repeat bottom, linear-gradient(158.25deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
   box-sizing: border-box;
   padding: 120px 0 93px;
+  color: #fff;
 
   &__head {
     display: grid;
@@ -725,7 +758,6 @@ main {
     font-weight: 600;
     font-size: 32px;
     line-height: 39px;
-    color: $default-text-color;
   }
   &__container {
     display: grid;
@@ -769,7 +801,6 @@ main {
     font-size: 20px;
     line-height: 24px;
     text-align: center;
-    color: #464451;
     margin-bottom: 20px;
   }
   &__content-text-text {
@@ -781,7 +812,6 @@ main {
     font-size: 16px;
     line-height: 20px;
     text-align: center;
-    color: #464451;
   }
 }
 .how-use {
@@ -894,6 +924,26 @@ main {
   }
   &__image-carousel {
     display: none;
+    overflow: hidden;
+    width: 100%;
+
+    /deep/ .swiper-pagination {
+      position: static;
+      padding: 15px 0 20px;
+      font-size: 15px;
+      line-height: 1em;
+    }
+
+    /deep/ .swiper-pagination-bullet {
+      width: 1em;
+      height: 1em;
+      background: #fff;
+      opacity: 0.5;
+      margin: 0 12.5px;
+    }
+    /deep/ .swiper-pagination-bullet-active {
+      opacity: 1;
+    }
   }
   &__image {
     display: grid;
@@ -920,18 +970,23 @@ main {
     z-index: 6;
   }
   &__image-container {
-    display: grid;
-    grid-template-columns: 12% 20% 30% 20% 12%;
-    column-gap: 5px;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+  }
+  &__slider {
+    height: 341px;
+  }
+  &__slide {
+    width: 500px;
+    transition: opacity, transform;
   }
   &__image {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   &__text {
     margin: 80px auto 60px auto;
-    width: 40%;
+    // width: 40%;
     font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -961,7 +1016,7 @@ main {
     border-radius: 80px;
     padding: 100px  0 100px;
     display: grid;
-    grid-template-rows: 4em repeat(4, 1fr max-content);
+    grid-template-rows: 4em repeat(3, 1fr max-content);
     grid-template-columns: 70%;
     row-gap: .8em;
     z-index: 6;
@@ -1018,7 +1073,7 @@ main {
     align-items: center;
     justify-items: end;
     padding: 12px 20px;
-    
+
 
     & i {
       position: relative;
@@ -1076,6 +1131,11 @@ main {
     line-height: 17px;
     color: #FFFFFF;
 
+    a {
+      font: inherit;
+      color: inherit;
+    }
+
   }
   &__image {
     position: absolute;
@@ -1121,7 +1181,7 @@ main {
       }
     }
   }
-  
+
   .what-in-box {
     background: url('../assets/back-inside-1440.svg') no-repeat left bottom, linear-gradient(158.25deg, #157DA9 32.49%, rgba(71, 160, 197, 0.9) 59.63%, rgba(25, 139, 188, 0.64) 92.41%);
 
@@ -1137,6 +1197,9 @@ main {
       background: url('../assets/what-in-box_content-1440.svg') no-repeat;
       width: 712.18px;
       height: 652.26px;
+    }
+    &__content-text-text {
+      margin: 0;
     }
   }
   .how-use {
@@ -1172,6 +1235,14 @@ main {
       &_two {
         height: 100%;
       }
+    }
+  }
+  .doubt {
+    &__slider {
+      height: 250px;
+    }
+    &__slide {
+      width: 366px;
     }
   }
 }
@@ -1282,7 +1353,7 @@ main {
   .how-work {
     padding: 70px 0 70px 0;
     row-gap: 50px;
-   
+
 
     &__arrow-container {
       display: none;
@@ -1472,27 +1543,14 @@ main {
     &__container {
     width: 100%;
     }
-    &__image-container {
-      grid-template-columns: 40% 60% 40%;
+    &__slider {
+      height: 166px;
     }
-    &__image {
-
-      &:first-child {
-        display: none;
-      }
-      &:last-child {
-        display: none;
-      }
-      &:nth-child(2) {
-        opacity: 0.5;
-      }
-      &:nth-child(4) {
-        opacity: 0.5;
-      }
+    &__slide {
+      width: 243px;
     }
     &__text {
       padding: 18px;
-      width: 100%;
       font-weight: 500;
       font-size: 16px;
       line-height: 22px;
@@ -1518,7 +1576,7 @@ main {
       padding: 50px 10px;
     }
     &__head {
-      
+
     }
     &__question {
       padding: 12px 15px;
@@ -1526,9 +1584,9 @@ main {
       justify-self: center;
     }
     &__answer {
-    
+
       &_collapse {
-      
+
       }
     }
   }
