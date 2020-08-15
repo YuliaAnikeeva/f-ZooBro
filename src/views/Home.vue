@@ -415,6 +415,8 @@ export default {
     if (url['reset-password']){
       this.changePasswordModal=true
       const resetPassword = url['reset-password']
+    } else if (document.querySelector('.' + url.class)) {
+      document.querySelector('.' + url.class).scrollIntoView()
     }
   },
   methods:{
