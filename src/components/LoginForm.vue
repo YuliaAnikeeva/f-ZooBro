@@ -42,7 +42,7 @@
             <a class="link_recovery" @click="()=>{toggleRecoveryPassword()}">Я не помню пароль</a>
             <p class="link_noacc"> Нет аккаунта? <a class="link_reg" @click="()=>{toggleRegister()}"> Создать </a></p>
             <!-- test link  -->
-            <a class="link_succ" @click="()=>{toRegistrationSuccessModal()}">Registration Success</a>
+            <!-- <a class="link_succ" @click="()=>{toRegistrationSuccessModal()}">Registration Success</a> -->
             <!-- test link -->
 
 
