@@ -535,4 +535,19 @@
         }
     }
 }
+
+@media (max-height: 1600px) {
+  .title {
+    
+    padding: 30px 10px 20px 10px;
+  }
+
+  .transition-box{
+    margin: 10px -12px 0;
+  }
+  .onboarding-buttons{
+      margin-top: 0px;
+      margin-bottom: 0px;
+  }
+}
 </style>
