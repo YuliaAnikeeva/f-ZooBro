@@ -9,9 +9,9 @@
               </div>
               <div class="menu-open__menu-collapsed" v-show="activeMenu">
                 <div @click="showMap = true" class="rout-buttons__dilivery rout-buttons__dilivery_collapsed">Доставка</div>
-                <div class="rout-buttons__how-work rout-buttons__how-work_collapsed"><router-link class="router-link" to="/#how-work">Как это работает</router-link></div>
-                <div class="rout-buttons__faq rout-buttons__faq_collapsed"><router-link class="router-link" to="/#faq">FAQ</router-link></div>
-                <div class="rout-buttons__tel rout-buttons__tel_collapsed"><router-link class="router-link" to="/#contacts">+7 (925) 112-08-12</router-link></div>
+                <div class="rout-buttons__how-work rout-buttons__how-work_collapsed"><p class="router-link" @click="routeFunc('how-work')">Как это работает</p></div>
+                <div class="rout-buttons__faq rout-buttons__faq_collapsed"><p class="router-link" @click="routeFunc('faq')">FAQ</p></div>
+                <div class="rout-buttons__tel rout-buttons__tel_collapsed"><p class="router-link" @click="routeFunc('footer')">+7 (925) 112-08-12</p></div>
               </div>
             </div>
             <div class="logo">
@@ -19,15 +19,15 @@
             </div>
             <div class="rout-buttons">
                 <div @click="showMap = true" class="rout-buttons__dilivery">Доставка</div>
-                <div class="rout-buttons__how-work"><router-link class="router-link" to="/#how-work">Как это работает</router-link></div>
-                <div class="rout-buttons__faq"><router-link class="router-link" to="/#faq">FAQ</router-link></div>
-                <div class="rout-buttons__tel"><router-link class="router-link" to="/#contacts">Контакты</router-link></div>   
-                <div class="rout-buttons__auth" v-if="true">
+                <div class="rout-buttons__how-work"><p class="router-link" @click="routeFunc('how-work')">Как это работает</p></div>
+                <div class="rout-buttons__faq"><p class="router-link" @click="routeFunc('faq')">FAQ</p></div>
+                <div class="rout-buttons__tel"><p class="router-link" @click="routeFunc('footer')" >Контакты</p></div>   
+                <div class="rout-buttons__auth" v-if="!token">
                     <button class="rout-buttons__auth-button">
                         <a  @click="loginModal = true">Войти</a>
                     </button>
                 </div>
-                <div class="rout-buttons__profile" v-if="false">
+                <div class="rout-buttons__profile" v-if="token">
                     <button class="rout-buttons__profile-button " type="button">
                         <router-link class="router-link" to="/profile"><img src="../assets/profile-icon.svg" alt=""></router-link>
                     </button>
@@ -170,7 +170,7 @@
         </template>
 
         <main>
-            <router-view/>
+            <router-view @toggle="disableMenuFromView"/>
         </main>
     </div>
 </template>
@@ -204,6 +204,7 @@
         'snackbarType',
         'snackbarMsg',
         'snackbarObj',
+        'token',
       ]),
     },
     methods:{
@@ -227,6 +228,17 @@
       },
       toggleMenuOpen() {
         this.activeMenu = !this.activeMenu;
+      },
+      disableMenuFromView() {
+        this.activeMenu = false;
+      },
+      routeFunc(payload) {
+        if (document.querySelector('.' + payload)) {
+          document.querySelector('.' + payload).scrollIntoView()
+        } else {
+          this.$router.push('/?class=' + payload)
+        }
+        this.disableMenuFromView()
       }
     },
     watch: {
@@ -294,7 +306,9 @@
     font-size: 14px;
     line-height: 17px;
     color: #FFFFFF;
-
+    &:hover {
+      cursor: pointer;
+    }
   }
   .nav-menu {
     width: 100%;
@@ -304,7 +318,8 @@
     grid-template-columns: 1fr 1fr;
     justify-content: space-around;
     justify-items: center;
-
+    position: fixed;
+    z-index: 999;
   }
   .logo {
       width: 105px;
@@ -317,6 +332,10 @@
       background: url('../assets/logo-zoobro.svg');
       background-size: contain;
 
+  }
+
+  main {
+    padding-top: 65px;
   }
 
   .rout-buttons {
